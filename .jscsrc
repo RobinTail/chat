@@ -1,0 +1,13 @@
+{
+    "preset": "google",
+    "esnext": true,
+    "fileExtensions": [
+        ".js",
+        ".jsx"
+    ],
+    "excludeFiles": [
+        "node_modules/**",
+        "static/index.js"
+    ],
+    "validateIndentation": 4
+}
