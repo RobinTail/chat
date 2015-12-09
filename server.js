@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var ios = require('socket.io-express-session');
 var session = require('express-session');
 var handlers = require('./handlers');
 var passport = require('passport');
@@ -37,25 +40,26 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 */
-app.use(session({
+var sessionMiddleware = session({
     resave: false,
     saveUninitialized: false,
     secret: 'robintail/chat/session/secret',
     store: new MongoStore({
         mongooseConnection: mongoose.connection
     })
-}));
+});
+app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
 // serialization functions
 passport.serializeUser(function(user, done) {
-    console.log('Serialize: ' + user);
+    console.log('Serialize: ' + user.name);
     done(null, user._id);
 });
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        console.log('Deserialize: ' + user);
+        console.log('Deserialize: ' + user.name);
         done(err, user);
     });
 });
@@ -87,8 +91,31 @@ app.get('/auth/vkontakte/callback',
     passport.authenticate('vkontakte', {failureRedirect: '/'}),
     handlers.authSuccess);
 
-// launch server
-app.listen(8080, function() {
-    console.log('Start serving');
+// io connection
+io.use(ios(sessionMiddleware));
+io.on('connection', function(socket) {
+    User.findById(socket.handshake.session.passport.user,
+        function(err, user) {
+            if (err) {
+                socket.emit('latest', {
+                    error: true,
+                    message: 'User not found'
+                });
+            } else {
+                console.log('io connection from ' + user.name);
+                socket.emit('latest', {
+                    error: false,
+                    messages: [
+                        {'text': 'test1'},
+                        {'text': 'test2'},
+                        {'text': 'test3'}
+                    ]
+                });
+            }
+        });
 });
 
+// launch server
+http.listen(8080, function() {
+    console.log('Start serving');
+});
