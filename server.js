@@ -28,6 +28,7 @@ mongoose.connect(db);
 var MongoStore = require('connect-mongo')(session);
 
 // app configuration
+app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/static'));
 /*
 app.use(cookieParser());
@@ -61,7 +62,6 @@ passport.deserializeUser(function(id, done) {
 
 // handlers
 app.get('/', handlers.app);
-app.get('/chat', isAuthMiddleware, handlers.chat);
 app.get('/logout', handlers.logout);
 
 // auth handlers
@@ -92,11 +92,3 @@ app.listen(8080, function() {
     console.log('Start serving');
 });
 
-/**
- * Middleware, that checks the authentication was successful
- * Or forces the redirect to root
- */
-function isAuthMiddleware(req, res, next) {
-    if (req.isAuthenticated()) { return next(); }
-    res.redirect('/');
-}

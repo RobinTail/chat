@@ -1,4 +1,5 @@
 var User = require('./user');
+var Chat = require('./chat');
 
 // logger
 
@@ -7,15 +8,15 @@ module.exports.logger = function(req, res, next) {
     next();
 };
 
-// entry html file
+// entry point
 
 module.exports.app = function(req, res) {
-    if (req.isAuthenticated()) {
-        res.redirect('/chat');
-    } else {
-        console.log('Feeding entry');
-        res.sendFile(__dirname + '/static/index.html');
-    }
+    console.log('Feeding entry');
+    res.render('index', {
+        applicationData: {
+            isAuthenticated: req.isAuthenticated()
+        }
+    });
 };
 
 // fires when auth was successful
@@ -31,15 +32,3 @@ module.exports.logout = function(req, res) {
     res.redirect('/');
 };
 
-// check auth and show chat
-
-module.exports.chat = function(req, res) {
-    User.findById(req.session.passport.user, function(err, user) {
-        if (err) {
-            console.log(err);  // handle errors
-        } else {
-            console.log('User info: ' + user);
-            res.end('OK :)');
-        }
-    });
-};
