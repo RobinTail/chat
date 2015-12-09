@@ -9,8 +9,6 @@ var passport = require('passport');
 var auth = require('./auth');
 var User = require('./user');
 
-app.use(handlers.logger);
-
 if (process.env.NODE_ENV !== 'production') {
     console.log('Using webpack dev middleware');
     var webpack = require('webpack');
@@ -31,15 +29,9 @@ mongoose.connect(db);
 var MongoStore = require('connect-mongo')(session);
 
 // app configuration
+app.use(handlers.logger);
 app.set('view engine', 'ejs');
 app.use('/static', express.static(__dirname + '/static'));
-/*
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-*/
 var sessionMiddleware = session({
     resave: false,
     saveUninitialized: false,
@@ -93,27 +85,7 @@ app.get('/auth/vkontakte/callback',
 
 // io connection
 io.use(ios(sessionMiddleware));
-io.on('connection', function(socket) {
-    User.findById(socket.handshake.session.passport.user,
-        function(err, user) {
-            if (err) {
-                socket.emit('latest', {
-                    error: true,
-                    message: 'User not found'
-                });
-            } else {
-                console.log('io connection from ' + user.name);
-                socket.emit('latest', {
-                    error: false,
-                    messages: [
-                        {'text': 'test1'},
-                        {'text': 'test2'},
-                        {'text': 'test3'}
-                    ]
-                });
-            }
-        });
-});
+io.on('connection', handlers.ioConnect);
 
 // launch server
 http.listen(8080, function() {
