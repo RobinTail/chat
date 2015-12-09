@@ -2,6 +2,8 @@ var React = require('react');
 var Header = require('./header.jsx');
 var Modal = require('./modal.jsx');
 var Auth = require('./auth.jsx');
+var Chat = require('./chat.jsx');
+var appData = require('../appData.jsx');
 
 var injectTapEventPlugin = require('react-tap-event-plugin');
 var ThemeManager = require('material-ui/lib/styles/theme-manager');
@@ -35,7 +37,11 @@ module.exports = React.createClass({
         if (this.props.children) {
             return this.props.children;
         } else {
-            return <Auth />;
+            if (appData('isAuthenticated')) {
+                return <Chat />
+            } else {
+                return <Auth />;
+            }
         }
     }
 });

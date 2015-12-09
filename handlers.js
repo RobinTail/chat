@@ -20,7 +20,7 @@ module.exports.app = function(req, res) {
 // fires when auth was successful
 
 module.exports.authSuccess = function(req, res) {
-    res.redirect('/chat');
+    res.redirect('/');
 };
 
 // log out
