@@ -59,14 +59,14 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {failureRedirect: '/'}),
     handlers.authSuccess);
-app.get('/chat', isAuthOK, handlers.chat);
+app.get('/chat', isAuthMiddleware, handlers.chat);
 app.get('/logout', handlers.logout);
 
 app.listen(8080, function() {
     console.log('Start serving');
 });
 
-function isAuthOK(req, res, next) {
+function isAuthMiddleware(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
     res.redirect('/');
 }

@@ -10,8 +10,12 @@ module.exports.logger = function(req, res, next) {
 // entry html file
 
 module.exports.app = function(req, res) {
-    console.log('Feeding entry');
-    res.sendFile(__dirname + '/static/index.html');
+    if (req.isAuthenticated()) {
+        res.redirect('/chat');
+    } else {
+        console.log('Feeding entry');
+        res.sendFile(__dirname + '/static/index.html');
+    }
 };
 
 // fires when auth was successful
@@ -32,11 +36,10 @@ module.exports.logout = function(req, res) {
 module.exports.chat = function(req, res) {
     User.findById(req.session.passport.user, function(err, user) {
         if (err) {
-            console.log('Auth Error: ' + err);  // handle errors
-            req.redirect('/');
+            console.log(err);  // handle errors
         } else {
-            console.log('Auth Success: ' + user);
+            console.log('User info: ' + user);
+            res.end('OK :)');
         }
     });
-    res.end('OK :)');
 };
