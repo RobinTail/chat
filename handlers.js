@@ -1,5 +1,3 @@
-var User = require('./user');
-var Chat = require('./chat');
 
 // logger
 
