@@ -52,7 +52,10 @@ module.exports.latest = function(socket, broadcastOne) {
             messages = messages.reverse().map(function(message) {
                 return {
                     name: message.userID.name,
-                    text: message.text
+                    text: message.text,
+                    // jscs:disable maximumLineLength
+                    isMy: socket.handshake.session.passport.user == message.userID._id
+                    // jscs:enable maximumLineLength
                 };
             });
             console.log('feeding latest messages (%s)',
