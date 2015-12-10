@@ -21,7 +21,7 @@ module.exports = Reflux.createStore({
                 this.messages.push({
                     name: 'System',
                     isSystem: true,
-                    isCritycal: true,
+                    isCritical: true,
                     text: 'Connection lost'
                 });
                 this.triggerChange();
@@ -37,7 +37,7 @@ module.exports = Reflux.createStore({
             this.messages.push({
                 name: 'System',
                 isSystem: true,
-                isCritycal: true,
+                isCritical: true,
                 text: data.message
             });
         } else {

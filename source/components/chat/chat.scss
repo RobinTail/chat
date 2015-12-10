@@ -20,6 +20,14 @@
                 background-color: rgba(100,100,255,0.1);
             }
 
+            &.message-system {
+                background-color: rgba(150,150,0,0.2);
+            }
+
+            &.message-system-critical {
+                background-color: rgba(255,0,0,0.3);
+            }
+
             .message-avatar {
                 margin-right: 10px;
                 position: absolute;
