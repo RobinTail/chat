@@ -2,40 +2,76 @@
 
 .chat-holder {
     margin-bottom: 80px;
-}
 
-.send-message-holder {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border-top: 1px solid rgba(0,0,0,0.2);
+    .messages-holder {
+        list-style: none;
+        padding: 0;
 
-    & > .send-message-subholder {
-        margin: 0 auto;
-        display: table;
-        padding: 0 15px;
+        & > li {
+            margin-top: 5px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            position: relative;
+            padding: 5px 5px 5px 60px;
+            min-height: 40px;
 
-        & > div {
-            display: table-row;
-
-            & > div:nth-child(1) {
-                display: table-cell;
-                width: 90%;
-                vertical-align: bottom;
+            &:nth-child(odd)
+            {
+                background-color: rgba(100,100,255,0.1);
             }
 
-            & > div:nth-child(2) {
-                display: table-cell;
-                min-width: 100px;
-                vertical-align: bottom;
-                text-align: right;
-                padding-bottom: 10px;
+            .message-avatar {
+                margin-right: 10px;
+                position: absolute;
+                left: 5px;
+                top: 5px;
+            }
+
+            .message-author {
+                font-size: smaller;
+                font-weight: bolder;
+            }
+
+            .message-text {
+                //margin-left: 50px;
+            }
+        }
+    }
+
+    .send-message-holder {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+        .send-message-subholder {
+            margin: 0 auto;
+            display: table;
+            padding: 0 15px;
+
+            & > div {
+                display: table-row;
+
+                & > div:nth-child(1) {
+                    display: table-cell;
+                    width: 90%;
+                    vertical-align: bottom;
+                }
+
+                & > div:nth-child(2) {
+                    display: table-cell;
+                    min-width: 100px;
+                    vertical-align: bottom;
+                    text-align: right;
+                    padding-bottom: 10px;
+                }
             }
         }
     }
 }
+
 
 @media (min-width: $screen-sm) {
     .send-message-subholder {

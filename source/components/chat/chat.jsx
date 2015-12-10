@@ -5,6 +5,7 @@ var Actions = require('../../actions.jsx');
 var TextField = require('material-ui/lib/text-field');
 var FloatingActionButton = require('material-ui/lib/floating-action-button');
 var FontIcon = require('material-ui/lib/font-icon');
+var Avatar = require('material-ui/lib/avatar');
 require('./chat.scss');
 
 module.exports = React.createClass({
@@ -61,7 +62,7 @@ module.exports = React.createClass({
     },
     renderMessagesContainer: function() {
         return (
-            <ul>
+            <ul className='messages-holder'>
                 {this.renderMessages()}
             </ul>
         );
@@ -70,7 +71,10 @@ module.exports = React.createClass({
         return this.state.messages.map(function(message, id) {
             return (
                 <li key={id}>
-                    {message.name}: {message.text}
+                    <Avatar className='message-avatar'>{message.name[0]}</Avatar>
+                    <span className='message-author'>{message.name}</span>
+                    <br />
+                    <span className='message-text'>{message.text}</span>
                 </li>
             );
         });
@@ -87,10 +91,14 @@ module.exports = React.createClass({
     },
     sendMessage: function() {
         Actions.submitChatMessage(this.state.myMessage);
+        this.setState({
+            myMessage: ''
+        });
     },
     onChange: function() {
         this.setState({
             messages: ChatStore.messages
         });
+        window.scrollTo(0, document.body.scrollHeight);
     }
 });
