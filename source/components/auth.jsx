@@ -8,7 +8,7 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div style={{textAlign: 'center'}}>
-                <h1>Choose your login method</h1>
+                <h1>Choose your sign in method</h1>
                 <AuthFB />
                 &nbsp;
                 <AuthTW />

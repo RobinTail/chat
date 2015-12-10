@@ -27,6 +27,7 @@ module.exports = React.createClass({
                             <FontIcon className='material-icons'>menu</FontIcon>
                         </IconButton>
                     }>
+                        <MenuItem primaryText='Sign Out' onClick={this.handleSignOut} />
                     </IconMenu>
                 }
             />
@@ -34,5 +35,8 @@ module.exports = React.createClass({
     },
     handleHomeClick: function() {
         this.history.pushState(null, '/');
+    },
+    handleSignOut: function() {
+        window.location = '/logout';
     }
 });
