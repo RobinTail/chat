@@ -14,11 +14,7 @@
             position: relative;
             padding: 5px 5px 5px 60px;
             min-height: 40px;
-
-            &:nth-child(odd)
-            {
-                background-color: rgba(100,100,255,0.1);
-            }
+            width: 75%;
 
             &.message-system {
                 background-color: rgba(150,150,0,0.2);
@@ -26,6 +22,20 @@
 
             &.message-system-critical {
                 background-color: rgba(255,0,0,0.3);
+            }
+
+            &.message-my {
+                padding: 5px 60px 5px 5px;
+                margin-left: auto;
+                background-color: rgba(100,100,255,0.1);
+                text-align: right;
+
+                & > .message-avatar {
+                    margin-right: 0;
+                    margin-left: 10px;
+                    left: auto;
+                    right: 5px;
+                }
             }
 
             .message-avatar {
@@ -40,9 +50,6 @@
                 font-weight: bolder;
             }
 
-            .message-text {
-                //margin-left: 50px;
-            }
         }
     }
 
