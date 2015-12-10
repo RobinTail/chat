@@ -31,7 +31,9 @@ module.exports = React.createClass({
                             <div>
                                 <TextField className='user-input'
                                     hintText='Your message'
+                                    // jscs:disable maximumLineLength
                                     floatingLabelText='Start typing your message here'
+                                    // jscs:enable maximumLineLength
                                     value={this.state.myMessage}
                                     onKeyDown={this.messageKeyPressed}
                                     onChange={this.messageChanged}
@@ -84,7 +86,7 @@ module.exports = React.createClass({
     messageChanged: function(e) {
         this.setState({
             myMessage: e.target.value
-        })
+        });
     },
     sendMessage: function() {
 

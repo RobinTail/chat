@@ -1,14 +1,15 @@
 @import '../main/vars.scss';
 
 .chat-holder {
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .send-message-holder {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    background-color: white;
 
     & > .send-message-subholder {
         margin: 0 auto;
