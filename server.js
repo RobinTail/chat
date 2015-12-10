@@ -46,14 +46,10 @@ app.use(passport.session());
 
 // serialization functions
 passport.serializeUser(function(user, done) {
-    //console.log('Serialize: ' + user.name);
     done(null, user._id);
 });
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        /*if (!err) {
-            console.log('Deserialize: ' + user.name);
-        }*/
         done(err, user);
     });
 });

@@ -42,20 +42,23 @@ module.exports.ioConnect = function(socket) {
     User.findById(socket.handshake.session.passport.user,
         function(err, user) {
             if (err) {
-                console.log('user not found in db');
-                sendError(socket, 'User not found');
+                console.log('user find failure: ' + err);
+                sendError(socket, 'Database error');
                 return false;
             }
-            console.log('authenticated user ' + user.name);
-            socket.handshake.session.userName = user.name;
-            chatCore.enterChat(socket);
-            chatCore.latest(socket);
-            socket.on('submit', function(data) {
-                chatCore.submit(socket, data);
-            });
-            socket.on('disconnect', function() {
-                chatCore.leaveChat(socket, socket.handshake.session.userName);
-            });
+            if (user) {
+                console.log('authenticated user ' + user.name);
+                socket.handshake.session.userName = user.name;
+                chatCore.enterChat(socket);
+                chatCore.latest(socket);
+                socket.on('submit', function(data) {
+                    chatCore.submit(socket, data);
+                });
+                socket.on('disconnect', function() {
+                    chatCore.leaveChat(socket,
+                        socket.handshake.session.userName);
+                });
+            }
         });
 };
 
