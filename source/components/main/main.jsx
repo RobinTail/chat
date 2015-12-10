@@ -1,13 +1,15 @@
 var React = require('react');
-var Header = require('./header.jsx');
-var Modal = require('./modal.jsx');
-var Auth = require('./auth.jsx');
-var Chat = require('./chat.jsx');
-var appData = require('../appData.jsx');
+var Header = require('./../header.jsx');
+var Modal = require('./../modal.jsx');
+var Auth = require('./../auth.jsx');
+var Chat = require('./../chat/chat.jsx');
+var appData = require('../../appData.jsx');
 
 var injectTapEventPlugin = require('react-tap-event-plugin');
 var ThemeManager = require('material-ui/lib/styles/theme-manager');
-var Theme = require('../material-ui-theme.jsx');
+var Theme = require('../../material-ui-theme.jsx');
+
+require('./main.scss');
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release

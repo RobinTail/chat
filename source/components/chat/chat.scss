@@ -1,0 +1,54 @@
+@import '../main/vars.scss';
+
+.chat-holder {
+    margin-bottom: 60px;
+}
+
+.send-message-holder {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    & > .send-message-subholder {
+        margin: 0 auto;
+        display: table;
+        padding: 0 15px;
+
+        & > div {
+            display: table-row;
+
+            & > div:nth-child(1) {
+                display: table-cell;
+                width: 90%;
+                vertical-align: bottom;
+            }
+
+            & > div:nth-child(2) {
+                display: table-cell;
+                min-width: 100px;
+                vertical-align: bottom;
+                text-align: right;
+                padding-bottom: 10px;
+            }
+        }
+    }
+}
+
+@media (min-width: $screen-sm) {
+    .send-message-subholder {
+      width: $wrapper-sm;
+    }
+}
+
+@media (min-width: $screen-md) {
+    .send-message-subholder {
+        width: $wrapper-md;
+    }
+}
+
+@media (min-width: $screen-lg) {
+    .send-message-subholder {
+        width: $wrapper-lg;
+    }
+}

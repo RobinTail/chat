@@ -1,0 +1,19 @@
+@import 'vars.scss';
+
+@media (min-width: $screen-sm) {
+  #Wrapper {
+    width: $wrapper-sm;
+  }
+}
+
+@media (min-width: $screen-md) {
+  #Wrapper {
+    width: $wrapper-md;
+  }
+}
+
+@media (min-width: $screen-lg) {
+  #Wrapper {
+    width: $wrapper-lg;
+  }
+}

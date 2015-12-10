@@ -10,20 +10,3 @@ body {
     margin-left: auto;
 }
 
-@media (min-width: 768px) {
-    #Wrapper {
-        width: 750px;
-    }
-}
-
-@media (min-width: 992px) {
-    #Wrapper {
-        width: 970px;
-    }
-}
-
-@media (min-width: 1200px) {
-    #Wrapper {
-        width: 1170px;
-    }
-}

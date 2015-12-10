@@ -5,7 +5,7 @@ import createHistory from 'history/lib/createBrowserHistory';
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 
-var Main = require('./components/main.jsx');
+var Main = require('./components/main/main.jsx');
 
 module.exports = (
     <Router history={createHistory()}>
