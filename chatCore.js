@@ -63,6 +63,11 @@ module.exports.latest = function(socket, broadcastOne) {
             sendMessages(socket, messages);
             if (broadcastOne) {
                 console.log('broadcasting');
+                // turn off isMy property for broadcasting
+                messages.map(function(message) {
+                    message.isMy = false;
+                    return message;
+                });
                 sendMessages(socket, messages, true);
             }
         });
