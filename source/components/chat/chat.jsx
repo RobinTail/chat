@@ -29,7 +29,7 @@ module.exports = React.createClass({
                     <div className='send-message-subholder'>
                         <div>
                             <div>
-                                <TextField className='user-input'
+                                <TextField className='my-message'
                                     hintText='Your message'
                                     // jscs:disable maximumLineLength
                                     floatingLabelText='Start typing your message here'
@@ -37,16 +37,13 @@ module.exports = React.createClass({
                                     value={this.state.myMessage}
                                     onKeyDown={this.messageKeyPressed}
                                     onChange={this.messageChanged}
-                                    style={{
-                                        width: '100%'
-                                    }}
+                                    fullWidth={true}
                                 />
                             </div>
                             <div>
                                 <FloatingActionButton
                                     primary={true}
                                     mini={true}
-                                    className='user-send'
                                 >
                                     <FontIcon
                                         className='material-icons'
@@ -89,7 +86,7 @@ module.exports = React.createClass({
         });
     },
     sendMessage: function() {
-
+        alert('i am the message sender');
     },
     onChange: function() {
         this.setState({
