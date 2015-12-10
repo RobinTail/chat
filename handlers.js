@@ -1,4 +1,14 @@
+var User = require('./user');
 var chatCore = require('./chatCore');
+
+function checkAuth(socket) {
+    if (!socket.handshake.session.passport) {
+        console.log('user not authenticated');
+        sendError(socket, 'Not authenticated request');
+        return false;
+    }
+    return true;
+}
 
 // logger
 
@@ -28,10 +38,25 @@ module.exports.authSuccess = function(req, res) {
 
 module.exports.ioConnect = function(socket) {
     console.log('io connection');
-    chatCore.latest(socket);
-    socket.on('submit', function(data) {
-        chatCore.submit(socket, data);
-    });
+    if (!checkAuth(socket)) { return false; }
+    User.findById(socket.handshake.session.passport.user,
+        function(err, user) {
+            if (err) {
+                console.log('user not found in db');
+                sendError(socket, 'User not found');
+                return false;
+            }
+            console.log('authenticated user ' + user.name);
+            socket.handshake.session.userName = user.name;
+            chatCore.enterChat(socket);
+            chatCore.latest(socket);
+            socket.on('submit', function(data) {
+                chatCore.submit(socket, data);
+            });
+            socket.on('disconnect', function() {
+                chatCore.leaveChat(socket, socket.handshake.session.userName);
+            });
+        });
 };
 
 // log out
