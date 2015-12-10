@@ -30,7 +30,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <Header />
-                {this.content()}
+                    {this.content()}
                 <Modal />
             </div>
         );
@@ -40,7 +40,7 @@ module.exports = React.createClass({
             return this.props.children;
         } else {
             if (appData('isAuthenticated')) {
-                return <Chat />
+                return <Chat />;
             } else {
                 return <Auth />;
             }
