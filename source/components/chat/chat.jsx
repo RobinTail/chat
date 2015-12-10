@@ -70,8 +70,17 @@ module.exports = React.createClass({
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
             return (
-                <li key={id} className={message.isSystem ? (message.isCritical ? 'message-system-critical' : 'message-system') : ''}>
-                    <Avatar className='message-avatar'>{message.name[0]}</Avatar>
+                <li
+                    key={id}
+                    className={message.isSystem ?
+                        (message.isCritical ?
+                            'message-system-critical' :
+                            'message-system') :
+                        (message.isMy ? 'message-my' : '')}
+                >
+                    <Avatar className='message-avatar'>
+                        {message.name[0]}
+                    </Avatar>
                     <span className='message-author'>{message.name}</span>
                     <br />
                     <span className='message-text'>{message.text}</span>
