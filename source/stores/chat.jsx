@@ -17,6 +17,15 @@ module.exports = Reflux.createStore({
             socket.on('latest', function(data) {
                 this.afterLatestChatMessages(data);
             }.bind(this));
+            socket.on('connect_error', function(err) {
+                this.messages.push({
+                    name: 'System',
+                    isSystem: true,
+                    isCritycal: true,
+                    text: 'Connection lost'
+                });
+                this.triggerChange();
+            }.bind(this));
         }
     },
     getLatestChatMessages: function() {
@@ -24,13 +33,23 @@ module.exports = Reflux.createStore({
         socket.emit('latest');
     },
     afterLatestChatMessages: function(data) {
-        //console.log(data);
         if (data.error) {
-            console.log(data.message);
+            this.messages.push({
+                name: 'System',
+                isSystem: true,
+                isCritycal: true,
+                text: data.message
+            });
         } else {
-            this.messages = data.messages;
+            data.messages.forEach(function(message) {
+                this.messages.push(message);
+            }.bind(this));
             this.triggerChange();
         }
+    },
+    submitChatMessage: function(message) {
+        console.log('submit message');
+        socket.emit('submit', {message: message});
     },
     triggerChange: function() {
         this.trigger('change', this.messages);

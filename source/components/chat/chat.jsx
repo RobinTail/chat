@@ -70,13 +70,13 @@ module.exports = React.createClass({
         return this.state.messages.map(function(message, id) {
             return (
                 <li key={id}>
-                    {message.text}
+                    {message.name}: {message.text}
                 </li>
             );
         });
     },
     messageKeyPressed: function(e) {
-        if (e.keyCode) {
+        if (e.keyCode === 13) {
             this.sendMessage();
         }
     },
@@ -86,7 +86,7 @@ module.exports = React.createClass({
         });
     },
     sendMessage: function() {
-        alert('i am the message sender');
+        Actions.submitChatMessage(this.state.myMessage);
     },
     onChange: function() {
         this.setState({
