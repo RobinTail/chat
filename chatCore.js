@@ -1,6 +1,8 @@
 var User = require('./user');
 var Chat = require('./chat');
 
+var latestQuantity = 5;
+
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
         console.log('user not authenticated');
@@ -38,8 +40,7 @@ module.exports.latest = function(socket, broadcastOne) {
             var preFetch = Chat.find(broadcastOne ? {'_id': broadcastOne} : {});
             preFetch
                 .sort({at: -1})
-                .limit(15)
-                .sort({at: 1})
+                .limit(latestQuantity)
                 .populate('userID', 'name')
                 .exec(function(err, messages) {
                     if (err) {
@@ -47,7 +48,7 @@ module.exports.latest = function(socket, broadcastOne) {
                         sendError(socket, 'Error fetching messages');
                         return false;
                     }
-                    messages = messages.map(function(message) {
+                    messages = messages.reverse().map(function(message) {
                         return {
                             name: message.userID.name,
                             text: message.text
