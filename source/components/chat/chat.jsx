@@ -6,6 +6,7 @@ var TextField = require('material-ui/lib/text-field');
 var FloatingActionButton = require('material-ui/lib/floating-action-button');
 var FontIcon = require('material-ui/lib/font-icon');
 var Avatar = require('material-ui/lib/avatar');
+var Loading = require('../loading.jsx');
 require('./chat.scss');
 
 module.exports = React.createClass({
@@ -15,7 +16,8 @@ module.exports = React.createClass({
     getInitialState: function() {
         return {
             myMessage: '',
-            messages: []
+            messages: [],
+            isLoaded: false
         };
     },
     componentWillMount: function() {
@@ -24,7 +26,6 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div className='chat-holder'>
-                <h1>this is chat</h1>
                 {this.renderMessagesContainer()}
                 <div className='send-message-holder'>
                     <div className='send-message-subholder'>
@@ -61,11 +62,20 @@ module.exports = React.createClass({
         );
     },
     renderMessagesContainer: function() {
-        return (
-            <ul className='messages-holder'>
-                {this.renderMessages()}
-            </ul>
-        );
+        if (this.state.isLoaded) {
+            if (this.state.messages.length) {
+                return (
+                    <ul className='messages-holder'>
+                        {this.renderMessages()}
+                    </ul>
+                );
+            } else {
+                return <h4><em>No messages yet. Write your first one :)</em></h4>
+            }
+        } else {
+            return <Loading />
+        }
+
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
@@ -106,7 +116,8 @@ module.exports = React.createClass({
     },
     onChange: function() {
         this.setState({
-            messages: ChatStore.messages
+            messages: ChatStore.messages,
+            isLoaded: true
         });
         window.scrollTo(0, document.body.scrollHeight);
     }
