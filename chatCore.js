@@ -81,7 +81,7 @@ module.exports.submit = function(socket, data) {
     var message = new Chat({
         userID: socket.handshake.session.passport.user,
         at: Date.now(),
-        text: data.message
+        text: data.text
     });
     message.save(function(err) {
         if (err) {
