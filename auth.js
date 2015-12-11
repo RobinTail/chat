@@ -23,7 +23,8 @@ passport.use(new FBStrategy({
                 user = new User({
                     oauthID: profile.id,
                     name: profile.displayName,
-                    created: Date.now()
+                    created: Date.now(),
+                    provider: profile.provider
                 });
                 user.save(function(err) {
                     if (err) {
@@ -55,7 +56,8 @@ passport.use(new TWStrategy({
                 user = new User({
                     oauthID: profile.id,
                     name: profile.displayName,
-                    created: Date.now()
+                    created: Date.now(),
+                    provider: profile.provider
                 });
                 user.save(function(err) {
                     if (err) {
@@ -87,7 +89,8 @@ passport.use(new GGStrategy({
                 user = new User({
                     oauthID: profile.id,
                     name: profile.displayName,
-                    created: Date.now()
+                    created: Date.now(),
+                    provider: profile.provider
                 });
                 user.save(function(err) {
                     if (err) {
@@ -119,7 +122,8 @@ passport.use(new VKStrategy({
                 user = new User({
                     oauthID: profile.id,
                     name: profile.displayName,
-                    created: Date.now()
+                    created: Date.now(),
+                    provider: profile.provider
                 });
                 user.save(function(err) {
                     if (err) {
