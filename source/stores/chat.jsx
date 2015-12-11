@@ -4,46 +4,40 @@ var Actions = require('../actions.jsx');
 var appData = require('../appData.jsx');
 
 if (appData('isAuthenticated')) {
-    console.log('opening io connection');
     var socket = io.connect(document.location.origin);
 }
 
 module.exports = Reflux.createStore({
     listenables: [Actions],
     messages: [],
+    isConnectionLost: false,
     init: function() {
         if (appData('isAuthenticated')) {
-            console.log('listening to io response');
-            socket.on('latest', function(data) {
-                this.afterLatestChatMessages(data);
-            }.bind(this));
             socket.on('connect', function() {
-                if (this.messages.length) {
-                    var last = this.messages[this.messages.length - 1];
-                    if (last.isCritical && last.text === 'Connection lost') {
-                        this.messages.push({
-                            name: 'System',
-                            isSystem: true,
-                            text: 'Connected'
-                        });
-                        this.triggerChange();
-                    }
+                if (this.isConnectionLost) {
+                    this.isConnectionLost = false;
+                    this.messages.push({
+                        name: 'System',
+                        isSystem: true,
+                        text: 'Connected'
+                    });
+                    this.triggerChange();
                 }
             }.bind(this));
             socket.on('connect_error', function(err) {
-                if (this.messages.length) {
-                    var last = this.messages[this.messages.length - 1];
-                    if (last.isCritical && last.text === 'Connection lost') {
-                        return;
-                    }
+                if (!this.isConnectionLost) {
+                    this.isConnectionLost = true;
+                    this.messages.push({
+                        name: 'System',
+                        isSystem: true,
+                        isCritical: true,
+                        text: 'Connection lost'
+                    });
+                    this.triggerChange();
                 }
-                this.messages.push({
-                    name: 'System',
-                    isSystem: true,
-                    isCritical: true,
-                    text: 'Connection lost'
-                });
-                this.triggerChange();
+            }.bind(this));
+            socket.on('latest', function(data) {
+                this.afterLatestChatMessages(data);
             }.bind(this));
         }
     },
