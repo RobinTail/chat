@@ -51,10 +51,12 @@ module.exports.latest = function(socket, broadcastOne) {
             }
             messages = messages.reverse().map(function(message) {
                 return {
-                    name: message.userID.name,
+                    name: message.userID ? message.userID.name : 'Unknown',
                     text: message.text,
                     // jscs:disable maximumLineLength
-                    isMy: socket.handshake.session.passport.user == message.userID._id
+                    isMy: message.userID ?
+                            socket.handshake.session.passport.user == message.userID._id :
+                            false
                     // jscs:enable maximumLineLength
                 };
             });
