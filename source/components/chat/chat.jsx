@@ -10,6 +10,8 @@ var Message = require('./message.jsx');
 var smoothscroll = require('smoothscroll');
 require('./chat.scss');
 
+const TYPING_TIMEOUT = 800;
+
 module.exports = React.createClass({
     mixins: [
         Reflux.listenTo(ChatStore, 'onChange')
@@ -18,6 +20,7 @@ module.exports = React.createClass({
         return {
             myMessage: '',
             messages: [],
+            typing: [],
             isLoaded: false,
             isTyping: false,
             lastTyping: (new Date()).getTime()
@@ -46,6 +49,7 @@ module.exports = React.createClass({
         return (
             <div className='chat-holder'>
                 {this.renderMessagesContainer()}
+                {this.renderTypingContainer()}
                 <div className='send-message-holder'>
                     <div className='send-message-subholder'>
                         <div>
@@ -106,6 +110,24 @@ module.exports = React.createClass({
             return <Message key={id} {...message} />;
         });
     },
+    renderTypingContainer: function() {
+        if (this.state.typing.length) {
+            var verb = this.state.typing.length > 1 ?
+                <span>are</span> : <span>is</span>;
+            var msg = <span> {verb} typing...</span>;
+            var names = this.state.typing.map(function(user) {
+                return user.name;
+            }).join(', ');
+            return (
+                <div className='typing-holder'>
+                {names}
+                {msg}
+                </div>
+            );
+        } else {
+            return null;
+        }
+    },
     messageEnterKeyPressed: function() {
         this.sendMessage();
     },
@@ -121,13 +143,13 @@ module.exports = React.createClass({
         setTimeout(function() {
             var now = (new Date()).getTime();
             var typingDiff = now - this.state.lastTyping;
-            if (typingDiff >= 800 && this.state.isTyping) {
+            if (typingDiff >= TYPING_TIMEOUT && this.state.isTyping) {
                 this.setState({
                     isTyping: false
                 });
                 Actions.iStopTypingChatMessage();
             }
-        }.bind(this), 800);
+        }.bind(this), TYPING_TIMEOUT);
     },
     sendMessage: function() {
         Actions.submitChatMessage(this.state.myMessage);
@@ -138,6 +160,7 @@ module.exports = React.createClass({
     onChange: function() {
         this.setState({
             messages: ChatStore.messages,
+            typing: ChatStore.typing,
             isLoaded: true
         });
         smoothscroll(document.body.scrollHeight);
