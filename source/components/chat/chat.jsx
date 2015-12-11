@@ -4,7 +4,9 @@ var ChatStore = require('../../stores/chat.jsx');
 var Actions = require('../../actions.jsx');
 var TextField = require('material-ui/lib/text-field');
 var FloatingActionButton = require('material-ui/lib/floating-action-button');
+var FontIcon = require('material-ui/lib/font-icon');
 var Loading = require('../loading.jsx');
+var Message = require('./message.jsx');
 var smoothscroll = require('smoothscroll');
 require('./chat.scss');
 
@@ -101,7 +103,7 @@ module.exports = React.createClass({
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
-            return <Message {...message} />
+            return <Message key={id} {...message} />;
         });
     },
     messageEnterKeyPressed: function() {

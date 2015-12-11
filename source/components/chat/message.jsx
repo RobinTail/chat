@@ -41,7 +41,6 @@ module.exports = React.createClass({
             [author, spacer, provider];
         return (
             <li
-                key={id}
                 className={this.props.isSystem ?
                     (this.props.isCritical ?
                         'message-system-critical' :
