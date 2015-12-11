@@ -18,6 +18,12 @@ module.exports = Reflux.createStore({
                 this.afterLatestChatMessages(data);
             }.bind(this));
             socket.on('connect_error', function(err) {
+                if (this.messages.length) {
+                    var last = this.messages[this.messages.length - 1];
+                    if (last.isCritical && last.text === 'Connection lost') {
+                        return;
+                    }
+                }
                 this.messages.push({
                     name: 'System',
                     isSystem: true,
