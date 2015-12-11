@@ -7,6 +7,7 @@ var FloatingActionButton = require('material-ui/lib/floating-action-button');
 var FontIcon = require('material-ui/lib/font-icon');
 var Avatar = require('material-ui/lib/avatar');
 var Loading = require('../loading.jsx');
+var smoothscroll = require('smoothscroll');
 require('./chat.scss');
 
 module.exports = React.createClass({
@@ -37,9 +38,10 @@ module.exports = React.createClass({
                                     floatingLabelText='Start typing your message here'
                                     // jscs:enable maximumLineLength
                                     value={this.state.myMessage}
-                                    onKeyDown={this.messageKeyPressed}
+                                    onEnterKeyDown={this.messageEnterKeyPressed}
                                     onChange={this.messageChanged}
                                     fullWidth={true}
+                                    autoComplete='off'
                                 />
                             </div>
                             <div>
@@ -70,10 +72,14 @@ module.exports = React.createClass({
                     </ul>
                 );
             } else {
-                return <h4><em>No messages yet. Write your first one :)</em></h4>
+                return (
+                    <h4><em>
+                        No messages yet. Write your first one :)
+                    </em></h4>
+                );
             }
         } else {
-            return <Loading />
+            return <Loading />;
         }
 
     },
@@ -98,10 +104,8 @@ module.exports = React.createClass({
             );
         });
     },
-    messageKeyPressed: function(e) {
-        if (e.keyCode === 13) {
-            this.sendMessage();
-        }
+    messageEnterKeyPressed: function(e) {
+        this.sendMessage();
     },
     messageChanged: function(e) {
         this.setState({
@@ -119,6 +123,6 @@ module.exports = React.createClass({
             messages: ChatStore.messages,
             isLoaded: true
         });
-        window.scrollTo(0, document.body.scrollHeight);
+        smoothscroll(document.body.scrollHeight);
     }
 });
