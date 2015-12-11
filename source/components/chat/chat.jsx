@@ -96,16 +96,19 @@ module.exports = React.createClass({
                 </Avatar>
             );
             var author = (
-                <span className='message-author'>{message.name}</span>
+                <span key='author' className='message-author'>{message.name}</span>
             );
             var provider = message.provider ? (
-                <span className='message-author-provider'>
+                <span key='provider' className='message-author-provider'>
                     ({message.provider})
                 </span>
             ) : null;
+            var spacer = (
+                <span key='spacer'>&nbsp;</span>
+            );
             var authorFull = message.isMy ?
-                [provider, ' ', author] :
-                [author, ' ', provider];
+                [provider, spacer, author] :
+                [author, spacer, provider];
             return (
                 <li
                     key={id}
