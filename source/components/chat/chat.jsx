@@ -111,7 +111,7 @@ module.exports = React.createClass({
     },
     messageChanged: function(e) {
         if (!this.state.isTyping) {
-            Actions.startTypingChatMessage();
+            Actions.iStartTypingChatMessage();
         }
         this.setState({
             myMessage: e.target.value,
@@ -125,7 +125,7 @@ module.exports = React.createClass({
                 this.setState({
                     isTyping: false
                 });
-                Actions.stopTypingChatMessage();
+                Actions.iStopTypingChatMessage();
             }
         }.bind(this), 800);
     },
