@@ -10,7 +10,7 @@
         & > li {
             margin-top: 5px;
             border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
+            border-radius: 10px 10px 10px 0;
             position: relative;
             padding: 5px 5px 5px 60px;
             min-height: 40px;
@@ -29,6 +29,7 @@
                 margin-left: auto;
                 background-color: rgba(100,100,255,0.1);
                 text-align: right;
+                border-radius: 10px 10px 0 10px;
 
                 & > .message-avatar {
                     margin-right: 0;
