@@ -14,7 +14,8 @@ passport.use(new FBStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({
-            oauthID: profile.id
+            oauthID: profile.id,
+            provider: profile.provider
         }, function(err, user) {
             if (err) {
                 console.log(err);  // handle errors!
@@ -48,7 +49,8 @@ passport.use(new TWStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({
-            oauthID: profile.id
+            oauthID: profile.id,
+            provider: profile.provider
         }, function(err, user) {
             if (err) {
                 console.log(err);  // handle errors!
@@ -82,7 +84,8 @@ passport.use(new GGStrategy({
     },
     function(request, accessToken, refreshToken, profile, done) {
         User.findOne({
-            oauthID: profile.id
+            oauthID: profile.id,
+            provider: profile.provider
         }, function(err, user) {
             if (err) {
                 console.log(err);  // handle errors!
@@ -116,7 +119,8 @@ passport.use(new VKStrategy({
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({
-            oauthID: profile.id
+            oauthID: profile.id,
+            provider: profile.provider
         }, function(err, user) {
             if (err) {
                 console.log(err);  // handle errors!
