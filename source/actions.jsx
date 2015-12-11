@@ -4,6 +4,6 @@ module.exports = Reflux.createActions([
     'updateModal',
     'getLatestChatMessages',
     'submitChatMessage',
-    'startTypingChatMessage',
-    'stopTypingChatMessage'
+    'iStartTypingChatMessage',
+    'iStopTypingChatMessage'
 ]);

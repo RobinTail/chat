@@ -10,6 +10,7 @@ if (appData('isAuthenticated')) {
 module.exports = Reflux.createStore({
     listenables: [Actions],
     messages: [],
+    typing: [],
     isConnectionLost: false,
     init: function() {
         if (appData('isAuthenticated')) {
@@ -39,6 +40,12 @@ module.exports = Reflux.createStore({
             socket.on('latest', function(data) {
                 this.afterLatestChatMessages(data);
             }.bind(this));
+            socket.on('start_typing', function(data) {
+                this.heStartTypingChatMessage(data);
+            }.bind(this));
+            socket.on('stop_typing', function(data) {
+                this.heStopTypingChatMessage(data);
+            }.bind(this));
         }
     },
     getLatestChatMessages: function() {
@@ -64,13 +71,21 @@ module.exports = Reflux.createStore({
         console.log('submit message');
         socket.emit('submit', {text: message});
     },
-    startTypingChatMessage: function() {
+    iStartTypingChatMessage: function() {
         socket.emit('start_typing');
     },
-    stopTypingChatMessage: function() {
+    iStopTypingChatMessage: function() {
         socket.emit('stop_typing');
     },
+    heStartTypingChatMessage: function(data) {
+        this.typing.push(data);
+        this.triggerChange();
+    },
+    heStopTypingChatMessage: function(data) {
+        this.typing.slice(this.typing.indexOf(data.id));
+        this.triggerChange();
+    },
     triggerChange: function() {
-        this.trigger('change', this.messages);
+        this.trigger('change');
     }
 });
