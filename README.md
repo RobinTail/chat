@@ -13,9 +13,10 @@ This sample chat based on Socket.IO and React, it uses oAuth authentication via 
 * Socket.IO
 * Passport
 * React with React Router
-* Reflux
+* Flux (with Reflux)
 * Babel
 * SASS
+* JSX
 * MongoDB with Mongoose
 * Material UI
 * Webpack
