@@ -5,8 +5,12 @@ var FontIcon = require('material-ui/lib/font-icon');
 module.exports = React.createClass({
     render: function() {
         return (
-            <RaisedButton linkButton={true} primary={true} href='/auth/twitter' label='Twitter'>
-            </RaisedButton>
+            <RaisedButton
+                linkButton={true}
+                primary={true}
+                href='/auth/twitter'
+                label='Twitter'
+            />
         );
     }
 });

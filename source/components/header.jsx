@@ -27,7 +27,10 @@ module.exports = React.createClass({
                             <FontIcon className='material-icons'>menu</FontIcon>
                         </IconButton>
                     }>
-                        <MenuItem primaryText='Sign Out' onClick={this.handleSignOut} />
+                        <MenuItem
+                            primaryText='Sign Out'
+                            onClick={this.handleSignOut}
+                        />
                     </IconMenu>
                 }
             />
