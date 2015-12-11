@@ -22,7 +22,23 @@ module.exports = React.createClass({
         };
     },
     componentWillMount: function() {
+        this.request();
+    },
+    request: function() {
         Actions.getLatestChatMessages();
+        var checkLoaded = new Promise(function(resolve, reject) {
+            window.setTimeout(function() {
+                if (this.state.isLoaded) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }.bind(this), 3000);
+        }.bind(this));
+        checkLoaded.catch(function() {
+            console.log('response timeout');
+            this.request();
+        }.bind(this));
     },
     render: function() {
         return (
