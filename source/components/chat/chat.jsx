@@ -106,10 +106,19 @@ module.exports = React.createClass({
                     className='message-avatar'
                     src={message.avatar}
                 />
-            ) : (
-                <Avatar className='message-avatar'>
-                    {message.name[0]}
-                </Avatar>
+            ) : (message.isSystem ? (
+                    <Avatar
+                        className='message-avatar'
+                        icon={
+                            <FontIcon className='material-icons'>
+                                settings
+                            </FontIcon>}
+                    />
+                ) : (
+                    <Avatar className='message-avatar'>
+                        {message.name[0]}
+                    </Avatar>
+                )
             );
             var author = (
                 <span key='author' className='message-author'>
