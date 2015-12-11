@@ -85,20 +85,27 @@ module.exports = React.createClass({
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
-            if (message.avatar) {
-                var avatar = (
-                    <Avatar
-                        className='message-avatar'
-                        src={message.avatar}
-                    />
-                );
-            } else {
-                var avatar = (
-                    <Avatar className='message-avatar'>
-                        {message.name[0]}
-                    </Avatar>
-                );
-            }
+            var avatar = message.avatar ? (
+                <Avatar
+                    className='message-avatar'
+                    src={message.avatar}
+                />
+            ) : (
+                <Avatar className='message-avatar'>
+                    {message.name[0]}
+                </Avatar>
+            );
+            var author = (
+                <span className='message-author'>{message.name}</span>
+            );
+            var provider = message.provider ? (
+                <span className='message-author-provider'>
+                    ({message.provider})
+                </span>
+            ) : null;
+            var authorFull = message.isMy ?
+                [provider, ' ', author] :
+                [author, ' ', provider];
             return (
                 <li
                     key={id}
@@ -109,14 +116,14 @@ module.exports = React.createClass({
                         (message.isMy ? 'message-my' : '')}
                 >
                     {avatar}
-                    <span className='message-author'>{message.name}</span>
+                    {authorFull}
                     <br />
                     <span className='message-text'>{message.text}</span>
                 </li>
             );
         });
     },
-    messageEnterKeyPressed: function(e) {
+    messageEnterKeyPressed: function() {
         this.sendMessage();
     },
     messageChanged: function(e) {
