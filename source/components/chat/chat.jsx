@@ -4,8 +4,6 @@ var ChatStore = require('../../stores/chat.jsx');
 var Actions = require('../../actions.jsx');
 var TextField = require('material-ui/lib/text-field');
 var FloatingActionButton = require('material-ui/lib/floating-action-button');
-var FontIcon = require('material-ui/lib/font-icon');
-var Avatar = require('material-ui/lib/avatar');
 var Loading = require('../loading.jsx');
 var smoothscroll = require('smoothscroll');
 require('./chat.scss');
@@ -103,56 +101,7 @@ module.exports = React.createClass({
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
-            var avatar = message.avatar ? (
-                <Avatar
-                    className='message-avatar'
-                    src={message.avatar}
-                />
-            ) : (message.isSystem ? (
-                    <Avatar
-                        className='message-avatar'
-                        icon={
-                            <FontIcon className='material-icons'>
-                                settings
-                            </FontIcon>}
-                    />
-                ) : (
-                    <Avatar className='message-avatar'>
-                        {message.name[0]}
-                    </Avatar>
-                )
-            );
-            var author = (
-                <span key='author' className='message-author'>
-                    {message.name}
-                </span>
-            );
-            var provider = message.provider ? (
-                <span key='provider' className='message-author-provider'>
-                    ({message.provider})
-                </span>
-            ) : null;
-            var spacer = (
-                <span key='spacer'>&nbsp;</span>
-            );
-            var authorFull = message.isMy ?
-                [provider, spacer, author] :
-                [author, spacer, provider];
-            return (
-                <li
-                    key={id}
-                    className={message.isSystem ?
-                        (message.isCritical ?
-                            'message-system-critical' :
-                            'message-system') :
-                        (message.isMy ? 'message-my' : '')}
-                >
-                    {avatar}
-                    {authorFull}
-                    <br />
-                    <span className='message-text'>{message.text}</span>
-                </li>
-            );
+            return <Message {...message} />
         });
     },
     messageEnterKeyPressed: function() {
