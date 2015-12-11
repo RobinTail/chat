@@ -85,6 +85,20 @@ module.exports = React.createClass({
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
+            if (message.avatar) {
+                var avatar = (
+                    <Avatar
+                        className='message-avatar'
+                        src={message.avatar}
+                    />
+                );
+            } else {
+                var avatar = (
+                    <Avatar className='message-avatar'>
+                        {message.name[0]}
+                    </Avatar>
+                );
+            }
             return (
                 <li
                     key={id}
@@ -94,9 +108,7 @@ module.exports = React.createClass({
                             'message-system') :
                         (message.isMy ? 'message-my' : '')}
                 >
-                    <Avatar className='message-avatar'>
-                        {message.name[0]}
-                    </Avatar>
+                    {avatar}
                     <span className='message-author'>{message.name}</span>
                     <br />
                     <span className='message-text'>{message.text}</span>

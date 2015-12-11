@@ -9,7 +9,8 @@ var config = require('./config.js');
 passport.use(new FBStrategy({
         clientID: config.facebook.clientID,
         clientSecret: config.facebook.clientSecret,
-        callbackURL: config.facebook.callbackURL
+        callbackURL: config.facebook.callbackURL,
+        profileFields: ['id', 'displayName', 'picture.type(small)']
     },
     function(accessToken, refreshToken, profile, done) {
         User.findOne({
@@ -24,7 +25,8 @@ passport.use(new FBStrategy({
                     oauthID: profile.id,
                     name: profile.displayName,
                     created: Date.now(),
-                    provider: profile.provider
+                    provider: profile.provider,
+                    avatar: profile.photos.length ? profile.photos[0].value : ''
                 });
                 user.save(function(err) {
                     if (err) {

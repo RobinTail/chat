@@ -42,7 +42,7 @@ module.exports.latest = function(socket, broadcastOne) {
     preFetch
         .sort({at: -1})
         .limit(latestQuantity)
-        .populate('userID', 'name')
+        .populate('userID', 'name avatar')
         .exec(function(err, messages) {
             if (err) {
                 console.log('can not get messages from db: %s', err);
@@ -52,6 +52,7 @@ module.exports.latest = function(socket, broadcastOne) {
             messages = messages.reverse().map(function(message) {
                 return {
                     name: message.userID ? message.userID.name : 'Unknown',
+                    avatar: message.userID ? message.userID.avatar : false,
                     text: message.text,
                     // jscs:disable maximumLineLength
                     isMy: message.userID ?

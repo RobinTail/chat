@@ -4,7 +4,8 @@ var User = mongoose.model('User', {
     oauthID: Number,
     name: String,
     created: Date,
-    provider: String
+    provider: String,
+    avatar: String
 });
 
 module.exports = User;
