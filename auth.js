@@ -127,7 +127,8 @@ passport.use(new VKStrategy({
                     oauthID: profile.id,
                     name: profile.displayName,
                     created: Date.now(),
-                    provider: profile.provider
+                    provider: profile.provider,
+                    avatar: profile.photos.length ? profile.photos[0].value : ''
                 });
                 user.save(function(err) {
                     if (err) {
