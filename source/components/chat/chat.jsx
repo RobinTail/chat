@@ -96,7 +96,9 @@ module.exports = React.createClass({
                 </Avatar>
             );
             var author = (
-                <span key='author' className='message-author'>{message.name}</span>
+                <span key='author' className='message-author'>
+                    {message.name}
+                </span>
             );
             var provider = message.provider ? (
                 <span key='provider' className='message-author-provider'>
