@@ -82,7 +82,7 @@ module.exports = Reflux.createStore({
         this.triggerChange();
     },
     heStopTypingChatMessage: function(data) {
-        this.typing.slice(this.typing.indexOf(data.id));
+        this.typing.splice(this.typing.indexOf(data.id), 1);
         this.triggerChange();
     },
     triggerChange: function() {
