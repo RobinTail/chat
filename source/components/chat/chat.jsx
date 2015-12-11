@@ -18,7 +18,9 @@ module.exports = React.createClass({
         return {
             myMessage: '',
             messages: [],
-            isLoaded: false
+            isLoaded: false,
+            isTyping: false,
+            lastTyping: (new Date()).getTime()
         };
     },
     componentWillMount: function() {
@@ -158,8 +160,19 @@ module.exports = React.createClass({
     },
     messageChanged: function(e) {
         this.setState({
-            myMessage: e.target.value
+            myMessage: e.target.value,
+            isTyping: true,
+            lastTyping: (new Date()).getTime()
         });
+        setTimeout(function() {
+            var now = (new Date()).getTime();
+            var typingDiff = now - this.state.lastTyping;
+            if (typingDiff >= 800 && this.state.isTyping) {
+                this.setState({
+                    isTyping: false
+                });
+            }
+        }.bind(this), 800);
     },
     sendMessage: function() {
         Actions.submitChatMessage(this.state.myMessage);
