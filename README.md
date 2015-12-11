@@ -8,11 +8,22 @@ This sample chat based on Socket.IO and React, it uses oAuth authentication via 
 
 # Technologies
 
-coming soon
+* NodeJS
+* Express
+* Socket.IO
+* Passport
+* React with React Router
+* Reflux
+* Babel
+* SASS
+* MongoDB with Mongoose
+* Material UI
+* Webpack
 
 # Requirements
 
 * NPM
+* MongoDB
 * Due to security reasons this repository does not contain oAuth ID and Secret code, it does not contain MongoDB connection URL.
 
 # Installation
