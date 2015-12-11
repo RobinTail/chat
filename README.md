@@ -4,7 +4,7 @@ This sample chat based on Socket.IO and React, it uses oAuth authentication via 
 
 # Demo
 
-coming soon
+![Chat log](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog.png)
 
 # Technologies
 
