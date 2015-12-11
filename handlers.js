@@ -50,7 +50,9 @@ module.exports.ioConnect = function(socket) {
                 console.log('authenticated user ' + user.name);
                 socket.handshake.session.userName = user.name;
                 chatCore.enterChat(socket);
-                chatCore.latest(socket);
+                socket.on('latest', function() {
+                    chatCore.latest(socket);
+                });
                 socket.on('submit', function(data) {
                     chatCore.submit(socket, data);
                 });
