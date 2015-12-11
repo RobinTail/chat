@@ -64,6 +64,12 @@ module.exports = Reflux.createStore({
         console.log('submit message');
         socket.emit('submit', {text: message});
     },
+    startTypingChatMessage: function() {
+        socket.emit('start_typing');
+    },
+    stopTypingChatMessage: function() {
+        socket.emit('stop_typing');
+    },
     triggerChange: function() {
         this.trigger('change', this.messages);
     }

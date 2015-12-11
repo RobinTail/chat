@@ -56,6 +56,12 @@ module.exports.ioConnect = function(socket) {
                 socket.on('submit', function(data) {
                     chatCore.submit(socket, data);
                 });
+                socket.on('start_typing', function() {
+                    chatCore.startTyping(socket);
+                });
+                socket.on('stop_typing', function() {
+                    chatCore.stopTyping(socket);
+                });
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket,
                         socket.handshake.session.userName);

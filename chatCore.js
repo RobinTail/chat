@@ -92,3 +92,11 @@ module.exports.submit = function(socket, data) {
         this.latest(socket, message._id);
     }.bind(this));
 };
+
+module.exports.startTyping = function(socket) {
+    console.log(socket.handshake.session.userName + ' start typing');
+};
+
+module.exports.stopTyping = function(socket) {
+    console.log(socket.handshake.session.userName + ' stop typing');
+};
