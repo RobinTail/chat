@@ -94,9 +94,15 @@ module.exports.submit = function(socket, data) {
 };
 
 module.exports.startTyping = function(socket) {
-    console.log(socket.handshake.session.userName + ' start typing');
+    socket.broadcast.emit('start_typing', {
+        id: socket.handshake.session.user,
+        name: socket.handshake.session.userName
+    });
 };
 
 module.exports.stopTyping = function(socket) {
-    console.log(socket.handshake.session.userName + ' stop typing');
+    socket.broadcast.emit('stop_typing', {
+        id: socket.handshake.session.user,
+        name: socket.handshake.session.userName
+    });
 };
