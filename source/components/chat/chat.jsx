@@ -5,10 +5,12 @@ var Actions = require('../../actions.jsx');
 var TextField = require('material-ui/lib/text-field');
 var FloatingActionButton = require('material-ui/lib/floating-action-button');
 var FontIcon = require('material-ui/lib/font-icon');
-var Avatar = require('material-ui/lib/avatar');
 var Loading = require('../loading.jsx');
+var Message = require('./message.jsx');
 var smoothscroll = require('smoothscroll');
 require('./chat.scss');
+
+const TYPING_TIMEOUT = 800;
 
 module.exports = React.createClass({
     mixins: [
@@ -18,7 +20,10 @@ module.exports = React.createClass({
         return {
             myMessage: '',
             messages: [],
-            isLoaded: false
+            typing: [],
+            isLoaded: false,
+            isTyping: false,
+            lastTyping: (new Date()).getTime()
         };
     },
     componentWillMount: function() {
@@ -44,6 +49,7 @@ module.exports = React.createClass({
         return (
             <div className='chat-holder'>
                 {this.renderMessagesContainer()}
+                {this.renderTypingContainer()}
                 <div className='send-message-holder'>
                     <div className='send-message-subholder'>
                         <div>
@@ -101,65 +107,49 @@ module.exports = React.createClass({
     },
     renderMessages: function() {
         return this.state.messages.map(function(message, id) {
-            var avatar = message.avatar ? (
-                <Avatar
-                    className='message-avatar'
-                    src={message.avatar}
-                />
-            ) : (message.isSystem ? (
-                    <Avatar
-                        className='message-avatar'
-                        icon={
-                            <FontIcon className='material-icons'>
-                                settings
-                            </FontIcon>}
-                    />
-                ) : (
-                    <Avatar className='message-avatar'>
-                        {message.name[0]}
-                    </Avatar>
-                )
-            );
-            var author = (
-                <span key='author' className='message-author'>
-                    {message.name}
-                </span>
-            );
-            var provider = message.provider ? (
-                <span key='provider' className='message-author-provider'>
-                    ({message.provider})
-                </span>
-            ) : null;
-            var spacer = (
-                <span key='spacer'>&nbsp;</span>
-            );
-            var authorFull = message.isMy ?
-                [provider, spacer, author] :
-                [author, spacer, provider];
-            return (
-                <li
-                    key={id}
-                    className={message.isSystem ?
-                        (message.isCritical ?
-                            'message-system-critical' :
-                            'message-system') :
-                        (message.isMy ? 'message-my' : '')}
-                >
-                    {avatar}
-                    {authorFull}
-                    <br />
-                    <span className='message-text'>{message.text}</span>
-                </li>
-            );
+            return <Message key={id} {...message} />;
         });
+    },
+    renderTypingContainer: function() {
+        if (this.state.typing.length) {
+            var verb = this.state.typing.length > 1 ?
+                <span>are</span> : <span>is</span>;
+            var msg = <span> {verb} typing...</span>;
+            var names = this.state.typing.map(function(user) {
+                return user.name;
+            }).join(', ');
+            return (
+                <div className='typing-holder'>
+                {names}
+                {msg}
+                </div>
+            );
+        } else {
+            return null;
+        }
     },
     messageEnterKeyPressed: function() {
         this.sendMessage();
     },
     messageChanged: function(e) {
+        if (!this.state.isTyping) {
+            Actions.iStartTypingChatMessage();
+        }
         this.setState({
-            myMessage: e.target.value
+            myMessage: e.target.value,
+            isTyping: true,
+            lastTyping: (new Date()).getTime()
         });
+        setTimeout(function() {
+            var now = (new Date()).getTime();
+            var typingDiff = now - this.state.lastTyping;
+            if (typingDiff >= TYPING_TIMEOUT && this.state.isTyping) {
+                this.setState({
+                    isTyping: false
+                });
+                Actions.iStopTypingChatMessage();
+            }
+        }.bind(this), TYPING_TIMEOUT);
     },
     sendMessage: function() {
         Actions.submitChatMessage(this.state.myMessage);
@@ -170,6 +160,7 @@ module.exports = React.createClass({
     onChange: function() {
         this.setState({
             messages: ChatStore.messages,
+            typing: ChatStore.typing,
             isLoaded: true
         });
         smoothscroll(document.body.scrollHeight);

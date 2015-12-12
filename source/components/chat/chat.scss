@@ -59,6 +59,15 @@
         }
     }
 
+    .typing-holder {
+        display: inline-block;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 5px;
+        background-color: rgba(150,150,0,0.2);
+        padding: 5px;
+        font-size: smaller;
+    }
+
     .send-message-holder {
         position: fixed;
         bottom: 0;
