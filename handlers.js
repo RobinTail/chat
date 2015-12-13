@@ -23,7 +23,8 @@ module.exports.app = function(req, res) {
     console.log('Feeding entry');
     res.render('index', {
         applicationData: {
-            isAuthenticated: req.isAuthenticated()
+            isAuthenticated: req.isAuthenticated(),
+            sounds: true
         }
     });
 };
