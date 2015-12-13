@@ -8,6 +8,11 @@ if (element) {
  * Returns the value of stored application data (injected by NodeJS)
  */
 
-module.exports = function(name) {
-    return store[name];
+module.exports = {
+    get: function(name) {
+        return store[name];
+    },
+    set: function(name, value) {
+        store[name] = value;
+    }
 };
