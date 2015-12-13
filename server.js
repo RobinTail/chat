@@ -3,10 +3,10 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ios = require('socket.io-express-session');
-var session = require('express-session');
 var handlers = require('./handlers');
 var passport = require('passport');
 var User = require('./user');
+var mongoose = require('mongoose');
 
 // load authentication strategies
 require('./auth');
@@ -15,23 +15,12 @@ require('./auth');
 require('./webpack.init')(app);
 
 // database connection
-var mongoose = require('mongoose');
-var db = require('./db.js');
-mongoose.connect(db);
-var MongoStore = require('connect-mongo')(session);
+mongoose.connect(require('./db.js'));
 
 // app configuration
+var sessionMiddleware = require('./session')(mongoose);
 app.use(handlers.logger);
 app.set('view engine', 'ejs');
-app.use('/static', express.static(__dirname + '/static'));
-var sessionMiddleware = session({
-    resave: false,
-    saveUninitialized: false,
-    secret: 'robintail/chat/session/secret',
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection
-    })
-});
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,6 +36,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 // handlers
+app.use('/static', express.static(__dirname + '/static'));
 app.get('/', handlers.app);
 app.get('/logout', handlers.logout);
 
