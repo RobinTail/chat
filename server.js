@@ -3,7 +3,6 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ios = require('socket.io-express-session');
-var handlers = require('./handlers');
 var passport = require('passport');
 var User = require('./user');
 var mongoose = require('mongoose');
@@ -23,6 +22,7 @@ app.set('view engine', 'ejs');
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
+io.use(ios(sessionMiddleware));
 
 // serialization functions
 passport.serializeUser(function(user, done) {
@@ -34,38 +34,8 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-// handlers
-app.use(handlers.logger);
-app.use('/static', express.static(__dirname + '/static'));
-app.get('/', handlers.app);
-app.get('/logout', handlers.logout);
-
-// auth handlers
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {failureRedirect: '/'}),
-    handlers.authSuccess);
-app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {failureRedirect: '/'}),
-    handlers.authSuccess);
-app.get('/auth/google', passport.authenticate('google', {
-        scope: [
-            'https://www.googleapis.com/auth/userinfo.profile',
-            'https://www.googleapis.com/auth/userinfo.email'
-        ]
-    }));
-app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect: '/'}),
-    handlers.authSuccess);
-app.get('/auth/vkontakte', passport.authenticate('vkontakte'));
-app.get('/auth/vkontakte/callback',
-    passport.authenticate('vkontakte', {failureRedirect: '/'}),
-    handlers.authSuccess);
-
-// io connection
-io.use(ios(sessionMiddleware));
-io.on('connection', handlers.ioConnect);
+// router
+require('./routes')(app, passport, io);
 
 // launch server
 http.listen(8080, function() {
