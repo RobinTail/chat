@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "test": "mocha",
     "build": "webpack --progress && NODE_ENV=production node server.js",
     "webpack": "webpack --progress",
     "jscs": "jscs ./"
@@ -53,7 +54,9 @@
     "webpack-dev-middleware": "^1.4.0"
   },
   "devDependencies": {
-    "jscs": "^2.6.0"
+    "chai": "^3.4.1",
+    "jscs": "^2.6.0",
+    "mocha": "^2.3.4"
   },
   "babel": {
     "presets": [
