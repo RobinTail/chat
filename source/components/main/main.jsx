@@ -39,7 +39,7 @@ module.exports = React.createClass({
         if (this.props.children) {
             return this.props.children;
         } else {
-            if (appData('isAuthenticated')) {
+            if (appData.get('isAuthenticated')) {
                 return <Chat />;
             } else {
                 return <Auth />;
