@@ -6,21 +6,13 @@ var ios = require('socket.io-express-session');
 var session = require('express-session');
 var handlers = require('./handlers');
 var passport = require('passport');
-var auth = require('./auth');
 var User = require('./user');
 
-if (process.env.NODE_ENV !== 'production') {
-    console.log('Using webpack dev middleware');
-    var webpack = require('webpack');
-    var webpackDevMiddleware = require('webpack-dev-middleware');
-    var webpackCompiler = webpack(require('./webpack.config'));
-    app.use(webpackDevMiddleware(webpackCompiler, {
-        noInfo: true,
-        publicPath: '/static/'
-    }));
-} else {
-    console.log('Using webpack build');
-}
+// load authentication strategies
+require('./auth');
+
+// set up webpack
+require('./webpack.init')(app);
 
 // database connection
 var mongoose = require('mongoose');
