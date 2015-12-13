@@ -19,7 +19,6 @@ mongoose.connect(require('./db.js'));
 
 // app configuration
 var sessionMiddleware = require('./session')(mongoose);
-app.use(handlers.logger);
 app.set('view engine', 'ejs');
 app.use(sessionMiddleware);
 app.use(passport.initialize());
@@ -36,6 +35,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 // handlers
+app.use(handlers.logger);
 app.use('/static', express.static(__dirname + '/static'));
 app.get('/', handlers.app);
 app.get('/logout', handlers.logout);
