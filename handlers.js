@@ -1,5 +1,5 @@
-var User = require('./user');
-var chatCore = require('./chatCore');
+var User = require('./schema/user');
+var chatCore = require('./lib/chatCore');
 
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
