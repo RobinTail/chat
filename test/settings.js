@@ -18,7 +18,7 @@ describe('Settings', function() {
     describe('config', function() {
 
         it('should be an object', function() {
-            expect(config).to.be.a('object');
+            expect(config).to.be.an('object');
         });
 
         it('should not be empty', function() {

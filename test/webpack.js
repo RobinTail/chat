@@ -5,7 +5,7 @@ describe('Webpack', function() {
     describe('Config', function() {
 
         it('should be an object', function() {
-            expect(webpackConfig).to.be.a('object');
+            expect(webpackConfig).to.be.an('object');
         });
 
         it('should have an entry', function() {
@@ -13,11 +13,12 @@ describe('Webpack', function() {
         });
 
         it('should have an output object', function() {
-            expect(webpackConfig).to.contain.key('output').to.be.a('object');
+            expect(webpackConfig).to.contain.key('output').to.be.an('object');
         });
 
         it('should have an output with path and filename', function() {
-            expect(webpackConfig.output).to.contain.all.keys(['path', 'filename']);
+            expect(webpackConfig.output).to.contain
+                .all.keys(['path', 'filename']);
         });
 
     });
