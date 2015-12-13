@@ -170,14 +170,16 @@ module.exports = React.createClass({
         });
     },
     onChange: function(section) {
+        if (section === 'messages' &&
+            appData.get('sounds') &&
+            this.state.isLoaded) {
+            ion.sound.play('button_click');
+        }
         this.setState({
             messages: ChatStore.messages,
             typing: ChatStore.typing,
             isLoaded: true
         });
         smoothscroll(document.body.scrollHeight);
-        if (section === 'messages' && appData.get('sounds')) {
-            ion.sound.play('button_click');
-        }
     }
 });
