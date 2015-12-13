@@ -30,6 +30,7 @@
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "history": "1.13.x",
+    "ion-sound": "^3.0.6",
     "material-ui": "^0.13.4",
     "mongoose": "^4.2.9",
     "node-sass": "^3.4.2",

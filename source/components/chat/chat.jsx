@@ -9,8 +9,19 @@ var Loading = require('../loading.jsx');
 var Message = require('./message.jsx');
 var smoothscroll = require('smoothscroll');
 require('./chat.scss');
+require('ion-sound');
 
 const TYPING_TIMEOUT = 800;
+
+ion.sound({
+    sounds: [
+        {name: 'button_click'}
+    ],
+    path: 'static/sounds/',
+    preload: true,
+    multiplay: true,
+    volume: 0.5
+});
 
 module.exports = React.createClass({
     mixins: [
@@ -157,12 +168,15 @@ module.exports = React.createClass({
             myMessage: ''
         });
     },
-    onChange: function() {
+    onChange: function(section) {
         this.setState({
             messages: ChatStore.messages,
             typing: ChatStore.typing,
             isLoaded: true
         });
         smoothscroll(document.body.scrollHeight);
+        if (section === 'messages') {
+            ion.sound.play('button_click');
+        }
     }
 });
