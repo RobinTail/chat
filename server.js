@@ -4,14 +4,14 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ios = require('socket.io-express-session');
 var passport = require('passport');
-var User = require('./user');
+var User = require('./schema/user');
 var mongoose = require('mongoose');
 
 // load authentication strategies
-require('./auth');
+require('./lib/auth');
 
 // set up webpack
-require('./webpack.init')(app);
+require('./lib/webpack.init.js')(app);
 
 // database connection
 mongoose.connect(require('./db.js'));
