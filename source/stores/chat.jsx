@@ -3,7 +3,7 @@ var Reflux = require('reflux');
 var Actions = require('../actions.jsx');
 var appData = require('../appData.jsx');
 
-if (appData('isAuthenticated')) {
+if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
 
@@ -13,7 +13,7 @@ module.exports = Reflux.createStore({
     typing: [],
     isConnectionLost: false,
     init: function() {
-        if (appData('isAuthenticated')) {
+        if (appData.get('isAuthenticated')) {
             socket.on('connect', function() {
                 if (this.isConnectionLost) {
                     this.isConnectionLost = false;
