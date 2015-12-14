@@ -24,7 +24,9 @@ module.exports.app = function(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
-            sounds: req.user.sounds || true
+            sounds: typeof(req.user.sounds) == 'undefined' ?
+                true : req.user.sounds,
+            provider: req.user.provider
         }
     });
 };
@@ -65,7 +67,12 @@ module.exports.ioConnect = function(socket) {
                 });
                 socket.on('sounds', function(value) {
                     console.log('sounds set: ' + value);
-                    //
+                    user.sounds = value;
+                    user.save(function(err) {
+                        if (err) {
+                            console.log('error saving sounds ' + err);
+                        }
+                    });
                 });
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket,
