@@ -3,7 +3,7 @@ var Reflux = require('reflux');
 var Actions = require('../actions.jsx');
 var appData = require('../appData.jsx');
 
-if (appData('isAuthenticated')) {
+if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
 
@@ -13,7 +13,7 @@ module.exports = Reflux.createStore({
     typing: [],
     isConnectionLost: false,
     init: function() {
-        if (appData('isAuthenticated')) {
+        if (appData.get('isAuthenticated')) {
             socket.on('connect', function() {
                 if (this.isConnectionLost) {
                     this.isConnectionLost = false;
@@ -64,7 +64,7 @@ module.exports = Reflux.createStore({
             data.messages.forEach(function(message) {
                 this.messages.push(message);
             }.bind(this));
-            this.triggerChange();
+            this.triggerChange('messages');
         }
     },
     submitChatMessage: function(message) {
@@ -79,13 +79,16 @@ module.exports = Reflux.createStore({
     },
     heStartTypingChatMessage: function(data) {
         this.typing.push(data);
-        this.triggerChange();
+        this.triggerChange('typing');
     },
     heStopTypingChatMessage: function(data) {
         this.typing.splice(this.typing.indexOf(data.id), 1);
-        this.triggerChange();
+        this.triggerChange('typing');
     },
-    triggerChange: function() {
-        this.trigger('change');
+    setChatSounds: function(value) {
+        socket.emit('sounds', value);
+    },
+    triggerChange: function(section) {
+        this.trigger(section);
     }
 });

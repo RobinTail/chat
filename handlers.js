@@ -1,5 +1,5 @@
-var User = require('./user');
-var chatCore = require('./chatCore');
+var User = require('./schema/user');
+var chatCore = require('./lib/chatCore');
 
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
@@ -23,7 +23,10 @@ module.exports.app = function(req, res) {
     console.log('Feeding entry');
     res.render('index', {
         applicationData: {
-            isAuthenticated: req.isAuthenticated()
+            isAuthenticated: req.isAuthenticated(),
+            sounds: typeof(req.user.sounds) == 'undefined' ?
+                true : req.user.sounds,
+            provider: req.user.provider
         }
     });
 };
@@ -61,6 +64,15 @@ module.exports.ioConnect = function(socket) {
                 });
                 socket.on('stop_typing', function() {
                     chatCore.stopTyping(socket);
+                });
+                socket.on('sounds', function(value) {
+                    console.log('sounds set: ' + value);
+                    user.sounds = value;
+                    user.save(function(err) {
+                        if (err) {
+                            console.log('error saving sounds ' + err);
+                        }
+                    });
                 });
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket,

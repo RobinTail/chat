@@ -5,7 +5,8 @@ var User = mongoose.model('User', {
     name: String,
     created: Date,
     provider: String,
-    avatar: String
+    avatar: String,
+    sounds: Boolean
 });
 
 module.exports = User;
