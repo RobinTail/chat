@@ -5,5 +5,6 @@ module.exports = Reflux.createActions([
     'getLatestChatMessages',
     'submitChatMessage',
     'iStartTypingChatMessage',
-    'iStopTypingChatMessage'
+    'iStopTypingChatMessage',
+    'setChatSounds'
 ]);

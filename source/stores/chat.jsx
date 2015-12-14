@@ -85,6 +85,9 @@ module.exports = Reflux.createStore({
         this.typing.splice(this.typing.indexOf(data.id), 1);
         this.triggerChange('typing');
     },
+    setChatSounds: function(value) {
+        socket.emit('sounds', value);
+    },
     triggerChange: function(section) {
         this.trigger(section);
     }

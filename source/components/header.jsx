@@ -7,6 +7,7 @@ var IconButton = require('material-ui/lib/icon-button');
 var MenuItem = require('material-ui/lib/menus/menu-item');
 var FontIcon = require('material-ui/lib/font-icon');
 var appData = require('../appData.jsx');
+var Actions = require('../actions.jsx');
 
 module.exports = React.createClass({
     mixins: [
@@ -52,9 +53,9 @@ module.exports = React.createClass({
         this.history.pushState(null, '/');
     },
     handleSounds: function() {
-        appData.set('sounds', !appData.get('sounds'));
+        Actions.setChatSounds(!this.state.sounds);
         this.setState({
-            sounds: appData.get('sounds')
+            sounds: !appData.get('sounds')
         });
     },
     handleSignOut: function() {

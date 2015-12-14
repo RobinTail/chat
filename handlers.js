@@ -24,7 +24,7 @@ module.exports.app = function(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
-            sounds: true
+            sounds: req.user.sounds || true
         }
     });
 };
@@ -62,6 +62,10 @@ module.exports.ioConnect = function(socket) {
                 });
                 socket.on('stop_typing', function() {
                     chatCore.stopTyping(socket);
+                });
+                socket.on('sounds', function(value) {
+                    console.log('sounds set: ' + value);
+                    //
                 });
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket,
