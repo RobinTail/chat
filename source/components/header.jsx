@@ -53,10 +53,11 @@ module.exports = React.createClass({
         this.history.pushState(null, '/');
     },
     handleSounds: function() {
+        appData.set('sounds', !appData.get('sounds'));
         this.setState({
-            sounds: !appData.get('sounds')
+            sounds: appData.get('sounds')
         });
-        Actions.setChatSounds(this.state.sounds);
+        Actions.setChatSounds(appData.get('sounds'));
     },
     handleSignOut: function() {
         window.location = '/logout';
