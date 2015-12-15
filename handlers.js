@@ -51,7 +51,9 @@ module.exports.ioConnect = function(socket) {
             }
             if (user) {
                 console.log('authenticated user ' + user.name);
-                socket.handshake.session.userName = user.name;
+                // save user name to socket passport
+                socket.handshake.session.passport.userName = user.name;
+                socket.handshake.session.passport.provider = user.provider;
                 chatCore.enterChat(socket);
                 socket.on('latest', function() {
                     chatCore.latest(socket);
