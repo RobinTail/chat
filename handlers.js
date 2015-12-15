@@ -75,8 +75,7 @@ module.exports.ioConnect = function(socket) {
                     });
                 });
                 socket.on('disconnect', function() {
-                    chatCore.leaveChat(socket,
-                        socket.handshake.session.userName);
+                    chatCore.leaveChat(socket);
                 });
             }
         });
