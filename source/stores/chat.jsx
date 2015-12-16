@@ -11,6 +11,7 @@ module.exports = Reflux.createStore({
     listenables: [Actions],
     messages: [],
     typing: [],
+    isLatestReceived: false,
     isConnectionLost: false,
     init: function() {
         if (appData.get('isAuthenticated')) {
@@ -40,6 +41,9 @@ module.exports = Reflux.createStore({
             socket.on('latest', function(data) {
                 this.afterLatestChatMessages(data);
             }.bind(this));
+            socket.on('new', function(data) {
+                this.newChatMessages(data);
+            }.bind(this));
             socket.on('start_typing', function(data) {
                 this.heStartTypingChatMessage(data);
             }.bind(this));
@@ -53,6 +57,12 @@ module.exports = Reflux.createStore({
         socket.emit('latest');
     },
     afterLatestChatMessages: function(data) {
+        if (!this.isLatestReceived) {
+            this.isLatestReceived = true;
+            this.newChatMessages(data);
+        }
+    },
+    newChatMessages: function(data) {
         if (data.error) {
             this.messages.push({
                 name: 'System',

@@ -178,7 +178,7 @@ module.exports = React.createClass({
         this.setState({
             messages: ChatStore.messages,
             typing: ChatStore.typing,
-            isLoaded: true
+            isLoaded: ChatStore.isLatestReceived
         });
         smoothscroll(document.body.scrollHeight);
     }
