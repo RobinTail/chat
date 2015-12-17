@@ -97,6 +97,23 @@ describe('Chat Intergation Tests', function() {
             });
         });
 
+        it('should not reply for \'latest\' request', function(done) {
+            this.timeout(10000);
+            this.slow(5500);
+            newXhr.setCookies('');
+            var socket = client(srv);
+            var test = true;
+            expect(test).to.be.true;
+            setTimeout(done, 5000);
+            socket.on('connect', function() {
+                promiseRequest(socket, this);
+                socket.on('latest', function(data) {
+                    test = false;
+                    done();
+                }.bind(this));
+            }.bind(this));
+        });
+
     });
 
     context('Authenticated', function() {
