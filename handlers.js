@@ -54,7 +54,6 @@ module.exports.ioConnect = function(socket) {
                 // save user name to socket passport
                 socket.handshake.session.passport.userName = user.name;
                 socket.handshake.session.passport.provider = user.provider;
-                chatCore.enterChat(socket);
                 socket.on('latest', function() {
                     chatCore.latest(socket);
                 });
@@ -79,6 +78,7 @@ module.exports.ioConnect = function(socket) {
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket);
                 });
+                chatCore.enterChat(socket);
             }
         });
 };
