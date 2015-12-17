@@ -1,6 +1,11 @@
 # Chat
 
-This sample chat based on Socket.IO and React, it uses oAuth authentication via four social networks (Facebook, Twitter, Google, VKontakte).
+This sample chat based on Socket.io and React, it uses oAuth authentication via social networks. 
+
+* Four oAuth providers: Facebook, Twitter, Google, VKontakte.
+* Chat automatically removes old messages from MongoDB by 'expires' schema property.
+* It makes a sound on new incoming messages.
+* It shows who are typing messages now.
 
 # Demo
 
@@ -10,7 +15,7 @@ This sample chat based on Socket.IO and React, it uses oAuth authentication via 
 
 * NodeJS
 * Express
-* Socket.IO
+* Socket.io
 * Passport
 * React with React Router
 * Flux (with Reflux)

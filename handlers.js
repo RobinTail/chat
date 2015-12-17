@@ -4,7 +4,7 @@ var chatCore = require('./lib/chatCore');
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
         console.log('user not authenticated');
-        sendError(socket, 'Not authenticated request');
+        chatCore.sendError(socket, 'Not authenticated request');
         return false;
     }
     return true;
