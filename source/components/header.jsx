@@ -34,12 +34,7 @@ module.exports = React.createClass({
                             <FontIcon className='material-icons'>menu</FontIcon>
                         </IconButton>
                     }>
-                        <MenuItem
-                            primaryText={'Turn sounds ' +
-                                (this.state.sounds ? 'off' : 'on')
-                            }
-                            onClick={this.handleSounds}
-                        />
+                        {this.renderSoundsOption()}
                         <MenuItem
                             primaryText='Sign Out'
                             onClick={this.handleSignOut}
@@ -48,6 +43,20 @@ module.exports = React.createClass({
                 }
             />
         );
+    },
+    renderSoundsOption: function() {
+        if (appData.get('isAuthenticated')) {
+            return (
+                <MenuItem
+                    primaryText={'Turn sounds ' +
+                    (this.state.sounds ? 'off' : 'on')
+                        }
+                    onClick={this.handleSounds}
+                />
+            );
+        } else {
+            return [];
+        }
     },
     handleHomeClick: function() {
         this.history.pushState(null, '/');

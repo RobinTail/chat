@@ -24,9 +24,11 @@ module.exports.app = function(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
-            sounds: typeof(req.user.sounds) == 'undefined' ?
-                true : req.user.sounds,
-            provider: req.user.provider
+            sounds: typeof req.user == 'object' ? (
+                        typeof req.user.sounds == 'undefined' ?
+                            true : req.user.sounds) :
+                        true,
+            provider: typeof req.user == 'object' ? req.user.provider : ''
         }
     });
 };
