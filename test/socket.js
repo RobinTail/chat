@@ -112,15 +112,18 @@ describe('Chat Intergation Tests', function() {
                 socket.on('connect', function() {
                     promiseRequest(socket, this);
                     socket.on('latest', function(data) {
-                        this.isLoaded = true;
-                        expect(data.error).to.be.false;
-                        expect(data.messages).to.be.an('array');
-                        done();
+                        if (!this.isLoaded) {
+                            this.isLoaded = true;
+                            expect(data.error).to.be.false;
+                            expect(data.messages).to.be.an('array');
+                            done();
+                        }
                     }.bind(this));
                 }.bind(this));
             });
 
         });
 
-    }); // connection
+    });
+
 }); // chat
