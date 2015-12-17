@@ -4,6 +4,7 @@ var ioc = require('socket.io-client');
 var expect = require('chai').expect;
 var https = require('https');
 var User = require('../schema/user');
+var Session = require('../schema/test.session');
 var signature = require('../node_modules/express-session/' +
                 'node_modules/cookie-signature');
 var testConfig = require('../test.confg');
@@ -34,8 +35,14 @@ function encodeSession(value) {
         ));
 }
 
-function cookieSession(encoded) {
-    return testConfig.cookieName + '=' + encoded;
+/**
+ * Prepare encoded session cookie
+ *
+ * @param {string} session
+ * @returns {string}
+ */
+function cookieSession(session) {
+    return testConfig.cookieName + '=' + encodeSession(session);
 }
 
 /**
@@ -96,12 +103,16 @@ describe('Chat Intergation Tests', function() {
 
         before('Remove test users and sessions', function(done) {
             this.timeout(5000);
-            User.find({oauthID: 0, provider: 'test'}).remove(done);
+            User.find({oauthID: 0, provider: 'test'}).remove(function() {
+                Session.find({isTest: true}).remove(done);
+            });
         });
 
         after('Remove test user and session', function(done) {
             this.timeout(5000);
-            User.findByIdAndRemove(testConfig.testUserID, done);
+            User.findByIdAndRemove(testConfig.testUserID, function() {
+                Session.findByIdAndRemove(testConfig.testSessionID, done);
+            });
         });
 
         context('Prepare', function() {
@@ -111,7 +122,7 @@ describe('Chat Intergation Tests', function() {
                 expect(testConfig.sessionEncoded).to.be.equals(encoded);
             });
 
-            it('Should create user', function(done) {
+            it('Should create test user', function(done) {
                 this.timeout(5000);
                 user = new User({
                     oauthID: 0,
@@ -124,6 +135,34 @@ describe('Chat Intergation Tests', function() {
                         done(err);
                     } else {
                         testConfig.testUserID = user._id;
+                        expect(testConfig.testUserID).not.to.be.undefined;
+                        expect(testConfig.testUserID).not.to.be.null;
+                        done();
+                    }
+                });
+            });
+
+            it('Should create test session', function(done) {
+                var session = new Session({
+                    _id: 'test_' + Date.now().toString(),
+                    session: JSON.stringify({
+                        cookie: {
+                            expires: null,
+                            path: '/'
+                        },
+                        passport: {
+                            user: testConfig.testUserID
+                        }
+                    }),
+                    expires: Date.now() + 3600,
+                    isTest: true
+                });
+                session.save(function(err, session) {
+                    if (err) {
+                        done(err);
+                    } else {
+                        testConfig.testSessionID = session._id;
+                        expect('everything').to.be.ok;
                         done();
                     }
                 });
@@ -140,7 +179,7 @@ describe('Chat Intergation Tests', function() {
             it('Should feed latest', function(done) {
                 this.timeout(12000);
                 this.isLoaded = false;
-                newXhr.setCookies(cookieSession(testConfig.cookieValue));
+                newXhr.setCookies(cookieSession(testConfig.testSessionID));
                 var socket = client(srv);
                 socket.on('connect', function() {
                     promiseRequest(socket, this);
