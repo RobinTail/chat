@@ -24,9 +24,11 @@ module.exports.app = function(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
-            sounds: typeof(req.user.sounds) == 'undefined' ?
-                true : req.user.sounds,
-            provider: req.user.provider
+            sounds: typeof req.user == 'object' ? (
+                        typeof req.user.sounds == 'undefined' ?
+                            true : req.user.sounds) :
+                        true,
+            provider: typeof req.user == 'object' ? req.user.provider : ''
         }
     });
 };
@@ -54,7 +56,6 @@ module.exports.ioConnect = function(socket) {
                 // save user name to socket passport
                 socket.handshake.session.passport.userName = user.name;
                 socket.handshake.session.passport.provider = user.provider;
-                chatCore.enterChat(socket);
                 socket.on('latest', function() {
                     chatCore.latest(socket);
                 });
@@ -79,6 +80,7 @@ module.exports.ioConnect = function(socket) {
                 socket.on('disconnect', function() {
                     chatCore.leaveChat(socket);
                 });
+                chatCore.enterChat(socket);
             }
         });
 };
