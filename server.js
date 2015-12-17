@@ -7,7 +7,7 @@ import myconsole from './lib/console';
 import socket from 'socket.io';
 import http2 from 'http';
 // load authentication strategies
-import './lib/auth';
+import './lib/authStrategies';
 import initWebpack from './lib/initWebpack';
 // database connection
 import uri from './db';
