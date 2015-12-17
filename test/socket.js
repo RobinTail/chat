@@ -77,7 +77,7 @@ describe('Chat Intergation Tests', function() {
             srv.close();
         });
 
-        it('Should connect', function(done) {
+        it('should connect', function(done) {
             this.timeout(5000);
             newXhr.setCookies('');
             var socket = client(srv);
@@ -87,7 +87,7 @@ describe('Chat Intergation Tests', function() {
             });
         });
 
-        it('Should reply with error', function(done) {
+        it('should reply with error', function(done) {
             this.timeout(5000);
             newXhr.setCookies('');
             var socket = client(srv);
@@ -117,12 +117,12 @@ describe('Chat Intergation Tests', function() {
 
         context('Prepare', function() {
 
-            it('Should encode session properly', function() {
+            it('should encode session properly', function() {
                 var encoded = encodeSession(testConfig.sessionUnsigned);
                 expect(testConfig.sessionEncoded).to.be.equals(encoded);
             });
 
-            it('Should create test user', function(done) {
+            it('should create test user', function(done) {
                 this.timeout(5000);
                 user = new User({
                     oauthID: 0,
@@ -142,7 +142,7 @@ describe('Chat Intergation Tests', function() {
                 });
             });
 
-            it('Should create test session', function(done) {
+            it('should create test session', function(done) {
                 var session = new Session({
                     _id: 'test_' + Date.now().toString(),
                     session: JSON.stringify({
@@ -176,7 +176,7 @@ describe('Chat Intergation Tests', function() {
                 srv.close();
             });
 
-            it('Should feed latest', function(done) {
+            it('should reply for \'latest\' request', function(done) {
                 this.timeout(12000);
                 this.isLoaded = false;
                 newXhr.setCookies(cookieSession(testConfig.testSessionID));
