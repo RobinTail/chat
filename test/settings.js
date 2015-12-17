@@ -1,9 +1,10 @@
 var expect = require('chai').expect;
 var db = require('../db');
 var config = require('../config');
+var webpackConfig = require('../webpack.config.js');
 
 describe('Settings', function() {
-    describe('db', function() {
+    describe('Database settings', function() {
 
         it('should be a string', function() {
             expect(db).to.be.a('string');
@@ -15,7 +16,7 @@ describe('Settings', function() {
 
     });
 
-    describe('config', function() {
+    describe('oAuth settings', function() {
 
         it('should be an object', function() {
             expect(config).to.be.an('object');
@@ -23,6 +24,27 @@ describe('Settings', function() {
 
         it('should not be empty', function() {
             expect(Object.keys(config)).to.have.length.above(0);
+        });
+
+    });
+
+    describe('Webpack settings', function() {
+
+        it('should be an object', function() {
+            expect(webpackConfig).to.be.an('object');
+        });
+
+        it('should have an entry', function() {
+            expect(webpackConfig).to.contain.key('entry');
+        });
+
+        it('should have an output object', function() {
+            expect(webpackConfig).to.contain.key('output').to.be.an('object');
+        });
+
+        it('should have an output with path and filename', function() {
+            expect(webpackConfig.output).to.contain
+                .all.keys(['path', 'filename']);
         });
 
     });
