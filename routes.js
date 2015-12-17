@@ -1,7 +1,7 @@
 var express = require('express');
 var handlers = require('./handlers');
 
-module.exports = function(app, passport, io) {
+export default function(app, passport, io) {
     // logger
     app.use(handlers.logger);
 
