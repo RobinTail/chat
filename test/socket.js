@@ -1,5 +1,5 @@
 var newXhr = require('socket.io-client-cookie');
-var srv = require('../server');
+var srv = require('../index');
 var ioc = require('socket.io-client');
 var expect = require('chai').expect;
 var https = require('https');

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "NODE_ENV=test mocha",
+    "nyan": "NODE_ENV=test mocha --reporter nyan",
     "build": "webpack --progress && NODE_ENV=production node index.js",
     "webpack": "webpack --progress",
     "jscs": "jscs ./"
