@@ -1,9 +1,10 @@
 var User = require('./schema/user');
 var chatCore = require('./lib/chatCore');
+var myconsole = require('./lib/console');
 
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
-        console.log('user not authenticated');
+        myconsole.log('user not authenticated');
         chatCore.sendError(socket, 'Not authenticated request');
         return false;
     }
@@ -13,14 +14,14 @@ function checkAuth(socket) {
 // logger
 
 module.exports.logger = function(req, res, next) {
-    console.log('Request: ' + req.method + ' ' + req.originalUrl);
+    myconsole.log('Request: ' + req.method + ' ' + req.originalUrl);
     next();
 };
 
 // entry point
 
 module.exports.app = function(req, res) {
-    console.log('Feeding entry');
+    myconsole.log('Feeding entry');
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
@@ -42,17 +43,17 @@ module.exports.authSuccess = function(req, res) {
 // when io connection started
 
 module.exports.ioConnect = function(socket) {
-    console.log('io connection');
+    myconsole.log('io connection');
     if (!checkAuth(socket)) { return false; }
     User.findById(socket.handshake.session.passport.user,
         function(err, user) {
             if (err) {
-                console.log('user find failure: ' + err);
+                myconsole.log('user find failure: ' + err);
                 sendError(socket, 'Database error');
                 return false;
             }
             if (user) {
-                console.log('authenticated user ' + user.name);
+                myconsole.log('authenticated user ' + user.name);
                 // save user name to socket passport
                 socket.handshake.session.passport.userName = user.name;
                 socket.handshake.session.passport.provider = user.provider;
@@ -69,11 +70,11 @@ module.exports.ioConnect = function(socket) {
                     chatCore.stopTyping(socket);
                 });
                 socket.on('sounds', function(value) {
-                    console.log('sounds set: ' + value);
+                    myconsole.log('sounds set: ' + value);
                     user.sounds = value;
                     user.save(function(err) {
                         if (err) {
-                            console.log('error saving sounds ' + err);
+                            myconsole.log('error saving sounds ' + err);
                         }
                     });
                 });

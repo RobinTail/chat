@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha",
+    "test": "NODE_ENV=test mocha",
     "build": "webpack --progress && NODE_ENV=production node server.js",
     "webpack": "webpack --progress",
     "jscs": "jscs ./"

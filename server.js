@@ -6,6 +6,7 @@ var ios = require('socket.io-express-session');
 var passport = require('passport');
 var User = require('./schema/user');
 var mongoose = require('mongoose');
+var myconsole = require('./lib/console');
 
 // load authentication strategies
 require('./lib/auth');
@@ -39,7 +40,7 @@ require('./routes')(app, passport, io);
 
 // launch server
 http.listen(8080, function() {
-    console.log('Start serving');
+    myconsole.log('Start serving');
 });
 
 module.exports = http;

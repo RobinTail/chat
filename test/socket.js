@@ -64,7 +64,7 @@ function promiseRequest(socket, test) {
         }, 3000);
     });
     checkLoaded.catch(function() {
-        console.log('response timeout');
+        //console.log('response timeout');
         promiseRequest(socket, test);
     });
 }
