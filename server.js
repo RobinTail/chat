@@ -41,3 +41,5 @@ require('./routes')(app, passport, io);
 http.listen(8080, function() {
     console.log('Start serving');
 });
+
+module.exports = http;
