@@ -13,12 +13,13 @@ function client(srv) {
     return ioc(url);
 }
 
-describe('Chat', function() {
-    describe('Server', function() {
+describe('Chat Intergation Tests', function() {
 
-        describe('Not authenticated connection', function() {
+    describe('Client connection', function() {
 
-            afterEach(function() {
+        context('Not authenticated', function() {
+
+            afterEach('Close server connections', function() {
                 srv.close();
             });
 
@@ -44,9 +45,9 @@ describe('Chat', function() {
 
         });
 
-        describe('Authenticated connection', function() {
+        context('Authenticated', function() {
 
-            afterEach(function() {
+            afterEach('Close server connections', function() {
                 srv.close();
             });
 
@@ -84,5 +85,5 @@ describe('Chat', function() {
 
         });
 
-    });
-});
+    }); // connection
+}); // chat
