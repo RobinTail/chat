@@ -3,6 +3,7 @@ var srv = require('../server');
 var ioc = require('socket.io-client');
 var expect = require('chai').expect;
 var https = require('https');
+var User = require('../schema/user');
 var signature = require('../node_modules/express-session/' +
                 'node_modules/cookie-signature');
 var testConfig = require('../test.confg');
@@ -63,46 +64,78 @@ function promiseRequest(socket, test) {
 
 describe('Chat Intergation Tests', function() {
 
-    describe('Client connection', function() {
+    context('Not authenticated', function() {
 
-        context('Not authenticated', function() {
+        afterEach('Close server connections', function() {
+            srv.close();
+        });
 
-            afterEach('Close server connections', function() {
-                srv.close();
+        it('Should connect', function(done) {
+            this.timeout(5000);
+            newXhr.setCookies('');
+            var socket = client(srv);
+            socket.on('connect', function() {
+                expect('everything').to.be.ok;
+                done();
+            });
+        });
+
+        it('Should reply with error', function(done) {
+            this.timeout(5000);
+            newXhr.setCookies('');
+            var socket = client(srv);
+            socket.on('new', function(data) {
+                expect(data.error).to.be.true;
+                done();
+            });
+        });
+
+    });
+
+    context('Authenticated', function() {
+
+        before('Remove test users and sessions', function(done) {
+            this.timeout(5000);
+            User.find({oauthID: 0, provider: 'test'}).remove(done);
+        });
+
+        after('Remove test user and session', function(done) {
+            this.timeout(5000);
+            User.findByIdAndRemove(testConfig.testUserID, done);
+        });
+
+        context('Prepare', function() {
+
+            it('Should encode session properly', function() {
+                var encoded = encodeSession(testConfig.sessionUnsigned);
+                expect(testConfig.sessionEncoded).to.be.equals(encoded);
             });
 
-            it('Should connect', function(done) {
+            it('Should create user', function(done) {
                 this.timeout(5000);
-                newXhr.setCookies('');
-                var socket = client(srv);
-                socket.on('connect', function() {
-                    expect('everything').to.be.ok;
-                    done();
+                user = new User({
+                    oauthID: 0,
+                    name: 'test',
+                    created: Date.now(),
+                    provider: 'test'
                 });
-            });
-
-            it('Should reply with error', function(done) {
-                this.timeout(5000);
-                newXhr.setCookies('');
-                var socket = client(srv);
-                socket.on('new', function(data) {
-                    expect(data.error).to.be.true;
-                    done();
+                user.save(function(err, user) {
+                    if (err) {
+                        done(err);
+                    } else {
+                        testConfig.testUserID = user._id;
+                        done();
+                    }
                 });
             });
 
         });
 
-        context('Authenticated', function() {
+        context('Test connection', function() {
 
             afterEach('Close server connections', function() {
                 srv.close();
             });
-
-            it('Should encode session properly', function() {
-                var encoded = encodeSession(testConfig.sessionUnsigned);
-                expect(testConfig.sessionEncoded).to.be.equals(encoded);
-            }.bind(this));
 
             it('Should feed latest', function(done) {
                 this.timeout(12000);
