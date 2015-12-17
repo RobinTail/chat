@@ -3,4 +3,3 @@ db.js
 node_modules/
 static/index.js
 npm-debug.log
-test.confg.js
