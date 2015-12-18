@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
-var db = require('../db');
-var config = require('../config');
-var webpackConfig = require('../webpack.config.js');
+import {expect} from 'chai';
+import db from '../../db';
+import config from '../../config';
+import webpackConfig from '../../webpack.config.js';
 
 describe('Settings', function() {
     describe('Database settings', function() {
