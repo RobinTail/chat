@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import db from '../db';
-import config from '../config';
+import {oAuth as config} from '../config';
 import webpackConfig from '../webpackConfig.js';
 
 describe('Settings', function() {
