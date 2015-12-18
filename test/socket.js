@@ -1,13 +1,13 @@
 import newXhr from 'socket.io-client-cookie';
-import srv from '../../server';
+import srv from '../server';
 import ioc from 'socket.io-client';
 import {expect} from 'chai';
-import User from '../../schema/user';
-import Session from '../../schema/test.session';
+import User from '../schema/user';
+import Session from '../schema/test.session';
 // jscs:disable maximumLineLength
-import signature from '../../node_modules/express-session/node_modules/cookie-signature';
+import signature from '../node_modules/express-session/node_modules/cookie-signature';
 // jscs:enable maximumLineLength
-import testConfig from '../../testConfig';
+import testConfig from '../testConfig';
 
 /**
  * Creates a socket.io client for the given server

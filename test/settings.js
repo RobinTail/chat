@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import db from '../../db';
-import config from '../../config';
-import webpackConfig from '../../webpackConfig.js';
+import db from '../db';
+import config from '../config';
+import webpackConfig from '../webpackConfig.js';
 
 describe('Settings', function() {
     describe('Database settings', function() {
