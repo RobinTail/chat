@@ -8,7 +8,7 @@ import socket from 'socket.io';
 import http from 'http';
 import './lib/authStrategies';
 import initWebpack from './lib/initWebpack';
-import dbConnectUrl from './db';
+import {dbConnectionUrl} from './config';
 import session from './session';
 import routes from './routes';
 
@@ -17,7 +17,7 @@ const srv = http.Server(app);
 const io = socket(srv);
 
 initWebpack(app);
-mongoose.connect(dbConnectUrl);
+mongoose.connect(dbConnectionUrl);
 
 const sessionMiddleware = session(mongoose);
 

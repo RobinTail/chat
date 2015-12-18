@@ -1,17 +1,16 @@
 import {expect} from 'chai';
-import db from '../db';
-import {oAuth as config} from '../config';
-import webpackConfig from '../webpackConfig.js';
+import {dbConnectionUrl, oAuth} from '../config';
+import webpackConfig from '../webpackConfig';
 
 describe('Settings', function() {
     describe('Database settings', function() {
 
         it('should be a string', function() {
-            expect(db).to.be.a('string');
+            expect(dbConnectionUrl).to.be.a('string');
         });
 
         it('should be not empty', function() {
-            expect(db).have.length.above(0);
+            expect(dbConnectionUrl).have.length.above(0);
         });
 
     });
@@ -19,11 +18,11 @@ describe('Settings', function() {
     describe('oAuth settings', function() {
 
         it('should be an object', function() {
-            expect(config).to.be.an('object');
+            expect(oAuth).to.be.an('object');
         });
 
         it('should not be empty', function() {
-            expect(Object.keys(config)).to.have.length.above(0);
+            expect(Object.keys(oAuth)).to.have.length.above(0);
         });
 
     });
