@@ -5,22 +5,19 @@ import User from './schema/user';
 import mongoose from 'mongoose';
 import myconsole from './lib/console';
 import socket from 'socket.io';
-import http2 from 'http';
-// load authentication strategies
+import http from 'http';
 import './lib/authStrategies';
 import initWebpack from './lib/initWebpack';
-// database connection
-import uri from './db';
-// app configuration
+import dbConnectUrl from './db';
 import session from './session';
 import routes from './routes';
 
 const app = express();
-const http = http2.Server(app);
-const io = socket(http);
+const srv = http.Server(app);
+const io = socket(srv);
 
 initWebpack(app);
-mongoose.connect(uri);
+mongoose.connect(dbConnectUrl);
 
 const sessionMiddleware = session(mongoose);
 
@@ -43,8 +40,8 @@ passport.deserializeUser(function(id, done) {
 routes(app, passport, io);
 
 // launch server
-http.listen(8080, function() {
+srv.listen(8080, function() {
     myconsole.log('Start serving');
 });
 
-export default http;
+export default srv;
