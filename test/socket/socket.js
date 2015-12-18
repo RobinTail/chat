@@ -1,13 +1,13 @@
-var newXhr = require('socket.io-client-cookie');
-var srv = require('../index');
-var ioc = require('socket.io-client');
-var expect = require('chai').expect;
-var https = require('https');
-var User = require('../schema/user');
-var Session = require('../schema/test.session');
-var signature = require('../node_modules/express-session/' +
-                'node_modules/cookie-signature');
-var testConfig = require('../test.confg');
+import newXhr from 'socket.io-client-cookie';
+import srv from '../../server';
+import ioc from 'socket.io-client';
+import {expect} from 'chai';
+import User from '../../schema/user';
+import Session from '../../schema/test.session';
+// jscs:disable maximumLineLength
+import signature from '../../node_modules/express-session/node_modules/cookie-signature';
+// jscs:enable maximumLineLength
+import testConfig from '../../test.confg';
 
 /**
  * Creates a socket.io client for the given server
@@ -141,7 +141,7 @@ describe('Chat Intergation Tests', function() {
 
             it('should create test user', function(done) {
                 this.timeout(5000);
-                user = new User({
+                var user = new User({
                     oauthID: 0,
                     name: 'test',
                     created: Date.now(),
