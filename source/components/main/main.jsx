@@ -1,15 +1,15 @@
-var React = require('react');
-var Header = require('./../header.jsx');
-var Modal = require('./../modal.jsx');
-var Auth = require('./../auth.jsx');
-var Chat = require('./../chat/chat.jsx');
-var appData = require('../../appData.jsx');
+import React from 'react';
+import Header from './../header.jsx';
+import Modal from './../modal.jsx';
+import Auth from './../auth.jsx';
+import Chat from './../chat/chat.jsx';
+import appData from '../../appData.jsx';
 
-var injectTapEventPlugin = require('react-tap-event-plugin');
-var ThemeManager = require('material-ui/lib/styles/theme-manager');
-var Theme = require('../../material-ui-theme.jsx');
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import Theme from '../../material-ui-theme.jsx';
 
-require('./main.scss');
+import './main.scss';
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -17,7 +17,7 @@ require('./main.scss');
 //https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-module.exports = React.createClass({
+export default React.createClass({
     childContextTypes: {
         muiTheme: React.PropTypes.object
     },

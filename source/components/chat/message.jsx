@@ -1,8 +1,8 @@
-var React = require('react');
-var FontIcon = require('material-ui/lib/font-icon');
-var Avatar = require('material-ui/lib/avatar');
+import React from 'react';
+import FontIcon from 'material-ui/lib/font-icon';
+import Avatar from 'material-ui/lib/avatar';
 
-module.exports = React.createClass({
+export default React.createClass({
     render: function() {
         var avatar = this.props.avatar ? (
             <Avatar

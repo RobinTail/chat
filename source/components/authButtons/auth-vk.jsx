@@ -1,8 +1,8 @@
-var React = require('react');
-var RaisedButton = require('material-ui/lib/raised-button');
-var FontIcon = require('material-ui/lib/font-icon');
+import React from 'react';
+import RaisedButton from 'material-ui/lib/raised-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
-module.exports = React.createClass({
+export default React.createClass({
     render: function() {
         return (
             <RaisedButton

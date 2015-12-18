@@ -1,7 +1,7 @@
-var React = require('react');
-var CircularProgress = require('material-ui/lib/circular-progress');
+import React from 'react';
+import CircularProgress from 'material-ui/lib/circular-progress';
 
-module.exports = React.createClass({
+export default React.createClass({
     render: function() {
         return (
             <div style={{textAlign: 'center'}}>

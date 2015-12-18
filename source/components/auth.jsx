@@ -1,10 +1,10 @@
-var React = require('react');
-var AuthFB = require('./authButtons/auth-fb.jsx');
-var AuthTW = require('./authButtons/auth-tw.jsx');
-var AuthGG = require('./authButtons/auth-gg.jsx');
-var AuthVK = require('./authButtons/auth-vk.jsx');
+import React from 'react';
+import AuthFB from './authButtons/auth-fb.jsx';
+import AuthTW from './authButtons/auth-tw.jsx';
+import AuthGG from './authButtons/auth-gg.jsx';
+import AuthVK from './authButtons/auth-vk.jsx';
 
-module.exports = React.createClass({
+export default React.createClass({
     render: function() {
         return (
             <div style={{textAlign: 'center'}}>

@@ -1,16 +1,16 @@
-var React = require('react');
-var Reflux = require('reflux');
-var ChatStore = require('../../stores/chat.jsx');
-var Actions = require('../../actions.jsx');
-var TextField = require('material-ui/lib/text-field');
-var FloatingActionButton = require('material-ui/lib/floating-action-button');
-var FontIcon = require('material-ui/lib/font-icon');
-var Loading = require('../loading.jsx');
-var Message = require('./message.jsx');
-var smoothscroll = require('smoothscroll');
-var appData = require('../../appData.jsx');
-require('./chat.scss');
-require('ion-sound');
+import React from 'react';
+import Reflux from 'reflux';
+import ChatStore from '../../stores/chat.jsx';
+import Actions from '../../actions.jsx';
+import TextField from 'material-ui/lib/text-field';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import FontIcon from 'material-ui/lib/font-icon';
+import Loading from '../loading.jsx';
+import Message from './message.jsx';
+import smoothscroll from 'smoothscroll';
+import appData from '../../appData.jsx';
+import './chat.scss';
+import 'ion-sound';
 
 const TYPING_TIMEOUT = 800;
 
@@ -24,7 +24,7 @@ ion.sound({
     volume: 0.5
 });
 
-module.exports = React.createClass({
+export default React.createClass({
     mixins: [
         Reflux.listenTo(ChatStore, 'onChange')
     ],

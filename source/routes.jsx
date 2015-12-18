@@ -1,13 +1,10 @@
-var React = require('react');
-var ReactRouter = require('react-router');
+import React from 'react';
+import {Router, Route} from 'react-router';
 import createHistory from 'history/lib/createBrowserHistory';
 
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
+import Main from './components/main/main.jsx';
 
-var Main = require('./components/main/main.jsx');
-
-module.exports = (
+export default (
     <Router history={createHistory()}>
         <Route path='/' component={Main} />
     </Router>

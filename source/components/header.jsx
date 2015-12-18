@@ -1,15 +1,15 @@
-var React = require('react');
-var Router = require('react-router');
-var Reflux = require('reflux');
-var AppBar = require('material-ui/lib/app-bar');
-var IconMenu = require('material-ui/lib/menus/icon-menu');
-var IconButton = require('material-ui/lib/icon-button');
-var MenuItem = require('material-ui/lib/menus/menu-item');
-var FontIcon = require('material-ui/lib/font-icon');
-var appData = require('../appData.jsx');
-var Actions = require('../actions.jsx');
+import React from 'react';
+import Router from 'react-router';
+import Reflux from 'reflux';
+import AppBar from 'material-ui/lib/app-bar';
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import IconButton from 'material-ui/lib/icon-button';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import FontIcon from 'material-ui/lib/font-icon';
+import appData from '../appData.jsx';
+import Actions from '../actions.jsx';
 
-module.exports = React.createClass({
+export default React.createClass({
     mixins: [
         Router.History
     ],

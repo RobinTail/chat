@@ -1,8 +1,8 @@
-var Colors = require('material-ui/lib/styles/colors');
-var ColorManipulator = require('material-ui/lib/utils/color-manipulator');
-var Spacing = require('material-ui/lib/styles/spacing');
+import Colors from 'material-ui/lib/styles/colors';
+import ColorManipulator from 'material-ui/lib/utils/color-manipulator';
+import Spacing from 'material-ui/lib/styles/spacing';
 
-module.exports = {
+export default {
     spacing: Spacing,
     fontFamily: 'Roboto, sans-serif',
     palette: {

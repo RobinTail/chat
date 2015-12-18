@@ -1,13 +1,13 @@
-var io = require('socket.io-client');
-var Reflux = require('reflux');
-var Actions = require('../actions.jsx');
-var appData = require('../appData.jsx');
+import io from 'socket.io-client';
+import Reflux from 'reflux';
+import Actions from '../actions.jsx';
+import appData from '../appData.jsx';
 
 if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
 
-module.exports = Reflux.createStore({
+export default Reflux.createStore({
     listenables: [Actions],
     messages: [],
     typing: [],

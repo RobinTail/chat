@@ -1,9 +1,9 @@
-var React = require('react');
-var Reflux = require('reflux');
-var Dialog = require('material-ui/lib/dialog');
-var Store = require('../stores/modal.jsx');
+import React from 'react';
+import Reflux from 'reflux';
+import Dialog from 'material-ui/lib/dialog';
+import Store from '../stores/modal.jsx';
 
-module.exports = React.createClass({
+export default React.createClass({
     mixins: [
         Reflux.listenTo(Store, 'onChange')
     ],

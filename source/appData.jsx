@@ -8,7 +8,7 @@ if (element) {
  * Returns the value of stored application data (injected by NodeJS)
  */
 
-module.exports = {
+export default {
     get: function(name) {
         return store[name];
     },

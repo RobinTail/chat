@@ -1,5 +1,5 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Routes = require('./routes.jsx');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Routes from './routes.jsx';
 
 ReactDOM.render(Routes, document.getElementById('Wrapper'));
