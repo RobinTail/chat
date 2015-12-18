@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-var Session = mongoose.model('Session', {
+const Session = mongoose.model('Session', {
     _id: String,
     session: String,
     expires: Date,
     isTest: Boolean
 });
 
-module.exports = Session;
+export default Session;

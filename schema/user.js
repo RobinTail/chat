@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var User = mongoose.model('User', {
+const User = mongoose.model('User', {
     oauthID: Number,
     name: String,
     created: Date,
@@ -9,4 +9,4 @@ var User = mongoose.model('User', {
     sounds: Boolean
 });
 
-module.exports = User;
+export default User;
