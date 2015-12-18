@@ -1,6 +1,6 @@
-var User = require('./schema/user');
-var chatCore = require('./lib/chatCore');
-var myconsole = require('./lib/console');
+import User from './schema/user';
+import * as chatCore from './lib/chatCore';
+import myconsole from './lib/console';
 
 function checkAuth(socket) {
     if (!socket.handshake.session.passport) {
@@ -13,14 +13,14 @@ function checkAuth(socket) {
 
 // logger
 
-module.exports.logger = function(req, res, next) {
+export function logger(req, res, next) {
     myconsole.log('Request: ' + req.method + ' ' + req.originalUrl);
     next();
-};
+}
 
 // entry point
 
-module.exports.app = function(req, res) {
+export function app(req, res) {
     myconsole.log('Feeding entry');
     res.render('index', {
         applicationData: {
@@ -32,17 +32,17 @@ module.exports.app = function(req, res) {
             provider: typeof req.user == 'object' ? req.user.provider : ''
         }
     });
-};
+}
 
 // fires when auth was successful
 
-module.exports.authSuccess = function(req, res) {
+export function authSuccess(req, res) {
     res.redirect('/');
-};
+}
 
 // when io connection started
 
-module.exports.ioConnect = function(socket) {
+export function ioConnect(socket) {
     myconsole.log('io connection');
     if (!checkAuth(socket)) { return false; }
     User.findById(socket.handshake.session.passport.user,
@@ -84,12 +84,11 @@ module.exports.ioConnect = function(socket) {
                 chatCore.enterChat(socket);
             }
         });
-};
+}
 
 // log out
 
-module.exports.logout = function(req, res) {
+export function logout(req, res) {
     req.logout();
     res.redirect('/');
-};
-
+}
