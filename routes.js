@@ -1,5 +1,5 @@
-var express = require('express');
-var handlers = require('./handlers');
+import express from 'express';
+import * as handlers from './handlers';
 
 export default function(app, passport, io) {
     // logger
