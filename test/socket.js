@@ -7,7 +7,7 @@ import Session from '../schema/test.session';
 // jscs:disable maximumLineLength
 import signature from '../node_modules/express-session/node_modules/cookie-signature';
 // jscs:enable maximumLineLength
-import testConfig from '../testConfig';
+import {testConfig} from '../config';
 
 /**
  * Creates a socket.io client for the given server
