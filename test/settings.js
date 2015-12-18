@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {dbConnectionUrl, oAuth} from '../config';
-import webpackConfig from '../webpackConfig';
+import webpackConfig from '../webpack.config';
 
 describe('Settings', function() {
     describe('Database settings', function() {

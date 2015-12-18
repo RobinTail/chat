@@ -1,6 +1,6 @@
-import webpack from 'webpack';
+var webpack = require('webpack');
 
-export default {
+module.exports = {
     entry: ['./source/index.jsx'],
     output: {
         path: __dirname + '/static',
