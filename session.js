@@ -1,5 +1,6 @@
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+import session from 'express-session';
+import connectMongo from 'connect-mongo';
+const MongoStore = connectMongo(session);
 
 export default function(mongoose) {
     return session({
