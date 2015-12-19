@@ -14,6 +14,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 # Technologies
 
 * NodeJS
+* ES6
 * Express
 * Socket.io
 * Passport
@@ -25,6 +26,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 * MongoDB with Mongoose
 * Material UI
 * Webpack
+* Mocha + Chai tests
 
 # Requirements
 
