@@ -86,6 +86,10 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
    export const dbConnectionUrl = 'mongodb://***';
    // jscs:enable maximumLineLength
    
+   // Server configuration options
+   // Specify port or socket
+   export const listenTo = 8080;
+   
    // Integration test config
    export const testConfig = {
        sessionUnsigned: 'test_1234567',
