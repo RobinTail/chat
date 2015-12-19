@@ -109,10 +109,10 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
    npm start
    ```
   
-   **or** (this will build webpack app and launch webserver)
+   **or** this command for production mode (which uses webpack build and launchs PM2)
 
    ```
-   npm run build
+   npm run production
    ```
 
 # Tests
