@@ -69,7 +69,7 @@ export default React.createClass({
                                 <TextField className='my-message'
                                     hintText='Your message'
                                     // jscs:disable maximumLineLength
-                                    floatingLabelText='Start typing your message here'
+                                    floatingLabelText='Start typing here'
                                     // jscs:enable maximumLineLength
                                     value={this.state.myMessage}
                                     onEnterKeyDown={this.messageEnterKeyPressed}
