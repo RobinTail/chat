@@ -8,6 +8,7 @@
     "test": "NODE_ENV=test mocha --require test/testWrapper.js",
     "nyan": "NODE_ENV=test mocha --require test/testWrapper.js --reporter nyan",
     "build": "webpack --progress && NODE_ENV=production node index.js",
+    "production": "webpack --progress && NODE_ENV=production pm2 start index.js -n chat",
     "webpack": "webpack --progress",
     "jscs": "jscs ./"
   },

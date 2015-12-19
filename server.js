@@ -1,3 +1,4 @@
+import fs from 'fs';
 import express from 'express';
 import ios from 'socket.io-express-session';
 import passport from 'passport';
@@ -8,7 +9,7 @@ import socket from 'socket.io';
 import http from 'http';
 import './lib/authStrategies';
 import initWebpack from './lib/initWebpack';
-import {dbConnectionUrl} from './config';
+import {listenTo, dbConnectionUrl} from './config';
 import session from './session';
 import routes from './routes';
 
@@ -39,8 +40,10 @@ passport.deserializeUser(function(id, done) {
 
 routes(app, passport, io);
 
-// launch server
-srv.listen(8080, function() {
+try {
+    fs.unlinkSync(listenTo);
+} catch (e) {}
+srv.listen(listenTo, function() {
     myconsole.log('Start serving');
 });
 
