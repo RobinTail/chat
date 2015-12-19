@@ -30,7 +30,7 @@ export default React.createClass({
         );
         var provider = this.props.provider ? (
             <span key='provider' className='message-author-provider'>
-                ({this.props.provider})
+                {this.props.provider}
             </span>
         ) : null;
         var spacer = (

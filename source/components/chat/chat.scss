@@ -54,7 +54,15 @@
 
             .message-author-provider {
                 font-size: smaller;
-                color: silver
+                color: silver;
+
+                &:before {
+                    content: "(";
+                }
+
+                &:after {
+                    content: ")";
+                }
             }
 
         }
