@@ -14,7 +14,8 @@
             position: relative;
             padding: 5px 5px 5px 60px;
             min-height: 40px;
-            width: 75%;
+            max-width: 80%;
+            box-sizing: border-box;
 
             &.message-system {
                 background-color: rgba(150,150,0,0.2);
