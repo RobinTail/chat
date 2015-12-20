@@ -40,8 +40,8 @@ export default React.createClass({
         } else {
             if (appData.get('isAuthenticated')) {
                 return [
-                    <Header />,
-                    <Chat />
+                    <Header key='header' />,
+                    <Chat key='chat' />
                 ];
             } else {
                 return <Auth />;
