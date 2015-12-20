@@ -50,7 +50,7 @@
             height: 100%;
             background-position: 50% 50%;
             background-repeat: no-repeat;
-            background-size: 50% 50%;
+            background-size: auto 50%;
             cursor: pointer;
 
             &:not(:last-child) {
@@ -65,6 +65,7 @@
             &.vk {
                 background-color: #45668e;
                 background-image: url('/static/images/vk.svg');
+                background-size: auto 40%;
             }
 
             &.tw {
