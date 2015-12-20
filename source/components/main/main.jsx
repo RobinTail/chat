@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './../header.jsx';
-import Modal from './../modal.jsx';
-import Auth from './../auth.jsx';
-import Chat from './../chat/chat.jsx';
+import Header from '../header.jsx';
+import Modal from '../modal.jsx';
+import Auth from '../auth/auth.jsx';
+import Chat from '../chat/chat.jsx';
 import appData from '../../appData.jsx';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -29,8 +29,7 @@ export default React.createClass({
     render: function() {
         return (
             <div>
-                <Header />
-                    {this.content()}
+                {this.content()}
                 <Modal />
             </div>
         );
@@ -40,7 +39,10 @@ export default React.createClass({
             return this.props.children;
         } else {
             if (appData.get('isAuthenticated')) {
-                return <Chat />;
+                return [
+                    <Header />,
+                    <Chat />
+                ];
             } else {
                 return <Auth />;
             }

@@ -1,0 +1,69 @@
+@import '../main/vars.scss';
+
+.authHolder {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    div {
+        -webkit-flex: 1 1 25%;
+        flex: 1 1 25%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+        cursor: pointer;
+        position: relative;
+        float: left;
+        box-sizing: border-box;
+
+        &:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        &.fb {
+            background-color: #3b5998;
+            background-image: url('/static/images/fb.svg');
+        }
+
+        &.vk {
+            background-color: #45668e;
+            background-image: url('/static/images/vk.svg');
+        }
+
+        &.tw {
+            background-color: #00aced;
+            background-image: url('/static/images/tw.svg');
+        }
+
+        &.gg {
+            background-color: #dd4b39;
+            background-image: url('/static/images/gg.svg');
+        }
+
+        &:hover {
+            z-index: 100;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            box-shadow: 0 5px 30px rgba(0,0,0,.2);
+        }
+    }
+}
+
+@media (min-width: $screen-sm) {
+    .authHolder {
+        -webkit-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        height: 200px;
+        max-width: 815px;
+
+        div:not(:last-child) {
+            margin-right: 5px;
+        }
+    }
+}
