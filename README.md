@@ -31,7 +31,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 # Requirements
 
 * NPM
-* MongoDB
+* MongoDB >= 2.2
 * Due to security reasons this repository does not contain oAuth ID and Secret code, it does not contain MongoDB connection URL.
 
 # Installation
