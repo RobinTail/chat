@@ -111,7 +111,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
    npm start
    ```
   
-   **or** this command for production mode (which uses webpack build and launchs PM2)
+   **or** this command for production mode (this will make a webpack minified build and launch PM2)
 
    ```
    npm run production
