@@ -1,16 +1,17 @@
 {
   "name": "chat",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Sample React oAuth Chat",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "NODE_ENV=test mocha --require test/testWrapper.js",
-    "nyan": "NODE_ENV=test mocha --require test/testWrapper.js --reporter nyan",
-    "build": "webpack --progress && NODE_ENV=production node index.js",
-    "production": "webpack --progress && NODE_ENV=production pm2 start index.js -n chat",
     "webpack": "webpack --progress",
-    "jscs": "jscs ./"
+    "build": "webpack --progress && NODE_ENV=production node index.js",
+    "production": "NODE_ENV=production npm run _production2",
+    "_production2": "webpack --progress && pm2 start index.js -n chat",
+    "jscs": "jscs ./",
+    "test": "NODE_ENV=test mocha --require test/testWrapper.js",
+    "nyan": "NODE_ENV=test mocha --require test/testWrapper.js --reporter nyan"
   },
   "repository": {
     "type": "git",

@@ -20,7 +20,10 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        //new webpack.optimize.UglifyJsPlugin({minimize: true})
-    ]
+    plugins: process.env.NODE_ENV !== 'production' ? [] :
+        [
+            new webpack.optimize.UglifyJsPlugin({
+                minimize: true
+            })
+        ]
 };
