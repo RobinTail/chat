@@ -4,7 +4,7 @@ export default React.createClass({
     render: function() {
         return (
             <div
-                className={this.props.type}
+                className={'authButton ' + this.props.type}
                 onClick={this.handleClick}
             >
             </div>

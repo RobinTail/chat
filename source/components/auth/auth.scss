@@ -1,69 +1,118 @@
 @import '../main/vars.scss';
 
+/* vertical direction - small screen */
 .authHolder {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
     height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
 
-    div {
-        -webkit-flex: 1 1 25%;
-        flex: 1 1 25%;
-        height: 100%;
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: 50% 50%;
-        cursor: pointer;
-        position: relative;
-        float: left;
-        box-sizing: border-box;
+    .authWelcome {
+        display: -webkit-flex;
+        display: flex;
+        height: 25vh;
+        min-height: 120px;
+        justify-content: center;
+        align-items: center;
 
-        &:not(:last-child) {
-            margin-bottom: 5px;
+        h2, h1 {
+            text-align: center;
+            font-weight: 400;
+            margin: 0;
         }
 
-        &.fb {
-            background-color: #3b5998;
-            background-image: url('/static/images/fb.svg');
+        h2 {
+            color: #999;
+            font-size: 28px;
+            font-family: 'PT Sans', sans-serif;
         }
 
-        &.vk {
-            background-color: #45668e;
-            background-image: url('/static/images/vk.svg');
+        h1 {
+            font-size: 44px;
+            font-family: 'PT Serif', serif;
+            font-style: italic;
         }
+    }
 
-        &.tw {
-            background-color: #00aced;
-            background-image: url('/static/images/tw.svg');
-        }
+    .authButtonsHolder {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+        height: 60vh;
+        min-height: 200px;
+        justify-content: center;
 
-        &.gg {
-            background-color: #dd4b39;
-            background-image: url('/static/images/gg.svg');
-        }
+        .authButton {
+            -webkit-flex: 1 0 25%;
+            flex: 1 0 25%;
+            height: 100%;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            background-size: 50% 50%;
+            cursor: pointer;
 
-        &:hover {
-            z-index: 100;
-            -webkit-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            transform: scale(1.1);
-            box-shadow: 0 5px 30px rgba(0,0,0,.2);
+            &:not(:last-child) {
+                margin-bottom: 5px;
+            }
+
+            &.fb {
+                background-color: #3b5998;
+                background-image: url('/static/images/fb.svg');
+            }
+
+            &.vk {
+                background-color: #45668e;
+                background-image: url('/static/images/vk.svg');
+            }
+
+            &.tw {
+                background-color: #00aced;
+                background-image: url('/static/images/tw.svg');
+            }
+
+            &.gg {
+                background-color: #dd4b39;
+                background-image: url('/static/images/gg.svg');
+            }
+
+            &:hover {
+                z-index: 100;
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+                box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
+            }
         }
     }
 }
 
 @media (min-width: $screen-sm) {
-    .authHolder {
-        -webkit-flex-flow: row nowrap;
-        flex-flow: row nowrap;
-        height: 200px;
-        max-width: 815px;
+    /* horizontal direction - wide screen */
 
-        div:not(:last-child) {
-            margin-right: 5px;
+    .authHolder {
+
+        .authWelcome {
+            margin-top: 10vh;
+
+            h1 {
+                font-size: 48px;
+            }
+        }
+
+        .authButtonsHolder {
+            -webkit-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            height: 200px;
+
+            .authButton {
+                max-width: 200px;
+
+                &:not(:last-child) {
+                    margin-right: 5px;
+                }
+            }
         }
     }
 }
