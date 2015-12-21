@@ -1,10 +1,11 @@
 import React from 'react';
 import FontIcon from 'material-ui/lib/font-icon';
 import Avatar from 'material-ui/lib/avatar';
+import './message.scss';
 
 export default React.createClass({
     render: function() {
-        var avatar = this.props.avatar ? (
+        let avatar = this.props.avatar ? (
             <Avatar
                 className='message-avatar'
                 src={this.props.avatar}
@@ -23,30 +24,34 @@ export default React.createClass({
             </Avatar>
         )
         );
-        var author = (
+        let author = (
             <span key='author' className='message-author'>
                     {this.props.name}
             </span>
         );
-        var provider = this.props.provider ? (
+        let provider = this.props.provider ? (
             <span key='provider' className='message-author-provider'>
                 {this.props.provider}
             </span>
         ) : null;
-        var spacer = (
+        let spacer = (
             <span key='spacer'>&nbsp;</span>
         );
-        var authorFull = this.props.isMy ?
+        let authorFull = this.props.isMy ?
             [provider, spacer, author] :
             [author, spacer, provider];
+        let messageClass = '';
+        if (this.props.isSystem) {
+            if (this.props.isCritical) {
+                messageClass = 'message-system-critical';
+            } else {
+                messageClass = 'message-system';
+            }
+        } else if (this.props.isMy) {
+            messageClass = 'message-my';
+        }
         return (
-            <li
-                className={this.props.isSystem ?
-                    (this.props.isCritical ?
-                        'message-system-critical' :
-                        'message-system') :
-                    (this.props.isMy ? 'message-my' : '')}
-            >
+            <li className={'message ' + messageClass}>
                     {avatar}
                     {authorFull}
                 <br />
