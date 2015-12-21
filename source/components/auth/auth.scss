@@ -17,6 +17,10 @@
         align-items: center;
         margin-top: 10vh;
 
+        @media (max-width: $screen-sm) {
+            margin-top: 0;
+        }
+
         h2, h1 {
             text-align: center;
             font-weight: 400;
@@ -33,6 +37,10 @@
             font-size: 48px;
             font-family: 'PT Serif', serif;
             font-style: italic;
+
+            @media (max-width: $screen-sm) {
+                font-size: 44px;
+            }
         }
     }
 
@@ -45,6 +53,12 @@
         min-height: 200px;
         justify-content: center;
 
+        @media (max-width: $screen-sm) {
+            -webkit-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            height: 60vh;
+        }
+
         .authButton {
             -webkit-flex: 1 0 25%;
             flex: 1 0 25%;
@@ -55,8 +69,17 @@
             cursor: pointer;
             max-width: 200px;
 
+            @media (max-width: $screen-sm) {
+                max-width: 100%;
+            }
+
             &:not(:last-child) {
                 margin-right: 5px;
+
+                @media (max-width: $screen-sm) {
+                    margin-bottom: 5px;
+                    margin-right: 0;
+                }
             }
 
             &.fb {
@@ -86,36 +109,6 @@
                 -ms-transform: scale(1.1);
                 transform: scale(1.1);
                 box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
-            }
-        }
-    }
-}
-
-@media (max-width: $screen-sm) {
-    /* vertical direction - small screen */
-
-    .authHolder {
-
-        .authWelcome {
-            margin-top: 0;
-
-            h1 {
-                font-size: 44px;
-            }
-        }
-
-        .authButtonsHolder {
-            -webkit-flex-flow: column nowrap;
-            flex-flow: column nowrap;
-            height: 60vh;
-
-            .authButton {
-                max-width: 100%;
-
-                &:not(:last-child) {
-                    margin-bottom: 5px;
-                    margin-right: 0;
-                }
             }
         }
     }
