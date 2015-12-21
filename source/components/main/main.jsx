@@ -37,6 +37,7 @@ export default React.createClass({
         if (appData.get('isAuthenticated')) {
             return (
                 <div id='Wrapper'>
+                    <div id='fakedBody'></div>
                     <Header key='header' />
                     <Chat key='chat' />
                 </div>
