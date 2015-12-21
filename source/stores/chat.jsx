@@ -23,7 +23,7 @@ export default Reflux.createStore({
                         isSystem: true,
                         text: 'Connected'
                     });
-                    this.triggerChange();
+                    this.triggerChange('messages');
                 }
             }.bind(this));
             socket.on('connect_error', function(err) {
@@ -35,7 +35,7 @@ export default Reflux.createStore({
                         isCritical: true,
                         text: 'Connection lost'
                     });
-                    this.triggerChange();
+                    this.triggerChange('messages');
                 }
             }.bind(this));
             socket.on('latest', function(data) {
