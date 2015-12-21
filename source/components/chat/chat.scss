@@ -90,6 +90,19 @@
             display: table;
             max-width: $wrapper-default;
 
+            @media (max-width: $screen-md) {
+                max-width: $wrapper-md;
+            }
+
+            @media (max-width: $screen-sm) {
+                max-width: $wrapper-sm;
+            }
+
+            @media (max-width: $screen-xs) {
+                max-width: $wrapper-xs;
+                padding: $wrapper-xs-padding;
+            }
+
             & > div {
                 display: table-row;
 
@@ -106,37 +119,6 @@
                     text-align: right;
                     padding-bottom: 10px;
                 }
-            }
-        }
-    }
-}
-
-@media (max-width: $screen-md) {
-    .chat-holder {
-        .send-message-holder {
-            .send-message-subholder {
-                max-width: $wrapper-md;
-            }
-        }
-    }
-}
-
-@media (max-width: $screen-sm) {
-    .chat-holder {
-        .send-message-holder {
-            .send-message-subholder {
-                max-width: $wrapper-sm;
-            }
-        }
-    }
-}
-
-@media (max-width: $screen-xs) {
-    .chat-holder {
-        .send-message-holder {
-            .send-message-subholder {
-                max-width: $wrapper-xs;
-                padding: $wrapper-xs-padding;
             }
         }
     }

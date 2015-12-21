@@ -5,22 +5,16 @@
     margin-right: auto;
     margin-left: auto;
     max-width: $wrapper-default;
-}
 
-@media (max-width: $screen-md) {
-    #Wrapper {
+    @media (max-width: $screen-md) {
         max-width: $wrapper-md;
     }
-}
 
-@media (max-width: $screen-sm) {
-    #Wrapper {
+    @media (max-width: $screen-sm) {
         max-width: $wrapper-sm;
     }
-}
 
-@media (max-width: $screen-xs) {
-    #Wrapper {
+    @media (max-width: $screen-xs) {
         max-width: $wrapper-xs;
         padding: $wrapper-xs-padding;
     }
