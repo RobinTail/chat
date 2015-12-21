@@ -1,7 +1,6 @@
 import React from 'react';
-import FontIcon from 'material-ui/lib/font-icon';
-/*import Avatar from 'material-ui/lib/avatar';*/
 import Avatar from './avatar';
+import moment from 'moment';
 import './message.scss';
 
 export default React.createClass({
@@ -14,9 +13,7 @@ export default React.createClass({
         );
         let at = '';
         if (this.props.at) {
-            let d = new Date(this.props.at);
-            // todo: format date
-            at = d.getHours() + ':' + d.getMinutes();
+            at = moment(this.props.at).format('HH:mm');
         }
         let info = (
             <div className='message-info-wrapper'>
