@@ -1,19 +1,29 @@
 @import 'vars.scss';
 
-@media (min-width: $screen-sm) {
-  #Wrapper {
-    width: $wrapper-sm;
-  }
+
+#Wrapper {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: $wrapper-default;
+    box-sizing: border-box;
 }
 
-@media (min-width: $screen-md) {
-  #Wrapper {
-    width: $wrapper-md;
-  }
+@media (max-width: $screen-md) {
+    #Wrapper {
+        max-width: $wrapper-md;
+    }
 }
 
-@media (min-width: $screen-lg) {
-  #Wrapper {
-    width: $wrapper-lg;
-  }
+@media (max-width: $screen-sm) {
+    #Wrapper {
+        max-width: $wrapper-sm;
+    }
+}
+
+@media (max-width: $screen-xs) {
+    #Wrapper {
+        max-width: $wrapper-xs;
+    }
 }

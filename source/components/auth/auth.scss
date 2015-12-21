@@ -1,6 +1,6 @@
 @import '../main/vars.scss';
 
-/* vertical direction - small screen */
+/* horizontal direction - wide screen */
 .authHolder {
     display: -webkit-flex;
     display: flex;
@@ -15,6 +15,7 @@
         min-height: 120px;
         justify-content: center;
         align-items: center;
+        margin-top: 10vh;
 
         h2, h1 {
             text-align: center;
@@ -29,7 +30,7 @@
         }
 
         h1 {
-            font-size: 44px;
+            font-size: 48px;
             font-family: 'PT Serif', serif;
             font-style: italic;
         }
@@ -38,9 +39,9 @@
     .authButtonsHolder {
         display: -webkit-flex;
         display: flex;
-        -webkit-flex-flow: column nowrap;
-        flex-flow: column nowrap;
-        height: 60vh;
+        -webkit-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        height: 200px;
         min-height: 200px;
         justify-content: center;
 
@@ -52,9 +53,10 @@
             background-repeat: no-repeat;
             background-size: auto 50%;
             cursor: pointer;
+            max-width: 200px;
 
             &:not(:last-child) {
-                margin-bottom: 5px;
+                margin-right: 5px;
             }
 
             &.fb {
@@ -89,29 +91,30 @@
     }
 }
 
-@media (min-width: $screen-sm) {
-    /* horizontal direction - wide screen */
+@media (max-width: $screen-sm) {
+    /* vertical direction - small screen */
 
     .authHolder {
 
         .authWelcome {
-            margin-top: 10vh;
+            margin-top: 0;
 
             h1 {
-                font-size: 48px;
+                font-size: 44px;
             }
         }
 
         .authButtonsHolder {
-            -webkit-flex-flow: row nowrap;
-            flex-flow: row nowrap;
-            height: 200px;
+            -webkit-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+            height: 60vh;
 
             .authButton {
-                max-width: 200px;
+                max-width: 100%;
 
                 &:not(:last-child) {
-                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    margin-right: 0;
                 }
             }
         }

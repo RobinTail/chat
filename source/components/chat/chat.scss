@@ -89,6 +89,7 @@
             margin: 0 auto;
             display: table;
             padding: 0 15px;
+            max-width: $wrapper-default;
 
             & > div {
                 display: table-row;
@@ -111,21 +112,32 @@
     }
 }
 
-
-@media (min-width: $screen-sm) {
-    .send-message-subholder {
-      width: $wrapper-sm;
+@media (max-width: $screen-md) {
+    .chat-holder {
+        .send-message-holder {
+            .send-message-subholder {
+                max-width: $wrapper-md;
+            }
+        }
     }
 }
 
-@media (min-width: $screen-md) {
-    .send-message-subholder {
-        width: $wrapper-md;
+@media (max-width: $screen-sm) {
+    .chat-holder {
+        .send-message-holder {
+            .send-message-subholder {
+                max-width: $wrapper-sm;
+            }
+        }
     }
 }
 
-@media (min-width: $screen-lg) {
-    .send-message-subholder {
-        width: $wrapper-lg;
+@media (max-width: $screen-xs) {
+    .chat-holder {
+        .send-message-holder {
+            .send-message-subholder {
+                max-width: $wrapper-sm;
+            }
+        }
     }
 }
