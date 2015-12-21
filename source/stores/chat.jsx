@@ -71,10 +71,12 @@ export default Reflux.createStore({
                 text: data.message
             });
         } else {
-            data.messages.forEach(function(message) {
-                this.messages.push(message);
-            }.bind(this));
-            this.triggerChange('messages');
+            if (this.isLatestReceived) {
+                data.messages.forEach(function(message) {
+                    this.messages.push(message);
+                }.bind(this));
+                this.triggerChange('messages');
+            }
         }
     },
     submitChatMessage: function(message) {
