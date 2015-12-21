@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header.jsx';
+import Header from '../header/header.jsx';
 import Modal from '../modal.jsx';
 import Auth from '../auth/auth.jsx';
 import Chat from '../chat/chat.jsx';
