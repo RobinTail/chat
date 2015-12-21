@@ -27,6 +27,8 @@ export default React.createClass({
         if (this.props.isSystem) {
             if (this.props.isCritical) {
                 messageClass = 'message-system-critical';
+            } else if (this.props.isWarning) {
+                messageClass = 'message-system-warning';
             } else {
                 messageClass = 'message-system';
             }

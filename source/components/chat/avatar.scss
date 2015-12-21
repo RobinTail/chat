@@ -14,7 +14,7 @@
         float: right;
     }
 
-    .message-system &, .message-system-critical & {
+    .message-system &, .message-system-warning &, .message-system-critical & {
         display: none;
     }
 

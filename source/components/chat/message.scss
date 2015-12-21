@@ -41,7 +41,7 @@
         background-color: #6bba6b;
     }
 
-    .message-system &, .message-system-critical & {
+    .message-system &, .message-system-warning &, .message-system-critical & {
         display: none;
     }
 }
@@ -72,7 +72,7 @@
         text-align: right;
     }
 
-    .message-system &, .message-system-critical & {
+    .message-system &, .message-system-warning &, .message-system-critical & {
         max-width: 100%;
         width: 100%;
         padding: 0 10px;
@@ -83,6 +83,10 @@
     }
 
     .message-system & {
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    .message-system-warning & {
         background-color: rgba(255, 184, 0, 0.13);
     }
 
@@ -116,7 +120,7 @@
         }
     }
 
-    .message-system &, .message-system-critical & {
+    .message-system &, .message-system-warning &, .message-system-critical & {
         display: none;
     }
 
