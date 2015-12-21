@@ -7,6 +7,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import Loading from '../loading.jsx';
 import Message from './message.jsx';
+import moment from 'moment';
 import smoothscroll from 'smoothscroll';
 import appData from '../../appData.jsx';
 import './chat.scss';
@@ -170,16 +171,39 @@ export default React.createClass({
         });
     },
     onChange: function(section) {
-        if (section === 'messages' &&
-            appData.get('sounds') &&
-            this.state.isLoaded) {
-            ion.sound.play('button_click');
+        if (section === 'typing') {
+            this.setState({
+                typing: ChatStore.typing
+            });
+        } else if (section === 'messages') {
+            if (appData.get('sounds') && this.state.isLoaded) {
+                ion.sound.play('button_click');
+            }
+            this.setState({
+                messages: this.processMessages(ChatStore.messages),
+                isLoaded: ChatStore.isLatestReceived
+            });
+            smoothscroll(document.body.scrollHeight);
         }
-        this.setState({
-            messages: ChatStore.messages,
-            typing: ChatStore.typing,
-            isLoaded: ChatStore.isLatestReceived
-        });
-        smoothscroll(document.body.scrollHeight);
+    },
+    processMessages: function(messages) {
+        // add first date message when loaded
+        if (!this.state.isLoaded) {
+            let d = moment();
+            if (messages.length) {
+                let msg = messages[0];
+                if (msg.at) {
+                    d = moment(msg.at);
+                }
+            }
+            messages.unshift({
+                name: 'System',
+                isSystem: true,
+                text: d.format('MMMM Do') + '. What a lovely day!'
+            });
+        }
+        // todo: add date message on new day start
+        // todo: combine messages from one author
+        return messages;
     }
 });
