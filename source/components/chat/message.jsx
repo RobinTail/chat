@@ -12,10 +12,19 @@ export default React.createClass({
                 provider={this.props.provider}
             />
         );
-        let author = (
-            <span key='author' className='message-author'>
-                    {this.props.name}
-            </span>
+        let at = '';
+        if (this.props.at) {
+            let d = new Date(this.props.at);
+            // todo: format date
+            at = d.getHours() + ':' + d.getMinutes();
+        }
+        let info = (
+            <div className='message-info-wrapper'>
+                <div className='message-info'>
+                    <div className='message-info-author'>{this.props.name}</div>
+                    <div className='message-info-at'>{at}</div>
+                </div>
+            </div>
         );
         let messageClass = '';
         if (this.props.isSystem) {
@@ -29,6 +38,7 @@ export default React.createClass({
         }
         return (
             <li className={'message ' + messageClass}>
+                {info}
                 {avatar}
                 <div className='message-corner'></div>
                 <div className='message-text'>{this.props.text}</div>

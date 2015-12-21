@@ -6,6 +6,7 @@
     -webkit-flex-flow: row nowrap;
     flex-flow: row nowrap;
     justify-content: flex-start;
+    position: relative;
     // todo: remove this line
     /*border: 1px dashed red;*/
 
@@ -90,8 +91,43 @@
     }
 }
 
-.message-author {
-    font-size: smaller;
-    font-weight: bolder;
-}
+.message-info-wrapper {
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    text-align: right;
 
+    .message-info {
+        position: absolute;
+        right: 0;
+        max-width: 140px;
+
+        .message-info-author, .message-info-at {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .message-info-author {
+            font-weight: 700;
+        }
+    }
+
+    .message-system &, .message-system-critical & {
+        display: none;
+    }
+
+    .message-my & {
+        left: auto;
+        right: -20px;
+        text-align: left;
+
+        .message-info {
+            right: auto;
+            left: 0;
+        }
+    }
+}
