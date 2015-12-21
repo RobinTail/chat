@@ -9,7 +9,8 @@ export default React.createClass({
             <div
                 className='avatar'
                 style={{
-                    backgroundImage: 'url("' + this.props.url + '")'
+                    backgroundImage: this.props.url ?
+                        ('url("' + this.props.url + '")') : 'none'
                 }}
             >
                 {this.renderProvider()}
