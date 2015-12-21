@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './routes.jsx';
+import Main from './components/main/main.jsx';
 
-ReactDOM.render(Routes, document.getElementById('Wrapper'));
+ReactDOM.render(<Main />, document.getElementById('AppContainer'));

@@ -1,5 +1,4 @@
 import React from 'react';
-import Router from 'react-router';
 import Reflux from 'reflux';
 import AppBar from 'material-ui/lib/app-bar';
 import IconMenu from 'material-ui/lib/menus/icon-menu';
@@ -12,9 +11,6 @@ import {version} from '../../../package.json';
 import './header.scss';
 
 export default React.createClass({
-    mixins: [
-        Router.History
-    ],
     getInitialState: function() {
         return {
             sounds: appData.get('sounds')

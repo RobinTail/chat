@@ -30,22 +30,19 @@ export default React.createClass({
         return (
             <div>
                 {this.content()}
-                <Modal />
             </div>
         );
     },
     content: function() {
-        if (this.props.children) {
-            return this.props.children;
-        } else {
-            if (appData.get('isAuthenticated')) {
-                return [
-                    <Header key='header' />,
+        if (appData.get('isAuthenticated')) {
+            return (
+                <div id='Wrapper'>
+                    <Header key='header' />
                     <Chat key='chat' />
-                ];
-            } else {
-                return <Auth />;
-            }
+                </div>
+            );
+        } else {
+            return <Auth />;
         }
     }
 });
