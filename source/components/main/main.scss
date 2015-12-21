@@ -2,12 +2,9 @@
 
 
 #Wrapper {
-    padding-right: 15px;
-    padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
     max-width: $wrapper-default;
-    box-sizing: border-box;
 }
 
 @media (max-width: $screen-md) {
@@ -25,5 +22,6 @@
 @media (max-width: $screen-xs) {
     #Wrapper {
         max-width: $wrapper-xs;
+        padding: $wrapper-xs-padding;
     }
 }

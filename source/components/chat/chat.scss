@@ -88,7 +88,6 @@
         .send-message-subholder {
             margin: 0 auto;
             display: table;
-            padding: 0 15px;
             max-width: $wrapper-default;
 
             & > div {
@@ -136,7 +135,8 @@
     .chat-holder {
         .send-message-holder {
             .send-message-subholder {
-                max-width: $wrapper-sm;
+                max-width: $wrapper-xs;
+                padding: $wrapper-xs-padding;
             }
         }
     }
