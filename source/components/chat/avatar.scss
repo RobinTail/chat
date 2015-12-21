@@ -1,0 +1,66 @@
+@import '../main/vars.scss';
+
+.avatar {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    float: left;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-position: 0 0;
+    background-size: cover;
+
+    @media (max-width: $screen-md) {
+        width: 30px;
+        height: 30px;
+    }
+
+    @media (max-width: $screen-xs) {
+        width: 25px;
+        height: 25px;
+    }
+
+    .provider {
+        width: 20px;
+        height: 20px;
+        float: left;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: auto 50%;
+
+        @media (max-width: $screen-md) {
+            position: relative;
+            left: -10px;
+        }
+
+        @media (max-width: $screen-xs) {
+            display: none;
+        }
+
+        &.fb {
+            background-color: #3b5998;
+            background-image: url('/static/images/fb.svg');
+        }
+
+        &.vk {
+            background-color: #45668e;
+            background-image: url('/static/images/vk.svg');
+            background-size: auto 40%;
+        }
+
+        &.tw {
+            background-color: #00aced;
+            background-image: url('/static/images/tw.svg');
+        }
+
+        &.gg {
+            background-color: #dd4b39;
+            background-image: url('/static/images/gg.svg');
+        }
+
+
+    }
+}

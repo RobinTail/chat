@@ -1,28 +1,16 @@
 import React from 'react';
 import FontIcon from 'material-ui/lib/font-icon';
-import Avatar from 'material-ui/lib/avatar';
+/*import Avatar from 'material-ui/lib/avatar';*/
+import Avatar from './avatar';
 import './message.scss';
 
 export default React.createClass({
     render: function() {
-        let avatar = this.props.avatar ? (
+        let avatar = (
             <Avatar
-                className='message-avatar'
-                src={this.props.avatar}
+                url={this.props.avatar}
+                provider={this.props.provider}
             />
-        ) : (this.props.isSystem ? (
-            <Avatar
-                className='message-avatar'
-                icon={
-                    <FontIcon className='material-icons'>
-                        settings
-                    </FontIcon>}
-            />
-        ) : (
-            <Avatar className='message-avatar'>
-                        {this.props.name[0]}
-            </Avatar>
-        )
         );
         let author = (
             <span key='author' className='message-author'>
