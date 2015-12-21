@@ -1,58 +1,97 @@
+@import '../main/vars.scss';
+
 .message {
-    margin-top: 5px;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 10px 10px 10px 0;
-    position: relative;
-    padding: 5px 5px 5px 60px;
-    min-height: 40px;
-    max-width: 80%;
-    box-sizing: border-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    // todo: remove this line
+    /*border: 1px dashed red;*/
 
-    &.message-system {
-        background-color: rgba(150,150,0,0.2);
-    }
-
-    &.message-system-critical {
-        background-color: rgba(255,0,0,0.3);
+    &:not(:first-child) {
+        margin-top: 5px;
     }
 
     &.message-my {
-        padding: 5px 60px 5px 5px;
-        margin-left: auto;
-        background-color: rgba(0,0,255,0.1);
-        text-align: right;
-        border-radius: 10px 10px 0 10px;
-
-        & > .message-avatar {
-            margin-right: 0;
-            margin-left: 10px;
-            left: auto;
-            right: 5px;
-        }
-    }
-
-    .message-avatar {
-        margin-right: 10px;
-        position: absolute;
-        left: 5px;
-        top: 5px;
-    }
-
-    .message-author {
-        font-size: smaller;
-        font-weight: bolder;
-    }
-
-    .message-author-provider {
-        font-size: smaller;
-        color: silver;
-
-        &:before {
-            content: "(";
-        }
-
-        &:after {
-            content: ")";
-        }
+        -webkit-flex-flow: row-reverse nowrap;
+        flex-flow: row-reverse nowrap;
     }
 }
+
+.message-corner {
+    z-index: 1;
+    position: relative;
+    top: 25px;
+    right: -10px;
+    display: block;
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    -webkit-transform: perspective(71px) rotate(45deg);
+    -webkit-transform-origin: 100% 50% 0px;
+    -ms-transform-origin: 100% 50% 0px;
+    transform: perspective(71px) rotate(45deg);
+    transform-origin: 100% 50% 0px;
+
+    .message-my & {
+        right: 15px;
+        background-color: #6bba6b;
+    }
+
+    .message-system &, .message-system-critical & {
+        display: none;
+    }
+}
+
+.message-text {
+    z-index: 2;
+    display: inline-block;
+    max-width: 30vw;
+    padding: 15px;
+    border-radius: 5px;
+    color: #666;
+    font-size: 18px;
+    line-height: 23px;
+    background-color: white;
+    text-align: left;
+
+    @media (max-width: $screen-md) {
+        max-width: 60vw;
+    }
+
+    @media (max-width: $screen-xs) {
+        max-width: 90vw;
+    }
+
+    .message-my & {
+        background-color: #6bba6b;
+        color: white;
+        text-align: right;
+    }
+
+    .message-system &, .message-system-critical & {
+        max-width: 100%;
+        width: 100%;
+        padding: 0 10px;
+        line-height: 40px;
+        color: rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .message-system & {
+        background-color: rgba(255, 184, 0, 0.13);
+    }
+
+    .message-system-critical & {
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+}
+
+.message-author {
+    font-size: smaller;
+    font-weight: bolder;
+}
+

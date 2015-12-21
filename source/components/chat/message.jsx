@@ -17,17 +17,6 @@ export default React.createClass({
                     {this.props.name}
             </span>
         );
-        let provider = this.props.provider ? (
-            <span key='provider' className='message-author-provider'>
-                {this.props.provider}
-            </span>
-        ) : null;
-        let spacer = (
-            <span key='spacer'>&nbsp;</span>
-        );
-        let authorFull = this.props.isMy ?
-            [provider, spacer, author] :
-            [author, spacer, provider];
         let messageClass = '';
         if (this.props.isSystem) {
             if (this.props.isCritical) {
@@ -40,10 +29,9 @@ export default React.createClass({
         }
         return (
             <li className={'message ' + messageClass}>
-                    {avatar}
-                    {authorFull}
-                <br />
-                <span className='message-text'>{this.props.text}</span>
+                {avatar}
+                <div className='message-corner'></div>
+                <div className='message-text'>{this.props.text}</div>
             </li>
         );
     }
