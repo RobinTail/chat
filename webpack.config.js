@@ -6,6 +6,9 @@ module.exports = {
         path: __dirname + '/static',
         filename: 'index.js'
     },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
     module: {
         loaders: [
             {
