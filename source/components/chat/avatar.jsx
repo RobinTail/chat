@@ -1,8 +1,6 @@
 import React from 'react';
 import './avatar.scss';
 
-// todo: fix left/right provider label
-
 export default React.createClass({
     render: function() {
         return (
