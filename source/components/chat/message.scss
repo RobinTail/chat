@@ -85,10 +85,12 @@
         max-width: 60vw;
         align-self: flex-start;
         margin-top: 5px;
+        padding: 10px;
     }
 
     @media (max-width: $screen-xs) {
         max-width: 90vw;
+        padding: 5px 10px;
     }
 
     .message-my & {
