@@ -7,8 +7,6 @@
     flex-flow: row nowrap;
     justify-content: flex-start;
     position: relative;
-    // todo: remove this line
-    /*border: 1px dashed red;*/
 
     &:not(:first-child) {
         margin-top: 5px;

@@ -1,7 +1,7 @@
 @import '../main/vars.scss';
 
 .chat-holder {
-    padding-bottom: 80px;
+    padding-bottom: 100px;
 
     @media (max-width: $screen-md) {
         margin-top: 43px;
@@ -12,59 +12,115 @@
         padding: 0;
         margin: 0;
 
-        /* see messages.scss */
+        /* see message.scss */
     }
 
-    .typing-holder {
-        display: inline-block;
-        border: 1px solid rgba(0,0,0,0.1);
-        border-radius: 5px;
-        background-color: rgba(150,150,0,0.2);
-        padding: 5px;
-        font-size: smaller;
-    }
-
-    .send-message-holder {
+    .send-message-wrapper {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: white;
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        text-align: center;
+        z-index: 3;
+        background-color: #eee;
+        box-shadow: #eee 0 0 20px 10px;
 
-        .send-message-subholder {
-            margin: 0 auto;
-            display: table;
-            max-width: $wrapper-default;
+        .typing {
+            position: relative;
+            display: inline-block;
+            top: 5px;
+            z-index: 100;
+            font-family: 'PT Serif', serif;
+            color: rgba(0, 0, 0, 0.4);
+            font-size: 13px;
+            line-height: 13px;
+            text-align: left;
+            width: $wrapper-default;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             @media (max-width: $screen-md) {
-                max-width: $wrapper-md;
+                width: $wrapper-md;
             }
 
             @media (max-width: $screen-sm) {
-                max-width: $wrapper-sm;
+                width: $wrapper-sm;
             }
 
             @media (max-width: $screen-xs) {
-                max-width: $wrapper-xs;
+                width: $wrapper-xs;
+                padding: $wrapper-xs-padding;
+            }
+        }
+
+        .send-message {
+            position: relative;
+            display: inline-block;
+            width: $wrapper-default;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            line-height: 100%;
+
+            @media (max-width: $screen-md) {
+                width: $wrapper-md;
+            }
+
+            @media (max-width: $screen-sm) {
+                width: $wrapper-sm;
+            }
+
+            @media (max-width: $screen-xs) {
+                width: $wrapper-xs;
                 padding: $wrapper-xs-padding;
             }
 
-            & > div {
-                display: table-row;
+            .send-message-input {
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                height: 50px;
+                margin-bottom: 0;
+                padding-left: 20px;
+                padding-right: 12%;
+                float: left;
+                border-style: none;
+                border-radius: 5px;
+                background-color: #e4e4e4;
+                font-family: 'PT Sans', sans-serif;
+                color: #333;
+                font-size: 18px;
+                box-sizing: border-box;
 
-                & > div:nth-child(1) {
-                    display: table-cell;
-                    width: 90%;
-                    vertical-align: bottom;
+                @media (max-width: $screen-sm) {
+                    padding-right: 17%;
+                    height: 40px;
+                }
+            }
+
+            .send-message-button {
+                position: absolute;
+                right: 0;
+                display: block;
+                width: 10%;
+                height: 50px;
+                border: 0;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                background-color: #6bba6b;
+                background-image: url('/static/images/msg-send.svg');
+                background-position: 50% 50%;
+                background-size: 40px;
+                background-repeat: no-repeat;
+                color: rgba(51, 51, 51, 0);
+
+                @media (max-width: $screen-sm) {
+                    width: 15%;
+                    height: 40px;
                 }
 
-                & > div:nth-child(2) {
-                    display: table-cell;
-                    min-width: 100px;
-                    vertical-align: bottom;
-                    text-align: right;
-                    padding-bottom: 10px;
+                @media (max-width: $screen-xs) {
+                    background-size: 25px;
                 }
             }
         }
