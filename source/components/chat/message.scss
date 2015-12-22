@@ -8,6 +8,10 @@
     justify-content: flex-start;
     position: relative;
 
+    @media (max-width: $screen-md) {
+        flex-flow: column nowrap;
+    }
+
     &:not(:first-child) {
         margin-top: 5px;
     }
@@ -15,6 +19,11 @@
     &.message-my {
         -webkit-flex-flow: row-reverse nowrap;
         flex-flow: row-reverse nowrap;
+
+        @media (max-width: $screen-md) {
+            flex-flow: column nowrap;
+            align-items: flex-end;
+        }
     }
 }
 
@@ -34,9 +43,23 @@
     transform: perspective(71px) rotate(45deg);
     transform-origin: 100% 50% 0px;
 
+    @media (max-width: $screen-md) {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        right: auto;
+        left: 24px;
+        top: 35px;
+    }
+
     .message-my & {
         right: 15px;
         background-color: #6bba6b;
+
+        @media (max-width: $screen-md) {
+            left: auto;
+            right: 24px;
+        }
     }
 
     .message-system &, .message-system-warning &, .message-system-critical & {
@@ -59,6 +82,8 @@
 
     @media (max-width: $screen-md) {
         max-width: 60vw;
+        align-self: flex-start;
+        margin-top: 5px;
     }
 
     @media (max-width: $screen-xs) {
@@ -69,6 +94,10 @@
         background-color: #6bba6b;
         color: white;
         text-align: right;
+
+        @media (max-width: $screen-md) {
+            align-self: flex-end;
+        }
     }
 
     .message-system &, .message-system-warning &, .message-system-critical & {
@@ -103,19 +132,46 @@
     font-size: 13px;
     text-align: right;
 
+    @media (max-width: $screen-md) {
+        left: auto;
+        text-align: left;
+    }
+
     .message-info {
         position: absolute;
         right: 0;
-        max-width: 140px;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: column nowrap;
+        flex-flow: column nowrap;
 
-        .message-info-author, .message-info-at {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+
+        @media (max-width: $screen-md) {
+            position: relative;
+            right: auto;
+            left: 37px;
+            -webkit-flex-flow: row nowrap;
+            flex-flow: row nowrap;
         }
 
         .message-info-author {
+            max-width: 140px;
             font-weight: 700;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+
+            @media (max-width: $screen-md) {
+                overflow: visible;
+            }
+        }
+
+        .message-info-at {
+            white-space: nowrap;
+
+            @media (max-width: $screen-md) {
+                margin-left: 10px;
+            }
         }
     }
 
@@ -128,9 +184,25 @@
         right: -20px;
         text-align: left;
 
+        @media (max-width: $screen-md) {
+            right: 35px;
+        }
+
         .message-info {
             right: auto;
             left: 0;
+
+            @media (max-width: $screen-md) {
+                -webkit-flex-flow: row-reverse nowrap;
+                flex-flow: row-reverse nowrap;
+            }
+
+            .message-info-at {
+                @media (max-width: $screen-md) {
+                    margin-left: auto;
+                    margin-right: 10px;
+                }
+            }
         }
     }
 }
