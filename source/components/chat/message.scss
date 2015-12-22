@@ -79,6 +79,7 @@
     background-color: white;
     text-align: left;
     align-self: flex-end;
+    box-sizing: border-box;
 
     @media (max-width: $screen-md) {
         max-width: 60vw;
