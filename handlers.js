@@ -25,6 +25,8 @@ export function app(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
+            userID: typeof req.user == 'object' ?
+                    req.user._id : '',
             sounds: typeof req.user == 'object' ? (
                         typeof req.user.sounds == 'undefined' ?
                             true : req.user.sounds) :

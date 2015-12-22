@@ -198,6 +198,10 @@ export default React.createClass({
                 text: d.format('MMMM Do') + '. What a lovely day!'
             });
         }
+        // add isMy shorthand property
+        messages.forEach(function(message) {
+            message.isMy = message.userID === appData.get('userID');
+        });
         // todo: add date message on new day start
         // todo: combine messages from one author
         return messages;
