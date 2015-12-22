@@ -10,14 +10,6 @@
     background-size: cover;
     flex-shrink: 0;
 
-    .message-my & {
-        float: right;
-    }
-
-    .message-system &, .message-system-warning &, .message-system-critical & {
-        display: none;
-    }
-
     @media (max-width: $screen-md) {
         width: 30px;
         height: 30px;
@@ -26,6 +18,23 @@
     @media (max-width: $screen-xs) {
         width: 25px;
         height: 25px;
+        position: relative;
+        top: 9px;
+        z-index: 3;
+        left: 2px;
+    }
+
+    .message-my & {
+        float: right;
+
+        @media (max-width: $screen-xs) {
+            left: auto;
+            right: 2px;
+        }
+    }
+
+    .message-system &, .message-system-warning &, .message-system-critical & {
+        display: none;
     }
 
     .provider {
