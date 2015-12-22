@@ -61,6 +61,7 @@
             margin-bottom: 10px;
             border-radius: 5px;
             line-height: 100%;
+            box-sizing: border-box;
 
             @media (max-width: $screen-md) {
                 width: $wrapper-md;
@@ -128,6 +129,7 @@
 
                 @media (max-width: $screen-xs) {
                     background-size: 25px;
+                    margin: $wrapper-xs-padding;
                 }
             }
         }
