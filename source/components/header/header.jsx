@@ -31,10 +31,13 @@ export default React.createClass({
         );
     },
     renderSoundsOption: function() {
-        // todo: show proper sound icon
+        let url = '/static/images/sound-off.svg';
+        if (this.state.sounds) {
+            url = '/static/images/sound-on.svg';
+        }
         return (
             <img
-                src='/static/images/sound-on.svg'
+                src={url}
                 onClick={this.handleSounds}
             />
         );
