@@ -91,10 +91,16 @@
                 color: #333;
                 font-size: 18px;
                 box-sizing: border-box;
+                outline: 0;
 
                 @media (max-width: $screen-sm) {
                     padding-right: 17%;
                     height: 40px;
+                }
+
+                &:focus {
+                    background-color: white;
+                    box-shadow: rgba(0, 0, 0, 0.1) -6px 8px 15px 0;
                 }
             }
 
@@ -113,6 +119,7 @@
                 background-size: 40px;
                 background-repeat: no-repeat;
                 color: rgba(51, 51, 51, 0);
+                outline: 0;
 
                 @media (max-width: $screen-sm) {
                     width: 15%;
