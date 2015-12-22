@@ -99,6 +99,10 @@
                     height: 40px;
                 }
 
+                @media (max-width: $screen-xs) {
+                    font-size: 15px;
+                }
+
                 &:focus {
                     background-color: white;
                     box-shadow: rgba(0, 0, 0, 0.1) -6px 8px 15px 0;
