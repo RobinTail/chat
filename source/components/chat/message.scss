@@ -52,6 +52,10 @@
         top: 35px;
     }
 
+    @media (max-width: $screen-xs) {
+        display: none;
+    }
+
     .message-my & {
         right: 15px;
         background-color: #6bba6b;
