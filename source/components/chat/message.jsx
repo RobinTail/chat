@@ -5,7 +5,9 @@ import './message.scss';
 
 export default React.createClass({
     render: function() {
-        let avatar = (
+        let avatar = this.props.isSameAuthor ? (
+            <div className='message-same-author-placeholder'></div>
+        ) : (
             <Avatar
                 url={this.props.avatar}
                 provider={this.props.provider}
@@ -15,13 +17,16 @@ export default React.createClass({
         if (this.props.at) {
             at = moment(this.props.at).format('HH:mm');
         }
-        let info = (
+        let info = this.props.isSameAuthor ? null : (
             <div className='message-info-wrapper'>
                 <div className='message-info'>
                     <div className='message-info-author'>{this.props.name}</div>
                     <div className='message-info-at'>{at}</div>
                 </div>
             </div>
+        );
+        let corner = this.props.isSameAuthor ? null : (
+            <div className='message-corner'></div>
         );
         let messageClass = '';
         if (this.props.isSystem) {
@@ -39,7 +44,7 @@ export default React.createClass({
             <li className={'message ' + messageClass}>
                 {info}
                 {avatar}
-                <div className='message-corner'></div>
+                {corner}
                 <div className='message-text'>{this.props.text}</div>
             </li>
         );

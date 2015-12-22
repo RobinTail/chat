@@ -203,7 +203,14 @@ export default React.createClass({
             message.isMy = message.userID === appData.get('userID');
         });
         // todo: add date message on new day start
-        // todo: combine messages from one author
+        // combine messages from same author
+        let lastUserID = '';
+        messages.forEach(function(message) {
+            if (lastUserID === message.userID && !message.isSystem) {
+                message.isSameAuthor = true;
+            }
+            lastUserID = message.userID;
+        });
         return messages;
     }
 });

@@ -27,6 +27,14 @@
     }
 }
 
+.message-same-author-placeholder {
+    width: 70px;
+
+    @media (max-width: $screen-md) {
+        display: none;
+    }
+}
+
 .message-corner {
     z-index: 1;
     position: relative;
