@@ -24,7 +24,6 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 * SASS
 * JSX
 * MongoDB with Mongoose
-* Material UI
 * Webpack
 * Mocha + Chai tests
 
