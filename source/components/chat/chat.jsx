@@ -161,10 +161,12 @@ export default React.createClass({
         }.bind(this), TYPING_TIMEOUT);
     },
     sendMessage: function() {
-        Actions.submitChatMessage(this.state.myMessage);
-        this.setState({
-            myMessage: ''
-        });
+        if (this.state.myMessage.trim().length > 0) {
+            Actions.submitChatMessage(this.state.myMessage);
+            this.setState({
+                myMessage: ''
+            });
+        }
     },
     onChange: function(section) {
         if (section === 'typing') {
