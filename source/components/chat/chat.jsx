@@ -1,12 +1,12 @@
 import React from 'react';
 import Reflux from 'reflux';
-import ChatStore from '../../stores/chat.jsx';
-import Actions from '../../actions.jsx';
-import Loading from '../loading.jsx';
-import Message from './message.jsx';
+import ChatStore from '../../stores/chat';
+import Actions from '../../actions';
+import Loading from '../loading';
+import Message from './message';
 import moment from 'moment';
 import smoothscroll from 'smoothscroll';
-import appData from '../../appData.jsx';
+import appData from '../../appData';
 import './chat.scss';
 import 'ion-sound';
 

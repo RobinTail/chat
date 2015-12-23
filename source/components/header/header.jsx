@@ -1,7 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
-import appData from '../../appData.jsx';
-import Actions from '../../actions.jsx';
+import appData from '../../appData';
+import Actions from '../../actions';
 import {version} from '../../../package.json';
 import './header.scss';
 

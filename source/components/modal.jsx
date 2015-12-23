@@ -1,7 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 import Dialog from 'material-ui/lib/dialog';
-import Store from '../stores/modal.jsx';
+import Store from '../stores/modal';
 
 export default React.createClass({
     mixins: [

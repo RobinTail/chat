@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import Reflux from 'reflux';
-import Actions from '../actions.jsx';
-import appData from '../appData.jsx';
+import Actions from '../actions';
+import appData from '../appData';
 
 if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);

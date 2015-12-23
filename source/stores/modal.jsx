@@ -1,5 +1,5 @@
 import Reflux from 'reflux';
-import Actions from '../actions.jsx';
+import Actions from '../actions';
 
 export default Reflux.createStore({
     listenables: [Actions],

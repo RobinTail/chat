@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from '../header/header.jsx';
-import Modal from '../modal.jsx';
-import Auth from '../auth/auth.jsx';
-import Chat from '../chat/chat.jsx';
-import appData from '../../appData.jsx';
+import Header from '../header/header';
+import Modal from '../modal';
+import Auth from '../auth/auth';
+import Chat from '../chat/chat';
+import appData from '../../appData';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import Theme from '../../material-ui-theme.jsx';
+import Theme from '../../material-ui-theme';
 
 import './main.scss';
 

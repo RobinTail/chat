@@ -5,7 +5,8 @@ if (element) {
 }
 
 /**
- * Returns the value of stored application data (injected by NodeJS)
+ * Getter and setter for stored application data
+ * (injected by NodeJS into view)
  */
 
 export default {

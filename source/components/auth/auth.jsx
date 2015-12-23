@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthButton from './authButton.jsx';
+import AuthButton from './authButton';
 import './auth.scss';
 
 export default React.createClass({
