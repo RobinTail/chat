@@ -96,9 +96,14 @@
                 outline: 0;
 
                 @media (max-width: $screen-sm) {
-                    padding-right: 17%;
+                    padding-left: 10px;
+                    padding-right: 15%;
                     height: 40px;
                     font-size: 15px;
+                }
+
+                @media (max-width: $screen-xs) {
+                    padding-right: 17%;
                 }
 
                 &:focus {
@@ -125,11 +130,12 @@
                 outline: 0;
 
                 @media (max-width: $screen-sm) {
-                    width: 15%;
+                    width: 12%;
                     height: 40px;
                 }
 
                 @media (max-width: $screen-xs) {
+                    width: 15%;
                     background-size: 25px;
                     margin: $wrapper-xs-padding;
                 }
