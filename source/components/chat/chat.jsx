@@ -51,7 +51,7 @@ export default React.createClass({
             }.bind(this), 3000);
         }.bind(this));
         checkLoaded.catch(function() {
-            console.log('response timeout');
+            //console.log('response timeout');
             this.request();
         }.bind(this));
     },

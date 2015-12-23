@@ -53,7 +53,6 @@ export default Reflux.createStore({
         }
     },
     getLatestChatMessages: function() {
-        console.log('send io request');
         socket.emit('latest');
     },
     afterLatestChatMessages: function(data) {
@@ -80,7 +79,6 @@ export default Reflux.createStore({
         }
     },
     submitChatMessage: function(message) {
-        console.log('submit message');
         socket.emit('submit', {text: message});
     },
     iStartTypingChatMessage: function() {
