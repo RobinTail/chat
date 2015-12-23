@@ -14,12 +14,12 @@ const TYPING_TIMEOUT = 800;
 
 ion.sound({
     sounds: [
-        {name: 'button_click'}
+        {name: 'notice'}
     ],
     path: 'static/sounds/',
     preload: true,
     multiplay: true,
-    volume: 0.5
+    volume: 0.4
 });
 
 export default React.createClass({
@@ -175,7 +175,7 @@ export default React.createClass({
             });
         } else if (section === 'messages') {
             if (appData.get('sounds') && this.state.isLoaded) {
-                ion.sound.play('button_click');
+                ion.sound.play('notice');
             }
             this.setState({
                 messages: this.processMessages(ChatStore.messages),
