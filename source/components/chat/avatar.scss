@@ -8,6 +8,7 @@
     background-color: rgba(0, 0, 0, 0.1);
     background-position: 0 0;
     background-size: cover;
+    -webkit-flex-shrink: 0;
     flex-shrink: 0;
 
     @media (max-width: $screen-md) {
