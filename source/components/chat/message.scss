@@ -100,6 +100,10 @@
         padding: 10px;
     }
 
+    @media (max-width: $screen-sm) {
+        font-size: 15px;
+    }
+
     @media (max-width: $screen-xs) {
         max-width: 90vw;
         padding: 5px 10px;
