@@ -93,6 +93,7 @@
     text-align: left;
     align-self: flex-end;
     box-sizing: border-box;
+    word-wrap: break-word;
 
     @media (max-width: $screen-md) {
         max-width: 60vw;
