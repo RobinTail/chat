@@ -40,12 +40,21 @@ export default React.createClass({
         } else if (this.props.isMy) {
             messageClass = 'message-my';
         }
+        let text = <div className='message-text'>{this.props.text}</div>;
+        if (this.props.isParsed) {
+            text = (
+                <div
+                    className='message-text'
+                    dangerouslySetInnerHTML={{__html: this.props.html}}
+                ></div>
+            );
+        }
         return (
             <li className={'message ' + messageClass}>
                 {info}
                 {avatar}
                 {corner}
-                <div className='message-text'>{this.props.text}</div>
+                {text}
             </li>
         );
     }

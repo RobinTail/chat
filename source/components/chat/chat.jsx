@@ -6,6 +6,7 @@ import Loading from '../loading';
 import Message from './message';
 import moment from 'moment';
 import smoothscroll from 'smoothscroll';
+import linkifyString from 'linkifyjs/string';
 import appData from '../../appData';
 import './chat.scss';
 import 'ion-sound';
@@ -207,11 +208,14 @@ export default React.createClass({
                 text: d.format('MMMM Do') + '. What a lovely day!'
             });
         }
+
         // add isMy shorthand property
         messages.forEach(function(message) {
             message.isMy = message.userID === appData.get('userID');
         });
+
         // todo: add date message on new day start
+
         // combine messages from same author
         let lastUserID = '';
         messages.forEach(function(message) {
@@ -220,6 +224,21 @@ export default React.createClass({
             }
             lastUserID = message.userID;
         });
+        // convert urls to anchors
+        let parser = new Promise(function(resolve, reject) {
+            messages.filter(function(message) {
+                return !message.isParsed;
+            }).forEach(function(message) {
+                message.isParsed = true;
+                message.html = linkifyString(message.text);
+            });
+            resolve(messages);
+        });
+        parser.then(function(messages) {
+            this.setState({
+                messages: messages
+            });
+        }.bind(this));
         return messages;
     }
 });

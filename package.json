@@ -36,6 +36,7 @@
     "express-session": "^1.12.1",
     "ion-sound": "^3.0.6",
     "json-loader": "^0.5.4",
+    "linkifyjs": "^2.0.0-beta.7",
     "material-ui": "^0.13.4",
     "moment": "^2.10.6",
     "mongoose": "^4.2.9",
