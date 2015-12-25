@@ -44,7 +44,14 @@ export default function(chat, messages) {
             return !message.isParsed;
         }).forEach(function(message) {
             message.isParsed = true;
-            message.html = linkifyString(message.text);
+            message.html = linkifyString(message.text, {
+                format: function(value, type) {
+                    if (type === 'url' && value.length > 50) {
+                        value = value.slice(0, 50) + '…';
+                    }
+                    return value;
+                }
+            });
         });
         resolve(messages);
     });
