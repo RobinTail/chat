@@ -26,7 +26,7 @@ export default function() {
     }
 
     // add isMy shorthand property
-    messages.forEach((message) => {
+    messages.forEach(message => {
         message.isMy = message.userID === appData.get('userID');
     });
 
@@ -34,7 +34,7 @@ export default function() {
 
     // combine messages from same author
     let lastUserID = '';
-    messages.forEach((message) => {
+    messages.forEach(message => {
         if (lastUserID === message.userID && !message.isSystem) {
             message.isSameAuthor = true;
         }
@@ -43,9 +43,9 @@ export default function() {
 
     // convert urls to anchors
     let parser = new Promise((resolve, reject) => {
-        messages.filter((message) => {
+        messages.filter(message => {
             return !message.isParsed && !message.isSystem;
-        }).forEach((message) => {
+        }).forEach(message => {
             message.isParsed = true;
             message.html = linkifyString(message.text, {
                 format: (value, type) => {
@@ -63,17 +63,17 @@ export default function() {
     });
 
     // convert urls to embeds
-    messages.filter((message) => {
+    messages.filter(message => {
         return !message.isEmbed && !message.isSystem;
-    }).forEach((message) => {
-        let urls = linkifyFind(message.text).filter((entry) => {
+    }).forEach(message => {
+        let urls = linkifyFind(message.text).filter(entry => {
             return entry.type === 'url';
-        }).map((entry) => {
+        }).map(entry => {
             return entry.href;
         });
         if (urls.length) {
             let embed = embdelyApi.get(urls);
-            embed.then((data) => {
+            embed.then(data => {
                 if (data.type !== 'error') {
                     message.isEmbed = true;
                     message.embed = data;
