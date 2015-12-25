@@ -2,8 +2,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import ChatStore from '../../stores/chat';
 import Actions from '../../actions';
-import Loading from '../loading';
-import Message from './message';
+import MessagesList from './messagesList';
 import smoothscroll from 'smoothscroll';
 import processor from './processor';
 import appData from '../../appData';
@@ -58,35 +57,13 @@ export default React.createClass({
     render: function() {
         return (
             <div className='chat-holder'>
-                {this.renderMessagesContainer()}
+                <MessagesList
+                    messages={this.state.messages}
+                    isLoaded={this.state.isLoaded}
+                />
                 {this.renderSendMessageContainer()}
             </div>
         );
-    },
-    renderMessagesContainer: function() {
-        if (this.state.isLoaded) {
-            if (this.state.messages.length) {
-                return (
-                    <ul className='messages-holder'>
-                        {this.renderMessages()}
-                    </ul>
-                );
-            } else {
-                return (
-                    <h4><em>
-                        No messages yet. Write your first one :)
-                    </em></h4>
-                );
-            }
-        } else {
-            return <Loading />;
-        }
-
-    },
-    renderMessages: function() {
-        return this.state.messages.map(function(message, id) {
-            return <Message key={id} {...message} />;
-        });
     },
     renderTypingContainer: function() {
         // todo: add smooth transition on appear
