@@ -1,15 +1,15 @@
-import store from './chat';
+import ChatStore from './chat';
 import moment from 'moment';
 import {find as linkifyFind} from 'linkifyjs';
 import linkifyString from 'linkifyjs/string';
 import embdelyApi from '../api/embedly';
 import appData from '../appData';
 
-export default function() {
-    let messages = store.messages;
+export function preprocess() {
+    let messages = ChatStore.messages;
 
     // add first date message when loaded
-    if (!store.isDateMessagePosted) {
+    if (!ChatStore.isDateMessagePosted) {
         let d = moment();
         if (messages.length) {
             let msg = messages[0];
@@ -22,7 +22,7 @@ export default function() {
             isSystem: true,
             text: d.format('MMMM Do') + '. What a lovely day!'
         });
-        store.isDateMessagePosted = true;
+        ChatStore.isDateMessagePosted = true;
     }
 
     // add isMy shorthand property
@@ -42,27 +42,26 @@ export default function() {
     });
 
     // convert urls to anchors
-    let parser = new Promise((resolve, reject) => {
-        messages.filter((message) => {
-            return !message.isParsed && !message.isSystem;
-        }).forEach((message) => {
-            message.isParsed = true;
-            message.html = linkifyString(message.text, {
-                format: (value, type) => {
-                    if (type === 'url' && value.length > 50) {
-                        value = value.slice(0, 50) + '…';
-                    }
-                    return value;
+    messages.filter((message) => {
+        return !message.isParsed && !message.isSystem;
+    }).forEach((message) => {
+        message.isParsed = true;
+        message.html = linkifyString(message.text, {
+            format: (value, type) => {
+                if (type === 'url' && value.length > 50) {
+                    value = value.slice(0, 50) + '…';
                 }
-            });
+                return value;
+            }
         });
-        resolve();
     });
-    parser.then(() => {
-        store.triggerChange('messages');
-    });
+}
 
-    // convert urls to embeds
+/**
+ * Convert urls to embeds
+ */
+export function embedly() {
+    let messages = ChatStore.messages;
     messages.filter((message) => {
         return !message.isEmbed && !message.isSystem;
     }).forEach((message) => {
@@ -77,7 +76,7 @@ export default function() {
                 if (data.type !== 'error') {
                     message.isEmbed = true;
                     message.embed = data;
-                    store.triggerChange('messages');
+                    ChatStore.triggerChange('messages');
                 }
             });
         }

@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import Reflux from 'reflux';
 import Actions from '../actions';
 import appData from '../appData';
-import chatProcessor from './chatProcessor';
+import * as processor from './chatProcessor';
 
 if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
@@ -83,11 +83,15 @@ export default Reflux.createStore({
                 data.messages.forEach(function(message) {
                     this.messages.push(message);
                 }.bind(this));
-                // todo: move this call (or async part) to Action (?)
-                chatProcessor();
+                processor.preprocess();
+                Actions.fetchEmbedIntoChatMessages();
                 this.triggerChange('messages');
             }
         }
+    },
+    fetchEmbedIntoChatMessages: function() {
+        processor.embedly();
+        this.triggerChange('messages');
     },
     submitChatMessage: function(message) {
         socket.emit('submit', {text: message});

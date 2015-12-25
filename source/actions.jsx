@@ -14,6 +14,7 @@ export default Reflux.createActions([
     'getLatestChatMessages',
     'afterLatestChatMessages',
     'newChatMessages',
+    'fetchEmbedIntoChatMessages',
 
     // broadcasting events
     'submitChatMessage',
