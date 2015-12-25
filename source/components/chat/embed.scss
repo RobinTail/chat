@@ -1,0 +1,55 @@
+.message-embed {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    border-left: 4px solid #DDD;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+
+    .message-my & {
+        border-left: none;
+        border-right: 4px solid white;
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+
+    .message-embed-item {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+
+        & > * {
+            padding: 5px;
+            font-size: smaller;
+        }
+
+        & .message-embed-info {
+            flex-grow: 1;
+
+            .message-my & {
+                text-align: right;
+            }
+        }
+
+        // todo: fix sizes
+        & .message-embed-thumb {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        & .message-embed-photo {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        & .message-embed-video {
+            width: 100%;
+
+            iframe {
+                max-width: 100%;
+            }
+        }
+    }
+}

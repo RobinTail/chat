@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from './avatar';
+import Embed from './embed'
 import moment from 'moment';
 import './message.scss';
 
@@ -43,10 +44,12 @@ export default React.createClass({
         let text = <div className='message-text'>{this.props.text}</div>;
         if (this.props.isParsed) {
             text = (
-                <div
-                    className='message-text'
-                    dangerouslySetInnerHTML={{__html: this.props.html}}
-                ></div>
+                <div className='message-text'>
+                    <div
+                        dangerouslySetInnerHTML={{__html: this.props.html}}
+                    ></div>
+                    <Embed data={this.props.embed} />
+                </div>
             );
         }
         return (
