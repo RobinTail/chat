@@ -1,13 +1,15 @@
+import store from './chat';
 import moment from 'moment';
 import {find as linkifyFind} from 'linkifyjs';
 import linkifyString from 'linkifyjs/string';
-import embdelyApi from '../../api/embedly';
-import appData from '../../appData';
+import embdelyApi from '../api/embedly';
+import appData from '../appData';
 
-export default function(chat, messages) {
+export default function() {
+    let messages = store.messages;
 
     // add first date message when loaded
-    if (!chat.state.isLoaded) {
+    if (!store.isLatestReceived) {
         let d = moment();
         if (messages.length) {
             let msg = messages[0];
@@ -23,7 +25,7 @@ export default function(chat, messages) {
     }
 
     // add isMy shorthand property
-    messages.forEach(function(message) {
+    messages.forEach((message) => {
         message.isMy = message.userID === appData.get('userID');
     });
 
@@ -31,7 +33,7 @@ export default function(chat, messages) {
 
     // combine messages from same author
     let lastUserID = '';
-    messages.forEach(function(message) {
+    messages.forEach((message) => {
         if (lastUserID === message.userID && !message.isSystem) {
             message.isSameAuthor = true;
         }
@@ -39,13 +41,13 @@ export default function(chat, messages) {
     });
 
     // convert urls to anchors
-    let parser = new Promise(function(resolve, reject) {
-        messages.filter(function(message) {
+    let parser = new Promise((resolve, reject) => {
+        messages.filter((message) => {
             return !message.isParsed;
-        }).forEach(function(message) {
+        }).forEach((message) => {
             message.isParsed = true;
             message.html = linkifyString(message.text, {
-                format: function(value, type) {
+                format: (value, type) => {
                     if (type === 'url' && value.length > 50) {
                         value = value.slice(0, 50) + '…';
                     }
@@ -53,40 +55,30 @@ export default function(chat, messages) {
                 }
             });
         });
-        resolve(messages);
+        resolve();
     });
-    parser.then(function(messages) {
-        chat.setState({
-            messages: messages
-        });
+    parser.then(() => {
+        store.triggerChange('messages');
     });
 
     // convert urls to embeds
-    messages.filter(function(message, i) {
-        message.index = i;
+    messages.filter((message) => {
         return !message.isEmbed;
-    }).forEach(function(message) {
-        let urls = linkifyFind(message.text).filter(function(entry) {
+    }).forEach((message) => {
+        let urls = linkifyFind(message.text).filter((entry) => {
             return entry.type === 'url';
-        }).map(function(entry) {
+        }).map((entry) => {
             return entry.href;
         });
         if (urls.length) {
             let embed = embdelyApi.get(urls);
-            embed.then(function(data) {
+            embed.then((data) => {
                 if (data.type !== 'error') {
-                    // make copy of messages to prevent objects link
-                    // see: messagesList.shouldComponentUpdate()
-                    let nms = messages.slice();
-                    nms[message.index].isEmbed = true;
-                    nms[message.index].embed = data;
-                    chat.setState({
-                        messages: nms
-                    });
+                    message.isEmbed = true;
+                    message.embed = data;
+                    store.triggerChange('messages');
                 }
             });
         }
     });
-
-    return messages;
 }

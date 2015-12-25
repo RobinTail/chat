@@ -4,7 +4,6 @@ import ChatStore from '../../stores/chat';
 import Actions from '../../actions';
 import MessagesList from './messagesList';
 import smoothscroll from 'smoothscroll';
-import processor from './processor';
 import appData from '../../appData';
 import './chat.scss';
 import 'ion-sound';
@@ -36,23 +35,7 @@ export default React.createClass({
         };
     },
     componentWillMount: function() {
-        this.request();
-    },
-    request: function() {
         Actions.getLatestChatMessages();
-        let checkLoaded = new Promise(function(resolve, reject) {
-            window.setTimeout(function() {
-                if (this.state.isLoaded) {
-                    resolve();
-                } else {
-                    reject();
-                }
-            }.bind(this), 3000);
-        }.bind(this));
-        checkLoaded.catch(function() {
-            //console.log('response timeout');
-            this.request();
-        }.bind(this));
     },
     render: function() {
         return (
@@ -162,7 +145,9 @@ export default React.createClass({
                 ion.sound.play('notice');
             }
             this.setState({
-                messages: processor(this, ChatStore.messages),
+                // make a copy of stored messages (prevent link)
+                // see: messagesList.shouldComponentUpdate()
+                messages: ChatStore.messages.slice(),
                 isLoaded: ChatStore.isLatestReceived
             });
             smoothscroll(document.body.scrollHeight);

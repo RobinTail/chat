@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import Reflux from 'reflux';
 import Actions from '../actions';
 import appData from '../appData';
+import chatProcessor from './chatProcessor';
 
 if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
@@ -54,6 +55,19 @@ export default Reflux.createStore({
     },
     getLatestChatMessages: function() {
         socket.emit('latest');
+        let checkLoaded = new Promise(function(resolve, reject) {
+            window.setTimeout(function() {
+                if (this.isLatestReceived) {
+                    resolve();
+                } else {
+                    reject();
+                }
+            }.bind(this), 3000);
+        }.bind(this));
+        checkLoaded.catch(function() {
+            //console.log('response timeout');
+            this.getLatestChatMessages();
+        }.bind(this));
     },
     afterLatestChatMessages: function(data) {
         if (!this.isLatestReceived) {
@@ -74,6 +88,7 @@ export default Reflux.createStore({
                 data.messages.forEach(function(message) {
                     this.messages.push(message);
                 }.bind(this));
+                chatProcessor();
                 this.triggerChange('messages');
             }
         }
