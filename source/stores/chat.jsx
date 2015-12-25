@@ -8,6 +8,8 @@ if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
 
+// todo: move socket event handles to Actions
+
 export default Reflux.createStore({
     listenables: [Actions],
     messages: [],
@@ -17,27 +19,10 @@ export default Reflux.createStore({
     init: function() {
         if (appData.get('isAuthenticated')) {
             socket.on('connect', function() {
-                if (this.isConnectionLost) {
-                    this.isConnectionLost = false;
-                    this.messages.push({
-                        name: 'System',
-                        isSystem: true,
-                        text: 'Connected'
-                    });
-                    this.triggerChange('messages');
-                }
+                this.afterConnected();
             }.bind(this));
             socket.on('connect_error', function(err) {
-                if (!this.isConnectionLost) {
-                    this.isConnectionLost = true;
-                    this.messages.push({
-                        name: 'System',
-                        isSystem: true,
-                        isCritical: true,
-                        text: 'Connection lost'
-                    });
-                    this.triggerChange('messages');
-                }
+                this.afterConnectionLost(err);
             }.bind(this));
             socket.on('latest', function(data) {
                 this.afterLatestChatMessages(data);
@@ -51,6 +36,29 @@ export default Reflux.createStore({
             socket.on('stop_typing', function(data) {
                 this.heStopTypingChatMessage(data);
             }.bind(this));
+        }
+    },
+    afterConnected: function() {
+        if (this.isConnectionLost) {
+            this.isConnectionLost = false;
+            this.messages.push({
+                name: 'System',
+                isSystem: true,
+                text: 'Connected'
+            });
+            this.triggerChange('messages');
+        }
+    },
+    afterConnectionLost: function(err) {
+        if (!this.isConnectionLost) {
+            this.isConnectionLost = true;
+            this.messages.push({
+                name: 'System',
+                isSystem: true,
+                isCritical: true,
+                text: 'Connection lost'
+            });
+            this.triggerChange('messages');
         }
     },
     getLatestChatMessages: function() {
