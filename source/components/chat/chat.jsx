@@ -4,9 +4,8 @@ import ChatStore from '../../stores/chat';
 import Actions from '../../actions';
 import Loading from '../loading';
 import Message from './message';
-import moment from 'moment';
 import smoothscroll from 'smoothscroll';
-import linkifyString from 'linkifyjs/string';
+import processor from './processor';
 import appData from '../../appData';
 import './chat.scss';
 import 'ion-sound';
@@ -186,59 +185,10 @@ export default React.createClass({
                 ion.sound.play('notice');
             }
             this.setState({
-                messages: this.processMessages(ChatStore.messages),
+                messages: processor(this, ChatStore.messages),
                 isLoaded: ChatStore.isLatestReceived
             });
             smoothscroll(document.body.scrollHeight);
         }
-    },
-    processMessages: function(messages) {
-        // add first date message when loaded
-        if (!this.state.isLoaded) {
-            let d = moment();
-            if (messages.length) {
-                let msg = messages[0];
-                if (msg.at) {
-                    d = moment(msg.at);
-                }
-            }
-            messages.unshift({
-                name: 'System',
-                isSystem: true,
-                text: d.format('MMMM Do') + '. What a lovely day!'
-            });
-        }
-
-        // add isMy shorthand property
-        messages.forEach(function(message) {
-            message.isMy = message.userID === appData.get('userID');
-        });
-
-        // todo: add date message on new day start
-
-        // combine messages from same author
-        let lastUserID = '';
-        messages.forEach(function(message) {
-            if (lastUserID === message.userID && !message.isSystem) {
-                message.isSameAuthor = true;
-            }
-            lastUserID = message.userID;
-        });
-        // convert urls to anchors
-        let parser = new Promise(function(resolve, reject) {
-            messages.filter(function(message) {
-                return !message.isParsed;
-            }).forEach(function(message) {
-                message.isParsed = true;
-                message.html = linkifyString(message.text);
-            });
-            resolve(messages);
-        });
-        parser.then(function(messages) {
-            this.setState({
-                messages: messages
-            });
-        }.bind(this));
-        return messages;
     }
 });
