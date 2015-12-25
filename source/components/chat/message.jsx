@@ -6,7 +6,7 @@ import './message.scss';
 
 export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
-        // todo: check only param isEmbed (?)
+        // todo: check only params: isEmbed, isSameAuthor (?)
         let nextKeys = Object.keys(nextProps);
         let keys = nextKeys.concat(
                 Object.keys(this.props).filter(item => {
