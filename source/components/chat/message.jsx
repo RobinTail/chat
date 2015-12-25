@@ -5,6 +5,17 @@ import moment from 'moment';
 import './message.scss';
 
 export default React.createClass({
+    shouldComponentUpdate: function(nextProps, nextState) {
+        let nextKeys = Object.keys(nextProps);
+        let keys = nextKeys.concat(
+                Object.keys(this.props).filter((item) => {
+                    return nextKeys.indexOf(item) === -1;
+                }
+            ));
+        return !(keys.every((k) => {
+            return nextProps[k] === this.props[k];
+        }, this));
+    },
     render: function() {
         let avatar = this.props.isSameAuthor ? (
             <div className='message-same-author-placeholder'></div>
