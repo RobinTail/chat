@@ -15,7 +15,7 @@ export default React.createClass({
                 );
 
                 let embedDesc = (
-                    <div><em>{obj.description}</em></div>
+                    <div>{obj.description}</div>
                 );
 
                 let embedInfo = (
