@@ -126,6 +126,14 @@
         }
     }
 
+    & a {
+        color: #666;
+
+        .message-my & {
+            color: white;
+        }
+    }
+
     .message-system &, .message-system-warning &, .message-system-critical & {
         max-width: 100%;
         width: 100%;
