@@ -60,7 +60,7 @@ export default React.createClass({
             });
 
             return (
-                <div className='message-embed'>
+                <div className='message-embed-wrapper'>
                     {embedContains}
                 </div>
             );
