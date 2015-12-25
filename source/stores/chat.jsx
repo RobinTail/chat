@@ -8,8 +8,6 @@ if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
 
-// todo: move socket event handles to Actions
-
 export default Reflux.createStore({
     listenables: [Actions],
     messages: [],
@@ -18,27 +16,15 @@ export default Reflux.createStore({
     isConnectionLost: false,
     init: function() {
         if (appData.get('isAuthenticated')) {
-            socket.on('connect', function() {
-                this.afterConnected();
-            }.bind(this));
-            socket.on('connect_error', function(err) {
-                this.afterConnectionLost(err);
-            }.bind(this));
-            socket.on('latest', function(data) {
-                this.afterLatestChatMessages(data);
-            }.bind(this));
-            socket.on('new', function(data) {
-                this.newChatMessages(data);
-            }.bind(this));
-            socket.on('start_typing', function(data) {
-                this.heStartTypingChatMessage(data);
-            }.bind(this));
-            socket.on('stop_typing', function(data) {
-                this.heStopTypingChatMessage(data);
-            }.bind(this));
+            socket.on('connect', Actions.afterChatConnected);
+            socket.on('connect_error', Actions.afterChatConnectionLost);
+            socket.on('latest', Actions.afterLatestChatMessages);
+            socket.on('new', Actions.newChatMessages);
+            socket.on('start_typing', Actions.theyStartTypingChatMessage);
+            socket.on('stop_typing', Actions.theyStopTypingChatMessage);
         }
     },
-    afterConnected: function() {
+    afterChatConnected: function() {
         if (this.isConnectionLost) {
             this.isConnectionLost = false;
             this.messages.push({
@@ -49,7 +35,7 @@ export default Reflux.createStore({
             this.triggerChange('messages');
         }
     },
-    afterConnectionLost: function(err) {
+    afterChatConnectionLost: function(err) {
         if (!this.isConnectionLost) {
             this.isConnectionLost = true;
             this.messages.push({
@@ -96,6 +82,7 @@ export default Reflux.createStore({
                 data.messages.forEach(function(message) {
                     this.messages.push(message);
                 }.bind(this));
+                // todo: move this call (or async part) to Action (?)
                 chatProcessor();
                 this.triggerChange('messages');
             }
@@ -110,11 +97,11 @@ export default Reflux.createStore({
     iStopTypingChatMessage: function() {
         socket.emit('stop_typing');
     },
-    heStartTypingChatMessage: function(data) {
+    theyStartTypingChatMessage: function(data) {
         this.typing.push(data);
         this.triggerChange('typing');
     },
-    heStopTypingChatMessage: function(data) {
+    theyStopTypingChatMessage: function(data) {
         this.typing.splice(this.typing.indexOf(data.id), 1);
         this.triggerChange('typing');
     },
