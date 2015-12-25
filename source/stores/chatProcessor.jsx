@@ -9,7 +9,7 @@ export default function() {
     let messages = store.messages;
 
     // add first date message when loaded
-    if (!store.isLatestReceived) {
+    if (!store.isDateMessagePosted) {
         let d = moment();
         if (messages.length) {
             let msg = messages[0];
@@ -22,6 +22,7 @@ export default function() {
             isSystem: true,
             text: d.format('MMMM Do') + '. What a lovely day!'
         });
+        store.isDateMessagePosted = true;
     }
 
     // add isMy shorthand property
@@ -43,7 +44,7 @@ export default function() {
     // convert urls to anchors
     let parser = new Promise((resolve, reject) => {
         messages.filter((message) => {
-            return !message.isParsed;
+            return !message.isParsed && !message.isSystem;
         }).forEach((message) => {
             message.isParsed = true;
             message.html = linkifyString(message.text, {
@@ -63,7 +64,7 @@ export default function() {
 
     // convert urls to embeds
     messages.filter((message) => {
-        return !message.isEmbed;
+        return !message.isEmbed && !message.isSystem;
     }).forEach((message) => {
         let urls = linkifyFind(message.text).filter((entry) => {
             return entry.type === 'url';
