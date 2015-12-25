@@ -8,9 +8,13 @@ export default React.createClass({
 
                 console.log(obj);
 
-                let embedTitle = <div><strong>{obj.title}</strong></div>;
+                let embedTitle = (
+                    <div><strong>
+                        <a href={obj.url}>{obj.title}</a>
+                    </strong></div>
+                );
 
-                let embedDesc = obj.type === 'video' ? null : (
+                let embedDesc = (
                     <div><em>{obj.description}</em></div>
                 );
 
@@ -29,6 +33,7 @@ export default React.createClass({
                                 dangerouslySetInnerHTML={{__html: obj.html}}
                             ></div>
                         );
+                        embedInfo = null;
                         break;
                     case 'photo':
                         embedImage = (
