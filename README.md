@@ -45,7 +45,7 @@ Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' scree
    npm install
    ```
    
-* Create file **config.js** and fill it with the following:
+* Create file **config.jsx** (NOTICE: extension is **.JSX**) and fill it with the following:
 
    ```
    // all oAuth providers require callback url to be registred
@@ -89,7 +89,10 @@ Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' scree
    // jscs:disable maximumLineLength
    export const dbConnectionUrl = 'mongodb://***';
    // jscs:enable maximumLineLength
-   
+
+   // Embed.ly API key
+   export const embedlyKey = '***';
+
    // Server configuration options
    // Specify port or socket
    export const listenTo = 8080;
@@ -106,7 +109,7 @@ Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' scree
 
    ```
 
-* Follow URLs in this file to register your application. Fill your ClientID and ClientSecret. Don't forget to register callback url. Fill your MongoDB connection URL.
+* Follow URLs in this file to register your application. Fill your ClientID and ClientSecret. Don't forget to register callback url. Fill your MongoDB connection URL. Fill Embedly API key.
 * Execute command (this will launch the webserver on port 8080 with Webpack Dev Middleware)
 
    ```
