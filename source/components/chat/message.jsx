@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from './avatar';
-import Embed from './embed'
+import Embed from './embed';
 import moment from 'moment';
 import './message.scss';
 
