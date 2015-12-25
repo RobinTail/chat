@@ -4,6 +4,9 @@ import Message from './message';
 import './messagesList.scss';
 
 export default React.createClass({
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return nextProps.messages !== this.props.messages;
+    },
     render: function() {
         if (this.props.isLoaded) {
             if (this.props.messages.length) {
