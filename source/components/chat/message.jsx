@@ -55,14 +55,13 @@ export default React.createClass({
         }
         let text = <div className='message-text'>{this.props.text}</div>;
         if (this.props.isParsed) {
-            text = (
-                <div className='message-text'>
+            text = [(
+                <div key='text' className='message-text'>
                     <div
                         dangerouslySetInnerHTML={{__html: this.props.html}}
                     ></div>
-                    <Embed data={this.props.embed} />
                 </div>
-            );
+            ), <Embed key='embed' data={this.props.embed} />];
         }
         return (
             <li className={'message ' + messageClass}>
