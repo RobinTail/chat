@@ -2,6 +2,9 @@ import React from 'react';
 import './embed.scss';
 
 export default React.createClass({
+    shouldComponentUpdate: function(nextProps, nextState) {
+        return nextProps.data !== this.props.data;
+    },
     render: function() {
         if (this.props.data) {
             let embedContains = this.props.data.map(function(obj, i) {
@@ -18,7 +21,7 @@ export default React.createClass({
                 );
 
                 let embedInfo = (
-                    <div className='message-embed-info'>
+                    <div className='embed-info'>
                                 {embedTitle}
                                 {embedDesc}
                     </div>
@@ -31,7 +34,7 @@ export default React.createClass({
                         let vthUrl = obj.thumbnail_url;
                         // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                         embedImage = (
-                            <div className='message-embed-video'
+                            <div className='embed-video'
                                 style={{
                                     backgroundImage: 'url(' + vthUrl + ')'
                                 }}
@@ -43,10 +46,10 @@ export default React.createClass({
                     case 'photo':
                         let phPortrait = obj.width < obj.height ? ' portrait' : '';
                         embedImage = (
-                            <div className='message-embed-thumb'>
+                            <div className='embed-thumb'>
                                 <a href={obj.url}>
                                     <img
-                                    className={'message-embed-photo' + phPortrait}
+                                    className={'embed-photo' + phPortrait}
                                     src={obj.url}
                                     />
                                 </a>
@@ -61,9 +64,9 @@ export default React.createClass({
                         let thUrl = obj.thumbnail_url;
                         // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                         embedImage = thUrl ? (
-                            <div className='message-embed-thumb'>
+                            <div className='embed-thumb small'>
                                 <img
-                                    className={'message-embed-photo' + thPortrait}
+                                    className={'embed-photo' + thPortrait}
                                     src={thUrl}
                                 />
                             </div>
@@ -71,17 +74,21 @@ export default React.createClass({
                 }
 
                 return (
-                    <div className='message-embed-item' key={i}>
+                    <div className='embed-item' key={i}>
                         {embedImage}
                         {embedInfo}
                     </div>
                 );
             });
 
+            let embedClass = 'embed-wrapper' + (
+                    this.props.isMy ? ' embed-my' : ''
+            );
             return (
-                <div className='message-embed-wrapper'>
+                <li className={embedClass}>
+                    <div className='message-same-author-placeholder'></div>
                     {embedContains}
-                </div>
+                </li>
             );
         } else {
             return null;
