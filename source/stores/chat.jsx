@@ -14,7 +14,7 @@ export default Reflux.createStore({
     typing: [],
     isLatestReceived: false,
     isConnectionLost: false,
-    isDateMessagePosted: false,
+    dateMessagesPosted: [],
     init: function() {
         if (appData.get('isAuthenticated')) {
             socket.on('connect', Actions.afterChatConnected);

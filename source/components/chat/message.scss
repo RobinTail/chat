@@ -137,14 +137,12 @@
     .message-system &, .message-system-warning &, .message-system-critical & {
         max-width: 100%;
         width: 100%;
-        padding: 0 10px;
-        line-height: 40px;
+        padding: 10px;
         color: rgba(0, 0, 0, 0.3);
         font-size: 14px;
         font-weight: 700;
 
         @media (max-width: $screen-xs) {
-            line-height: 100%;
             padding: 5px 10px;
         }
     }
