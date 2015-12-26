@@ -9,5 +9,6 @@
         "node_modules/**",
         "static/index.js"
     ],
-    "validateIndentation": 4
+    "validateIndentation": 4,
+    "maximumLineLength": 120
 }

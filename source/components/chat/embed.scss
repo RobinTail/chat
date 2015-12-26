@@ -1,15 +1,25 @@
+@import '../main/vars.scss';
+
 .message-embed-wrapper {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-flow: row wrap;
     flex-flow: row wrap;
-    border-left: 4px solid #DDD;
     -webkit-justify-content: flex-start;
     justify-content: flex-start;
+    margin: 5px 0;
+    max-width: 30vw;
+
+    @media (max-width: $screen-md) {
+        max-width: 60vw;
+    }
+
+    @media (max-width: $screen-xs) {
+        max-width: 90vw;
+        padding: 5px 10px;
+    }
 
     .message-my & {
-        border-left: none;
-        border-right: 4px solid white;
         -webkit-justify-content: flex-end;
         justify-content: flex-end;
     }
@@ -19,33 +29,55 @@
         display: flex;
         -webkit-flex-flow: row nowrap;
         flex-flow: row nowrap;
+        max-width: 100%;
 
-        & > * {
-            padding: 5px;
-            font-size: smaller;
+        .message-my & {
+            -webkit-flex-flow: row-reverse nowrap;
+            flex-flow: row-reverse nowrap;
         }
 
         & .message-embed-info {
-            flex-grow: 1;
+            padding: 5px 10px;
 
             .message-my & {
                 text-align: right;
             }
         }
 
-        // todo: fix sizes
-        & .message-embed-thumb {
-            max-width: 100px;
-            max-height: 100px;
+        & a {
+            color: #666;
         }
 
-        & .message-embed-photo {
-            max-width: 200px;
-            max-height: 200px;
+        // todo: fix sizes
+        & .message-embed-thumb {
+            position: relative;
+            width: 200px;
+            min-width: 200px;
+            height: 200px;
+            overflow: hidden;
+
+            .message-embed-photo {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                height: 100%;
+                width: auto;
+                -webkit-transform: translate(-50%,-50%);
+                -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);
+
+                &.portrait {
+                    width: 100%;
+                    height: auto;
+                }
+            }
         }
 
         & .message-embed-video {
             width: 100%;
+            background-size: 50%;
+            background-repeat: no-repeat;
+            background-position: center;
 
             iframe {
                 max-width: 100%;

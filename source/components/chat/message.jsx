@@ -6,15 +6,16 @@ import './message.scss';
 
 export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
+        // todo: check only params: isEmbed, isSameAuthor (?)
         let nextKeys = Object.keys(nextProps);
         let keys = nextKeys.concat(
-                Object.keys(this.props).filter((item) => {
+                Object.keys(this.props).filter(item => {
                     return nextKeys.indexOf(item) === -1;
                 }
             ));
-        return !(keys.every((k) => {
+        return !(keys.every(k => {
             return nextProps[k] === this.props[k];
-        }, this));
+        }));
     },
     render: function() {
         let avatar = this.props.isSameAuthor ? (
@@ -54,14 +55,13 @@ export default React.createClass({
         }
         let text = <div className='message-text'>{this.props.text}</div>;
         if (this.props.isParsed) {
-            text = (
-                <div className='message-text'>
+            text = [(
+                <div key='text' className='message-text'>
                     <div
                         dangerouslySetInnerHTML={{__html: this.props.html}}
                     ></div>
-                    <Embed data={this.props.embed} />
                 </div>
-            );
+            ), <Embed key='embed' data={this.props.embed} />];
         }
         return (
             <li className={'message ' + messageClass}>

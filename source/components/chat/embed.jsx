@@ -5,8 +5,7 @@ export default React.createClass({
     render: function() {
         if (this.props.data) {
             let embedContains = this.props.data.map(function(obj, i) {
-
-                console.log(obj);
+                //console.log(obj);
 
                 let embedTitle = (
                     <div><strong>
@@ -15,7 +14,7 @@ export default React.createClass({
                 );
 
                 let embedDesc = (
-                    <div><em>{obj.description}</em></div>
+                    <div>{obj.description}</div>
                 );
 
                 let embedInfo = (
@@ -28,31 +27,46 @@ export default React.createClass({
                 let embedImage = null;
                 switch (obj.type) {
                     case 'video':
+                        // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+                        let vthUrl = obj.thumbnail_url;
+                        // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                         embedImage = (
                             <div className='message-embed-video'
+                                style={{
+                                    backgroundImage: 'url(' + vthUrl + ')'
+                                }}
                                 dangerouslySetInnerHTML={{__html: obj.html}}
                             ></div>
                         );
                         embedInfo = null;
                         break;
                     case 'photo':
+                        let phPortrait = obj.width < obj.height ? ' portrait' : '';
                         embedImage = (
-                            <img
-                                className='message-embed-photo'
-                                src={obj.url}
-                            />
+                            <div className='message-embed-thumb'>
+                                <a href={obj.url}>
+                                    <img
+                                    className={'message-embed-photo' + phPortrait}
+                                    src={obj.url}
+                                    />
+                                </a>
+                            </div>
                         );
                         embedInfo = null;
                         break;
                     default:
                         // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+                        let thPortrait = obj.thumbnail_width < obj.thumbnail_height ?
+                            ' portrait' : '';
                         let thUrl = obj.thumbnail_url;
                         // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                         embedImage = thUrl ? (
-                            <img
-                                className='message-embed-thumb'
-                                src={thUrl}
-                            />
+                            <div className='message-embed-thumb'>
+                                <img
+                                    className={'message-embed-photo' + thPortrait}
+                                    src={thUrl}
+                                />
+                            </div>
                         ) : null;
                 }
 
