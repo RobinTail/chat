@@ -1,21 +1,11 @@
 import React from 'react';
 import Avatar from './avatar';
-import Embed from './embed';
 import moment from 'moment';
 import './message.scss';
 
 export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
-        // todo: check only params: isEmbed, isSameAuthor (?)
-        let nextKeys = Object.keys(nextProps);
-        let keys = nextKeys.concat(
-                Object.keys(this.props).filter(item => {
-                    return nextKeys.indexOf(item) === -1;
-                }
-            ));
-        return !(keys.every(k => {
-            return nextProps[k] === this.props[k];
-        }));
+        return false;
     },
     render: function() {
         let avatar = this.props.isSameAuthor ? (
@@ -55,13 +45,13 @@ export default React.createClass({
         }
         let text = <div className='message-text'>{this.props.text}</div>;
         if (this.props.isParsed) {
-            text = [(
-                <div key='text' className='message-text'>
+            text = (
+                <div className='message-text'>
                     <div
                         dangerouslySetInnerHTML={{__html: this.props.html}}
                     ></div>
                 </div>
-            ), <Embed key='embed' data={this.props.embed} />];
+            );
         }
         return (
             <li className={'message ' + messageClass}>

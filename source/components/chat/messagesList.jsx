@@ -1,6 +1,7 @@
 import React from 'react';
 import Loading from '../loading';
 import Message from './message';
+import Embed from './embed';
 import './messagesList.scss';
 
 export default React.createClass({
@@ -29,7 +30,10 @@ export default React.createClass({
     },
     renderMessages: function() {
         return this.props.messages.map(function(message, id) {
-            return <Message key={id} {...message} />;
+            return [
+                <Message key={'message_' + id} {...message} />,
+                <Embed key={'embed_' + id} isMy={message.isMy} data={message.embed} />
+            ];
         });
     }
 });
