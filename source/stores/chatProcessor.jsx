@@ -6,7 +6,6 @@ import embdelyApi from '../api/embedly';
 import appData from '../appData';
 
 const DATE_MESSAGE_KEY_FORMAT = 'YYYY-MM-DD';
-// jscs:disable maximumLineLength
 const DATE_MESSAGE_TEXTS = [
     'What a lovely day!',
     'My life is my message, — Mahatma Gandhi',
@@ -28,7 +27,6 @@ const DATE_MESSAGE_TEXTS = [
     'War is a poor chisel to carve out tomorrow, — Martin Luther King, Jr.',
     'We are not makers of history. We are made by history, — Martin Luther King, Jr.'
 ];
-// jscs:enable maximumLineLength
 
 export default function() {
     let messages = store.messages;

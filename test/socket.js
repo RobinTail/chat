@@ -4,9 +4,7 @@ import ioc from 'socket.io-client';
 import {expect} from 'chai';
 import User from '../schema/user';
 import Session from '../schema/test.session';
-// jscs:disable maximumLineLength
 import signature from '../node_modules/express-session/node_modules/cookie-signature';
-// jscs:enable maximumLineLength
 import {testConfig} from '../config';
 
 /**
