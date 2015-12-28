@@ -41,7 +41,7 @@ export default React.createClass({
     },
     request: function() {
         Actions.getLatestChatMessages();
-        var checkLoaded = new Promise(function(resolve, reject) {
+        let checkLoaded = new Promise(function(resolve, reject) {
             window.setTimeout(function() {
                 if (this.state.isLoaded) {
                     resolve();
@@ -91,16 +91,23 @@ export default React.createClass({
     renderTypingContainer: function() {
         // todo: add smooth transition on appear
         if (this.state.typing.length) {
-            var verb = this.state.typing.length > 1 ?
+            let verb = this.state.typing.length > 1 ?
                 <span>are</span> : <span>is</span>;
-            var msg = <span> {verb} typing...</span>;
-            var names = this.state.typing.map(function(user, i) {
-                return [
-                    <strong key={'name_' + i}>{user.name}</strong>,
-                    <em key={'sep_' + i}> &amp; </em>
-                ];
-            });
-            names[names.length - 1].pop();
+            let msg = <span> {verb} typing...</span>;
+            let names = null;
+            if (this.state.typing.length > 3) {
+                names = (
+                    <strong>{this.state.typing.length + ' persons'}</strong>
+                );
+            } else {
+                names = this.state.typing.map(function(user, i) {
+                    return [
+                        <strong key={'name_' + i}>{user.name}</strong>,
+                        <em key={'sep_' + i}> &amp; </em>
+                    ];
+                });
+                names[names.length - 1].pop();
+            }
             return (
                 <div className='typing'>
                     {names}
@@ -150,8 +157,8 @@ export default React.createClass({
             lastTyping: (new Date()).getTime()
         });
         setTimeout(function() {
-            var now = (new Date()).getTime();
-            var typingDiff = now - this.state.lastTyping;
+            let now = (new Date()).getTime();
+            let typingDiff = now - this.state.lastTyping;
             if (typingDiff >= TYPING_TIMEOUT && this.state.isTyping) {
                 this.setState({
                     isTyping: false
