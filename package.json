@@ -10,7 +10,7 @@
     "production": "NODE_ENV=production npm run _production2",
     "_production2": "webpack --progress && pm2 start index.js -n chat",
     "jscs": "jscs ./",
-    "eslint": "eslint --init",
+    "eslint": "eslint ./",
     "test": "NODE_ENV=test mocha --require test/testWrapper.js",
     "nyan": "NODE_ENV=test mocha --require test/testWrapper.js --reporter nyan"
   },

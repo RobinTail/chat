@@ -19,12 +19,16 @@
     },
     "env": {
         "es6": true,
-        "browser": true
+        "browser": true,
+        "node": true,
+        "mocha": true
     },
     "extends": "eslint:recommended",
     "ecmaFeatures": {
         "jsx": true,
-        "experimentalObjectRestSpread": true
+        "experimentalObjectRestSpread": true,
+        "arrowFunctions": true,
+        "modules": true
     },
     "plugins": [
         "react"
