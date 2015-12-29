@@ -38,8 +38,8 @@ export default React.createClass({
             return (
                 <div id='Wrapper'>
                     <div id='fakedBody'></div>
-                    <Header key='header' />
-                    <Chat key='chat' />
+                    <Header />
+                    <Chat />
                 </div>
             );
         } else {
