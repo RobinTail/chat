@@ -11,6 +11,18 @@ function checkAuth(socket) {
     return true;
 }
 
+// error catcher
+
+export function catcher(err, req, res, next) {
+    res.render('index', {
+        applicationData: {
+            isAuthenticated: false,
+            error: true,
+            data: err
+        }
+    });
+}
+
 // logger
 
 export function logger(req, res, next) {
