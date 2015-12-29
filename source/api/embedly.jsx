@@ -5,7 +5,7 @@ let rootUrl = 'http://api.embed.ly/1/oembed?key=' +
 
 export default {
     get: function(urls) {
-        return fetch(rootUrl + urls.map(encodeURIComponent).join(','), {})
+        return fetch(rootUrl + urls.slice(0,10).map(encodeURIComponent).join(','), {})
             .then(function(res) {
                 if (res.status >= 200 && res.status < 300) {
                     return res;
