@@ -14,7 +14,7 @@ ion.sound({
     sounds: [
         {name: 'notice'}
     ],
-    path: 'static/sounds/',
+    path: '/static/sounds/',
     preload: true,
     multiplay: true,
     volume: 0.4
