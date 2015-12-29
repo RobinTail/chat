@@ -19,13 +19,13 @@ export default React.createClass({
             return (
                 <Dialog
                     title={this.state.title}
-                    modal={false}
                     actions={
                         [
                             {text: 'OK'}
                         ]
                     }
-                    openImmediately={true}>
+                    defaultOpen={true}
+                >
                     {this.state.message}
                 </Dialog>
             );
