@@ -10,8 +10,8 @@
     margin: 5px 0;
 
     &.embed-my {
-        -webkit-flex-flow: row-reverse nowrap;
-        flex-flow: row-reverse nowrap;
+        -webkit-flex-flow: row-reverse wrap;
+        flex-flow: row-reverse wrap;
 
         .embed-item {
             -webkit-flex-flow: row-reverse nowrap;
