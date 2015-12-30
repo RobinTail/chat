@@ -63,7 +63,7 @@ export function ioConnect(socket) {
         function(err, user) {
             if (err) {
                 myconsole.log('user find failure: ' + err);
-                sendError(socket, 'Database error');
+                chatCore.sendError(socket, 'Database error');
                 return false;
             }
             if (user) {
