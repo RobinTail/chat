@@ -36,6 +36,7 @@
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
+    "flux": "^2.1.1",
     "ion-sound": "^3.0.6",
     "json-loader": "^0.5.4",
     "linkifyjs": "^2.0.0-beta.7",
