@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import Reflux from 'reflux';
 import Actions from '../actions';
 import appData from '../appData';
-import chatProcessor from './chatProcessor';
+import * as processor from './chatProcessor';
 
 // todo: move all connections and calls to actions. Issue #11
 
@@ -85,10 +85,15 @@ export default Reflux.createStore({
                 this.messages = this.messages.concat(data.messages);
                 // todo: move this call (or async part) to Action (?)
                 // todo: arguments
-                chatProcessor();
+                processor.preprocess();
+                Actions.fetchEmbedIntoChatMessages();
                 this.triggerChange('messages');
             }
         }
+    },
+    fetchEmbedIntoChatMessages: function() {
+        processor.embedly();
+        this.triggerChange('messages');
     },
     submitChatMessage: function(message) {
         socket.emit('submit', {text: message});

@@ -1,4 +1,4 @@
-import store from './chat';
+import ChatStore from './chat';
 import moment from 'moment';
 import {find as linkifyFind} from 'linkifyjs';
 import linkifyString from 'linkifyjs/string';
@@ -28,8 +28,8 @@ const DATE_MESSAGE_TEXTS = [
     'We are not makers of history. We are made by history, — Martin Luther King, Jr.'
 ];
 
-export default function() {
-    let messages = store.messages;
+export function preprocess() {
+    let messages = ChatStore.messages;
 
     // add date messages
     let dateMessagesPlan = [];
@@ -40,7 +40,7 @@ export default function() {
                 let d = moment(message.at);
                 let dKey = d.format(DATE_MESSAGE_KEY_FORMAT);
                 if (dKey !== lastDate) {
-                    if (store.dateMessagesPosted.indexOf(dKey) === -1) {
+                    if (ChatStore.dateMessagesPosted.indexOf(dKey) === -1) {
                         dateMessagesPlan.push({
                             key: dKey,
                             date: d,
@@ -62,7 +62,7 @@ export default function() {
     }
     let offset = 0;
     dateMessagesPlan.forEach((plan, i) => {
-        let randomText = DATE_MESSAGE_TEXTS[store.dateMessagesPosted.length ?
+        let randomText = DATE_MESSAGE_TEXTS[ChatStore.dateMessagesPosted.length ?
             (Math.floor(Math.random() * DATE_MESSAGE_TEXTS.length) + 1) : 0
         ];
         messages.splice(plan.index + offset, 0, {
@@ -71,7 +71,7 @@ export default function() {
             text: plan.date.format('MMMM Do') + '. ' + randomText
         });
         offset++;
-        store.dateMessagesPosted.push(plan.key);
+        ChatStore.dateMessagesPosted.push(plan.key);
     });
 
     // add isMy shorthand property
@@ -89,28 +89,27 @@ export default function() {
     });
 
     // convert urls to anchors
-    let parser = new Promise((resolve, reject) => {
-        messages.filter(message => {
-            return !message.isParsed && !message.isSystem;
-        }).forEach(message => {
-            message.isParsed = true;
-            message.html = linkifyString(message.text, {
-                format: (value, type) => {
-                    if (type === 'url' && value.length > 50) {
-                        value = value.slice(0, 50) + '…';
-                    }
-                    return value;
+    messages.filter((message) => {
+        return !message.isParsed && !message.isSystem;
+    }).forEach((message) => {
+        message.isParsed = true;
+        message.html = linkifyString(message.text, {
+            format: (value, type) => {
+                if (type === 'url' && value.length > 50) {
+                    value = value.slice(0, 50) + '…';
                 }
-            });
+                return value;
+            }
         });
-        resolve();
     });
-    parser.then(() => {
-        store.triggerChange('messages');
-    });
+}
 
-    // convert urls to embeds
-    messages.filter(message => {
+/**
+ * Convert urls to embeds
+ */
+export function embedly() {
+    let messages = ChatStore.messages;
+    messages.filter((message) => {
         return !message.isEmbed && !message.isSystem;
     }).forEach(message => {
         let urls = linkifyFind(message.text).filter(entry => {
@@ -124,7 +123,7 @@ export default function() {
                 if (data.type !== 'error') {
                     message.isEmbed = true;
                     message.embed = data;
-                    store.triggerChange('messages');
+                    ChatStore.triggerChange('messages');
                 }
             });
         }
