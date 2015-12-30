@@ -1,4 +1,7 @@
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+
+// todo: remove all prefixes from flexboxes in SCSS of component Chat
 
 module.exports = {
     entry: ['./source/index.jsx'],
@@ -19,7 +22,12 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loaders: ['style-loader', 'css-loader', 'sass-loader']
+                loaders: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.json$/,
@@ -28,6 +36,12 @@ module.exports = {
             }
         ]
     },
+    postcss: [
+        autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        })
+    ],
     plugins: process.env.NODE_ENV !== 'production' ? [] :
         [
             new webpack.optimize.UglifyJsPlugin({
