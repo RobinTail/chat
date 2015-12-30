@@ -11,8 +11,6 @@ function checkAuth(socket) {
     return true;
 }
 
-// error catcher
-
 export function catcher(err, req, res, next) {
     res.render('index', {
         applicationData: {
@@ -23,14 +21,10 @@ export function catcher(err, req, res, next) {
     });
 }
 
-// logger
-
 export function logger(req, res, next) {
     myconsole.log('Request: ' + req.method + ' ' + req.originalUrl);
     next();
 }
-
-// entry point
 
 export function app(req, res) {
     myconsole.log('Feeding entry');
@@ -48,13 +42,9 @@ export function app(req, res) {
     });
 }
 
-// fires when auth was successful
-
 export function authSuccess(req, res) {
     res.redirect('/');
 }
-
-// when io connection started
 
 export function ioConnect(socket) {
     myconsole.log('io connection');
@@ -99,8 +89,6 @@ export function ioConnect(socket) {
             }
         });
 }
-
-// log out
 
 export function logout(req, res) {
     req.logout();
