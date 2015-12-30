@@ -4,6 +4,7 @@ import Modal from '../modal';
 import Auth from '../auth/auth';
 import Chat from '../chat/chat';
 import appData from '../../appData';
+import Actions from '../../actions';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
@@ -26,10 +27,16 @@ export default React.createClass({
             muiTheme: ThemeManager.getMuiTheme(Theme)
         };
     },
+    componentWillMount: function() {
+        if (appData.get('error') === true) {
+            Actions.updateModal('Error occured', 'Message: ' + appData.get('data').message);
+        }
+    },
     render: function() {
         return (
             <div>
                 {this.content()}
+                <Modal />
             </div>
         );
     },

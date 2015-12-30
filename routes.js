@@ -37,4 +37,7 @@ export default function(app, passport, io) {
 
     // socket io
     io.on('connection', handlers.ioConnect);
+
+    // catcher
+    app.use(handlers.catcher);
 };
