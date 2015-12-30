@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../loading';
+import Loading from '../loading/loading';
 import Message from './message';
 import Embed from './embed';
 import './messagesList.scss';

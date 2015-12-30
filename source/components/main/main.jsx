@@ -1,15 +1,11 @@
 import React from 'react';
 import Header from '../header/header';
-import Modal from '../modal';
+import Modal from '../modal/modal';
 import Auth from '../auth/auth';
 import Chat from '../chat/chat';
 import appData from '../../appData';
 import Actions from '../../actions';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import Theme from '../../material-ui-theme';
-
 import './main.scss';
 
 //Needed for onTouchTap
@@ -19,14 +15,6 @@ import './main.scss';
 injectTapEventPlugin();
 
 export default React.createClass({
-    childContextTypes: {
-        muiTheme: React.PropTypes.object
-    },
-    getChildContext() {
-        return {
-            muiTheme: ThemeManager.getMuiTheme(Theme)
-        };
-    },
     componentWillMount: function() {
         if (appData.get('error') === true) {
             Actions.updateModal('Error occured', 'Message: ' + appData.get('data').message);
