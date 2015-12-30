@@ -4,6 +4,8 @@ import Actions from '../actions';
 import appData from '../appData';
 import chatProcessor from './chatProcessor';
 
+// todo: move all connections and calls to actions. Issue #11
+
 if (appData.get('isAuthenticated')) {
     var socket = io.connect(document.location.origin);
 }
@@ -80,10 +82,9 @@ export default Reflux.createStore({
             });
         } else {
             if (this.isLatestReceived) {
-                data.messages.forEach(function(message) {
-                    this.messages.push(message);
-                }.bind(this));
+                this.messages = this.messages.concat(data.messages);
                 // todo: move this call (or async part) to Action (?)
+                // todo: arguments
                 chatProcessor();
                 this.triggerChange('messages');
             }
