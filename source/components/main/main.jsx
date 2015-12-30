@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../header/header';
-import Modal from '../modal';
+import Modal from '../modal/modal';
 import Auth from '../auth/auth';
 import Chat from '../chat/chat';
 import appData from '../../appData';
