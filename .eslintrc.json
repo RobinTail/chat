@@ -1,9 +1,7 @@
 {
     "rules": {
-        "indent": [
-            2,
-            4
-        ],
+        "indent": 0,
+        "no-extra-semi": 0,
         "quotes": [
             2,
             "single"
