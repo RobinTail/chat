@@ -4,7 +4,6 @@ import Modal from '../modal/modal';
 import Auth from '../auth/auth';
 import Chat from '../chat/chat';
 import appData from '../../appData';
-import Actions from '../../actions';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import './main.scss';
 
@@ -15,11 +14,6 @@ import './main.scss';
 injectTapEventPlugin();
 
 export default React.createClass({
-    componentWillMount: function() {
-        if (appData.get('error') === true) {
-            Actions.updateModal('Error occured', 'Message: ' + appData.get('data').message);
-        }
-    },
     render: function() {
         return (
             <div>
@@ -28,6 +22,7 @@ export default React.createClass({
             </div>
         );
     },
+
     content: function() {
         if (appData.get('isAuthenticated')) {
             return (

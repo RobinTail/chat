@@ -1,28 +1,38 @@
 import React from 'react';
-import Reflux from 'reflux';
-import Store from '../../stores/modal';
+import modalStore from '../../stores/modal';
+import modalActionCreators from '../../actions/modalActionCreators';
 import './modal.scss';
 
+function getDataFromStore() {
+    return {
+        title: modalStore.getTitle(),
+        message: modalStore.getMessage(),
+        show: modalStore.isShow()
+    };
+}
+
 export default React.createClass({
-    mixins: [
-        Reflux.listenTo(Store, 'onChange')
-    ],
     getInitialState: function() {
-        return {
-            title: '',
-            message: '',
-            show: false
-        };
+        return getDataFromStore();
     },
+
+    componentDidMount: function() {
+        modalStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function() {
+        modalStore.removeChangeListener(this._onChange);
+    },
+
     render: function() {
         if (this.state.show) {
             return (
                 <div>
-                    <div className='modal-wrapper' onClick={this.handleClose}>
-                        <div className='modal' onClick={this.stopPropagation}>
+                    <div className='modal-wrapper' onClick={this._handleClose}>
+                        <div className='modal' onClick={this._handleOutsideClick}>
                             <div className='modal-header'>
                                 <h4>{this.state.title}</h4>
-                                <span className='modal-closer' onClick={this.handleClose}>&times;</span>
+                                <span className='modal-closer' onClick={this._handleClose}>&times;</span>
                             </div>
                             <div className='modal-body'>
                                 {this.state.message}
@@ -36,19 +46,16 @@ export default React.createClass({
             return null;
         }
     },
-    handleClose: function() {
-        this.setState({
-            show: false
-        });
+
+    _handleClose: function() {
+        modalActionCreators.modalHide();
     },
-    stopPropagation: function(e) {
+
+    _handleOutsideClick: function(e) {
         e.stopPropagation();
     },
-    onChange: function(e, data) {
-        this.setState({
-            title: data.title,
-            message: data.message,
-            show: true
-        });
+
+    _onChange: function() {
+        this.setState(getDataFromStore());
     }
 });
