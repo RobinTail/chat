@@ -22,24 +22,19 @@ export default React.createClass({
                 </div>
                 <div className='appSettingsBar' key='appSettingsBar'>
                     {this.renderSoundsOption()}
-                    <img
-                        src='/static/images/logout.svg'
-                        onClick={this.handleSignOut}
-                    />
+                    <div
+                        className='signOutBtn'
+                        onClick={this._handleSignOut}>
+                    </div>
                 </div>
             </div>
         );
     },
     renderSoundsOption: function() {
-        let url = '/static/images/sound-off.svg';
-        if (this.state.sounds) {
-            url = '/static/images/sound-on.svg';
-        }
         return (
-            <img
-                src={url}
-                onClick={this.handleSounds}
-            />
+            <div className={'soundBtn' + (this.state.sounds ? ' _on' : '')}
+                onClick={this._handleSounds}>
+            </div>
         );
     },
     handleSounds: function() {

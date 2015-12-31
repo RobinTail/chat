@@ -33,6 +33,11 @@ module.exports = {
                 test: /\.json$/,
                 exclude: /node_modules/,
                 loader: 'json-loader'
+            },
+            {
+                test: /\.svg/,
+                exclude: /node_modules/,
+                loader: 'url-loader'
             }
         ]
     },

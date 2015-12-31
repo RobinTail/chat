@@ -50,7 +50,7 @@
         background-color: #26c0de;
     }
 
-    img {
+    .soundBtn, .signOutBtn {
         display: inline-block;
         width: 20px;
         height: 20px;
@@ -58,5 +58,17 @@
         margin-top: 4px;
         margin-right: 20px;
         cursor: pointer;
+        background-size: 20px 20px;
+    }
+
+    .soundBtn {
+        background-image: url('./sound-off.svg');
+        &._on {
+            background-image: url('./sound-on.svg');
+        }
+    }
+
+    .signOutBtn {
+        background-image: url('./logout.svg');
     }
 }
