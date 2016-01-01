@@ -22,7 +22,7 @@ Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' scree
 * Socket.io
 * Passport
 * React
-* Flux (with Reflux)
+* Flux
 * Babel
 * SASS
 * JSX
