@@ -1,6 +1,6 @@
 import React from 'react';
 import modalStore from '../../stores/modal';
-import modalActionCreators from '../../actions/modalActionCreators';
+import {modalHide} from '../../actions/modalActions';
 import './modal.scss';
 
 function getDataFromStore() {
@@ -48,7 +48,7 @@ export default React.createClass({
     },
 
     _handleClose: function() {
-        modalActionCreators.modalHide();
+        modalHide();
     },
 
     _handleOutsideClick: function(e) {
