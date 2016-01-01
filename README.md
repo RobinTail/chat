@@ -6,6 +6,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 * Chat automatically removes old messages from MongoDB by 'expires' schema property.
 * It makes a sound on new incoming messages.
 * It shows who are typing messages now.
+* Converts URLs to anchors and fetch webpage's previews, photos and videos from Embedly API.
 
 # Demo
 
