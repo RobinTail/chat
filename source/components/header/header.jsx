@@ -1,7 +1,6 @@
 import React from 'react';
-import Reflux from 'reflux';
 import appData from '../../appData';
-import Actions from '../../actions';
+import {setSounds} from '../../actions/chatActions';
 import {version} from '../../../package.json';
 import './header.scss';
 
@@ -11,16 +10,17 @@ export default React.createClass({
             sounds: appData.get('sounds')
         };
     },
+
     render: function() {
         return (
             <div>
-                <div className='appHeader' key='appHeader'>
+                <div className='appHeader'>
                     ⧓&nbsp;Robichat
                     <span className='appVersion'>
                             {version}
                     </span>
                 </div>
-                <div className='appSettingsBar' key='appSettingsBar'>
+                <div className='appSettingsBar'>
                     {this.renderSoundsOption()}
                     <div
                         className='signOutBtn'
@@ -30,6 +30,7 @@ export default React.createClass({
             </div>
         );
     },
+
     renderSoundsOption: function() {
         return (
             <div className={'soundBtn' + (this.state.sounds ? ' _on' : '')}
@@ -37,14 +38,16 @@ export default React.createClass({
             </div>
         );
     },
-    handleSounds: function() {
+
+    _handleSounds: function() {
         appData.set('sounds', !appData.get('sounds'));
         this.setState({
             sounds: appData.get('sounds')
         });
-        Actions.setChatSounds(appData.get('sounds'));
+        setSounds(appData.get('sounds'));
     },
-    handleSignOut: function() {
+
+    _handleSignOut: function() {
         window.location = '/logout';
     }
 });

@@ -5,6 +5,7 @@ export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
         return nextProps.data !== this.props.data;
     },
+    
     render: function() {
         if (this.props.data) {
             let embedContains = this.props.data.map(function(obj, i) {

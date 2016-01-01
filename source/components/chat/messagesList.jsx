@@ -5,9 +5,6 @@ import Embed from './embed';
 import './messagesList.scss';
 
 export default React.createClass({
-    shouldComponentUpdate: function(nextProps, nextState) {
-        return nextProps.messages !== this.props.messages;
-    },
     render: function() {
         if (this.props.isLoaded) {
             if (this.props.messages.length) {
@@ -28,10 +25,11 @@ export default React.createClass({
         }
 
     },
+
     renderMessages: function() {
         return this.props.messages.map(function(message, id) {
             return [
-                <Message key={'message_' + id} {...message} />,
+                <Message key={'message_' + id} data={message} />,
                 <Embed key={'embed_' + id} isMy={message.isMy} data={message.embed} />
             ];
         });

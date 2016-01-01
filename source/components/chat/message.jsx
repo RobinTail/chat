@@ -5,50 +5,52 @@ import './message.scss';
 
 export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
-        return false;
+        return nextProps.data !== this.props.data;
     },
+
     render: function() {
-        let avatar = this.props.isSameAuthor ? (
+        let data = this.props.data;
+        let avatar = data.isSameAuthor ? (
             <div className='message-same-author-placeholder'></div>
         ) : (
             <Avatar
-                url={this.props.avatar}
-                provider={this.props.provider}
+                url={data.avatar}
+                provider={data.provider}
             />
         );
         let at = '';
-        if (this.props.at) {
-            at = moment(this.props.at).format('HH:mm');
+        if (data.at) {
+            at = moment(data.at).format('HH:mm');
         }
-        let info = this.props.isSameAuthor ? null : (
+        let info = data.isSameAuthor ? null : (
             <div className='message-info-wrapper'>
                 <div className='message-info'>
-                    <div className='message-info-author'>{this.props.name}</div>
+                    <div className='message-info-author'>{data.name}</div>
                     <div className='message-info-at'>{at}</div>
                 </div>
             </div>
         );
-        let corner = this.props.isSameAuthor ? null : (
+        let corner = data.isSameAuthor ? null : (
             <div className='message-corner'></div>
         );
         let messageClass = '';
-        if (this.props.isSystem) {
-            if (this.props.isCritical) {
+        if (data.isSystem) {
+            if (data.isCritical) {
                 messageClass = 'message-system-critical';
-            } else if (this.props.isWarning) {
+            } else if (data.isWarning) {
                 messageClass = 'message-system-warning';
             } else {
                 messageClass = 'message-system';
             }
-        } else if (this.props.isMy) {
+        } else if (data.isMy) {
             messageClass = 'message-my';
         }
-        let text = <div className='message-text'>{this.props.text}</div>;
-        if (this.props.isParsed) {
+        let text = <div className='message-text'>{data.text}</div>;
+        if (data.html) {
             text = (
                 <div className='message-text'>
                     <div
-                        dangerouslySetInnerHTML={{__html: this.props.html}}
+                        dangerouslySetInnerHTML={{__html: data.html}}
                     ></div>
                 </div>
             );
