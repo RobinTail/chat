@@ -105,7 +105,7 @@ describe('Chat Intergation Tests', function() {
             setTimeout(done, 5000);
             socket.on('connect', function() {
                 promiseRequest(socket, this);
-                socket.on('latest', function(data) {
+                socket.on('latest', function() {
                     test = false;
                     done();
                 }.bind(this));

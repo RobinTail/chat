@@ -19,6 +19,7 @@ export function catcher(err, req, res, next) {
             data: err
         }
     });
+    next();
 }
 
 export function logger(req, res, next) {

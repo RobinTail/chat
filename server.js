@@ -40,9 +40,12 @@ passport.deserializeUser(function(id, done) {
 
 routes(app, passport, io);
 
+/* eslint-disable no-empty */
 try {
     fs.unlinkSync(listenTo);
 } catch (e) {}
+/* eslint-enable no-empty */
+
 srv.listen(listenTo, function() {
     myconsole.log('Start serving');
 });
