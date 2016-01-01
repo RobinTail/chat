@@ -1,11 +1,8 @@
 @import '../main/vars.scss';
 
 .message {
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-flow: row nowrap;
     flex-flow: row nowrap;
-    -webkit-justify-content: flex-start;
     justify-content: flex-start;
     position: relative;
 
@@ -18,13 +15,10 @@
     }
 
     &.message-my {
-        -webkit-flex-flow: row-reverse nowrap;
         flex-flow: row-reverse nowrap;
 
         @media (max-width: $screen-md) {
-            -webkit-flex-flow: column nowrap;
             flex-flow: column nowrap;
-            -webkit-align-items: flex-end;
             align-items: flex-end;
         }
     }
@@ -48,9 +42,6 @@
     width: 20px;
     height: 20px;
     background-color: white;
-    -webkit-transform: perspective(71px) rotate(45deg);
-    -webkit-transform-origin: 100% 50% 0px;
-    -ms-transform-origin: 100% 50% 0px;
     transform: perspective(71px) rotate(45deg);
     transform-origin: 100% 50% 0px;
 
@@ -94,14 +85,12 @@
     line-height: 23px;
     background-color: white;
     text-align: left;
-    -webkit-align-self: flex-end;
     align-self: flex-end;
     box-sizing: border-box;
     word-wrap: break-word;
 
     @media (max-width: $screen-md) {
         max-width: 60vw;
-        -webkit-align-self: flex-start;
         align-self: flex-start;
         padding: 10px;
     }
@@ -121,7 +110,6 @@
         text-align: right;
 
         @media (max-width: $screen-md) {
-            -webkit-align-self: flex-end;
             align-self: flex-end;
         }
     }
@@ -177,9 +165,7 @@
     .message-info {
         position: absolute;
         right: 0;
-        display: -webkit-flex;
         display: flex;
-        -webkit-flex-flow: column nowrap;
         flex-flow: column nowrap;
 
 
@@ -187,7 +173,6 @@
             position: relative;
             right: auto;
             left: 37px;
-            -webkit-flex-flow: row nowrap;
             flex-flow: row nowrap;
         }
 
@@ -230,7 +215,6 @@
             left: 0;
 
             @media (max-width: $screen-md) {
-                -webkit-flex-flow: row-reverse nowrap;
                 flex-flow: row-reverse nowrap;
             }
 

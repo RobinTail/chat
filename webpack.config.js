@@ -1,8 +1,6 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
-// todo: remove all prefixes from flexboxes in SCSS of component Chat
-
 module.exports = {
     entry: ['./source/index.jsx'],
     output: {

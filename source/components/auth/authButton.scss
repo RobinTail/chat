@@ -1,7 +1,6 @@
 @import '../main/vars';
 
 .authButton {
-    -webkit-flex: 1 0 25%;
     flex: 1 0 25%;
     height: 100%;
     background-position: 50% 50%;
@@ -46,8 +45,6 @@
 
     &:hover {
         z-index: 100;
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
         transform: scale(1.1);
         box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
     }

@@ -1,14 +1,11 @@
 @import '../main/vars.scss';
 
 .authHolder {
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-flow: column nowrap;
     flex-flow: column nowrap;
     height: 100vh;
 
     .authWelcome {
-        display: -webkit-flex;
         display: flex;
         height: 25vh;
         min-height: 120px;
@@ -44,16 +41,13 @@
     }
 
     .authButtonsHolder {
-        display: -webkit-flex;
         display: flex;
-        -webkit-flex-flow: row nowrap;
         flex-flow: row nowrap;
         height: 200px;
         min-height: 200px;
         justify-content: center;
 
         @media (max-width: $screen-sm) {
-            -webkit-flex-flow: column nowrap;
             flex-flow: column nowrap;
             height: 60vh;
         }
