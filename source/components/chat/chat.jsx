@@ -7,7 +7,7 @@ import appData from '../../appData';
 import './chat.scss';
 import 'ion-sound';
 
-ion.sound({
+window.ion.sound({
     sounds: [
         {name: 'notice'}
     ],
@@ -21,7 +21,7 @@ function getDataFromStore() {
     return {
         messages: chatStore.getMessages(),
         typing: chatStore.getTyping(),
-        isLoaded: chatStore.isLatestMessagesReceived(),
+        isLoaded: chatStore.isLatestMessagesReceived()
     };
 }
 
@@ -54,7 +54,7 @@ export default React.createClass({
         this.setState(getDataFromStore());
         if (section === 'messages') {
             if (appData.get('sounds') && this.state.isLoaded) {
-                ion.sound.play('notice');
+                window.ion.sound.play('notice');
             }
             smoothscroll(document.body.scrollHeight);
         }

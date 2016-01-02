@@ -5,7 +5,7 @@ import './message.scss';
 
 export default React.createClass({
     shouldComponentUpdate: function(nextProps, nextState) {
-        return nextProps.data !== this.props.data;
+        return (nextProps.data !== this.props.data) || (nextState !== this.state);
     },
 
     render: function() {
