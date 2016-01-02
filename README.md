@@ -1,5 +1,7 @@
 # Chat
 
+[![Build Status](https://travis-ci.org/RobinTail/chat.svg?branch=master)](https://travis-ci.org/RobinTail/chat)
+
 This sample chat based on Socket.io and React, it uses oAuth authentication via social networks. 
 
 * Four oAuth providers: Facebook, Twitter, Google, VKontakte.
