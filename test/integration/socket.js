@@ -1,11 +1,11 @@
 import newXhr from 'socket.io-client-cookie';
-import srv from '../server';
+import srv from '../../server';
 import ioc from 'socket.io-client';
 import {expect} from 'chai';
-import User from '../schema/user';
-import Session from '../schema/test.session';
-import signature from '../node_modules/express-session/node_modules/cookie-signature';
-import {testConfig} from '../config';
+import User from '../../schema/user';
+import Session from '../../schema/test.session';
+import signature from 'cookie-signature';
+import testConfig from './socketConfig';
 
 /**
  * Creates a socket.io client for the given server
