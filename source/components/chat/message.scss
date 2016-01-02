@@ -133,6 +133,10 @@
         @media (max-width: $screen-xs) {
             padding: 5px 10px;
         }
+
+        @media only screen and (max-device-width: $screen-xs) {
+            text-size-adjust: 100%;
+        }
     }
 
     .message-system & {

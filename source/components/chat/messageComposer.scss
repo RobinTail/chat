@@ -37,6 +37,10 @@
             width: $wrapper-xs;
             padding: $wrapper-xs-padding;
         }
+
+        @media only screen and (max-device-width: $screen-xs) {
+            text-size-adjust: 100%;
+        }
     }
 
     .send-message {
