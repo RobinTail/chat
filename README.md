@@ -10,10 +10,19 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 
 # Demo
 
-Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' screens). Try it on http://chat.robintail.cz/
+Try it on http://chat.robintail.cz/
+
+# Screenshots
+
+Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' screens). 
+
 [![Chat log](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-lg-preview.png)](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-lg.png)
 [![Chat log](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-sm-preview.png)](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-sm.png)
 [![Chat log](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-xs-preview.png)](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/chatlog-xs.png)
+
+Embedly API sample fetch. 
+
+![Emdebly API](https://raw.githubusercontent.com/RobinTail/chat/master/images/demo/embedly.png)
 
 # Technologies
 
