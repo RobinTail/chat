@@ -75,17 +75,13 @@ Embedly API sample fetch.
            // https://apps.twitter.com/
            // WARNING: Required to set up your mobile phone number
            consumerKey: '***',
-           // jscs:disable maximumLineLength
            consumerSecret: '***',
-           // jscs:enable maximumLineLength
            callbackURL: '/auth/twitter/callback'
        },
        google: {
            // https://console.developers.google.com
            // WARNING: Required to enable Google+ API in developer console
-           // jscs:disable maximumLineLength
            clientID: '***',
-           // jscs:enable maximumLineLength
            clientSecret: '***',
            callbackURL: '/auth/google/callback'
        },
@@ -98,9 +94,7 @@ Embedly API sample fetch.
    };
    
    // MongoDB connection URL
-   // jscs:disable maximumLineLength
    export const dbConnectionUrl = 'mongodb://***';
-   // jscs:enable maximumLineLength
 
    // Embed.ly API key
    export const embedlyKey = '***';
