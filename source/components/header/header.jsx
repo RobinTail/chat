@@ -17,7 +17,7 @@ export default React.createClass({
                 <div className='appHeader'>
                     ⧓&nbsp;Robichat
                     <span className='appVersion'>
-                            {version}
+                        {version}
                     </span>
                 </div>
                 <div className='appSettingsBar'>

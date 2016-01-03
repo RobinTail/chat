@@ -27,7 +27,6 @@ const DATE_MESSAGE_TEXTS = [
     'War is a poor chisel to carve out tomorrow, — Martin Luther King, Jr.',
     'We are not makers of history. We are made by history, — Martin Luther King, Jr.'
 ];
-
 const CHANGE_EVENT = 'change';
 
 export default new class ChatStore extends EventEmitter {
