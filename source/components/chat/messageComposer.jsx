@@ -39,21 +39,18 @@ export default React.createClass({
     },
 
     renderTypingContainer: function() {
-        // todo: add smooth transition on appear
         if (this.props.typing.length) {
-            let verb = this.props.typing.length > 1 ?
-                <span>are</span> : <span>is</span>;
-            let msg = <span> {verb} typing...</span>;
+            let msg = <span> {this.props.typing.length > 1 ? 'are' : 'is'} typing...</span>;
             let names = null;
             if (this.props.typing.length > 3) {
                 names = (
                     <strong>{this.props.typing.length + ' persons'}</strong>
                 );
             } else {
-                names = this.props.typing.map((user, i) => {
+                names = this.props.typing.map(user => {
                     return [
-                        <strong key={'name_' + i}>{user.name}</strong>,
-                        <em key={'sep_' + i}> &amp; </em>
+                        <strong key={'name_' + user.id}>{user.name}</strong>,
+                        <em key={'sep_' + user.id}> &amp; </em>
                     ];
                 });
                 names[names.length - 1].pop();
