@@ -1,6 +1,6 @@
 {
   "name": "chat",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "Sample React oAuth Chat",
   "main": "index.js",
   "scripts": {
