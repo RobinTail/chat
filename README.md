@@ -9,6 +9,7 @@ This sample chat based on Socket.io and React, it uses oAuth authentication via 
 * It makes a sound on new incoming messages.
 * It shows who are typing messages now.
 * Converts URLs to anchors and fetch webpage's previews, photos and videos from Embedly API.
+* It displays a quote Martin Luther King, Jr. at the beginning of a new day :)
 
 # Demo
 
