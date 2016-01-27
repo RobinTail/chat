@@ -80,7 +80,6 @@ describe('Chat Intergation Tests', function() {
             newXhr.setCookies('');
             var socket = client(srv);
             socket.on('connect', function() {
-                expect('everything').to.be.ok;
                 done();
             });
         });
@@ -90,7 +89,7 @@ describe('Chat Intergation Tests', function() {
             newXhr.setCookies('');
             var socket = client(srv);
             socket.on('new', function(data) {
-                expect(data.error).to.be.true;
+                expect(data.error).to.eq(true);
                 done();
             });
         });
@@ -101,7 +100,7 @@ describe('Chat Intergation Tests', function() {
             newXhr.setCookies('');
             var socket = client(srv);
             var test = true;
-            expect(test).to.be.true;
+            expect(test).to.eq(true);
             setTimeout(done, 5000);
             socket.on('connect', function() {
                 promiseRequest(socket, this);
@@ -150,8 +149,8 @@ describe('Chat Intergation Tests', function() {
                         done(err);
                     } else {
                         testConfig.testUserID = user._id;
-                        expect(testConfig.testUserID).not.to.be.undefined;
-                        expect(testConfig.testUserID).not.to.be.null;
+                        expect(testConfig.testUserID).to.not.eq(undefined);
+                        expect(testConfig.testUserID).to.not.eq(null);
                         done();
                     }
                 });
@@ -177,7 +176,6 @@ describe('Chat Intergation Tests', function() {
                         done(err);
                     } else {
                         testConfig.testSessionID = session._id;
-                        expect('everything').to.be.ok;
                         done();
                     }
                 });
@@ -193,24 +191,25 @@ describe('Chat Intergation Tests', function() {
 
             it('should reply for \'latest\' request', function(done) {
                 this.timeout(12000);
-                this.isLoaded = false;
+                var test = {isLoaded: false};
                 newXhr.setCookies(cookieSession(testConfig.testSessionID));
                 var socket = client(srv);
                 socket.on('connect', function() {
-                    promiseRequest(socket, this);
                     socket.on('latest', function(data) {
-                        if (!this.isLoaded) {
-                            this.isLoaded = true;
-                            expect(data.error).to.be.false;
+                        if (!test.isLoaded) {
+                            test.isLoaded = true;
+                            expect(data.error).to.eq(false);
                             expect(data.messages).to.be.an('array');
                             done();
                         }
-                    }.bind(this));
-                }.bind(this));
+                    });
+                    promiseRequest(socket, test);
+                });
+            });
             });
 
         });
 
     });
 
-}); // chat
+});
