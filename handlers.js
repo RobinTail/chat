@@ -58,10 +58,11 @@ export function ioConnect(socket) {
                 return false;
             }
             if (user) {
-                myconsole.log('authenticated user ' + user.name);
+                myconsole.log('authenticated user %s (%s)', user.name, user.provider);
                 // save user name to socket passport
                 socket.handshake.session.passport.userName = user.name;
                 socket.handshake.session.passport.provider = user.provider;
+                socket.handshake.session.passport.avatar = user.avatar;
                 socket.on('latest', function() {
                     chatCore.latest(socket);
                 });
