@@ -206,6 +206,33 @@ describe('Chat Intergation Tests', function() {
                     promiseRequest(socket, test);
                 });
             });
+
+            // todo: should be modified bue to Issue #12
+            it('should reply with message after submit new one', function(done) {
+                this.timeout(15000);
+                var test = {isLoaded: false};
+                newXhr.setCookies(cookieSession(testConfig.testSessionID));
+                var socket = client(srv);
+                socket.on('connect', function() {
+                    socket.on('latest', function() {
+                        if (!test.isLoaded) {
+                            test.isLoaded = true;
+                            socket.on('new', function(data) {
+                                expect(data.error).to.eq(false);
+                                expect(data.messages).to.be.an('array');
+                                expect(data.messages.length).to.eq(1);
+                                expect(data.messages[0]).to.be.an('object');
+                                expect(data.messages[0].userID).to.eq(testConfig.testUserID.toString());
+                                expect(data.messages[0].name).to.eq('test');
+                                expect(data.messages[0].provider).to.eq('test');
+                                expect(data.messages[0].text).to.eq('test message');
+                                done();
+                            });
+                            socket.emit('submit', {text: 'test message'});
+                        }
+                    });
+                    promiseRequest(socket, this);
+                });
             });
 
         });
