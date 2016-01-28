@@ -2,6 +2,11 @@ import {expect} from 'chai';
 import * as chatCore from '../../lib/chatCore';
 import EventEmitter from 'events';
 
+const USER_ID = '56a9f63452a330ef5aaa166a';
+const USER_NAME = 'test';
+const USER_PROVIDER = 'test_provider';
+const USER_AVATAR = 'test_avatar';
+
 describe('Chat Core Tests', function() {
     let socket;
 
@@ -11,27 +16,15 @@ describe('Chat Core Tests', function() {
         socket.handshake = {
             session: {
                 passport: {
-                    user: 0,
-                    userName: 'test',
-                    provider: 'test'
+                    user: {
+                        _id: USER_ID,
+                        name: USER_NAME,
+                        provider: USER_PROVIDER,
+                        avatar: USER_AVATAR
+                    }
                 }
             }
         };
-    });
-
-    describe('sendError()', function() {
-
-        it('should emit an event \'new\' with error message', function(done) {
-            socket.on('new', data => {
-                expect(data).to.be.an('object');
-                expect(data).to.contain.all.keys(['error','message']);
-                expect(data.error).to.eq(true);
-                expect(data.message).to.eq('test');
-                done();
-            });
-            chatCore.sendError(socket, 'test');
-        });
-
     });
 
     describe('enterChat()', function() {
@@ -44,8 +37,11 @@ describe('Chat Core Tests', function() {
                 expect(data.messages).to.be.an('array');
                 expect(data.messages.length).to.be.eq(1);
                 expect(data.messages[0]).to.be.an('object');
-                expect(data.messages[0]).to.contain.key('isSystem');
+                expect(data.messages[0]).to.contain.all.keys(['author','isSystem','isWarning','at','text']);
+                expect(data.messages[0].author).to.be.an('object');
+                expect(data.messages[0].author.name).to.eq('System');
                 expect(data.messages[0].isSystem).to.eq(true);
+                expect(data.messages[0].isWarning).to.eq(true);
                 done();
             });
             chatCore.enterChat(socket);
@@ -63,8 +59,11 @@ describe('Chat Core Tests', function() {
                 expect(data.messages).to.be.an('array');
                 expect(data.messages.length).to.be.eq(1);
                 expect(data.messages[0]).to.be.an('object');
-                expect(data.messages[0]).to.contain.key('isSystem');
+                expect(data.messages[0]).to.contain.all.keys(['author','isSystem','isWarning','at','text']);
+                expect(data.messages[0].author).to.be.an('object');
+                expect(data.messages[0].author.name).to.eq('System');
                 expect(data.messages[0].isSystem).to.eq(true);
+                expect(data.messages[0].isWarning).to.eq(true);
                 done();
             });
             chatCore.enterChat(socket);
@@ -78,8 +77,8 @@ describe('Chat Core Tests', function() {
             socket.broadcast.on('start_typing', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name']);
-                expect(data.id).to.be.eq(0);
-                expect(data.name).to.be.eq('test');
+                expect(data.id).to.be.eq(USER_ID);
+                expect(data.name).to.be.eq(USER_NAME);
                 done();
             });
             chatCore.startTyping(socket);
@@ -93,8 +92,8 @@ describe('Chat Core Tests', function() {
             socket.broadcast.on('stop_typing', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name']);
-                expect(data.id).to.be.eq(0);
-                expect(data.name).to.be.eq('test');
+                expect(data.id).to.be.eq(USER_ID);
+                expect(data.name).to.be.eq(USER_NAME);
                 done();
             });
             chatCore.stopTyping(socket);
