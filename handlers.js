@@ -2,13 +2,17 @@ import User from './schema/user';
 import * as chatCore from './lib/chatCore';
 import myconsole from './lib/console';
 
-function checkAuth(socket) {
-    if (!socket.handshake.session.passport) {
-        myconsole.log('user not authenticated');
-        chatCore.sendError(socket, 'Not authenticated request');
-        return false;
+function isPropertyDefined(obj, path) {
+    path.split('.').forEach(key => { obj = obj && obj[key]; });
+    return (typeof obj != 'undefined' && obj !== null);
+}
+
+function checkSocketAuth(socket) {
+    if (isPropertyDefined(socket, 'handshake.session.passport.user._id')) {
+        return true;
     }
-    return true;
+    myconsole.log('User not authenticated');
+    return false;
 }
 
 export function catcher(err, req, res, next) {
@@ -32,13 +36,11 @@ export function app(req, res) {
     res.render('index', {
         applicationData: {
             isAuthenticated: req.isAuthenticated(),
-            userID: typeof req.user == 'object' ?
-                    req.user._id : '',
-            sounds: typeof req.user == 'object' ? (
-                        typeof req.user.sounds == 'undefined' ?
-                            true : req.user.sounds) :
-                        true,
-            provider: typeof req.user == 'object' ? req.user.provider : ''
+            userID: req.user ? req.user._id : undefined,
+            name: req.user ? req.user.name : undefined,
+            sounds: req.user ? req.user.sounds : undefined,
+            provider: req.user ? req.user.provider : undefined,
+            avatar: req.user ? req.user.avatar : undefined
         }
     });
 }

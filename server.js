@@ -29,11 +29,16 @@ app.use(passport.session());
 io.use(ios(sessionMiddleware));
 
 passport.serializeUser(function(user, done) {
-    done(null, user._id);
+    done(null, {
+        _id: user._id, /* following data is used by ioConnect handler */
+        name: user.name,
+        provider: user.provider,
+        avatar: user.avatar
+    });
 });
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+passport.deserializeUser(function(user, done) {
+    User.findById(user._id, function(err, user) {
         done(err, user);
     });
 });
