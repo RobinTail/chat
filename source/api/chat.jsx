@@ -26,9 +26,12 @@ export default new class ChatAPI extends EventEmitter {
         if (this._isConnectionLost) {
             this._isConnectionLost = false;
             this.emitMessages([{
-                name: 'System',
+                author: {
+                    name: 'System'
+                },
                 isSystem: true,
-                text: 'Connected'
+                text: 'Connected',
+                at: new Date()
             }]);
         }
     }
@@ -37,10 +40,13 @@ export default new class ChatAPI extends EventEmitter {
         if (!this._isConnectionLost) {
             this._isConnectionLost = true;
             this.emitMessages([{
-                name: 'System',
+                author: {
+                    name: 'System'
+                },
                 isSystem: true,
                 isCritical: true,
-                text: 'Connection lost'
+                text: 'Connection lost',
+                at: new Date()
             }]);
         }
     }

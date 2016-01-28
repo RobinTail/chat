@@ -40,7 +40,7 @@ export default new class ChatStore extends EventEmitter {
             switch (action.type) {
                 case actionTypes.NEW_MESSAGES:
                     action.messages.forEach(message => {
-                        message.isMy = message.userID === appData.get('userID');
+                        message.isMy = message.author.id === appData.get('userID');
                         message.html = linkifyString(message.text, {
                             format: (value, type) => {
                                 if (type === 'url' && value.length > 50) {
@@ -79,13 +79,12 @@ export default new class ChatStore extends EventEmitter {
     _addSameAuthorProperty() {
         let previousUserId;
         this._messages.forEach(message => {
-            message.isSameAuthor = previousUserId === message.userID && !message.isSystem;
-            previousUserId = message.userID;
+            message.isSameAuthor = previousUserId === message.author.id && !message.isSystem;
+            previousUserId = message.author.id;
         });
     }
 
     _addDateMessages() {
-        // todo: use sort
         let dateMessagesPlan = [];
         let lastDate = null;
         if (this._messages.length) {
@@ -121,9 +120,12 @@ export default new class ChatStore extends EventEmitter {
                     (Math.floor(Math.random() * DATE_MESSAGE_TEXTS.length) + 1) : 0
                 ];
             this._messages.splice(plan.index + offset, 0, {
-                name: 'System',
+                author: {
+                    name: 'System'
+                },
                 isSystem: true,
-                text: plan.date.format('MMMM Do') + '. ' + randomText
+                text: plan.date.format('MMMM Do') + '. ' + randomText,
+                at: new Date()
             });
             offset++;
             this._dateMessagesAdded.push(plan.key);

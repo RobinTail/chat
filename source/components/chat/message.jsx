@@ -14,8 +14,8 @@ export default React.createClass({
             <div className='message-same-author-placeholder'></div>
         ) : (
             <Avatar
-                url={data.avatar}
-                provider={data.provider}
+                url={data.author.avatar}
+                provider={data.author.provider}
             />
         );
         let at = '';
@@ -25,7 +25,7 @@ export default React.createClass({
         let info = data.isSameAuthor ? null : (
             <div className='message-info-wrapper'>
                 <div className='message-info'>
-                    <div className='message-info-author'>{data.name}</div>
+                    <div className='message-info-author'>{data.author.name}</div>
                     <div className='message-info-at'>{at}</div>
                 </div>
             </div>
