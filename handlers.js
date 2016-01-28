@@ -1,4 +1,3 @@
-import User from './schema/user';
 import * as chatCore from './lib/chatCore';
 import myconsole from './lib/console';
 
@@ -50,48 +49,29 @@ export function authSuccess(req, res) {
 }
 
 export function ioConnect(socket) {
-    myconsole.log('io connection');
-    if (!checkAuth(socket)) { return false; }
-    User.findById(socket.handshake.session.passport.user,
-        function(err, user) {
-            if (err) {
-                myconsole.log('user find failure: ' + err);
-                chatCore.sendError(socket, 'Database error');
-                return false;
-            }
-            if (user) {
-                myconsole.log('authenticated user %s (%s)', user.name, user.provider);
-                // save user name to socket passport
-                socket.handshake.session.passport.userName = user.name;
-                socket.handshake.session.passport.provider = user.provider;
-                socket.handshake.session.passport.avatar = user.avatar;
-                socket.on('latest', function() {
-                    chatCore.latest(socket);
-                });
-                socket.on('submit', function(data) {
-                    chatCore.submit(socket, data);
-                });
-                socket.on('start_typing', function() {
-                    chatCore.startTyping(socket);
-                });
-                socket.on('stop_typing', function() {
-                    chatCore.stopTyping(socket);
-                });
-                socket.on('sounds', function(value) {
-                    myconsole.log('sounds set: ' + value);
-                    user.sounds = value;
-                    user.save(function(err) {
-                        if (err) {
-                            myconsole.log('error saving sounds ' + err);
-                        }
-                    });
-                });
-                socket.on('disconnect', function() {
-                    chatCore.leaveChat(socket);
-                });
-                chatCore.enterChat(socket);
-            }
-        });
+    myconsole.log('new io connection');
+    if (!checkSocketAuth(socket)) { return; }
+
+    socket.on('submit', (data) => {
+        chatCore.submit(socket, data);
+    });
+    socket.on('start_typing', () => {
+        chatCore.startTyping(socket);
+    });
+    socket.on('stop_typing', () => {
+        chatCore.stopTyping(socket);
+    });
+    socket.on('sounds', (value) => {
+        chatCore.setSounds(socket, value);
+    });
+    socket.on('disconnect', () => {
+        chatCore.leaveChat(socket);
+    });
+
+    let sessionUser = socket.handshake.session.passport.user;
+    myconsole.log('authenticated user %s (%s)', sessionUser.name, sessionUser.provider);
+    chatCore.enterChat(socket);
+    chatCore.sendLatestMessages(socket);
 }
 
 export function logout(req, res) {
