@@ -4,15 +4,10 @@ import chatAPI from '../api/chat';
 import {find as linkifyFind} from 'linkifyjs';
 import embedlyApi from '../api/embedly';
 
-export function initChat() {
-    chatAPI.getLatestMessages();
-}
-
-function emitNewMessages(messages, isLatestMessagesReceived) {
+function emitNewMessages(messages) {
     Dispatcher.dispatch({
         type: actionTypes.NEW_MESSAGES,
-        messages: messages,
-        isLatestMessagesReceived: isLatestMessagesReceived
+        messages: messages
     });
 }
 
@@ -47,8 +42,8 @@ export function setSounds(isEnabled) {
     chatAPI.setSounds(isEnabled);
 }
 
-chatAPI.addMessagesListener((messages, isLatestMessagesReceived) => {
-    emitNewMessages(messages, isLatestMessagesReceived);
+chatAPI.addMessagesListener((messages) => {
+    emitNewMessages(messages);
     messages.forEach(message => {
         let urls = linkifyFind(message.text).filter(entry => {
             return entry.type === 'url';

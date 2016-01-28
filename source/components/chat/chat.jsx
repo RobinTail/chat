@@ -20,8 +20,7 @@ window.ion.sound({
 function getDataFromStore() {
     return {
         messages: chatStore.getMessages(),
-        typing: chatStore.getTyping(),
-        isLoaded: chatStore.isLatestMessagesReceived()
+        typing: chatStore.getTyping()
     };
 }
 
@@ -43,7 +42,6 @@ export default React.createClass({
             <div className='chat-holder'>
                 <MessagesList
                     messages={this.state.messages}
-                    isLoaded={this.state.isLoaded}
                 />
                 <MessageComposer typing={this.state.typing} />
             </div>
@@ -53,7 +51,7 @@ export default React.createClass({
     _onChange: function(section) {
         this.setState(getDataFromStore());
         if (section === 'messages') {
-            if (appData.get('sounds') && this.state.isLoaded) {
+            if (appData.get('sounds')) {
                 window.ion.sound.play('notice');
             }
             smoothscroll(document.body.scrollHeight);

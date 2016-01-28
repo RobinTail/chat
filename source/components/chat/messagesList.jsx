@@ -1,37 +1,36 @@
 import React from 'react';
-import Loading from '../loading/loading';
 import Message from './message';
 import Embed from './embed';
+import appData from '../../appData';
 import './messagesList.scss';
 
 export default React.createClass({
     render: function() {
-        if (this.props.isLoaded) {
-            if (this.props.messages.length) {
-                return (
-                    <ul className='messages-list'>
-                        {this.renderMessages()}
-                    </ul>
-                );
-            } else {
-                return (
-                    <h4><em>
-                        No messages yet. Write your first one :)
-                    </em></h4>
-                );
-            }
-        } else {
-            return <Loading />;
-        }
-
+        return (
+            <ul className='messages-list'>
+                {this.renderMessages()}
+            </ul>
+        );
     },
 
     renderMessages: function() {
-        return this.props.messages.map(function(message, id) {
-            return [
-                <Message key={'message_' + id} data={message} />,
-                <Embed key={'embed_' + id} isMy={message.isMy} data={message.embed} />
-            ];
-        });
+        if (this.props.messages.length) {
+            return this.props.messages.map((message, id) => {
+                return [
+                    <Message key={'message_' + id} data={message}/>,
+                    <Embed key={'embed_' + id} isMy={message.isMy} data={message.embed}/>
+                ];
+            });
+        } else {
+            return (
+                <Message key='nomessages' data={{
+                    isSystem: true,
+                    text: 'Welcome, ' + appData.get('name') + '. Type your first message.',
+                    author: {
+                        name: 'System'
+                    }
+                }} />
+            );
+        }
     }
 });

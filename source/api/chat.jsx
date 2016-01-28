@@ -9,7 +9,6 @@ export default new class ChatAPI extends EventEmitter {
 
     constructor() {
         super();
-        this._isLatestMessagesReceived = false;
         this._isConnectionLost = false;
         this._socket = null;
 
@@ -17,7 +16,6 @@ export default new class ChatAPI extends EventEmitter {
             this._socket = io.connect(document.location.origin);
             this._socket.on('connect', this._afterConnected.bind(this));
             this._socket.on('connect_error', this._afterConnectionLost.bind(this));
-            this._socket.on('latest', this._afterLatestMessages.bind(this));
             this._socket.on('new', this._newMessages.bind(this));
             this._socket.on('start_typing', this._theyStartTyping.bind(this));
             this._socket.on('stop_typing', this._theyStopTyping.bind(this));
@@ -47,42 +45,8 @@ export default new class ChatAPI extends EventEmitter {
         }
     }
 
-    getLatestMessages() {
-        this._socket.emit('latest');
-        let checkLoaded = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (this._isLatestMessagesReceived) {
-                    resolve();
-                } else {
-                    reject();
-                }
-            }, 3000);
-        });
-        checkLoaded.catch(() => {
-            this.getLatestMessages();
-        });
-    }
-
-    _afterLatestMessages(data) {
-        if (!this._isLatestMessagesReceived) {
-            this._isLatestMessagesReceived = true;
-            this._newMessages(data);
-        }
-    }
-
     _newMessages(data) {
-        if (data.error) {
-            this.emitMessages([{
-                name: 'System',
-                isSystem: true,
-                isCritical: true,
-                text: data.message
-            }]);
-        } else {
-            if (this._isLatestMessagesReceived) {
-                this.emitMessages(data.messages);
-            }
-        }
+        this.emitMessages(data.messages);
     }
 
     submitMessage(text) {
@@ -110,7 +74,7 @@ export default new class ChatAPI extends EventEmitter {
     }
 
     emitMessages(messages) {
-        this.emit(MESSAGE_EVENT, messages, this._isLatestMessagesReceived);
+        this.emit(MESSAGE_EVENT, messages);
     }
 
     emitTyping(data, isStart) {

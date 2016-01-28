@@ -35,7 +35,6 @@ export default new class ChatStore extends EventEmitter {
         super();
         this._messages = [];
         this._typing = [];
-        this._isLatestMessagesReceived = null;
         this._dateMessagesAdded = [];
         this._dispatchToken = dispatcher.register(action => {
             switch (action.type) {
@@ -54,7 +53,6 @@ export default new class ChatStore extends EventEmitter {
                     this._messages = this._messages.concat(action.messages);
                     this._addDateMessages();
                     this._addSameAuthorProperty();
-                    this._isLatestMessagesReceived = action.isLatestMessagesReceived;
                     this.emitChange('messages');
                     break;
                 case actionTypes.THEY_START_TYPING:
@@ -138,10 +136,6 @@ export default new class ChatStore extends EventEmitter {
 
     getTyping() {
         return this._typing;
-    }
-
-    isLatestMessagesReceived() {
-        return this._isLatestMessagesReceived;
     }
 
     emitChange(section) {

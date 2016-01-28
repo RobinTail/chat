@@ -9,8 +9,6 @@ import {initChat} from './actions/chatActions';
 
 if (appData.get('error') === true) {
     modalMessage('Error occured', 'Message: ' + appData.get('data').message);
-} else if (appData.get('isAuthenticated')) {
-    initChat();
 }
 
 ReactDOM.render(<Main />, document.getElementById('AppContainer'));
