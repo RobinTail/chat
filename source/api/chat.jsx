@@ -10,6 +10,7 @@ export default new class ChatAPI extends EventEmitter {
     constructor() {
         super();
         this._isConnectionLost = false;
+        this._areLatestReceived = false;
         this._socket = null;
 
         if (appData.get('isAuthenticated')) {
@@ -52,6 +53,12 @@ export default new class ChatAPI extends EventEmitter {
     }
 
     _newMessages(data) {
+        if (data.areLatest) {
+            if (this._areLatestReceived) {
+                return;
+            }
+            this._areLatestReceived = true;
+        }
         this.emitMessages(data.messages);
     }
 
