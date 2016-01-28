@@ -65,7 +65,7 @@ export default new class ChatStore extends EventEmitter {
                     break;
                 case actionTypes.MESSAGE_ADDITIONAL_DATA:
                     let msg = this._messages.find(message => {
-                        return message.id === action.messageID;
+                        return message._id === action.messageID;
                     });
                     if (msg) {
                         Object.assign(msg, action.additionalData);

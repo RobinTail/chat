@@ -12,6 +12,7 @@ export default new class ChatAPI extends EventEmitter {
         this._isConnectionLost = false;
         this._areLatestReceived = false;
         this._socket = null;
+        this._lastOwnMessageNumber = 0;
 
         if (appData.get('isAuthenticated')) {
             this._socket = io.connect(document.location.origin);
@@ -65,7 +66,9 @@ export default new class ChatAPI extends EventEmitter {
     submitMessage(text) {
         this._socket.emit('submit', {text: text});
         /* Issue #12: show submitted message immediately */
+        this._lastOwnMessageNumber++;
         this.emitMessages([{
+            _id: '_own_' + this._lastOwnMessageNumber,
             author: {
                 id: appData.get('userID'),
                 name: appData.get('name'),

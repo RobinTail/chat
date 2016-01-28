@@ -53,7 +53,7 @@ chatAPI.addMessagesListener((messages) => {
         if (urls.length) {
             embedlyApi.get(urls).then(data => {
                 if (data.type !== 'error') {
-                    emitMessageAdditionalData(message.id, {
+                    emitMessageAdditionalData(message._id, {
                         embed: data
                     });
                 }
