@@ -7,6 +7,12 @@ import Session from '../../schema/test.session';
 import signature from 'cookie-signature';
 import testConfig from './socketConfig';
 
+const USER_OAUTH = 1234567890;
+const USER_NAME = 'test';
+const USER_PROVIDER = 'test_provider';
+const USER_AVATAR = 'test_avatar';
+const TEST_MESSAGE = 'this is the test message';
+
 /**
  * Creates a socket.io client for the given server
  *
@@ -17,7 +23,7 @@ function client(srv) {
     var addr = srv.address();
     if (!addr) { addr = srv.listen().address(); }
     var url = 'ws://localhost:' + addr.port;
-    return ioc(url);
+    return ioc(url, {forceNew: true});
 }
 
 /**
@@ -43,30 +49,6 @@ function cookieSession(session) {
     return testConfig.cookieName + '=' + encodeSession(session);
 }
 
-/**
- * Request latest messages in Promise
- * Checks test.isLoaded
- *
- * @param {object} socket
- * @param {object} test
- */
-function promiseRequest(socket, test) {
-    socket.emit('latest', {});
-    var checkLoaded = new Promise(function(resolve, reject) {
-        setTimeout(function() {
-            if (test.isLoaded) {
-                resolve();
-            } else {
-                reject();
-            }
-        }, 3000);
-    });
-    checkLoaded.catch(function() {
-        //console.log('response timeout');
-        promiseRequest(socket, test);
-    });
-}
-
 describe('Chat Intergation Tests', function() {
 
     context('Not authenticated', function() {
@@ -79,36 +61,28 @@ describe('Chat Intergation Tests', function() {
             this.timeout(5000);
             newXhr.setCookies('');
             var socket = client(srv);
-            socket.on('connect', function() {
+            socket.on('connect', () => {
+                socket.removeAllListeners();
                 done();
             });
         });
 
-        it('should reply with error', function(done) {
-            this.timeout(5000);
-            newXhr.setCookies('');
-            var socket = client(srv);
-            socket.on('new', function(data) {
-                expect(data.error).to.eq(true);
-                done();
-            });
-        });
-
-        it('should not reply for \'latest\' request', function(done) {
+        it('should not broadcast messages', function(done) {
             this.timeout(10000);
-            this.slow(5500);
             newXhr.setCookies('');
-            var socket = client(srv);
-            var test = true;
+            let socket1 = client(srv);
+            let socket2 = client(srv);
+            let test = true;
+            socket2.on('new', () => {
+                test = false;
+                done();
+            });
             expect(test).to.eq(true);
-            setTimeout(done, 5000);
-            socket.on('connect', function() {
-                promiseRequest(socket, this);
-                socket.on('latest', function() {
-                    test = false;
-                    done();
-                }.bind(this));
-            }.bind(this));
+            socket1.emit('submit', {text: TEST_MESSAGE});
+            setTimeout(() => {
+                socket2.removeAllListeners();
+                done();
+            }, 5000);
         });
 
     });
@@ -117,7 +91,7 @@ describe('Chat Intergation Tests', function() {
 
         before('Remove test users and sessions', function(done) {
             this.timeout(5000);
-            User.find({oauthID: 0, provider: 'test'}).remove(function() {
+            User.find({oauthID: USER_OAUTH, provider: USER_PROVIDER}).remove(function() {
                 Session.find({isTest: true}).remove(done);
             });
         });
@@ -139,18 +113,23 @@ describe('Chat Intergation Tests', function() {
             it('should create test user', function(done) {
                 this.timeout(5000);
                 var user = new User({
-                    oauthID: 0,
-                    name: 'test',
+                    oauthID: USER_OAUTH,
+                    name: USER_NAME,
                     created: Date.now(),
-                    provider: 'test'
+                    provider: USER_PROVIDER,
+                    avatar: USER_AVATAR
                 });
-                user.save(function(err, user) {
+                user.save((err, newuser) => {
                     if (err) {
                         done(err);
                     } else {
-                        testConfig.testUserID = user._id;
-                        expect(testConfig.testUserID).to.not.eq(undefined);
-                        expect(testConfig.testUserID).to.not.eq(null);
+                        testConfig.user = newuser;
+                        expect(testConfig.user._id).to.not.eq(undefined);
+                        expect(testConfig.user._id).to.not.eq(null);
+                        expect(testConfig.user.oauthID).to.eq(USER_OAUTH);
+                        expect(testConfig.user.name).to.eq(USER_NAME);
+                        expect(testConfig.user.provider).to.eq(USER_PROVIDER);
+                        expect(testConfig.user.avatar).to.eq(USER_AVATAR);
                         done();
                     }
                 });
@@ -165,17 +144,24 @@ describe('Chat Intergation Tests', function() {
                             path: '/'
                         },
                         passport: {
-                            user: testConfig.testUserID
+                            user: {
+                                _id: testConfig.user._id,
+                                name: testConfig.user.name,
+                                provider: testConfig.user.provider,
+                                avatar: testConfig.user.avatar
+                            }
                         }
                     }),
                     expires: Date.now() + 3600,
                     isTest: true
                 });
-                session.save(function(err, session) {
+                session.save((err, newsession) => {
                     if (err) {
                         done(err);
                     } else {
-                        testConfig.testSessionID = session._id;
+                        testConfig.testSessionID = newsession._id;
+                        expect(testConfig.testSessionID).to.not.eq(undefined);
+                        expect(testConfig.testSessionID).to.not.eq(null);
                         done();
                     }
                 });
@@ -189,49 +175,48 @@ describe('Chat Intergation Tests', function() {
                 srv.close();
             });
 
-            it('should reply for \'latest\' request', function(done) {
+            it('should emit \'new\' event with latest messages', function(done) {
                 this.timeout(12000);
-                var test = {isLoaded: false};
                 newXhr.setCookies(cookieSession(testConfig.testSessionID));
-                var socket = client(srv);
-                socket.on('connect', function() {
-                    socket.on('latest', function(data) {
-                        if (!test.isLoaded) {
-                            test.isLoaded = true;
-                            expect(data.error).to.eq(false);
-                            expect(data.messages).to.be.an('array');
-                            done();
-                        }
+                let socket = client(srv);
+                socket.on('connect', () => {
+                    socket.on('new', (data) => {
+                        expect(data.error).to.eq(false);
+                        expect(data.areLatest).to.eq(true);
+                        expect(data.messages).to.be.an('array');
+                        socket.removeAllListeners();
+                        done();
                     });
-                    promiseRequest(socket, test);
                 });
             });
 
-            // todo: should be modified bue to Issue #12
-            it('should reply with message after submit new one', function(done) {
+            it('should broadcast messages on \'submit\' event', function(done) {
                 this.timeout(15000);
-                var test = {isLoaded: false};
                 newXhr.setCookies(cookieSession(testConfig.testSessionID));
-                var socket = client(srv);
-                socket.on('connect', function() {
-                    socket.on('latest', function() {
-                        if (!test.isLoaded) {
-                            test.isLoaded = true;
-                            socket.on('new', function(data) {
-                                expect(data.error).to.eq(false);
-                                expect(data.messages).to.be.an('array');
-                                expect(data.messages.length).to.eq(1);
-                                expect(data.messages[0]).to.be.an('object');
-                                expect(data.messages[0].userID).to.eq(testConfig.testUserID.toString());
-                                expect(data.messages[0].name).to.eq('test');
-                                expect(data.messages[0].provider).to.eq('test');
-                                expect(data.messages[0].text).to.eq('test message');
-                                done();
-                            });
-                            socket.emit('submit', {text: 'test message'});
+                let socket1 = client(srv);
+                let socket2 = client(srv);
+                socket2.on('connect', () => {
+                    socket2.on('new', (data) => {
+                        if (!data.areLatest && !data.areSystem) {
+                            expect(data.error).to.eq(false);
+                            expect(data.messages).to.be.an('array');
+                            expect(data.messages.length).to.eq(1);
+                            expect(data.messages[0]).to.be.an('object');
+                            expect(data.messages[0]).to.contain.all.keys(['_id', 'author', 'text', 'at']);
+                            expect(data.messages[0].author).to.be.an('object');
+                            expect(data.messages[0].author.id).to.eq(testConfig.user._id.toString());
+                            expect(data.messages[0].author.name).to.eq(testConfig.user.name);
+                            expect(data.messages[0].author.provider).to.eq(testConfig.user.provider);
+                            expect(data.messages[0].author.avatar).to.eq(testConfig.user.avatar);
+                            expect(data.messages[0].text).to.eq(TEST_MESSAGE);
+                            socket2.removeAllListeners();
+                            done();
                         }
                     });
-                    promiseRequest(socket, this);
+                });
+                socket1.on('connect', () => {
+                    socket1.emit('submit', {text: TEST_MESSAGE});
+                    socket1.removeAllListeners();
                 });
             });
 
