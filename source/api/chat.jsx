@@ -57,6 +57,17 @@ export default new class ChatAPI extends EventEmitter {
 
     submitMessage(text) {
         this._socket.emit('submit', {text: text});
+        /* Issue #12: show submitted message immediately */
+        this.emitMessages([{
+            author: {
+                id: appData.get('userID'),
+                name: appData.get('name'),
+                avatar: appData.get('avatar'),
+                provider: appData.get('provider')
+            },
+            text: text,
+            at: new Date()
+        }]);
     }
 
     iStartTyping() {
