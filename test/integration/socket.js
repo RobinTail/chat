@@ -197,7 +197,7 @@ describe('Chat Intergation Tests', function() {
                 let socket2 = client(srv);
                 socket2.on('connect', () => {
                     socket2.on('new', (data) => {
-                        if (!data.areLatest && !data.areSystem) {
+                        if (!data.areLatest) {
                             expect(data.error).to.eq(false);
                             expect(data.messages).to.be.an('array');
                             expect(data.messages.length).to.eq(1);

@@ -29,19 +29,13 @@ describe('Chat Core Tests', function() {
 
     describe('enterChat()', function() {
 
-        it('should broadcast an event \'new\' with system message', function(done) {
-            socket.broadcast.on('new', data => {
+        it('should broadcast an event \'enter_chat\' with user info', function(done) {
+            socket.broadcast.on('enter_chat', data => {
                 expect(data).to.be.an('object');
-                expect(data).to.contain.all.keys(['error','messages']);
-                expect(data.error).to.eq(false);
-                expect(data.messages).to.be.an('array');
-                expect(data.messages.length).to.be.eq(1);
-                expect(data.messages[0]).to.be.an('object');
-                expect(data.messages[0]).to.contain.all.keys(['author','isSystem','isWarning','at','text']);
-                expect(data.messages[0].author).to.be.an('object');
-                expect(data.messages[0].author.name).to.eq('System');
-                expect(data.messages[0].isSystem).to.eq(true);
-                expect(data.messages[0].isWarning).to.eq(true);
+                expect(data).to.contain.all.keys(['id','name','provider']);
+                expect(data.id).to.eq(USER_ID);
+                expect(data.name).to.eq(USER_NAME);
+                expect(data.provider).to.eq(USER_PROVIDER);
                 done();
             });
             chatCore.enterChat(socket);
@@ -51,19 +45,13 @@ describe('Chat Core Tests', function() {
 
     describe('leaveChat()', function() {
 
-        it('should broadcast an event \'new\' with system message', function(done) {
-            socket.broadcast.on('new', data => {
+        it('should broadcast an event \'leave_chat\' with user info', function(done) {
+            socket.broadcast.on('leave_chat', data => {
                 expect(data).to.be.an('object');
-                expect(data).to.contain.all.keys(['error','messages']);
-                expect(data.error).to.eq(false);
-                expect(data.messages).to.be.an('array');
-                expect(data.messages.length).to.be.eq(1);
-                expect(data.messages[0]).to.be.an('object');
-                expect(data.messages[0]).to.contain.all.keys(['author','isSystem','isWarning','at','text']);
-                expect(data.messages[0].author).to.be.an('object');
-                expect(data.messages[0].author.name).to.eq('System');
-                expect(data.messages[0].isSystem).to.eq(true);
-                expect(data.messages[0].isWarning).to.eq(true);
+                expect(data).to.contain.all.keys(['id','name','provider']);
+                expect(data.id).to.eq(USER_ID);
+                expect(data.name).to.eq(USER_NAME);
+                expect(data.provider).to.eq(USER_PROVIDER);
                 done();
             });
             chatCore.leaveChat(socket);

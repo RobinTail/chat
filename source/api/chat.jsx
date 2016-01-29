@@ -18,6 +18,8 @@ export default new class ChatAPI extends EventEmitter {
             this._socket = io.connect(document.location.origin);
             this._socket.on('connect', this._afterConnected.bind(this));
             this._socket.on('connect_error', this._afterConnectionLost.bind(this));
+            this._socket.on('enter_chat', this._enterChat.bind(this));
+            this._socket.on('leave_chat', this._leaveChat.bind(this));
             this._socket.on('new', this._newMessages.bind(this));
             this._socket.on('start_typing', this._theyStartTyping.bind(this));
             this._socket.on('stop_typing', this._theyStopTyping.bind(this));
@@ -51,6 +53,30 @@ export default new class ChatAPI extends EventEmitter {
                 at: new Date()
             }]);
         }
+    }
+
+    _enterChat(data) {
+        this.emitMessages([{
+            author: {
+                name: 'System'
+            },
+            isSystem: true,
+            isWarning: true,
+            text: data.name + ' (' + data.provider + ') enters chat.',
+            at: new Date()
+        }]);
+    }
+
+    _leaveChat(data) {
+        this.emitMessages([{
+            author: {
+                name: 'System'
+            },
+            isSystem: true,
+            isWarning: true,
+            text: data.name + ' (' + data.provider + ') leaves chat.',
+            at: new Date()
+        }]);
     }
 
     _newMessages(data) {
