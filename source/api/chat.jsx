@@ -13,6 +13,7 @@ export default new class ChatAPI extends EventEmitter {
         this._areLatestReceived = false;
         this._socket = null;
         this._lastOwnMessageNumber = 0;
+        this._online = [];
 
         if (appData.get('isAuthenticated')) {
             this._socket = io.connect(document.location.origin);
@@ -56,27 +57,34 @@ export default new class ChatAPI extends EventEmitter {
     }
 
     _enterChat(data) {
-        this.emitMessages([{
-            author: {
-                name: 'System'
-            },
-            isSystem: true,
-            isWarning: true,
-            text: data.name + ' (' + data.provider + ') enters chat.',
-            at: new Date()
-        }]);
+        if (!this._online.find(item => item.id === data.id)) {
+            this._online.push(data);
+            this.emitMessages([{
+                author: {
+                    name: 'System'
+                },
+                isSystem: true,
+                isWarning: true,
+                text: data.name + ' (' + data.provider + ') enters chat.',
+                at: new Date()
+            }]);
+        }
     }
 
     _leaveChat(data) {
-        this.emitMessages([{
-            author: {
-                name: 'System'
-            },
-            isSystem: true,
-            isWarning: true,
-            text: data.name + ' (' + data.provider + ') leaves chat.',
-            at: new Date()
-        }]);
+        let i = this._online.findIndex(item => item.id === data.id);
+        if (i !== -1) {
+            this._online.splice(i, 1);
+            this.emitMessages([{
+                author: {
+                    name: 'System'
+                },
+                isSystem: true,
+                isWarning: true,
+                text: data.name + ' (' + data.provider + ') leaves chat.',
+                at: new Date()
+            }]);
+        }
     }
 
     _newMessages(data) {
