@@ -82,13 +82,11 @@ export default React.createClass({
                 );
             });
 
-            let embedClass = 'embed-wrapper' + (
-                    this.props.isMy ? ' embed-my' : ''
-            );
+            let embedClass = 'embed-wrapper' + (this.props.isMy ? ' embed-my' : '');
             return (
                 <li className={embedClass}>
                     <div className='message-same-author-placeholder'></div>
-                    {embedContains}
+                    <div className='embed-holder'>{embedContains}</div>
                 </li>
             );
         } else {

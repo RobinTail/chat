@@ -26,6 +26,7 @@
 
 .message-same-author-placeholder {
     width: 70px;
+    min-width: 70px;
 
     @media (max-width: $screen-md) {
         display: none;
