@@ -13,7 +13,7 @@ export default new class ChatAPI extends EventEmitter {
         this._areLatestReceived = false;
         this._socket = null;
         this._lastOwnMessageNumber = 0;
-        this._online = [];
+        this._onlineUsers = [];
 
         if (appData.get('isAuthenticated')) {
             this._socket = io.connect(document.location.origin);
@@ -57,8 +57,8 @@ export default new class ChatAPI extends EventEmitter {
     }
 
     _enterChat(data) {
-        if (!this._online.find(item => item.id === data.id)) {
-            this._online.push(data);
+        if (!this._onlineUsers.find(item => item.id === data.id)) {
+            this._onlineUsers.push(data);
             this.emitMessages([{
                 author: {
                     name: 'System'
@@ -72,9 +72,9 @@ export default new class ChatAPI extends EventEmitter {
     }
 
     _leaveChat(data) {
-        let i = this._online.findIndex(item => item.id === data.id);
+        let i = this._onlineUsers.findIndex(item => item.id === data.id);
         if (i !== -1) {
-            this._online.splice(i, 1);
+            this._onlineUsers.splice(i, 1);
             this.emitMessages([{
                 author: {
                     name: 'System'
