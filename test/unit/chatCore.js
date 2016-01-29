@@ -66,7 +66,7 @@ describe('Chat Core Tests', function() {
                 expect(data.messages[0].isWarning).to.eq(true);
                 done();
             });
-            chatCore.enterChat(socket);
+            chatCore.leaveChat(socket);
         });
 
     });
