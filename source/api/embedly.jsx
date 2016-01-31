@@ -21,13 +21,13 @@ export default new class embedlyAPI {
                 return res.json();
             })
             .catch(e => {
-                return {
+                return [{
                     type: 'error',
                     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                     // use api response style
                     error_message: e.message
                     // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
-                };
+                }];
             });
     }
 };
