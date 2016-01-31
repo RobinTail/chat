@@ -15,6 +15,7 @@ export default React.createClass({
             </div>
         );
     },
+
     renderProvider() {
         if (!this.props.provider) { return null; }
         let check = this.props.provider;

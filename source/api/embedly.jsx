@@ -1,12 +1,14 @@
 import 'whatwg-fetch';
 import {embedlyKey} from '../../config';
-let rootUrl = 'http://api.embed.ly/1/oembed?key=' +
-    embedlyKey + '&format=json&maxwidth=400&urls=';
 
-export default {
-    get: function(urls) {
-        return fetch(rootUrl + urls.slice(0,10).map(encodeURIComponent).join(','), {})
-            .then(function(res) {
+export default new class embedlyAPI {
+    constructor() {
+        this._rootUrl = 'http://api.embed.ly/1/oembed?key=' + embedlyKey + '&format=json&maxwidth=400&urls=';
+    }
+
+    get(urls) {
+        return fetch(this._rootUrl + urls.slice(0,10).map(encodeURIComponent).join(','), {})
+            .then(res => {
                 if (res.status >= 200 && res.status < 300) {
                     return res;
                 } else {
@@ -15,10 +17,10 @@ export default {
                     throw error;
                 }
             })
-            .then(function(res) {
+            .then(res => {
                 return res.json();
             })
-            .catch(function(e) {
+            .catch(e => {
                 return {
                     type: 'error',
                     // jscs:disable requireCamelCaseOrUpperCaseIdentifiers

@@ -7,10 +7,10 @@ const USER_NAME = 'test';
 const USER_PROVIDER = 'test_provider';
 const USER_AVATAR = 'test_avatar';
 
-describe('Chat Core Tests', function() {
+describe('Chat Core Tests', () => {
     let socket;
 
-    beforeEach('Init Mock Object', function() {
+    beforeEach('Init Mock Object', () => {
         socket = new EventEmitter();
         socket.broadcast = new EventEmitter();
         socket.handshake = {
@@ -27,9 +27,9 @@ describe('Chat Core Tests', function() {
         };
     });
 
-    describe('enterChat()', function() {
+    describe('enterChat()', () => {
 
-        it('should broadcast an event \'enter_chat\' with user info', function(done) {
+        it('should broadcast an event \'enter_chat\' with user info', done => {
             socket.broadcast.on('enter_chat', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name','provider']);
@@ -43,9 +43,9 @@ describe('Chat Core Tests', function() {
 
     });
 
-    describe('leaveChat()', function() {
+    describe('leaveChat()', () => {
 
-        it('should broadcast an event \'leave_chat\' with user info', function(done) {
+        it('should broadcast an event \'leave_chat\' with user info', done => {
             socket.broadcast.on('leave_chat', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name','provider']);
@@ -59,9 +59,9 @@ describe('Chat Core Tests', function() {
 
     });
 
-    describe('startTyping()', function() {
+    describe('startTyping()', () => {
 
-        it('should broadcast an event \'start_typing\' with name', function(done) {
+        it('should broadcast an event \'start_typing\' with name', done => {
             socket.broadcast.on('start_typing', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name']);
@@ -74,9 +74,9 @@ describe('Chat Core Tests', function() {
 
     });
 
-    describe('stopTyping()', function() {
+    describe('stopTyping()', () => {
 
-        it('should broadcast an event \'stop_typing\' with name', function(done) {
+        it('should broadcast an event \'stop_typing\' with name', done => {
             socket.broadcast.on('stop_typing', data => {
                 expect(data).to.be.an('object');
                 expect(data).to.contain.all.keys(['id','name']);

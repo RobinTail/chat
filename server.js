@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 io.use(ios(sessionMiddleware));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
     done(null, {
         _id: user._id, /* following data is used by ioConnect handler */
         name: user.name,
@@ -37,8 +37,8 @@ passport.serializeUser(function(user, done) {
     });
 });
 
-passport.deserializeUser(function(user, done) {
-    User.findById(user._id, function(err, user) {
+passport.deserializeUser((user, done) => {
+    User.findById(user._id, (err, user) => {
         done(err, user);
     });
 });
@@ -51,7 +51,7 @@ try {
 } catch (e) {}
 /* eslint-enable no-empty */
 
-srv.listen(listenTo, function() {
+srv.listen(listenTo, () => {
     myconsole.log('Start serving');
 });
 

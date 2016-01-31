@@ -8,7 +8,7 @@ export default React.createClass({
 
     render: function() {
         if (this.props.data) {
-            let embedContains = this.props.data.map(function(obj, i) {
+            let embedContains = this.props.data.map((obj, i) => {
                 //console.log(obj);
 
                 let embedTitle = (

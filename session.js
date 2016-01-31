@@ -2,7 +2,7 @@ import session from 'express-session';
 import connectMongo from 'connect-mongo';
 const MongoStore = connectMongo(session);
 
-export default function(mongoose) {
+export default mongoose => {
     return session({
         resave: false,
         saveUninitialized: false,

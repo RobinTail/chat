@@ -1,7 +1,7 @@
 import express from 'express';
 import * as handlers from './handlers';
 
-export default function(app, passport, io) {
+export default (app, passport, io) => {
     // logger
     app.use(handlers.logger);
 

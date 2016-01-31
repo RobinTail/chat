@@ -49,11 +49,11 @@ function cookieSession(session) {
     return testConfig.cookieName + '=' + encodeSession(session);
 }
 
-describe('Chat Intergation Tests', function() {
+describe('Chat Intergation Tests', () => {
 
-    context('Not authenticated', function() {
+    context('Not authenticated', () => {
 
-        afterEach('Close server connections', function() {
+        afterEach('Close server connections', () => {
             srv.close();
         });
 
@@ -87,25 +87,25 @@ describe('Chat Intergation Tests', function() {
 
     });
 
-    context('Authenticated', function() {
+    context('Authenticated', () => {
 
         before('Remove test users and sessions', function(done) {
             this.timeout(5000);
-            User.find({oauthID: USER_OAUTH, provider: USER_PROVIDER}).remove(function() {
+            User.find({oauthID: USER_OAUTH, provider: USER_PROVIDER}).remove(() => {
                 Session.find({isTest: true}).remove(done);
             });
         });
 
         after('Remove test user and session', function(done) {
             this.timeout(5000);
-            User.findByIdAndRemove(testConfig.testUserID, function() {
+            User.findByIdAndRemove(testConfig.testUserID, () => {
                 Session.findByIdAndRemove(testConfig.testSessionID, done);
             });
         });
 
-        context('Prepare', function() {
+        context('Prepare', () => {
 
-            it('should encode session properly', function() {
+            it('should encode session properly', () => {
                 var encoded = encodeSession(testConfig.sessionUnsigned);
                 expect(testConfig.sessionEncoded).to.be.equals(encoded);
             });
@@ -135,7 +135,7 @@ describe('Chat Intergation Tests', function() {
                 });
             });
 
-            it('should create test session', function(done) {
+            it('should create test session', (done) => {
                 var session = new Session({
                     _id: 'test_' + Date.now().toString(),
                     session: JSON.stringify({
@@ -169,9 +169,9 @@ describe('Chat Intergation Tests', function() {
 
         });
 
-        context('Test connection', function() {
+        context('Test connection', () => {
 
-            afterEach('Close server connections', function() {
+            afterEach('Close server connections', () => {
                 srv.close();
             });
 
@@ -180,7 +180,7 @@ describe('Chat Intergation Tests', function() {
                 newXhr.setCookies(cookieSession(testConfig.testSessionID));
                 let socket = client(srv);
                 socket.on('connect', () => {
-                    socket.on('new', (data) => {
+                    socket.on('new', data => {
                         expect(data.error).to.eq(false);
                         expect(data.areLatest).to.eq(true);
                         expect(data.messages).to.be.an('array');
@@ -196,7 +196,7 @@ describe('Chat Intergation Tests', function() {
                 let socket1 = client(srv);
                 let socket2 = client(srv);
                 socket2.on('connect', () => {
-                    socket2.on('new', (data) => {
+                    socket2.on('new', data => {
                         if (!data.areLatest) {
                             expect(data.error).to.eq(false);
                             expect(data.messages).to.be.an('array');

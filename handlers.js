@@ -52,7 +52,7 @@ export function ioConnect(socket) {
     myconsole.log('new io connection');
     if (!checkSocketAuth(socket)) { return; }
 
-    socket.on('submit', (data) => {
+    socket.on('submit', data => {
         chatCore.submit(socket, data);
     });
     socket.on('start_typing', () => {
@@ -61,7 +61,7 @@ export function ioConnect(socket) {
     socket.on('stop_typing', () => {
         chatCore.stopTyping(socket);
     });
-    socket.on('sounds', (value) => {
+    socket.on('sounds', value => {
         chatCore.setSounds(socket, value);
     });
     socket.on('disconnect', () => {

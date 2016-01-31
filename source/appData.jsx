@@ -1,19 +1,17 @@
-var element = document.getElementById('applicationData');
-var store = {};
-if (element) {
-    store = JSON.parse(element.textContent);
-}
+export default new class appData {
+    constructor() {
+        this._store = {};
+        let element = document.getElementById('applicationData');
+        if (element) {
+            this._store = JSON.parse(element.textContent);
+        }
+    }
 
-/**
- * Getter and setter for stored application data
- * (injected by NodeJS into view)
- */
+    get(name) {
+        return this._store[name];
+    }
 
-export default {
-    get: function(name) {
-        return store[name];
-    },
-    set: function(name, value) {
-        store[name] = value;
+    set(name, value) {
+        this._store[name] = value;
     }
 };
