@@ -14,7 +14,7 @@ export default React.createClass({
                 </div>
                 <div className='authButtonsHolder'>
                     <AuthButton type='fb' url='/auth/facebook' />
-                    <AuthButton type='vk' url='/auth/vkontakte' />
+                    <AuthButton disabled={true} type='vk' url='/auth/vkontakte' />
                     <AuthButton type='tw' url='/auth/twitter' />
                     <AuthButton type='gg' url='/auth/google' />
                 </div>
