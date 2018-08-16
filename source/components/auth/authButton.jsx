@@ -5,8 +5,8 @@ export default React.createClass({
     render: function() {
         return (
             <div
-                className={'authButton ' + this.props.type}
-                onClick={this.handleClick}
+                className={'authButton ' + this.props.type + ' ' + (this.props.disabled ? '_disabled' : '')}
+                onClick={this.props.disabled ? null : this.handleClick}
             >
             </div>
         );

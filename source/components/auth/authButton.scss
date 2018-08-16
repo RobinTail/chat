@@ -43,7 +43,11 @@
         background-image: url('./gg.svg');
     }
 
-    &:hover {
+    &._disabled {
+        background-color: silver !important;
+    }
+
+    &:not(._disabled):hover {
         z-index: 100;
         transform: scale(1.1);
         box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
