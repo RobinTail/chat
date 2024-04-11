@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import express from 'express';
 import ios from 'socket.io-express-session';
 import passport from 'passport';
@@ -8,7 +8,6 @@ import myconsole from './lib/console';
 import socket from 'socket.io';
 import http from 'http';
 import './lib/authStrategies';
-import initWebpack from './lib/initWebpack';
 import {listenTo, dbConnectionUrl} from './config';
 import session from './session';
 import routes from './routes';
@@ -17,7 +16,6 @@ const app = express();
 const srv = http.Server(app);
 const io = socket(srv);
 
-initWebpack(app);
 mongoose.connect(dbConnectionUrl);
 
 const sessionMiddleware = session(mongoose);
