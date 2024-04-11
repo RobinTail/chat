@@ -6,7 +6,7 @@ export const fbStrategy = new FBStrategy(
   {
     clientID: config.facebook.appId,
     clientSecret: config.facebook.secret,
-    callbackURL: "/auth/facebook/callback",
+    callbackURL: "/assets/facebook/callback",
     profileFields: ["id", "displayName", "picture.type(small)"],
   },
   (accessToken, refreshToken, profile, done) =>

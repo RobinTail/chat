@@ -7,10 +7,10 @@ import {
   wrapperXS,
   wrapperXSPadding,
 } from "./vars.tsx";
+import { Auth } from "./components/Auth.tsx";
 /*
 import Header from "../header/header";
 import Modal from "../modal/modal";
-import Auth from "../auth/auth";
 import Chat from "../chat/chat";
  */
 
@@ -51,7 +51,7 @@ export const App = () => {
           [Header] [Chat]
         </Box>
       ) : (
-        <>Auth</>
+        <Auth />
       )}
       [Modal]
     </Box>
