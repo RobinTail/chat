@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/RobinTail/chat#readme",
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
     "@types/express-session": "^1.18.0",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
@@ -37,6 +41,7 @@
     "passport-twitter": "^1.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
     "smoothscroll": "^0.4.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
@@ -50,8 +55,11 @@
     "@types/passport-facebook": "^3.0.3",
     "@types/passport-google-oauth2": "^0.1.8",
     "@types/passport-twitter": "^1.0.40",
+    "@types/react": "^18.2.76",
+    "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "cookie-signature": "^1.0.6",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -61,9 +69,16 @@
     "prettier": "3.2.5",
     "socket.io-client-cookie": "^0.1.0",
     "tsx": "^4.7.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8",
+    "vitest": "^1.5.0"
   },
   "engines": {
     "node": "^18 || ^20"
+  },
+  "resolutions": {
+    "**/react": "^18",
+    "**/react-dom": "^18",
+    "**/@types/react": "^18"
   }
 }

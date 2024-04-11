@@ -1,5 +1,5 @@
 import session from "express-session";
-import { createConfig, createServer, ServeStatic } from "express-zod-api";
+import { createConfig, createServer } from "express-zod-api";
 import passport from "passport";
 import { z } from "zod";
 import { attachSockets, createSimpleConfig } from "zod-sockets";
@@ -25,9 +25,7 @@ const { httpServer, logger } = await createServer(
     logger: { level: "debug", color: true },
     cors: true,
   }),
-  {
-    static: new ServeStatic("/static"),
-  },
+  {},
 );
 
 const io = new Server();

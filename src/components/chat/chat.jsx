@@ -11,7 +11,7 @@ window.ion.sound({
     sounds: [
         {name: 'notice'}
     ],
-    path: '/static/sounds/',
+    path: '/public/sounds/',
     preload: true,
     multiplay: true,
     volume: 0.4

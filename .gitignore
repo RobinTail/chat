@@ -1,4 +1,3 @@
 node_modules/
-static/index.js
 npm-debug.log
 secrets.ts
