@@ -1,6 +1,7 @@
 import session from "express-session";
 import { createConfig, createServer, ServeStatic } from "express-zod-api";
 import passport from "passport";
+import { z } from "zod";
 import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
 import { sessionSalt } from "../secrets";
@@ -36,6 +37,17 @@ await attachSockets({
   target: httpServer,
   config: createSimpleConfig({
     logger,
+    emission: {
+      enter_chat: {
+        schema: z.tuple([
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            provider: z.string(),
+          }),
+        ]),
+      },
+    },
     hooks: {
       onConnection: async ({ logger, client }) => {
         logger.debug("handshake", client.handshake);
