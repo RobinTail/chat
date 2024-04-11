@@ -1,13 +1,13 @@
+import session from "express-session";
 import { createServer } from "express-zod-api";
-import ios from "socket.io-express-session";
 import passport from "passport";
+import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { User } from "./user";
-import socket from "socket.io";
+import { Server } from "socket.io";
 import "./lib/authStrategies";
-import session from "./session";
 import routes from "./routes";
 
-const { httpServer, app } = await createServer(
+const { httpServer, app, logger } = await createServer(
   {
     server: { listen: 8090 },
     logger: { level: "debug", color: true },
@@ -16,15 +16,25 @@ const { httpServer, app } = await createServer(
   {},
 );
 
-const io = socket(srv);
+const io = new Server();
 
-const sessionMiddleware = session();
+io.engine.use(
+  session({
+    secret: process.env.SESSION_SECRET || "sample",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  }),
+);
+io.engine.use(passport.initialize());
+io.engine.use(passport.session());
 
-app.set("view engine", "ejs");
-app.use(sessionMiddleware);
-app.use(passport.initialize());
-app.use(passport.session());
-io.use(ios(sessionMiddleware));
+await attachSockets({
+  io,
+  target: httpServer,
+  config: createSimpleConfig({ logger }),
+  actions: [],
+});
 
 passport.serializeUser((user, done) => {
   done(null, {
