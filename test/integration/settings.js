@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {dbConnectionUrl, oAuth} from '../../config';
+import {dbConnectionUrl, oAuth} from '../../secrets.js';
 import webpackConfig from '../../webpack.config';
 
 describe('App Settings Tests', () => {

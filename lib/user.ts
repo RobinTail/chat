@@ -1,5 +1,5 @@
 export interface User {
-  oauthID: number;
+  oauthID: string;
   name: string;
   created: Date;
   provider: string;

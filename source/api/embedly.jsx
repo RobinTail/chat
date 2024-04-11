@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import {embedlyKey} from '../../config';
+import {embedlyKey} from '../../secrets.js';
 
 export default new class embedlyAPI {
     constructor() {
