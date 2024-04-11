@@ -1,25 +1,20 @@
 {
   "name": "chat",
-  "version": "4.2.4",
+  "version": "5.0.0",
   "description": "Sample React oAuth Chat",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "npm run lint && npm run test:unit && npm run test:integration",
-    "travis": "npm run lint && npm run test:unit",
-    "production": "NODE_ENV=production npm run production:build",
-    "production:build": "webpack --progress && pm2 start index.js -n chat",
-    "lint": "npm run jscs && npm run eslint",
+    "test": "yarn lint && yarn test:unit && yarn test:integration",
+    "lint": "eslint . --ext .js,.jsx",
     "test:unit": "NODE_ENV=test mocha ./test/unit --recursive --require test/testWrapper.js",
-    "test:integration": "NODE_ENV=test mocha ./test/integration --recursive --require test/testWrapper.js",
-    "jscs": "jscs .",
-    "eslint": "eslint . --ext .js,.jsx"
+    "test:integration": "NODE_ENV=test mocha ./test/integration --recursive --require test/testWrapper.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/RobinTail/chat.git"
   },
-  "author": "Robin Tail",
+  "author": "Anna Bocharova",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/RobinTail/chat/issues"
@@ -72,12 +67,11 @@
     "cookie-signature": "^1.0.6",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.12.0",
-    "jscs": "^2.6.0",
     "mocha": "^2.3.4",
     "socket.io-client-cookie": "^0.1.0"
   },
   "engines": {
-    "node": "^4.1.2"
+    "node": "^18 || ^20"
   },
   "babel": {
     "presets": [
