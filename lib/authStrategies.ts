@@ -1,6 +1,4 @@
 import { Strategy as FBStrategy } from "passport-facebook";
-import { Strategy as TWStrategy } from "passport-twitter";
-import { Strategy as GGStrategy } from "passport-google-oauth2";
 import { User } from "./user";
 import { oAuth as config } from "../secrets";
 
@@ -11,7 +9,7 @@ export const fbStrategy = new FBStrategy(
     callbackURL: "/auth/facebook/callback",
     profileFields: ["id", "displayName", "picture.type(small)"],
   },
-  ({}, {}, profile, done) =>
+  (accessToken, refreshToken, profile, done) =>
     done({
       oauthID: profile.id,
       name: profile.displayName,

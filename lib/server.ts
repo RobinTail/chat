@@ -37,8 +37,13 @@ await attachSockets({
   config: createSimpleConfig({
     logger,
     hooks: {
-      onConnection: async () => {
-        /** handlers.ioConnect */
+      onConnection: async ({ logger, client }) => {
+        logger.debug("handshake", client.handshake);
+        const sessionUser = client.handshake.auth.passport?.user;
+        if (!sessionUser) {
+          return;
+        }
+        logger.info("authenticated user", sessionUser);
       },
     },
   }),
