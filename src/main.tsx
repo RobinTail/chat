@@ -3,11 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { App } from "./App.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: () => <h1>HERE</h1>,
+    Component: App,
     errorElement: <Alert severity="error">Route not found</Alert>,
   },
 ]);
