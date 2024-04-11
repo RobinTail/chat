@@ -1,5 +1,5 @@
 import session from "express-session";
-import { createServer } from "express-zod-api";
+import { createConfig, createServer, ServeStatic } from "express-zod-api";
 import passport from "passport";
 import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
@@ -7,12 +7,26 @@ import { sessionSalt } from "../secrets";
 import { fbStrategy } from "./authStrategies";
 
 const { httpServer, logger } = await createServer(
-  {
-    server: { listen: 8090 },
+  createConfig({
+    server: {
+      listen: 8090,
+      beforeRouting: ({ app }) => {
+        app.get("/auth/facebook", passport.authenticate("facebook"));
+        app.get(
+          "/auth/facebook/callback",
+          passport.authenticate("facebook", {
+            failureRedirect: "/",
+            successRedirect: "/",
+          }),
+        );
+      },
+    },
     logger: { level: "debug", color: true },
     cors: true,
+  }),
+  {
+    static: new ServeStatic("/static"),
   },
-  {},
 );
 
 const io = new Server();
@@ -20,7 +34,14 @@ const io = new Server();
 await attachSockets({
   io,
   target: httpServer,
-  config: createSimpleConfig({ logger }),
+  config: createSimpleConfig({
+    logger,
+    hooks: {
+      onConnection: async () => {
+        /** handlers.ioConnect */
+      },
+    },
+  }),
   actions: [],
 });
 
