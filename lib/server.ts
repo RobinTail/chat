@@ -3,6 +3,7 @@ import { createServer } from "express-zod-api";
 import passport from "passport";
 import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
+import { sessionSalt } from "../secrets";
 import { fbStrategy } from "./authStrategies";
 
 const { httpServer, logger } = await createServer(
@@ -25,7 +26,7 @@ await attachSockets({
 
 io.engine.use(
   session({
-    secret: process.env.SESSION_SECRET || "sample",
+    secret: process.env.SESSION_SECRET || sessionSalt,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true },
