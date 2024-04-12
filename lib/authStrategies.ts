@@ -13,10 +13,8 @@ export const fbStrategy = new FBStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      created: new Date(),
       provider: profile.provider,
       avatar: profile.photos?.length ? profile.photos[0].value : "",
-      sounds: true,
     } satisfies User),
 );
 
@@ -31,10 +29,8 @@ export const twStrategy = new TWStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      created: new Date(),
       provider: profile.provider,
       avatar: profile.photos?.length ? profile.photos[0].value : "",
-      sounds: true,
     } satisfies User),
 );
 
@@ -48,10 +44,8 @@ export const ggStrategy = new GGStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      created: new Date(),
       provider: profile.provider,
       avatar: profile.photos?.length ? profile.photos[0].value : "",
-      sounds: true,
     } satisfies User);
   },
 );

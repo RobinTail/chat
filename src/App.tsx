@@ -1,4 +1,6 @@
 import Box from "@mui/material/Box";
+import React from "react";
+import { useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import {
   wrapperDefault,
@@ -15,9 +17,17 @@ import Chat from "../chat/chat";
  */
 
 export const App = () => {
-  const [isAuthenticated] = useLocalStorageState("isAuthenticated", {
-    defaultValue: false,
+  const [params] = useSearchParams();
+  const [user] = useLocalStorageState("user", {
+    defaultValue: {
+      oauthID: params.get("oauthID"),
+      name: params.get("name"),
+      provider: params.get("provider"),
+      avatar: params.get("avatar"),
+      sounds: true,
+    },
   });
+  const isAuthenticated = React.useMemo(() => !!user.oauthID, [user.oauthID]);
 
   return (
     <Box>
