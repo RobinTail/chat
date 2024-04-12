@@ -1,5 +1,6 @@
 import { SxProps } from "@mui/material";
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { mergeSx } from "merge-sx";
 import fbLogo from "../assets/fb.svg";
 import twLogo from "../assets/tw.svg";
 import ggLogo from "../assets/gg.svg";
@@ -28,10 +29,9 @@ export const AuthButton = ({
   url: string;
   provider: keyof typeof styles;
 }) => (
-  <Button
-    disabled={disabled}
-    onClick={() => window.location.replace(url)}
-    sx={[
+  <Box
+    onClick={disabled ? undefined : () => window.location.replace(url)}
+    sx={mergeSx(
       {
         flex: "1 0 33%",
         height: "100%",
@@ -42,6 +42,7 @@ export const AuthButton = ({
         maxWidth: { xs: "100%", md: "200px" },
       },
       styles[provider],
-    ]}
+      disabled && { backgroundColor: "silver" },
+    )}
   />
 );
