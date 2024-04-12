@@ -12,6 +12,26 @@ const { httpServer, logger } = await createServer(
     server: {
       listen: 8090,
       beforeRouting: ({ app }) => {
+        app.use(
+          session({
+            secret: process.env.SESSION_SECRET || sessionSalt,
+            resave: false,
+            saveUninitialized: true,
+            cookie: { secure: true },
+          }),
+        );
+        app.use(passport.initialize());
+        app.use(passport.session());
+        passport.use(fbStrategy);
+        passport.serializeUser((user, done) => {
+          done(null, JSON.stringify(user));
+        });
+        passport.deserializeUser((user, done) => {
+          done(null, typeof user === "string" ? JSON.parse(user) : null);
+        });
+        app.get("/logout", (req, res) => {
+          req.logout(() => res.end("logged out"));
+        });
         app.get("/auth/facebook", passport.authenticate("facebook"));
         app.get(
           "/auth/facebook/callback",
@@ -59,38 +79,3 @@ await attachSockets({
   }),
   actions: [],
 });
-
-io.engine.use(
-  session({
-    secret: process.env.SESSION_SECRET || sessionSalt,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  }),
-);
-io.engine.use(passport.initialize());
-io.engine.use(passport.session());
-
-passport.use(fbStrategy);
-
-/*
-passport.use(twStrategy);
-passport.use(ggStrategy);
-
-passport.serializeUser((user, done) => {
-  done(null, {
-    _id: user._id,
-    name: user.name,
-    provider: user.provider,
-    avatar: user.avatar,
-  });
-});
-
-passport.deserializeUser((user, done) => {
-  User.findById(user._id, (err, user) => {
-    done(err, user);
-  });
-});
-
-routes(app, passport, io);
-*/

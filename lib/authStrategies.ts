@@ -6,11 +6,11 @@ export const fbStrategy = new FBStrategy(
   {
     clientID: config.facebook.appId,
     clientSecret: config.facebook.secret,
-    callbackURL: "/assets/facebook/callback",
+    callbackURL: "/auth/facebook/callback",
     profileFields: ["id", "displayName", "picture.type(small)"],
   },
   (accessToken, refreshToken, profile, done) =>
-    done({
+    done(null, {
       oauthID: profile.id,
       name: profile.displayName,
       created: new Date(),
@@ -28,7 +28,7 @@ export const twStrategy = new TWStrategy(
     callbackURL: config.twitter.callbackURL,
   },
   ({}, {}, profile, done) =>
-    done({
+    done(null, {
       oauthID: profile.id,
       name: profile.displayName,
       created: new Date(),
@@ -45,7 +45,7 @@ export const ggStrategy = new GGStrategy(
     callbackURL: config.google.callbackURL,
   },
   ({}, {}, profile, done) => {
-    done({
+    done(null, {
       oauthID: profile.id,
       name: profile.displayName,
       created: new Date(),

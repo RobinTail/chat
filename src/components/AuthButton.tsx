@@ -30,7 +30,14 @@ export const AuthButton = ({
   provider: keyof typeof styles;
 }) => (
   <Box
-    onClick={disabled ? undefined : () => window.location.replace(url)}
+    onClick={
+      disabled
+        ? undefined
+        : () =>
+            window.location.replace(
+              `http://${window.location.host.split(":")[0]}:8090${url}`,
+            )
+    }
     sx={mergeSx(
       {
         flex: "1 0 33%",
