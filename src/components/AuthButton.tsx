@@ -33,10 +33,7 @@ export const AuthButton = ({
     onClick={
       disabled
         ? undefined
-        : () =>
-            window.location.replace(
-              `http://${window.location.host.split(":")[0]}:8090${url}`,
-            )
+        : () => window.location.replace(`http://localhost:8090${url}`)
     }
     sx={mergeSx(
       {
