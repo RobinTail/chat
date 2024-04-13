@@ -1,3 +1,5 @@
+declare module "ion-sound" {}
+
 interface Window {
   ion: {
     sound: {

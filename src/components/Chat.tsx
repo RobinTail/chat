@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import smoothscroll from "smoothscroll";
+import smoothScroll from "smoothscroll";
 import "ion-sound";
 import { UserContext } from "../contexts/UserContext.ts";
 
@@ -23,7 +23,7 @@ export const Chat = () => {
     if (sounds) {
       window.ion.sound.play("notice");
     }
-    smoothscroll(document.body.scrollHeight);
+    smoothScroll(document.body.scrollHeight);
   }, [messages, sounds]);
 
   return (
