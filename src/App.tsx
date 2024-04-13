@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
+import { Chat } from "./components/Chat.tsx";
 import { Modal } from "./components/Modal.tsx";
 import { ModalContext } from "./contexts/ModalContext.ts";
 import { UserContext } from "./contexts/UserContext.ts";
@@ -77,7 +78,7 @@ export const App = () => {
                 }}
               />
               <Header />
-              <Modal />
+              <Chat />
             </UserContext.Provider>
           </Box>
         ) : (
