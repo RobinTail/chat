@@ -3,6 +3,7 @@ import React from "react";
 import smoothScroll from "smoothscroll";
 import "ion-sound";
 import { UserContext } from "../contexts/UserContext.ts";
+import { MessagesList } from "./MessagesList.tsx";
 
 export const Chat = () => {
   const [messages, setMessages] = React.useState([]);
@@ -33,7 +34,8 @@ export const Chat = () => {
         mt: { xs: "43px", md: "unset" },
       }}
     >
-      [MessagesList messages] [MessageComposer isTyping]
+      <MessagesList messages={messages} />
+      [MessageComposer isTyping]
     </Box>
   );
 };
