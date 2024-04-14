@@ -59,12 +59,12 @@ export const MessageComposer = ({
             lineHeight: "15px",
             textAlign: "left",
             width: {
-              xs: wrapperXS,
-              sm: wrapperSM,
-              md: wrapperMD,
-              lg: wrapperDefault,
+              xs: `${wrapperXS}vw`,
+              sm: `${wrapperSM}vw`,
+              md: `${wrapperMD}vw`,
+              lg: `${wrapperDefault}vw`,
             },
-            p: { xs: wrapperXSPadding, sm: "unset" },
+            p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
@@ -89,12 +89,12 @@ export const MessageComposer = ({
           position: "relative",
           display: "inline-block",
           width: {
-            xs: wrapperXS,
-            sm: wrapperSM,
-            md: wrapperMD,
-            lg: wrapperDefault,
+            xs: `${wrapperXS}vw`,
+            sm: `${wrapperSM}vw`,
+            md: `${wrapperMD}vw`,
+            lg: `${wrapperDefault}vw`,
           },
-          p: { xs: wrapperXSPadding, sm: "unset" },
+          p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
           mt: "7px",
           mb: "10px",
           borderRadius: "5px",
@@ -103,24 +103,22 @@ export const MessageComposer = ({
         }}
       >
         <TextField
-          inputProps={{
-            sx: {
-              position: "relative",
-              display: "inline-block",
-              width: "100%",
-              height: "50px",
-              mb: 0,
-              pl: "20px",
-              pr: "12%",
-              float: "left",
-              borderStyle: "none",
-              borderRadius: "5px",
-              backgroundColor: "#e4e4e4",
-              color: "#333",
-              fontSize: "18px",
-              boxSizing: "border-box",
-              outline: 0,
-            },
+          fullWidth
+          sx={{
+            height: "50px",
+            position: "relative",
+            display: "inline-block",
+            mb: 0,
+            pl: "20px",
+            pr: "12%",
+            float: "left",
+            borderStyle: "none",
+            borderRadius: "5px",
+            backgroundColor: "#e4e4e4",
+            color: "#333",
+            fontSize: "18px",
+            boxSizing: "border-box",
+            outline: 0,
           }}
           placeholder="Start typing here"
           autoFocus
