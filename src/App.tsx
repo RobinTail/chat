@@ -21,17 +21,28 @@ import Chat from "../chat/chat";
 
 export const App = () => {
   const [params] = useSearchParams();
-  const [user, {}, { removeItem: logout }] = useLocalStorageState("user", {
+  const [user, setUser, { removeItem: logout }] = useLocalStorageState("user", {
     defaultValue: {
-      oauthID: params.get("oauthID"),
-      name: params.get("name"),
-      provider: params.get("provider"),
-      avatar: params.get("avatar"),
+      oauthID: null,
+      name: null,
+      provider: null,
+      avatar: null,
     },
   });
   const [sounds, setSounds] = React.useState(true);
   const [modalVisibility, setModalVisibility] = React.useState(false);
   const [notice, setNotice] = React.useState({ title: "", message: "" });
+
+  React.useEffect(() => {
+    if (params.has("oauthID") && params.has("name")) {
+      setUser({
+        oauthID: params.get("oauthID"),
+        name: params.get("name"),
+        provider: params.get("provider"),
+        avatar: params.get("avatar"),
+      });
+    }
+  }, []);
 
   const hideModal = React.useCallback(() => setModalVisibility(false), []);
   const notify = React.useCallback((title: string, message: string) => {

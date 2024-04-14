@@ -32,7 +32,7 @@ const { httpServer, logger } = await createServer(
           done(null, typeof user === "string" ? JSON.parse(user) : null);
         });
         app.get("/logout", (req, res) => {
-          req.logout(() => res.end("logged out"));
+          req.logout(() => res.redirect("http://localhost:8080"));
         });
         app.get("/auth/facebook", passport.authenticate("facebook"));
         app.get(
