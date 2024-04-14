@@ -3,6 +3,7 @@ import React from "react";
 import smoothScroll from "smoothscroll";
 import "ion-sound";
 import { UserContext } from "../contexts/UserContext.ts";
+import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
 
 export const Chat = () => {
@@ -35,7 +36,17 @@ export const Chat = () => {
       }}
     >
       <MessagesList messages={messages} />
-      [MessageComposer isTyping]
+      <MessageComposer
+        setTyping={setTyping}
+        onSend={() => {
+          /* @todo */
+        }}
+        others={
+          [
+            /* @todo */
+          ]
+        }
+      />
     </Box>
   );
 };
