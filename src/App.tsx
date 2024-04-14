@@ -15,18 +15,15 @@ import {
 } from "./vars.tsx";
 import { Auth } from "./components/Auth.tsx";
 import { Header } from "./components/Header.tsx";
-/*
-import Chat from "../chat/chat";
- */
 
 export const App = () => {
   const [params] = useSearchParams();
   const [user, setUser, { removeItem: logout }] = useLocalStorageState("user", {
     defaultValue: {
-      oauthID: null,
-      name: null,
-      provider: null,
-      avatar: null,
+      oauthID: null as string | null,
+      name: null as string | null,
+      provider: null as string | null,
+      avatar: null as string | null,
     },
   });
   const [sounds, setSounds] = React.useState(true);
