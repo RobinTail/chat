@@ -1,24 +1,6 @@
-import { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import { mergeSx } from "merge-sx";
-import fbLogo from "../assets/fb.svg";
-import twLogo from "../assets/tw.svg";
-import ggLogo from "../assets/gg.svg";
-
-const styles = {
-  fb: {
-    backgroundColor: "#3b5998",
-    backgroundImage: `url(${fbLogo})`,
-  },
-  tw: {
-    backgroundColor: "#00aced",
-    backgroundImage: `url(${twLogo})`,
-  },
-  gg: {
-    backgroundColor: "#dd4b39",
-    backgroundImage: `url(${ggLogo})`,
-  },
-} satisfies Record<string, SxProps>;
+import { Provider, providers } from "../Provider.tsx";
 
 export const AuthButton = ({
   disabled,
@@ -27,7 +9,7 @@ export const AuthButton = ({
 }: {
   disabled?: boolean;
   url: string;
-  provider: keyof typeof styles;
+  provider: Provider;
 }) => (
   <Box
     onClick={
@@ -45,7 +27,10 @@ export const AuthButton = ({
         cursor: "pointer",
         maxWidth: { xs: "100%", md: "200px" },
       },
-      styles[provider],
+      {
+        backgroundColor: providers[provider].color,
+        backgroundImage: `url(${providers[provider].logo})`,
+      },
       disabled && { backgroundColor: "silver" },
     )}
   />
