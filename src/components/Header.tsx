@@ -6,7 +6,7 @@ import { version } from "../../package.json";
 import { UserContext } from "../contexts/UserContext.ts";
 import soundOn from "../assets/sound-on.svg";
 import soundOff from "../assets/sound-off.svg";
-import logout from "../assets/logout.svg";
+import logoutIcon from "../assets/logout.svg";
 
 const btnSx: SxProps = {
   display: "inline-block",
@@ -21,7 +21,7 @@ const btnSx: SxProps = {
   backgroundPosition: "center",
 };
 
-export const Header = () => {
+export const Header = ({ logout }: { logout: () => void }) => {
   const { sounds, setSounds } = React.useContext(UserContext);
   return (
     <Box>
@@ -82,8 +82,9 @@ export const Header = () => {
           onClick={() => setSounds(!sounds)}
         ></Box>
         <Box
-          sx={mergeSx(btnSx, { backgroundImage: `url(${logout})` })}
+          sx={mergeSx(btnSx, { backgroundImage: `url(${logoutIcon})` })}
           onClick={() => {
+            logout();
             window.location.replace("http://localhost:8090/logout");
           }}
         ></Box>

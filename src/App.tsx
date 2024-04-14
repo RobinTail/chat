@@ -21,7 +21,7 @@ import Chat from "../chat/chat";
 
 export const App = () => {
   const [params] = useSearchParams();
-  const [user] = useLocalStorageState("user", {
+  const [user, {}, { removeItem: logout }] = useLocalStorageState("user", {
     defaultValue: {
       oauthID: params.get("oauthID"),
       name: params.get("name"),
@@ -77,7 +77,7 @@ export const App = () => {
                   zIndex: -1,
                 }}
               />
-              <Header />
+              <Header logout={logout} />
               <Chat />
             </UserContext.Provider>
           </Box>

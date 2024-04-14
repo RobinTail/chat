@@ -5,7 +5,7 @@ import { z } from "zod";
 import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
 import { sessionSalt } from "../secrets";
-import { fbStrategy } from "./authStrategies";
+import { fbStrategy, twStrategy } from "./authStrategies";
 
 const { httpServer, logger } = await createServer(
   createConfig({
@@ -23,6 +23,7 @@ const { httpServer, logger } = await createServer(
         app.use(passport.initialize());
         app.use(passport.session());
         passport.use(fbStrategy);
+        passport.use(twStrategy);
         passport.serializeUser((user, done) => {
           done(null, JSON.stringify(user));
         });
@@ -36,6 +37,16 @@ const { httpServer, logger } = await createServer(
         app.get(
           "/auth/facebook/callback",
           passport.authenticate("facebook"),
+          (req, res) => {
+            res.redirect(
+              "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
+            );
+          },
+        );
+        app.get("/auth/twitter", passport.authenticate("twitter"));
+        app.get(
+          "/auth/twitter/callback",
+          passport.authenticate("twitter"),
           (req, res) => {
             res.redirect(
               "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),

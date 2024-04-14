@@ -1,4 +1,5 @@
 import { Strategy as FBStrategy } from "passport-facebook";
+import { Strategy as TWStrategy } from "passport-twitter";
 import { User } from "./user";
 import { oAuth as config } from "../secrets";
 
@@ -18,14 +19,13 @@ export const fbStrategy = new FBStrategy(
     } satisfies User),
 );
 
-/*
 export const twStrategy = new TWStrategy(
   {
-    consumerKey: config.twitter.consumerKey,
-    consumerSecret: config.twitter.consumerSecret,
-    callbackURL: config.twitter.callbackURL,
+    consumerKey: config.twitter.apiKey,
+    consumerSecret: config.twitter.apiToken,
+    callbackURL: "/auth/twitter/callback",
   },
-  ({}, {}, profile, done) =>
+  (accessToken, refreshToken, profile, done) =>
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
@@ -34,6 +34,7 @@ export const twStrategy = new TWStrategy(
     } satisfies User),
 );
 
+/*
 export const ggStrategy = new GGStrategy(
   {
     clientID: config.google.clientID,
