@@ -2,10 +2,13 @@ import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
+import { find as linkifyFind } from "linkifyjs";
 import { mergeSx } from "merge-sx";
 import moment from "moment";
+import React from "react";
 import { Provider, providers } from "../Provider.tsx";
 import Linkify from "linkify-react";
+import { Embedly } from "./Embedly.tsx";
 
 export interface MessageProps {
   isSameAuthor?: boolean;
@@ -26,6 +29,14 @@ export const Message = ({
   isSystem,
   severity,
 }: MessageProps) => {
+  const urls = React.useMemo(
+    () =>
+      linkifyFind(text)
+        .filter(({ type }) => type === "url")
+        .map(({ href }) => href),
+    [text],
+  );
+
   const avatar = isSameAuthor ? (
     <Box
       sx={{
@@ -180,29 +191,32 @@ export const Message = ({
       <Linkify options={{ truncate: 50 }}>{text}</Linkify>
     </Box>
   );
+
   return (
-    <ListItem
-      sx={mergeSx(
-        {
-          display: "flex",
-          flexFlow: { xs: "column nowrap", md: "row nowrap" },
-          justifyContent: "flex-start",
-          position: "relative",
-          "&:not(:first-child)": {
-            marginTop: "5px",
+    <>
+      <ListItem
+        sx={mergeSx(
+          {
+            display: "flex",
+            flexFlow: { xs: "column nowrap", md: "row nowrap" },
+            justifyContent: "flex-start",
+            position: "relative",
+            "&:not(:first-child)": {
+              marginTop: "5px",
+            },
           },
-        },
-        isMy && {
-          flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
-          alignItems: { xs: "flex-end", md: "unset" },
-        },
-      )}
-    >
-      {info}
-      {!isSystem && avatar}
-      {!isSystem && corner}
-      {msg}
-      [Embed key isMy data=embed ]
-    </ListItem>
+          isMy && {
+            flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
+            alignItems: { xs: "flex-end", md: "unset" },
+          },
+        )}
+      >
+        {info}
+        {!isSystem && avatar}
+        {!isSystem && corner}
+        {msg}
+      </ListItem>
+      <Embedly urls={urls} isMy={isMy} />
+    </>
   );
 };

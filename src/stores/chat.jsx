@@ -40,14 +40,6 @@ export default new (class ChatStore extends EventEmitter {
         case actionTypes.NEW_MESSAGES:
           action.messages.forEach((message) => {
             message.isMy = message.author.id === appData.get("userID");
-            message.html = linkifyString(message.text, {
-              format: (value, type) => {
-                if (type === "url" && value.length > 50) {
-                  value = value.slice(0, 50) + "…";
-                }
-                return value;
-              },
-            });
           });
           this._messages = this._messages.concat(action.messages);
           this._addDateMessages();
