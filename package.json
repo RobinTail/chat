@@ -34,6 +34,7 @@
     "ion-sound": "^3.0.7",
     "keymirror": "^0.1.1",
     "linkify-react": "^4.1.3",
+    "linkify-string": "^4.1.3",
     "linkifyjs": "^4.1.3",
     "merge-sx": "^2.0.0",
     "moment": "^2.30.1",
