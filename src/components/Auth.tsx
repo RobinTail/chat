@@ -45,7 +45,7 @@ export const Auth = () => (
     >
       <AuthButton provider="fb" url="/auth/facebook" />
       <AuthButton provider="tw" url="/auth/twitter" />
-      <AuthButton disabled provider="gg" url="/auth/google" />
+      <AuthButton provider="gg" url="/auth/google" />
     </Box>
   </Box>
 );

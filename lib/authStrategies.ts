@@ -1,5 +1,6 @@
 import { Strategy as FBStrategy } from "passport-facebook";
 import { Strategy as TWStrategy } from "passport-twitter";
+import { Strategy as GGStrategy } from "passport-google-oauth2";
 import { User } from "./user";
 import { oAuth as config } from "../secrets";
 
@@ -34,14 +35,13 @@ export const twStrategy = new TWStrategy(
     } satisfies User),
 );
 
-/*
 export const ggStrategy = new GGStrategy(
   {
-    clientID: config.google.clientID,
-    clientSecret: config.google.clientSecret,
-    callbackURL: config.google.callbackURL,
+    clientID: config.google.appId,
+    clientSecret: config.google.secret,
+    callbackURL: "/auth/google/callback",
   },
-  ({}, {}, profile, done) => {
+  (accessToken, refreshToken, profile, done) => {
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
@@ -50,4 +50,3 @@ export const ggStrategy = new GGStrategy(
     } satisfies User);
   },
 );
-*/
