@@ -12,7 +12,7 @@ export const Chat = () => {
   const [messages, setMessages] = React.useState<MessageProps[]>([]);
   const [isTyping, setTyping] = React.useState(false);
   const { sounds } = React.useContext(UserContext);
-  const socket = React.useMemo(() => io("http://localhost:8090/socket.io"), []);
+  const socket = React.useMemo(() => io("http://localhost:8090/"), []);
 
   React.useEffect(() => {
     socket.on("connect", () => {

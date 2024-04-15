@@ -75,7 +75,11 @@ const { httpServer, logger } = await createServer(
   {},
 );
 
-const io = new Server();
+const io = new Server({
+  cors: {
+    origin: "http://localhost:8080",
+  },
+});
 
 await attachSockets({
   io,
