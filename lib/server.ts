@@ -109,7 +109,7 @@ await attachSockets({
         const serializedUser = sessionObj.passport?.user;
         const sessionUser =
           typeof serializedUser === "string"
-            ? deserializer(serializedUser)
+            ? (deserializer(serializedUser) as User)
             : undefined;
         if (!sessionUser) {
           return;
@@ -122,12 +122,3 @@ await attachSockets({
 });
 
 io.engine.use(sessMw);
-
-// @todo move
-declare module "express-session" {
-  interface SessionData {
-    passport?: {
-      user?: string;
-    };
-  }
-}
