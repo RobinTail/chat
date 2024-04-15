@@ -10,13 +10,9 @@ export function ioConnect(socket) {
   socket.on("stop_typing", () => {
     chatCore.stopTyping(socket);
   });
-  socket.on("sounds", (value) => {
-    chatCore.setSounds(socket, value);
-  });
   socket.on("disconnect", () => {
     chatCore.leaveChat(socket);
   });
 
-  chatCore.enterChat(socket);
   chatCore.sendLatestMessages(socket);
 }

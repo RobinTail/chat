@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/UserContext.ts";
 import { MessageProps } from "./Message.tsx";
 import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
+import { Root } from "../client.ts";
 
 export const Chat = () => {
   const [isConnected, setConnected] = useState(false);
@@ -14,7 +15,8 @@ export const Chat = () => {
   const [isTyping, setTyping] = React.useState(false);
   const { sounds } = React.useContext(UserContext);
   const socket = React.useMemo(
-    () => io("http://localhost:8090/", { withCredentials: true }),
+    () =>
+      io("http://localhost:8090/", { withCredentials: true }) as Root.Socket,
     [],
   );
 

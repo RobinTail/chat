@@ -1,81 +1,11 @@
-import session from "express-session";
-import { createConfig, createServer } from "express-zod-api";
+import { createServer } from "express-zod-api";
 import passport from "passport";
-import { z } from "zod";
-import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
-import { sessionSalt } from "../secrets";
-import { fbStrategy, ggStrategy, twStrategy } from "./authStrategies";
-import express from "express";
-import { User, userSchema } from "./user";
+import { attachSockets, Config } from "zod-sockets";
+import { httpConfig, socketConfig } from "./config";
+import { sessionMw } from "./session-mw";
 
-const sessMw = session({
-  secret: process.env.SESSION_SECRET || sessionSalt,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false },
-});
-
-const { httpServer, logger } = await createServer(
-  createConfig({
-    server: {
-      listen: 8090,
-      beforeRouting: ({ app }) => {
-        app.use(sessMw);
-        app.use(passport.initialize());
-        app.use(passport.session());
-        passport.use(fbStrategy);
-        passport.use(twStrategy);
-        passport.use(ggStrategy);
-        passport.serializeUser((user, done) => {
-          done(null, JSON.stringify(user));
-        });
-        passport.deserializeUser((user, done) => {
-          done(null, typeof user === "string" ? JSON.parse(user) : null);
-        });
-        app.get("/logout", (req, res) => {
-          req.logout(() => res.redirect("http://localhost:8080"));
-        });
-        app.get("/auth/facebook", passport.authenticate("facebook"));
-        app.get(
-          "/auth/facebook/callback",
-          passport.authenticate("facebook"),
-          (req, res) => {
-            res.redirect(
-              "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-            );
-          },
-        );
-        app.get("/auth/twitter", passport.authenticate("twitter"));
-        app.get(
-          "/auth/twitter/callback",
-          passport.authenticate("twitter"),
-          (req, res) => {
-            res.redirect(
-              "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-            );
-          },
-        );
-        app.get(
-          "/auth/google",
-          passport.authenticate("google", { scope: ["email", "profile"] }),
-        );
-        app.get(
-          "/auth/google/callback",
-          passport.authenticate("google"),
-          (req, res) => {
-            res.redirect(
-              "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-            );
-          },
-        );
-      },
-    },
-    logger: { level: "debug", color: true },
-    cors: true,
-  }),
-  {},
-);
+const { httpServer, logger } = await createServer(httpConfig, {});
 
 const io = new Server({
   cors: {
@@ -87,27 +17,10 @@ const io = new Server({
 await attachSockets({
   io,
   target: httpServer,
-  config: createSimpleConfig({
-    logger,
-    emission: {
-      enter_chat: {
-        schema: z.tuple([userSchema]),
-      },
-    },
-    hooks: {
-      onConnection: async ({ logger, client }) => {
-        const sessionUser = client.getRequest<express.Request>().user;
-        if (!sessionUser) {
-          return;
-        }
-        logger.info("authenticated user", sessionUser);
-        await client.broadcast("enter_chat", sessionUser as User);
-      },
-    },
-  }),
+  config: new Config({ ...socketConfig, logger }),
   actions: [],
 });
 
-io.engine.use(sessMw);
+io.engine.use(sessionMw);
 io.engine.use(passport.initialize());
 io.engine.use(passport.session());
