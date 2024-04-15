@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React from "react";
+import React, { useState } from "react";
 import smoothScroll from "smoothscroll";
 import "ion-sound";
 import io from "socket.io-client";
@@ -9,6 +9,7 @@ import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
 
 export const Chat = () => {
+  const [isConnected, setConnected] = useState(false);
   const [messages, setMessages] = React.useState<MessageProps[]>([]);
   const [isTyping, setTyping] = React.useState(false);
   const { sounds } = React.useContext(UserContext);
@@ -18,28 +19,21 @@ export const Chat = () => {
   );
 
   React.useEffect(() => {
-    socket.on("connect", () => {
-      setMessages((current) =>
-        current.concat({
-          author: { name: "System" },
-          isSystem: true,
-          text: "Connected",
-          at: new Date(),
-        }),
-      );
-    });
-    socket.on("connect_error", () => {
-      setMessages((current) =>
-        current.concat({
-          author: { name: "System" },
-          isSystem: true,
-          severity: "critical",
-          text: "Connection lost",
-          at: new Date(),
-        }),
-      );
-    });
+    socket.on("connect", () => setConnected(true));
+    socket.on("connect_error", () => setConnected(false));
   }, [socket]);
+
+  React.useEffect(() => {
+    setMessages((current) =>
+      current.concat({
+        author: { name: "System" },
+        isSystem: true,
+        severity: isConnected ? undefined : "critical",
+        text: isConnected ? "Connected" : "Connection lost",
+        at: new Date(),
+      }),
+    );
+  }, [isConnected]);
 
   React.useEffect(() => {
     window.ion.sound({
