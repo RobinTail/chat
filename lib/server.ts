@@ -96,7 +96,7 @@ await attachSockets({
     },
     hooks: {
       onConnection: async ({ logger, client }) => {
-        const sessionUser = (client.getRequest() as express.Request).user;
+        const sessionUser = client.getRequest<express.Request>().user;
         if (!sessionUser) {
           return;
         }
