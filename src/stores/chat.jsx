@@ -2,7 +2,6 @@ import appData from "../AppData.js";
 import dispatcher from "../dispatcher/dispatcher";
 import { actionTypes } from "../constants/constants";
 import EventEmitter from "events";
-import linkifyString from "linkifyjs/string";
 import moment from "moment";
 
 const DATE_MESSAGE_KEY_FORMAT = "YYYY-MM-DD";

@@ -16,46 +16,11 @@ export default new (class ChatAPI extends EventEmitter {
 
     if (appData.get("isAuthenticated")) {
       this._socket = io.connect(document.location.origin);
-      this._socket.on("connect", this._afterConnected.bind(this));
-      this._socket.on("connect_error", this._afterConnectionLost.bind(this));
       this._socket.on("enter_chat", this._enterChat.bind(this));
       this._socket.on("leave_chat", this._leaveChat.bind(this));
       this._socket.on("new", this._newMessages.bind(this));
       this._socket.on("start_typing", this._theyStartTyping.bind(this));
       this._socket.on("stop_typing", this._theyStopTyping.bind(this));
-    }
-  }
-
-  _afterConnected() {
-    if (this._isConnectionLost) {
-      this._isConnectionLost = false;
-      this.emitMessages([
-        {
-          author: {
-            name: "System",
-          },
-          isSystem: true,
-          text: "Connected",
-          at: new Date(),
-        },
-      ]);
-    }
-  }
-
-  _afterConnectionLost(/*err*/) {
-    if (!this._isConnectionLost) {
-      this._isConnectionLost = true;
-      this.emitMessages([
-        {
-          author: {
-            name: "System",
-          },
-          isSystem: true,
-          isCritical: true,
-          text: "Connection lost",
-          at: new Date(),
-        },
-      ]);
     }
   }
 

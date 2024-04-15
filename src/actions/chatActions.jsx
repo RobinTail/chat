@@ -1,8 +1,6 @@
 import Dispatcher from "../dispatcher/dispatcher";
 import { actionTypes } from "../constants/constants";
 import chatAPI from "../api/chat";
-import { find as linkifyFind } from "linkifyjs";
-import embedlyApi from "../api/embedly";
 
 function emitNewMessages(messages) {
   Dispatcher.dispatch({
