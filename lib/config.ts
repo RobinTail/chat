@@ -4,6 +4,7 @@ import passport from "passport";
 import { z } from "zod";
 import { createSimpleConfig } from "zod-sockets";
 import { fbStrategy, ggStrategy, twStrategy } from "./authStrategies";
+import { messageSchema } from "./message";
 import { sessionMw } from "./session-mw";
 import { User, userSchema } from "./user";
 
@@ -67,9 +68,8 @@ export const httpConfig = createConfig({
 
 export const socketConfig = createSimpleConfig({
   emission: {
-    enter_chat: {
-      schema: z.tuple([userSchema]),
-    },
+    enter_chat: { schema: z.tuple([userSchema]) },
+    new_messages: { schema: z.tuple([messageSchema.array()]) },
   },
   hooks: {
     onConnection: async ({ logger, client }) => {

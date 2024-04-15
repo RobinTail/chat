@@ -35,6 +35,9 @@ export const Chat = () => {
         }),
       );
     });
+    socket.on("new_messages", (incoming) => {
+      setMessages((current) => current.concat(incoming));
+    });
   }, [socket]);
 
   React.useEffect(() => {
@@ -76,8 +79,8 @@ export const Chat = () => {
       <MessagesList messages={messages} />
       <MessageComposer
         setTyping={setTyping}
-        onSend={() => {
-          /* @todo */
+        onSend={(text) => {
+          socket.emit("submit", text);
         }}
         others={
           [

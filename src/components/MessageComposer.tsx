@@ -31,7 +31,7 @@ export const MessageComposer = ({
       onSend(message);
       setMessage("");
     }
-  }, []);
+  }, [message, onSend]);
 
   return (
     <Box

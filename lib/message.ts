@@ -1,10 +1,8 @@
-export interface Message {
-  author: {
-    id: string;
-    name: string;
-    provider: string;
-    avatar: string;
-  };
-  at: Date;
-  text: string;
-}
+import { z } from "zod";
+import { userSchema } from "./user";
+
+export const messageSchema = z.object({
+  author: userSchema,
+  at: z.date(),
+  text: z.string(),
+});

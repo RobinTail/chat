@@ -3,15 +3,15 @@ import ggLogo from "./assets/gg.svg";
 import twLogo from "./assets/tw.svg";
 
 export const providers = {
-  fb: {
+  facebook: {
     color: "#3b5998",
     logo: fbLogo,
   },
-  tw: {
+  twitter: {
     color: "#00aced",
     logo: twLogo,
   },
-  gg: {
+  google: {
     color: "#dd4b39",
     logo: ggLogo,
   },

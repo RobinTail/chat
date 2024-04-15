@@ -43,9 +43,9 @@ export const Auth = () => (
         justifyContent: "center",
       }}
     >
-      <AuthButton provider="fb" url="/auth/facebook" />
-      <AuthButton provider="tw" url="/auth/twitter" />
-      <AuthButton provider="gg" url="/auth/google" />
+      <AuthButton provider="facebook" url="/auth/facebook" />
+      <AuthButton provider="twitter" url="/auth/twitter" />
+      <AuthButton provider="google" url="/auth/google" />
     </Box>
   </Box>
 );
