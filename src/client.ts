@@ -4,7 +4,7 @@ export namespace Root {
   /** @desc The actual path of the Root namespace */
   export const path = "/";
   export interface Emission {
-    enter_chat: (p1: {
+    enter_chat: (user: {
       oauthID: string;
       name: string;
       provider: string;

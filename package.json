@@ -8,7 +8,8 @@
     "test": "yarn lint && yarn test:unit && yarn test:int",
     "lint": "eslint .",
     "test:unit": "NODE_ENV=test vitest ./test/unit",
-    "test:int": "NODE_ENV=test vitest ./test/integration"
+    "test:int": "NODE_ENV=test vitest ./test/integration",
+    "build:client": "tsx lib/generate-client.ts && eslint --fix src/client.ts"
   },
   "repository": {
     "type": "git",
