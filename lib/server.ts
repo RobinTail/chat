@@ -6,20 +6,22 @@ import { attachSockets, createSimpleConfig } from "zod-sockets";
 import { Server } from "socket.io";
 import { sessionSalt } from "../secrets";
 import { fbStrategy, ggStrategy, twStrategy } from "./authStrategies";
+import express from "express";
+import { User } from "./user";
+
+const sessMw = session({
+  secret: process.env.SESSION_SECRET || sessionSalt,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false },
+});
 
 const { httpServer, logger } = await createServer(
   createConfig({
     server: {
       listen: 8090,
       beforeRouting: ({ app }) => {
-        app.use(
-          session({
-            secret: process.env.SESSION_SECRET || sessionSalt,
-            resave: false,
-            saveUninitialized: true,
-            cookie: { secure: true },
-          }),
-        );
+        app.use(sessMw);
         app.use(passport.initialize());
         app.use(passport.session());
         passport.use(fbStrategy);
@@ -78,6 +80,7 @@ const { httpServer, logger } = await createServer(
 const io = new Server({
   cors: {
     origin: "http://localhost:8080",
+    credentials: true,
   },
 });
 
@@ -99,8 +102,12 @@ await attachSockets({
     },
     hooks: {
       onConnection: async ({ logger, client }) => {
-        logger.debug("handshake", client.handshake);
-        const sessionUser = client.handshake.auth.passport?.user;
+        logger.debug(
+          "session",
+          (client.getRequest() as express.Request).session,
+        );
+        const sessionUser = (client.getRequest() as express.Request).session
+          .passport?.user;
         if (!sessionUser) {
           return;
         }
@@ -110,3 +117,14 @@ await attachSockets({
   }),
   actions: [],
 });
+
+io.engine.use(sessMw);
+
+// @todo move
+declare module "express-session" {
+  interface SessionData {
+    passport?: {
+      user?: User;
+    };
+  }
+}
