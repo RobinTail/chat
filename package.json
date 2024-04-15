@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsx lib/server.ts",
     "test": "yarn lint && yarn test:unit && yarn test:int",
-    "lint": "eslint . --ext .js,.jsx",
+    "lint": "eslint .",
     "test:unit": "NODE_ENV=test vitest ./test/unit",
     "test:int": "NODE_ENV=test vitest ./test/integration"
   },
@@ -32,7 +32,6 @@
     "flux": "^2.1.1",
     "http-errors": "^2.0.0",
     "ion-sound": "^3.0.7",
-    "keymirror": "^0.1.1",
     "linkify-react": "^4.1.3",
     "linkifyjs": "^4.1.3",
     "merge-sx": "^2.0.0",
