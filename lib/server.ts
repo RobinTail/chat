@@ -7,7 +7,7 @@ import { Server } from "socket.io";
 import { sessionSalt } from "../secrets";
 import { fbStrategy, ggStrategy, twStrategy } from "./authStrategies";
 import express from "express";
-import { User } from "./user";
+import { User, userSchema } from "./user";
 
 const sessMw = session({
   secret: process.env.SESSION_SECRET || sessionSalt,
@@ -94,13 +94,7 @@ await attachSockets({
     logger,
     emission: {
       enter_chat: {
-        schema: z.tuple([
-          z.object({
-            id: z.string(),
-            name: z.string(),
-            provider: z.string(),
-          }),
-        ]),
+        schema: z.tuple([userSchema]),
       },
     },
     hooks: {
@@ -115,6 +109,7 @@ await attachSockets({
           return;
         }
         logger.info("authenticated user", sessionUser);
+        await client.broadcast("enter_chat", sessionUser);
       },
     },
   }),
