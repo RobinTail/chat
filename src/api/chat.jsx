@@ -16,28 +16,10 @@ export default new (class ChatAPI extends EventEmitter {
 
     if (appData.get("isAuthenticated")) {
       this._socket = io.connect(document.location.origin);
-      this._socket.on("enter_chat", this._enterChat.bind(this));
       this._socket.on("leave_chat", this._leaveChat.bind(this));
       this._socket.on("new", this._newMessages.bind(this));
       this._socket.on("start_typing", this._theyStartTyping.bind(this));
       this._socket.on("stop_typing", this._theyStopTyping.bind(this));
-    }
-  }
-
-  _enterChat(data) {
-    if (!this._onlineUsers.find((item) => item.id === data.id)) {
-      this._onlineUsers.push(data);
-      this.emitMessages([
-        {
-          author: {
-            name: "System",
-          },
-          isSystem: true,
-          isWarning: true,
-          text: data.name + " (" + data.provider + ") enters chat.",
-          at: new Date(),
-        },
-      ]);
     }
   }
 
@@ -114,21 +96,5 @@ export default new (class ChatAPI extends EventEmitter {
 
   emitTyping(data, isStart) {
     this.emit(TYPING_EVENT, data, isStart);
-  }
-
-  addMessagesListener(callback) {
-    this.on(MESSAGE_EVENT, callback);
-  }
-
-  removeMessagesListener(callback) {
-    this.removeListener(MESSAGE_EVENT, callback);
-  }
-
-  addTypingListener(callback) {
-    this.on(TYPING_EVENT, callback);
-  }
-
-  removeTypingListener(callback) {
-    this.removeListener(TYPING_EVENT, callback);
   }
 })();

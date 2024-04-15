@@ -21,6 +21,18 @@ export const Chat = () => {
   React.useEffect(() => {
     socket.on("connect", () => setConnected(true));
     socket.on("connect_error", () => setConnected(false));
+    socket.on("enter_chat", (data) => {
+      // @todo duplicates
+      setMessages((current) =>
+        current.concat({
+          author: { name: "System" },
+          isSystem: true,
+          severity: "warning",
+          text: data.name + " (" + data.provider + ") enters chat.",
+          at: new Date(),
+        }),
+      );
+    });
   }, [socket]);
 
   React.useEffect(() => {
