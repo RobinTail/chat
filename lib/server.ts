@@ -16,9 +16,6 @@ const sessMw = session({
   cookie: { secure: false },
 });
 
-const serializer = JSON.stringify;
-const deserializer = JSON.parse;
-
 const { httpServer, logger } = await createServer(
   createConfig({
     server: {
@@ -31,10 +28,10 @@ const { httpServer, logger } = await createServer(
         passport.use(twStrategy);
         passport.use(ggStrategy);
         passport.serializeUser((user, done) => {
-          done(null, serializer(user));
+          done(null, JSON.stringify(user));
         });
         passport.deserializeUser((user, done) => {
-          done(null, typeof user === "string" ? deserializer(user) : null);
+          done(null, typeof user === "string" ? JSON.parse(user) : null);
         });
         app.get("/logout", (req, res) => {
           req.logout(() => res.redirect("http://localhost:8080"));
@@ -99,17 +96,12 @@ await attachSockets({
     },
     hooks: {
       onConnection: async ({ logger, client }) => {
-        const sessionObj = (client.getRequest() as express.Request).session;
-        const serializedUser = sessionObj.passport?.user;
-        const sessionUser =
-          typeof serializedUser === "string"
-            ? (deserializer(serializedUser) as User)
-            : undefined;
+        const sessionUser = (client.getRequest() as express.Request).user;
         if (!sessionUser) {
           return;
         }
         logger.info("authenticated user", sessionUser);
-        await client.broadcast("enter_chat", sessionUser);
+        await client.broadcast("enter_chat", sessionUser as User);
       },
     },
   }),
@@ -117,3 +109,5 @@ await attachSockets({
 });
 
 io.engine.use(sessMw);
+io.engine.use(passport.initialize());
+io.engine.use(passport.session());
