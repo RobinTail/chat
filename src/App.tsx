@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
-import React from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import useLocalStorageState from "use-local-storage-state";
 import { Chat } from "./components/Chat.tsx";
 import { Modal } from "./components/Modal.tsx";
 import { ModalContext } from "./contexts/ModalContext.ts";
@@ -18,14 +17,10 @@ import { Header } from "./components/Header.tsx";
 
 export const App = () => {
   const [params] = useSearchParams();
-  const [user, setUser, { removeItem: logout }] = useLocalStorageState("user", {
-    defaultValue: {
-      oauthID: null as string | null,
-      name: null as string | null,
-      provider: null as string | null,
-      avatar: null as string | null,
-    },
-  });
+  const [user, setUser] = useState<null | Record<
+    "oauthID" | "name" | "provider" | "avatar",
+    string | null
+  >>(null);
   const [sounds, setSounds] = React.useState(true);
   const [modalVisibility, setModalVisibility] = React.useState(false);
   const [notice, setNotice] = React.useState({ title: "", message: "" });
@@ -39,7 +34,7 @@ export const App = () => {
         avatar: params.get("avatar"),
       });
     }
-  }, []);
+  }, [params]);
 
   const hideModal = React.useCallback(() => setModalVisibility(false), []);
   const notify = React.useCallback((title: string, message: string) => {
@@ -57,7 +52,7 @@ export const App = () => {
           notify,
         }}
       >
-        {user.oauthID ? (
+        {user ? (
           <Box
             sx={{
               mx: "auto",
@@ -85,7 +80,7 @@ export const App = () => {
                   zIndex: -1,
                 }}
               />
-              <Header logout={logout} />
+              <Header logout={() => setUser(null)} />
               <Chat />
             </UserContext.Provider>
           </Box>
