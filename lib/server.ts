@@ -16,6 +16,9 @@ const sessMw = session({
   cookie: { secure: false },
 });
 
+const serializer = JSON.stringify;
+const deserializer = JSON.parse;
+
 const { httpServer, logger } = await createServer(
   createConfig({
     server: {
@@ -28,10 +31,10 @@ const { httpServer, logger } = await createServer(
         passport.use(twStrategy);
         passport.use(ggStrategy);
         passport.serializeUser((user, done) => {
-          done(null, JSON.stringify(user));
+          done(null, serializer(user));
         });
         passport.deserializeUser((user, done) => {
-          done(null, typeof user === "string" ? JSON.parse(user) : null);
+          done(null, typeof user === "string" ? deserializer(user) : null);
         });
         app.get("/logout", (req, res) => {
           req.logout(() => res.redirect("http://localhost:8080"));
@@ -102,12 +105,12 @@ await attachSockets({
     },
     hooks: {
       onConnection: async ({ logger, client }) => {
-        logger.debug(
-          "session",
-          (client.getRequest() as express.Request).session,
-        );
-        const sessionUser = (client.getRequest() as express.Request).session
-          .passport?.user;
+        const sessionObj = (client.getRequest() as express.Request).session;
+        const serializedUser = sessionObj.passport?.user;
+        const sessionUser =
+          typeof serializedUser === "string"
+            ? deserializer(serializedUser)
+            : undefined;
         if (!sessionUser) {
           return;
         }
@@ -124,7 +127,7 @@ io.engine.use(sessMw);
 declare module "express-session" {
   interface SessionData {
     passport?: {
-      user?: User;
+      user?: string;
     };
   }
 }
