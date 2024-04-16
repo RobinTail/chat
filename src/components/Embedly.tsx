@@ -3,7 +3,8 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import { mergeSx } from "merge-sx";
 import React from "react";
-import { embedlyKey } from "../../secrets.ts";
+
+import { embedlyKey } from "../apiKeys.ts";
 
 interface EmbedObj {
   type: "photo" | "video" | "link" | "rich" | "error";
