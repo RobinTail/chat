@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "tsx lib/server.ts",
-    "test": "yarn lint && yarn test:unit && yarn test:int",
+    "test": "yarn lint && yarn test:types && yarn test:unit && yarn test:int",
     "lint": "eslint .",
+    "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
     "test:unit": "NODE_ENV=test vitest ./test/unit",
     "test:int": "NODE_ENV=test vitest ./test/integration",
     "build:client": "tsx lib/generate-client.ts && eslint --fix src/client.ts"
