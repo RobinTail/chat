@@ -19,6 +19,7 @@ export const Chat = () => {
   const [messages, setMessages] = React.useState<MessageProps[]>([]);
   const { sounds } = React.useContext(UserContext);
   const [othersTyping, setOthersTyping] = React.useState<string[]>([]);
+  const [isTyping, setTyping] = React.useState(false);
 
   React.useEffect(() => {
     socket.connect();
@@ -63,6 +64,10 @@ export const Chat = () => {
   }, []);
 
   React.useEffect(() => {
+    socket.emit("typing", isTyping);
+  }, [isTyping]);
+
+  React.useEffect(() => {
     setMessages((current) =>
       current.concat({
         author: { name: "System" },
@@ -100,9 +105,7 @@ export const Chat = () => {
     >
       <MessagesList messages={messages} />
       <MessageComposer
-        onTyping={(isTyping) => {
-          socket.emit("typing", isTyping);
-        }}
+        onTyping={setTyping}
         onSend={(text) => {
           socket.emit("submit", text);
         }}
