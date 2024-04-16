@@ -48,7 +48,20 @@ export const Chat = () => {
       );
     });
     socket.on("new_messages", (incoming) => {
-      setMessages((current) => current.concat(incoming));
+      setMessages((current) => {
+        const lastMsg = current[current.length - 1];
+        let lastAuthorId = lastMsg?.author?.oauthID;
+        return current.concat(
+          incoming.map((msg) => {
+            const result = {
+              ...msg,
+              isSameAuthor: lastAuthorId === msg.author.oauthID,
+            };
+            lastAuthorId = msg.author.oauthID;
+            return result;
+          }),
+        );
+      });
     });
     socket.on("typing", (names) => setOthersTyping(names));
     /** strict mode runs this effect twice, cleanup required */
