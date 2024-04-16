@@ -46,6 +46,7 @@ export const Message = ({
     [text],
   );
 
+  const Logo = author.provider ? providers[author.provider].Logo : undefined;
   const avatar = isSameAuthor ? (
     <Box
       sx={{
@@ -61,13 +62,18 @@ export const Message = ({
       badgeContent={
         author.provider && (
           <Avatar
-            src={author.provider && providers[author.provider].logo}
             sx={{
               width: "20px",
               height: "20px",
               backgroundColor: providers[author.provider].color,
+              "& svg": {
+                maxWidth: "80%",
+                maxHeight: "80%",
+              },
             }}
-          />
+          >
+            {Logo && <Logo />}
+          </Avatar>
         )
       }
     >

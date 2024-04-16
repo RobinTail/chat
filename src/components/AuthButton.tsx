@@ -10,28 +10,32 @@ export const AuthButton = ({
   disabled?: boolean;
   url: string;
   provider: Provider;
-}) => (
-  <Box
-    onClick={
-      disabled
-        ? undefined
-        : () => window.location.replace(`http://localhost:8090${url}`)
-    }
-    sx={mergeSx(
-      {
+}) => {
+  const { Logo } = providers[provider];
+
+  return (
+    <Box
+      onClick={
+        disabled
+          ? undefined
+          : () => window.location.replace(`http://localhost:8090${url}`)
+      }
+      sx={mergeSx({
+        display: "flex",
         flex: "1 0 33%",
         height: "100%",
-        backgroundPosition: "50% 50%",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "auto 50%",
         cursor: "pointer",
         maxWidth: { xs: "100%", md: "200px" },
-      },
-      {
-        backgroundColor: providers[provider].color,
-        backgroundImage: `url(${providers[provider].logo})`,
-      },
-      disabled && { backgroundColor: "silver" },
-    )}
-  />
-);
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: disabled ? "silver" : providers[provider].color,
+        "& > svg": {
+          maxWidth: "100%",
+          maxHeight: "100%",
+        },
+      })}
+    >
+      <Logo />
+    </Box>
+  );
+};

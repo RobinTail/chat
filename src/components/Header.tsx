@@ -1,24 +1,18 @@
-import { SxProps } from "@mui/material";
+import Logout from "@mui/icons-material/Logout";
+import VolumeUp from "@mui/icons-material/VolumeUp";
+import VolumeOff from "@mui/icons-material/VolumeOff";
+import IconButton from "@mui/material/IconButton";
+import type { SxProps } from "@mui/material/";
 import Box from "@mui/material/Box";
-import { mergeSx } from "merge-sx";
 import React from "react";
 import { version } from "../../package.json";
 import { UserContext } from "../contexts/UserContext.ts";
-import soundOn from "../assets/sound-on.svg";
-import soundOff from "../assets/sound-off.svg";
-import logoutIcon from "../assets/logout.svg";
 
 const btnSx: SxProps = {
-  display: "inline-block",
-  width: "20px",
-  height: "20px",
-  verticalAlign: "middle",
+  p: 0,
   mt: "4px",
   mr: "20px",
-  cursor: "pointer",
-  backgroundSize: "contain",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
+  color: "black",
 };
 
 export const Header = ({ logout }: { logout: () => void }) => {
@@ -75,19 +69,18 @@ export const Header = ({ logout }: { logout: () => void }) => {
           pl: "20px",
         }}
       >
-        <Box
-          sx={mergeSx(btnSx, {
-            backgroundImage: `url(${sounds ? soundOn : soundOff})`,
-          })}
-          onClick={() => setSounds(!sounds)}
-        ></Box>
-        <Box
-          sx={mergeSx(btnSx, { backgroundImage: `url(${logoutIcon})` })}
+        <IconButton sx={btnSx} onClick={() => setSounds(!sounds)}>
+          {sounds ? <VolumeUp /> : <VolumeOff />}
+        </IconButton>
+        <IconButton
+          sx={btnSx}
           onClick={() => {
             logout();
             window.location.replace("http://localhost:8090/logout");
           }}
-        ></Box>
+        >
+          <Logout />
+        </IconButton>
       </Box>
     </Box>
   );

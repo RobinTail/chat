@@ -2,6 +2,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import React from "react";
+import Send from "@mui/icons-material/Send";
 import {
   wrapperDefault,
   wrapperMD,
@@ -9,7 +10,6 @@ import {
   wrapperXS,
   wrapperXSPadding,
 } from "../vars.tsx";
-import msgSend from "../assets/msg-send.svg";
 
 const TYPING_TIMEOUT = 800;
 
@@ -150,16 +150,14 @@ export const MessageComposer = ({
             borderTopRightRadius: "5px",
             borderBottomRightRadius: "5px",
             backgroundColor: "#6bba6b",
-            backgroundImage: `url(${msgSend})`,
-            backgroundPosition: "50% 50%",
-            backgroundSize: "40px",
-            backgroundRepeat: "no-repeat",
-            color: "rgba(51, 51, 51, 0)",
             outline: 0,
             cursor: "pointer",
+            color: "white",
           }}
           onClick={send}
-        ></Button>
+        >
+          <Send />
+        </Button>
       </Box>
     </Box>
   );

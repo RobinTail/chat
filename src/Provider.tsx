@@ -1,20 +1,21 @@
-import fbLogo from "./assets/fb.svg";
-import ggLogo from "./assets/gg.svg";
-import twLogo from "./assets/tw.svg";
+import React from "react";
+import { Facebook } from "./icons/Facebook.tsx";
+import { Google } from "./icons/Google.tsx";
+import { Twitter } from "./icons/Twitter.tsx";
 
 export const providers = {
   facebook: {
     color: "#3b5998",
-    logo: fbLogo,
+    Logo: Facebook,
   },
   twitter: {
     color: "#00aced",
-    logo: twLogo,
+    Logo: Twitter,
   },
   google: {
     color: "#dd4b39",
-    logo: ggLogo,
+    Logo: Google,
   },
-} satisfies Record<string, Record<"color" | "logo", string>>;
+} satisfies Record<string, { color: string; Logo: React.FC }>;
 
 export type Provider = keyof typeof providers;
