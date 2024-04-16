@@ -8,7 +8,8 @@
     "test": "yarn lint && yarn test:types",
     "lint": "eslint .",
     "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
-    "build:client": "tsx lib/generate-client.ts && eslint --fix src/client.ts"
+    "build:client": "tsx lib/generate-client.ts && eslint --fix src/client.ts",
+    "build:app": "vite build"
   },
   "repository": {
     "type": "git",
