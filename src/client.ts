@@ -7,7 +7,7 @@ export namespace Root {
     enter_chat: (user: {
       oauthID: string;
       name: string;
-      provider: string;
+      provider: "facebook" | "twitter" | "google";
       avatar: string;
     }) => void;
     new_messages: (
@@ -16,7 +16,7 @@ export namespace Root {
         author: {
           oauthID: string;
           name: string;
-          provider: string;
+          provider: "facebook" | "twitter" | "google";
           avatar: string;
         };
         at: Date;

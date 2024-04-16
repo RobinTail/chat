@@ -4,7 +4,7 @@ export const userSchema = z
   .object({
     oauthID: z.string(),
     name: z.string(),
-    provider: z.string(),
+    provider: z.enum(["facebook", "twitter", "google"]),
     avatar: z.string(),
   })
   .describe("user");
