@@ -69,16 +69,27 @@ export const httpConfig = createConfig({
 export const socketConfig = createSimpleConfig({
   emission: {
     enter_chat: { schema: z.tuple([userSchema]) },
+    leave_chat: { schema: z.tuple([userSchema]) },
     new_messages: { schema: z.tuple([messageSchema.array()]) },
   },
   hooks: {
     onConnection: async ({ logger, client }) => {
+      logger.debug("Connected user", client.id);
       const sessionUser = client.getRequest<express.Request>().user;
       if (!sessionUser) {
         return;
       }
-      logger.info("authenticated user", sessionUser);
+      logger.debug("authenticated user", sessionUser);
       await client.broadcast("enter_chat", sessionUser as User);
+    },
+    onDisconnect: async ({ logger, client }) => {
+      logger.debug("Disconnected user", client.id);
+      const sessionUser = client.getRequest<express.Request>().user;
+      if (!sessionUser) {
+        return;
+      }
+      logger.debug("authenticated user", sessionUser);
+      await client.broadcast("leave_chat", sessionUser as User);
     },
   },
 });

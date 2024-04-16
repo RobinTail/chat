@@ -7,9 +7,6 @@ export function ioConnect(socket) {
   socket.on("stop_typing", () => {
     chatCore.stopTyping(socket);
   });
-  socket.on("disconnect", () => {
-    chatCore.leaveChat(socket);
-  });
 
   chatCore.sendLatestMessages(socket);
 }

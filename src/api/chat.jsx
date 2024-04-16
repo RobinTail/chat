@@ -8,11 +8,9 @@ const TYPING_EVENT = "typing";
 export default new (class ChatAPI extends EventEmitter {
   constructor() {
     super();
-    this._isConnectionLost = false;
     this._areLatestReceived = false;
     this._socket = null;
     this._lastOwnMessageNumber = 0;
-    this._onlineUsers = [];
 
     if (appData.get("isAuthenticated")) {
       this._socket = io.connect(document.location.origin);
@@ -20,24 +18,6 @@ export default new (class ChatAPI extends EventEmitter {
       this._socket.on("new", this._newMessages.bind(this));
       this._socket.on("start_typing", this._theyStartTyping.bind(this));
       this._socket.on("stop_typing", this._theyStopTyping.bind(this));
-    }
-  }
-
-  _leaveChat(data) {
-    let i = this._onlineUsers.findIndex((item) => item.id === data.id);
-    if (i !== -1) {
-      this._onlineUsers.splice(i, 1);
-      this.emitMessages([
-        {
-          author: {
-            name: "System",
-          },
-          isSystem: true,
-          isWarning: true,
-          text: data.name + " (" + data.provider + ") leaves chat.",
-          at: new Date(),
-        },
-      ]);
     }
   }
 

@@ -24,13 +24,24 @@ export const Chat = () => {
     socket.connect();
     socket.on("connect", () => setConnected(true));
     socket.on("connect_error", () => setConnected(false));
-    socket.on("enter_chat", (data) => {
+    socket.on("enter_chat", ({ name, provider }) => {
       setMessages((current) =>
         current.concat({
           author: { name: "System" },
           isSystem: true,
           severity: "warning",
-          text: data.name + " (" + data.provider + ") enters chat.",
+          text: `${name} (${provider}) enters chat.`,
+          at: new Date(),
+        }),
+      );
+    });
+    socket.on("leave_chat", ({ name, provider }) => {
+      setMessages((current) =>
+        current.concat({
+          author: { name: "System" },
+          isSystem: true,
+          severity: "warning",
+          text: `${name} (${provider}) leaves chat.`,
           at: new Date(),
         }),
       );
@@ -44,6 +55,7 @@ export const Chat = () => {
       socket.removeAllListeners("connect");
       socket.removeAllListeners("connect_error");
       socket.removeAllListeners("enter_chat");
+      socket.removeAllListeners("leave_chat");
       socket.removeAllListeners("new_messages");
     };
   }, []);

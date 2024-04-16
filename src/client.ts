@@ -10,6 +10,12 @@ export namespace Root {
       provider: "facebook" | "twitter" | "google";
       avatar: string;
     }) => void;
+    leave_chat: (user: {
+      oauthID: string;
+      name: string;
+      provider: "facebook" | "twitter" | "google";
+      avatar: string;
+    }) => void;
     new_messages: (
       p1: {
         /** user */
