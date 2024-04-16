@@ -15,7 +15,7 @@ export const fbStrategy = new FBStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      provider: profile.provider,
+      provider: profile.provider as "facebook",
       avatar: profile.photos?.length ? profile.photos[0].value : "",
     } satisfies User),
 );
@@ -30,7 +30,7 @@ export const twStrategy = new TWStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      provider: profile.provider,
+      provider: profile.provider as "twitter",
       avatar: profile.photos?.length ? profile.photos[0].value : "",
     } satisfies User),
 );
@@ -45,7 +45,7 @@ export const ggStrategy = new GGStrategy(
     done(null, {
       oauthID: profile.id,
       name: profile.displayName,
-      provider: profile.provider,
+      provider: profile.provider as "google",
       avatar: profile.photos?.length ? profile.photos[0].value : "",
     } satisfies User);
   },
