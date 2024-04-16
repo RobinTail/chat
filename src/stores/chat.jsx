@@ -125,23 +125,7 @@ export default new (class ChatStore extends EventEmitter {
     });
   }
 
-  getMessages() {
-    return this._messages;
-  }
-
-  getTyping() {
-    return this._typing;
-  }
-
   emitChange(section) {
     this.emit(CHANGE_EVENT, section);
-  }
-
-  addChangeListener(callback) {
-    this.on(CHANGE_EVENT, callback);
-  }
-
-  removeChangeListener(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
   }
 })();

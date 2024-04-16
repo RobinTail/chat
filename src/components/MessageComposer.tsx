@@ -2,7 +2,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import React from "react";
-import { MessageProps } from "./Message.tsx";
 import {
   wrapperDefault,
   wrapperMD,
@@ -15,13 +14,13 @@ import msgSend from "../assets/msg-send.svg";
 const TYPING_TIMEOUT = 800;
 
 export const MessageComposer = ({
-  setTyping,
+  onTyping,
   onSend,
   others,
 }: {
-  setTyping: (next: boolean) => void;
+  onTyping: (isTyping: boolean) => void;
   onSend: (msg: string) => void;
-  others: MessageProps["author"][];
+  others: string[];
 }) => {
   const [message, setMessage] = React.useState("");
   const timer = React.useRef<NodeJS.Timeout>();
@@ -72,7 +71,7 @@ export const MessageComposer = ({
           {others.length > 3 ? (
             <strong>{`${others.length} persons`}</strong>
           ) : (
-            others.map(({ name }, index) => (
+            others.map((name, index) => (
               <>
                 <strong key={index}>{name}</strong>
                 {index < others.length - 1 ? <em> &amp; </em> : null}
@@ -130,12 +129,12 @@ export const MessageComposer = ({
           }}
           onChange={(e) => {
             setMessage(e.target.value);
-            setTyping(true);
+            onTyping(true);
             if (timer.current) {
               clearTimeout(timer.current);
             }
             timer.current = setTimeout(() => {
-              setTyping(false);
+              onTyping(false);
             }, TYPING_TIMEOUT);
           }}
           autoComplete="off"

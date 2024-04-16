@@ -29,9 +29,11 @@ export namespace Root {
         text: string;
       }[],
     ) => void;
+    typing: (p1: string[]) => void;
   }
   export interface Actions {
     submit: (text: string) => void;
+    typing: (p1: boolean) => void;
   }
   /** @example const socket: Root.Socket = io(Root.path) */
   export type Socket = SocketBase<Emission, Actions>;

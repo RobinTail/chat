@@ -71,6 +71,7 @@ export const socketConfig = createSimpleConfig({
     enter_chat: { schema: z.tuple([userSchema]) },
     leave_chat: { schema: z.tuple([userSchema]) },
     new_messages: { schema: z.tuple([messageSchema.array()]) },
+    typing: { schema: z.tuple([z.string().array()]) },
   },
   hooks: {
     onConnection: async ({ logger, client }) => {

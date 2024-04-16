@@ -17,8 +17,8 @@ const socket = io("http://localhost:8090/", {
 export const Chat = () => {
   const [isConnected, setConnected] = useState(false);
   const [messages, setMessages] = React.useState<MessageProps[]>([]);
-  const [isTyping, setTyping] = React.useState(false);
   const { sounds } = React.useContext(UserContext);
+  const [othersTyping, setOthersTyping] = React.useState<string[]>([]);
 
   React.useEffect(() => {
     socket.connect();
@@ -49,6 +49,7 @@ export const Chat = () => {
     socket.on("new_messages", (incoming) => {
       setMessages((current) => current.concat(incoming));
     });
+    socket.on("typing", (names) => setOthersTyping(names));
     /** strict mode runs this effect twice, cleanup required */
     return () => {
       socket.disconnect();
@@ -57,6 +58,7 @@ export const Chat = () => {
       socket.removeAllListeners("enter_chat");
       socket.removeAllListeners("leave_chat");
       socket.removeAllListeners("new_messages");
+      socket.removeAllListeners("typing");
     };
   }, []);
 
@@ -98,15 +100,13 @@ export const Chat = () => {
     >
       <MessagesList messages={messages} />
       <MessageComposer
-        setTyping={setTyping}
+        onTyping={(isTyping) => {
+          socket.emit("typing", isTyping);
+        }}
         onSend={(text) => {
           socket.emit("submit", text);
         }}
-        others={
-          [
-            /* @todo */
-          ]
-        }
+        others={othersTyping}
       />
     </Box>
   );
