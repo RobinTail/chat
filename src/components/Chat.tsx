@@ -9,22 +9,22 @@ import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
 import { Root } from "../client.ts";
 
+const socket = io("http://localhost:8090/", {
+  withCredentials: true,
+  autoConnect: false, // avoiding effect dependency
+}) as Root.Socket;
+
 export const Chat = () => {
   const [isConnected, setConnected] = useState(false);
   const [messages, setMessages] = React.useState<MessageProps[]>([]);
   const [isTyping, setTyping] = React.useState(false);
   const { sounds } = React.useContext(UserContext);
-  const socket = React.useMemo(
-    () =>
-      io("http://localhost:8090/", { withCredentials: true }) as Root.Socket,
-    [],
-  );
 
   React.useEffect(() => {
+    socket.connect();
     socket.on("connect", () => setConnected(true));
     socket.on("connect_error", () => setConnected(false));
     socket.on("enter_chat", (data) => {
-      // @todo duplicates
       setMessages((current) =>
         current.concat({
           author: { name: "System" },
@@ -38,7 +38,15 @@ export const Chat = () => {
     socket.on("new_messages", (incoming) => {
       setMessages((current) => current.concat(incoming));
     });
-  }, [socket]);
+    /** strict mode runs this effect twice, cleanup required */
+    return () => {
+      socket.disconnect();
+      socket.removeAllListeners("connect");
+      socket.removeAllListeners("connect_error");
+      socket.removeAllListeners("enter_chat");
+      socket.removeAllListeners("new_messages");
+    };
+  }, []);
 
   React.useEffect(() => {
     setMessages((current) =>
