@@ -37,41 +37,8 @@ export default new (class ChatStore extends EventEmitter {
     this._dispatchToken = dispatcher.register((action) => {
       switch (action.type) {
         case actionTypes.NEW_MESSAGES:
-          action.messages.forEach((message) => {
-            message.isMy = message.author.id === appData.get("userID");
-          });
-          this._messages = this._messages.concat(action.messages);
           this._addDateMessages();
-          this._addSameAuthorProperty();
-          this.emitChange("messages");
-          break;
-        case actionTypes.THEY_START_TYPING:
-          this._typing.push(action.data);
-          this.emitChange("typing");
-          break;
-        case actionTypes.THEY_STOP_TYPING:
-          this._typing.splice(this._typing.indexOf(action.data.id), 1);
-          this.emitChange("typing");
-          break;
-        case actionTypes.MESSAGE_ADDITIONAL_DATA:
-          let msg = this._messages.find((message) => {
-            return message._id === action.messageID;
-          });
-          if (msg) {
-            Object.assign(msg, action.additionalData);
-            this.emitChange("messages");
-          }
-          break;
       }
-    });
-  }
-
-  _addSameAuthorProperty() {
-    let previousUserId;
-    this._messages.forEach((message) => {
-      message.isSameAuthor =
-        previousUserId === message.author.id && !message.isSystem;
-      previousUserId = message.author.id;
     });
   }
 
@@ -123,9 +90,5 @@ export default new (class ChatStore extends EventEmitter {
       offset++;
       this._dateMessagesAdded.push(plan.key);
     });
-  }
-
-  emitChange(section) {
-    this.emit(CHANGE_EVENT, section);
   }
 })();
