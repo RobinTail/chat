@@ -6,6 +6,7 @@ import { find as linkifyFind } from "linkifyjs";
 import { mergeSx } from "merge-sx";
 import moment from "moment";
 import React from "react";
+import { UserContext } from "../contexts/UserContext.ts";
 import { Provider, providers } from "../Provider.tsx";
 import Linkify from "linkify-react";
 import { Embedly } from "./Embedly.tsx";
@@ -13,9 +14,13 @@ import { Embedly } from "./Embedly.tsx";
 export interface MessageProps {
   isSameAuthor?: boolean;
   isSystem?: boolean;
-  isMy?: boolean;
   severity?: "warning" | "critical";
-  author: { avatar?: string; provider?: Provider; name: string };
+  author: {
+    oauthID?: string;
+    avatar?: string;
+    provider?: Provider;
+    name: string;
+  };
   at?: Date;
   text: string;
 }
@@ -25,10 +30,14 @@ export const Message = ({
   author,
   at,
   text,
-  isMy,
   isSystem,
   severity,
 }: MessageProps) => {
+  const { oauthID } = React.useContext(UserContext);
+  const isMy = React.useMemo(
+    () => author.oauthID === oauthID,
+    [author.oauthID, oauthID],
+  );
   const urls = React.useMemo(
     () =>
       linkifyFind(text)
