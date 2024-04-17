@@ -25,6 +25,12 @@ export const App = () => {
   const [modalVisibility, setModalVisibility] = React.useState(false);
   const [notice, setNotice] = React.useState({ title: "", message: "" });
 
+  const hideModal = React.useCallback(() => setModalVisibility(false), []);
+  const notify = React.useCallback((title: string, message: string) => {
+    setNotice({ title, message });
+    setModalVisibility(true);
+  }, []);
+
   React.useEffect(() => {
     if (params.has("oauthID") && params.has("name")) {
       setUser({
@@ -34,13 +40,10 @@ export const App = () => {
         avatar: params.get("avatar"),
       });
     }
+    if (params.has("error")) {
+      notify("Error", params.get("error") || "Unknown error");
+    }
   }, [params]);
-
-  const hideModal = React.useCallback(() => setModalVisibility(false), []);
-  const notify = React.useCallback((title: string, message: string) => {
-    setNotice({ title, message });
-    setModalVisibility(true);
-  }, []);
 
   return (
     <Box>

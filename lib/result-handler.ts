@@ -5,8 +5,10 @@ import { appUrl } from "./config";
 export const redirectingResultHandler = createResultHandler({
   getPositiveResponse: () => z.never(),
   getNegativeResponse: () => z.never(),
-  handler: ({ request, response }) => {
-    const feed = new URLSearchParams({ ...request.user });
+  handler: ({ request, response, error }) => {
+    const feed = new URLSearchParams(
+      error ? { error: error.message } : { ...request.user },
+    );
     response.redirect(`${appUrl}/?${feed}`);
   },
 });

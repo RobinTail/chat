@@ -21,10 +21,18 @@ export const httpConfig = createConfig({
       passport.use(twStrategy);
       passport.use(ggStrategy);
       passport.serializeUser((user, done) => {
-        done(null, JSON.stringify(user));
+        try {
+          done(null, JSON.stringify(user));
+        } catch (e) {
+          done(e);
+        }
       });
       passport.deserializeUser((user, done) => {
-        done(null, typeof user === "string" ? JSON.parse(user) : null);
+        try {
+          done(null, typeof user === "string" ? JSON.parse(user) : null);
+        } catch (e) {
+          done(e);
+        }
       });
     },
   },
