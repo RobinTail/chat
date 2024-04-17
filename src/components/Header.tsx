@@ -76,7 +76,7 @@ export const Header = ({ logout }: { logout: () => void }) => {
           sx={btnSx}
           onClick={() => {
             logout();
-            window.location.replace("http://localhost:8090/logout");
+            window.location.replace(`${coreUrl}/logout`);
           }}
         >
           <Logout />

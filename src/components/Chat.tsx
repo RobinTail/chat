@@ -9,7 +9,7 @@ import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
 import { Root } from "../client.ts";
 
-const socket = io("http://localhost:8090/", {
+const socket = io(`${coreUrl}${Root.path}`, {
   withCredentials: true,
   autoConnect: false, // avoiding effect dependency
 }) as Root.Socket;

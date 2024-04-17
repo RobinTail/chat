@@ -16,9 +16,7 @@ export const AuthButton = ({
   return (
     <Box
       onClick={
-        disabled
-          ? undefined
-          : () => window.location.replace(`http://localhost:8090${url}`)
+        disabled ? undefined : () => window.location.replace(`${coreUrl}${url}`)
       }
       sx={mergeSx({
         display: "flex",

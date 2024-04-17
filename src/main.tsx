@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 import Alert from "@mui/material/Alert";
 import React from "react";
 import ReactDOM from "react-dom/client";
