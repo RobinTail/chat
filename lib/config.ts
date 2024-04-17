@@ -24,42 +24,6 @@ export const httpConfig = createConfig({
       passport.deserializeUser((user, done) => {
         done(null, typeof user === "string" ? JSON.parse(user) : null);
       });
-      app.get("/logout", (req, res) => {
-        req.logout(() => res.redirect("http://localhost:8080"));
-      });
-      app.get("/auth/facebook", passport.authenticate("facebook"));
-      app.get(
-        "/auth/facebook/callback",
-        passport.authenticate("facebook"),
-        (req, res) => {
-          res.redirect(
-            "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-          );
-        },
-      );
-      app.get("/auth/twitter", passport.authenticate("twitter"));
-      app.get(
-        "/auth/twitter/callback",
-        passport.authenticate("twitter"),
-        (req, res) => {
-          res.redirect(
-            "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-          );
-        },
-      );
-      app.get(
-        "/auth/google",
-        passport.authenticate("google", { scope: ["email", "profile"] }),
-      );
-      app.get(
-        "/auth/google/callback",
-        passport.authenticate("google"),
-        (req, res) => {
-          res.redirect(
-            "http://localhost:8080/?" + new URLSearchParams({ ...req.user }),
-          );
-        },
-      );
     },
   },
   logger: { level: "debug", color: true },

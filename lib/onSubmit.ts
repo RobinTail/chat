@@ -1,9 +1,9 @@
 import express from "express";
 import { z } from "zod";
-import { factory } from "./factory";
+import { actionsFactory } from "./factory";
 import { User } from "./user";
 
-export const onSubmit = factory.build({
+export const onSubmit = actionsFactory.build({
   event: "submit",
   input: z.tuple([z.string().describe("text")]),
   handler: async ({ all, input: [text], client }) => {

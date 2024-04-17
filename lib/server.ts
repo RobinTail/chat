@@ -4,9 +4,10 @@ import { Server } from "socket.io";
 import { attachSockets } from "zod-sockets";
 import { actions } from "./actions";
 import { httpConfig, socketConfig } from "./config";
+import { routing } from "./routing";
 import { sessionMw } from "./session-mw";
 
-const { httpServer, logger } = await createServer(httpConfig, {});
+const { httpServer, logger } = await createServer(httpConfig, routing);
 
 const io = new Server({
   cors: {
