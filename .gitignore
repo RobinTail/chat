@@ -2,5 +2,6 @@ node_modules/
 npm-debug.log
 secrets.ts
 dist-app
+dist-core
 app/apiKeys.ts
 tsconfig.node.tsbuildinfo

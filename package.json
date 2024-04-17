@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
     "build:client": "tsx core/generate-client.ts && eslint --fix app/client.ts",
-    "build:app": "vite build"
+    "build:app": "vite build",
+    "build:core": "tsup"
   },
   "repository": {
     "type": "git",
@@ -67,6 +68,7 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "prettier": "3.2.5",
     "socket.io-client-cookie": "^0.1.0",
+    "tsup": "^8.0.2",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5",
     "vite": "^5.2.8",
