@@ -8,6 +8,8 @@ import { messageSchema } from "./message";
 import { sessionMw } from "./session-mw";
 import { User, userSchema } from "./user";
 
+export const appUrl = process.env.APP_URL || "http://localhost:8080";
+
 export const httpConfig = createConfig({
   server: {
     listen: 8090,

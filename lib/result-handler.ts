@@ -1,12 +1,12 @@
 import { createResultHandler } from "express-zod-api";
 import { z } from "zod";
+import { appUrl } from "./config";
 
 export const redirectingResultHandler = createResultHandler({
   getPositiveResponse: () => z.never(),
   getNegativeResponse: () => z.never(),
   handler: ({ request, response }) => {
-    response.redirect(
-      "http://localhost:8080/?" + new URLSearchParams({ ...request.user }),
-    );
+    const feed = new URLSearchParams({ ...request.user });
+    response.redirect(`${appUrl}/?${feed}`);
   },
 });
