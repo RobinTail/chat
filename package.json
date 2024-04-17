@@ -4,11 +4,11 @@
   "description": "Sample React oAuth Chat",
   "type": "module",
   "scripts": {
-    "start": "tsx lib/server.ts",
+    "start": "tsx core/server.ts",
     "test": "yarn lint && yarn test:types",
     "lint": "eslint .",
     "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
-    "build:client": "tsx lib/generate-client.ts && eslint --fix src/client.ts",
+    "build:client": "tsx core/generate-client.ts && eslint --fix app/client.ts",
     "build:app": "vite build"
   },
   "repository": {

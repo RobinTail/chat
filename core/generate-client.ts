@@ -4,7 +4,7 @@ import { actions } from "./actions";
 import { socketConfig } from "./config";
 
 await writeFile(
-  "src/client.ts",
+  "app/client.ts",
   new Integration({ config: socketConfig, actions }).print(),
   "utf-8",
 );
