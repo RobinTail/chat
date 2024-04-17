@@ -43,7 +43,7 @@ export const App = () => {
     if (params.has("error")) {
       notify("Error", params.get("error") || "Unknown error");
     }
-  }, [params]);
+  }, [notify, params]);
 
   return (
     <Box>
