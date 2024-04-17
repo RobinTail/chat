@@ -10,36 +10,29 @@ const dummyEndpoint = {
   handler: async () => ({}),
 };
 
+const facebookEndpoint = authFactory
+  .use(passport.authenticate("facebook"))
+  .build(dummyEndpoint);
+
+const twitterEndpoint = authFactory
+  .use(passport.authenticate("twitter"))
+  .build(dummyEndpoint);
+
+const googleEndpoint = authFactory
+  .use(passport.authenticate("google", { scope: ["email", "profile"] }))
+  .build(dummyEndpoint);
+
+const logoutEndpoint = authFactory
+  .use((req, {}, next) => {
+    req.logout(next);
+  })
+  .build(dummyEndpoint);
+
 export const routing: Routing = {
-  logout: authFactory
-    .use((req, {}, next) => {
-      req.logout(next);
-    })
-    .build(dummyEndpoint),
+  logout: logoutEndpoint,
   auth: {
-    facebook: {
-      "": authFactory
-        .use(passport.authenticate("facebook"))
-        .build(dummyEndpoint),
-      callback: authFactory
-        .use(passport.authenticate("facebook"))
-        .build(dummyEndpoint),
-    },
-    twitter: {
-      "": authFactory
-        .use(passport.authenticate("twitter"))
-        .build(dummyEndpoint),
-      callback: authFactory
-        .use(passport.authenticate("twitter"))
-        .build(dummyEndpoint),
-    },
-    google: {
-      "": authFactory
-        .use(passport.authenticate("google", { scope: ["email", "profile"] }))
-        .build(dummyEndpoint),
-      callback: authFactory
-        .use(passport.authenticate("google"))
-        .build(dummyEndpoint),
-    },
+    facebook: { "": facebookEndpoint, callback: facebookEndpoint },
+    twitter: { "": twitterEndpoint, callback: twitterEndpoint },
+    google: { "": googleEndpoint, callback: googleEndpoint },
   },
 };
