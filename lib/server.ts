@@ -1,7 +1,7 @@
 import { createServer } from "express-zod-api";
 import passport from "passport";
 import { Server } from "socket.io";
-import { attachSockets, Config } from "zod-sockets";
+import { attachSockets } from "zod-sockets";
 import { actions } from "./actions";
 import { httpConfig, socketConfig } from "./config";
 import { sessionMw } from "./session-mw";
@@ -18,8 +18,9 @@ const io = new Server({
 await attachSockets({
   io,
   target: httpServer,
-  config: new Config({ ...socketConfig, logger }),
+  config: socketConfig,
   actions,
+  logger,
 });
 
 io.engine.use(sessionMw);
