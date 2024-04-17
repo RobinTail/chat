@@ -11,5 +11,6 @@ export default defineConfig({
   plugins: [react()],
   server: { open: true, port },
   preview: { open: true, port },
+  build: { outDir: "dist-app" },
   define: { coreUrl: `'${process.env.CORE_URL || "http://localhost:8090"}'` },
 });

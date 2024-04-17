@@ -1,6 +1,6 @@
 node_modules/
 npm-debug.log
 secrets.ts
-dist
+dist-app
 app/apiKeys.ts
 tsconfig.node.tsbuildinfo
