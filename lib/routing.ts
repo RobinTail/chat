@@ -1,10 +1,10 @@
-import { Routing } from "express-zod-api";
+import { EndpointsFactory, Routing } from "express-zod-api";
 import passport from "passport";
 import { z } from "zod";
 import { authFactory } from "./factory";
 
-const dummyEndpoint = {
-  method: "get" as const,
+const dummyEndpoint: Parameters<EndpointsFactory["build"]>[0] = {
+  method: "get",
   input: z.object({}),
   output: z.object({}),
   handler: async () => ({}),
