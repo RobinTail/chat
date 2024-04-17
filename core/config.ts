@@ -9,10 +9,14 @@ import { sessionMw } from "./session-mw";
 import { User, userSchema } from "./user";
 
 export const appUrl = process.env.APP_URL || "http://localhost:8080";
+const listen = parseInt(
+  new URL(process.env.CORE_URL || "http://localhost:8090").port,
+  10,
+);
 
 export const httpConfig = createConfig({
   server: {
-    listen: 8090,
+    listen,
     beforeRouting: ({ app }) => {
       app.use(sessionMw);
       app.use(passport.initialize());
