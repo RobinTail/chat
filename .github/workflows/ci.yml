@@ -16,11 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-yarn
         with:
@@ -30,8 +30,11 @@ jobs:
         run: yarn install
       - name: Prepare environment
         env:
-          EMBEDLY_KEY: ${{ secrets.EMBEDLY_KEY }}
-        run: sed "s/EMBEDLY_KEY/$EMBEDLY_KEY/" app/apiKeys.dist.ts > app/apiKeys.ts
+          API_KEYS: ${{ secrets.API_KEYS }}
+          SECRETS: ${{ secrets.SECRETS }}
+        run: |
+          echo $API_KEYS > app/apiKeys.ts
+          echo $SECRETS > secrets.ts
       - name: Test
         run: yarn test
       - name: Build Core

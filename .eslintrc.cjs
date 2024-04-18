@@ -8,7 +8,7 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended'
   ],
-  ignorePatterns: ['dist-core', 'dist-app', '.eslintrc.cjs'],
+  ignorePatterns: ['dist-core', 'dist-app', '.eslintrc.cjs', "app/apiKeys.ts", "secrets.ts"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
