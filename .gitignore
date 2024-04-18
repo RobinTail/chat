@@ -1,4 +1,8 @@
-config.jsx
 node_modules/
-static/index.js
 npm-debug.log
+secrets.ts
+dist-app
+dist-core
+app/apiKeys.ts
+tsconfig.node.tsbuildinfo
+ecosystem.config.js
