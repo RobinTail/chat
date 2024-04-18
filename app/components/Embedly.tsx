@@ -4,6 +4,8 @@ import ListItem from "@mui/material/ListItem";
 import { mergeSx } from "merge-sx";
 import React from "react";
 
+import { embedlyKey } from "../apiKeys.ts";
+
 interface EmbedObj {
   type: "photo" | "video" | "link" | "rich" | "error";
   version: string;
@@ -30,7 +32,6 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
       return;
     }
     (async () => {
-      const embedlyKey = (await import("../apiKeys.ts"))?.embedlyKey || "";
       const response = await fetch(
         `http://api.embed.ly/1/oembed?key=${embedlyKey}&format=json&maxwidth=400&urls=${urls.slice(0, 10).map(encodeURIComponent).join(",")}`,
       );
