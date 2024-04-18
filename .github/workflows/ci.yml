@@ -28,6 +28,10 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('yarn.lock') }}
       - name: Install dependencies
         run: yarn install
+      - name: Prepare environment
+        env:
+          STATEMENT: 'export const embedlyKey = "${{ secrets.EMBEDLY_KEY }}";'
+        run: echo $STATEMENT > app/apiKeys.ts
       - name: Test
         run: yarn test
       - name: Build Core
