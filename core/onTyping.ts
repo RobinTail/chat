@@ -10,6 +10,9 @@ export const onTyping = actionsFactory.build({
   input: z.tuple([z.boolean().describe("isTyping")]),
   handler: async ({ input: [isTyping], client }) => {
     const user = client.getRequest<express.Request>().user as User;
+    if (!user) {
+      return;
+    }
     if (isTyping) {
       usersTyping[user.oauthID] = user.name;
     } else {

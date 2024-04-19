@@ -8,6 +8,9 @@ export const onSubmit = actionsFactory.build({
   input: z.tuple([z.string().describe("text")]),
   handler: async ({ all, input: [text], client }) => {
     const user = client.getRequest<express.Request>().user as User;
+    if (!user) {
+      return;
+    }
     const message = { author: user, at: new Date(), text };
     await all.broadcast("new_messages", [message]);
   },
