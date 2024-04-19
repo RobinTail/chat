@@ -43,6 +43,10 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
     })();
   }, [urls]);
 
+  if (!objects.length) {
+    return null;
+  }
+
   return (
     <ListItem
       sx={{
