@@ -54,6 +54,8 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
         flexFlow: isMy ? "row-reverse nowrap" : "row nowrap",
         justifyContent: "flex-start",
         margin: "5px 0",
+        px: 0,
+        py: 0.5,
       }}
     >
       <Box
@@ -89,7 +91,7 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
               sx={{
                 display: "flex",
                 flexFlow: isMy ? "row-reverse nowrap" : "row nowrap",
-                maxWidth: "30vw",
+                maxWidth: "70vw",
                 fontSize: "16px",
               }}
             >
