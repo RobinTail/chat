@@ -1,3 +1,4 @@
+import type { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
 import smoothScroll from "smoothscroll";
@@ -8,6 +9,11 @@ import { MessageProps } from "./Message.tsx";
 import { MessageComposer } from "./MessageComposer.tsx";
 import { MessagesList } from "./MessagesList.tsx";
 import { Root } from "../client.ts";
+
+const layoutSx: SxProps = {
+  pb: "100px",
+  mt: { xs: "43px", md: "unset" },
+};
 
 const socket = io(`${coreUrl}${Root.path}`, {
   withCredentials: true,
@@ -110,12 +116,7 @@ export const Chat = () => {
   }, [messages, sounds]);
 
   return (
-    <Box
-      sx={{
-        pb: "100px",
-        mt: { xs: "43px", md: "unset" },
-      }}
-    >
+    <Box sx={layoutSx}>
       <MessagesList messages={messages} />
       <MessageComposer
         onTyping={setTyping}

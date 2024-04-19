@@ -5,13 +5,7 @@ import { Chat } from "./components/Chat.tsx";
 import { Modal } from "./components/Modal.tsx";
 import { ModalContext } from "./contexts/ModalContext.ts";
 import { UserContext } from "./contexts/UserContext.ts";
-import {
-  wrapperDefault,
-  wrapperMD,
-  wrapperSM,
-  wrapperXS,
-  wrapperXSPadding,
-} from "./vars.tsx";
+import { wrapperSx } from "./wrapper.tsx";
 import { Auth } from "./components/Auth.tsx";
 import { Header } from "./components/Header.tsx";
 
@@ -56,21 +50,7 @@ export const App = () => {
         }}
       >
         {user ? (
-          <Box
-            sx={{
-              mx: "auto",
-              maxWidth: {
-                xs: `${wrapperXS}`,
-                sm: `${wrapperSM}vw`,
-                md: `${wrapperMD}vw`,
-                lg: `${wrapperDefault}vw`,
-              },
-              px: {
-                xs: `0 ${wrapperXSPadding}`,
-                sm: 0,
-              },
-            }}
-          >
+          <Box sx={wrapperSx}>
             <UserContext.Provider value={{ ...user, sounds, setSounds }}>
               <Box
                 sx={{

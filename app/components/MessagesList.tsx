@@ -13,7 +13,7 @@ export const MessagesList = ({ messages }: { messages: MessageProps[] }) => {
   };
 
   return (
-    <List sx={{ listStyle: "none", p: 0, m: 0 }}>
+    <List sx={{ listStyle: "none", p: 0, m: 0, gap: "5px" }}>
       {(messages.length ? messages : [initialMsg]).map((message, index) => (
         <Message key={index} {...message} />
       ))}

@@ -1,3 +1,4 @@
+import type { SxProps } from "@mui/material";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
@@ -24,6 +25,52 @@ interface EmbedObj {
   html?: string; // video, rich
 }
 
+const itemSx: SxProps = {
+  display: "flex",
+  justifyContent: "flex-start",
+  margin: "5px 0",
+  px: 0,
+  py: 0.5,
+};
+
+const placeholderSx: SxProps = {
+  width: "70px",
+  minWidth: "70px",
+  display: { xs: "none", md: "block" },
+};
+
+const layoutSx: SxProps = {
+  display: "flex",
+  flexFlow: "row wrap",
+};
+
+const objectSx: SxProps = {
+  display: "flex",
+  maxWidth: "70vw",
+  fontSize: "16px",
+};
+
+const frameSx: SxProps = {
+  position: "relative",
+  width: "200px",
+  minWidth: "200px",
+  height: "200px",
+  overflow: "hidden",
+};
+
+const imageSx: SxProps = {
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  height: "100%",
+  width: "auto",
+  transform: "translate(-50%, -50%)",
+};
+
+const storySx: SxProps = {
+  padding: "5px 10px",
+};
+
 export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
   const [objects, setObjects] = React.useState<EmbedObj[]>([]);
 
@@ -43,28 +90,21 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
     })();
   }, [urls]);
 
+  if (!objects.length) {
+    return null;
+  }
+
   return (
     <ListItem
-      sx={{
-        display: "flex",
+      sx={mergeSx(itemSx, {
         flexFlow: isMy ? "row-reverse nowrap" : "row nowrap",
-        justifyContent: "flex-start",
-        margin: "5px 0",
-      }}
+      })}
     >
+      <Box sx={placeholderSx} />
       <Box
-        sx={{
-          width: "70px",
-          minWidth: "70px",
-          display: { xs: "none", md: "block" },
-        }}
-      />
-      <Box
-        sx={{
-          display: "flex",
-          flexFlow: "row wrap",
+        sx={mergeSx(layoutSx, {
           justifyContent: isMy ? "flex-end" : "flex-start",
-        }}
+        })}
       >
         {objects.map(
           (
@@ -82,34 +122,16 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
           ) => (
             <Box
               key={index}
-              sx={{
-                display: "flex",
+              sx={mergeSx(objectSx, {
                 flexFlow: isMy ? "row-reverse nowrap" : "row nowrap",
-                maxWidth: "30vw",
-                fontSize: "16px",
-              }}
+              })}
             >
-              <Box
-                sx={{
-                  position: "relative",
-                  width: "200px",
-                  minWidth: "200px",
-                  height: "200px",
-                  overflow: "hidden",
-                }}
-              >
+              <Box sx={frameSx}>
                 <Link href={url}>
                   <Box
                     component="img"
                     sx={mergeSx(
-                      {
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        height: "100%",
-                        width: "auto",
-                        transform: "translate(-50%, -50%)",
-                      },
+                      imageSx,
                       (width && height && width < height) ||
                         (thumbnail_width &&
                           thumbnail_height &&
@@ -125,12 +147,10 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
                 </Link>
               </Box>
               <Box
-                sx={{ padding: "5px 10px", textAlign: isMy ? "right" : "left" }}
+                sx={mergeSx(storySx, { textAlign: isMy ? "right" : "left" })}
               >
-                <Box>
-                  <strong>
-                    <Link href={url}>{title}</Link>
-                  </strong>
+                <Box component="strong">
+                  <Link href={url}>{title}</Link>
                 </Box>
                 <Box>{description}</Box>
               </Box>
