@@ -85,10 +85,10 @@ export const MessageComposer = ({
             <strong>{`${others.length} persons`}</strong>
           ) : (
             others.map((name, index) => (
-              <>
+              <Box component="span" key={index}>
                 <strong key={index}>{name}</strong>
                 {index < others.length - 1 ? <em> &amp; </em> : null}
-              </>
+              </Box>
             ))
           )}
           <Box component="span">
