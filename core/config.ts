@@ -1,5 +1,6 @@
 import express from "express";
 import { createConfig } from "express-zod-api";
+import fs from "node:fs";
 import passport from "passport";
 import { z } from "zod";
 import { createSimpleConfig } from "zod-sockets";
@@ -8,15 +9,16 @@ import { messageSchema } from "./message";
 import { sessionMw } from "./session-mw";
 import { User, userSchema } from "./user";
 
+const sslDir = "/etc/letsencrypt/live/chat-core.robintail.cz";
 export const appUrl = process.env.APP_URL || "http://localhost:8080";
-const listen = parseInt(
-  new URL(process.env.CORE_URL || "http://localhost:8090").port,
-  10,
-);
+const httpListen =
+  "CORE_HTTP" in process.env ? parseInt(process.env.CORE_HTTP!, 10) : 8090;
+const sslListen =
+  "CORE_SSL" in process.env ? parseInt(process.env.CORE_SSL!, 10) : undefined;
 
 export const httpConfig = createConfig({
   server: {
-    listen,
+    listen: httpListen,
     beforeRouting: ({ app }) => {
       app.use(sessionMw);
       app.use(passport.initialize());
@@ -40,6 +42,15 @@ export const httpConfig = createConfig({
       });
     },
   },
+  https: sslListen
+    ? {
+        listen: sslListen,
+        options: {
+          cert: fs.readFileSync(`${sslDir}/fullchain.pem`, "utf-8"),
+          key: fs.readFileSync(`${sslDir}/privkey.pem`, "utf-8"),
+        },
+      }
+    : undefined,
   logger: { level: "debug", color: true },
   cors: true,
 });
