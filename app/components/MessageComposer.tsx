@@ -84,7 +84,6 @@ export const MessageComposer = ({
       ) : null}
       <Box
         sx={{
-          position: "relative",
           display: "flex",
           mt: "7px",
           mb: "10px",
