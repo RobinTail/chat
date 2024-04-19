@@ -17,7 +17,7 @@ export namespace Root {
       avatar: string;
     }) => void;
     new_messages: (
-      p1: {
+      messages: {
         /** user */
         author: {
           oauthID: string;
@@ -29,11 +29,11 @@ export namespace Root {
         text: string;
       }[],
     ) => void;
-    typing: (p1: string[]) => void;
+    typing: (usernames: string[]) => void;
   }
   export interface Actions {
     submit: (text: string) => void;
-    typing: (p1: boolean) => void;
+    typing: (isTyping: boolean) => void;
   }
   /** @example const socket: Root.Socket = io(Root.path) */
   export type Socket = SocketBase<Emission, Actions>;

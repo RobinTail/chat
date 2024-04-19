@@ -7,7 +7,7 @@ const usersTyping: Record<string, string> = {}; // id:name
 
 export const onTyping = actionsFactory.build({
   event: "typing",
-  input: z.tuple([z.boolean()]),
+  input: z.tuple([z.boolean().describe("isTyping")]),
   handler: async ({ input: [isTyping], client }) => {
     const user = client.getRequest<express.Request>().user as User;
     if (isTyping) {
