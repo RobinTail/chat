@@ -1,6 +1,21 @@
+import type { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import { mergeSx } from "merge-sx";
 import { Provider, providers } from "../Provider.tsx";
+
+const btnSx: SxProps = {
+  display: "flex",
+  flex: "1 0 33%",
+  height: "100%",
+  cursor: "pointer",
+  maxWidth: { xs: "100%", md: "200px" },
+  justifyContent: "center",
+  alignItems: "center",
+  "& > svg": {
+    maxWidth: "100%",
+    maxHeight: "100%",
+  },
+};
 
 export const AuthButton = ({
   disabled,
@@ -18,19 +33,8 @@ export const AuthButton = ({
       onClick={
         disabled ? undefined : () => window.location.replace(`${coreUrl}${url}`)
       }
-      sx={mergeSx({
-        display: "flex",
-        flex: "1 0 33%",
-        height: "100%",
-        cursor: "pointer",
-        maxWidth: { xs: "100%", md: "200px" },
-        justifyContent: "center",
-        alignItems: "center",
+      sx={mergeSx(btnSx, {
         backgroundColor: disabled ? "silver" : providers[provider].color,
-        "& > svg": {
-          maxWidth: "100%",
-          maxHeight: "100%",
-        },
       })}
     >
       <Logo />
