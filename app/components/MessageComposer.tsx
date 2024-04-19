@@ -127,7 +127,6 @@ export const MessageComposer = ({
         />
         <ButtonBase
           sx={{
-            border: 0,
             borderTopRightRadius: "5px",
             borderBottomRightRadius: "5px",
             backgroundColor: "#6bba6b",
