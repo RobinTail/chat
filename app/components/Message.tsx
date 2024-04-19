@@ -103,14 +103,15 @@ export const Message = ({
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
-          right: { xs: isMy ? "37px" : "auto", md: 0 },
-          left: { xs: isMy ? "auto" : "37px", md: "unset" },
+          right: { xs: isMy ? "37px" : "auto", md: isMy ? "auto" : "20px" },
+          left: { xs: isMy ? "auto" : "37px", md: isMy ? "20px" : "auto" },
           display: "flex",
           flexFlow: {
             xs: isMy ? "row-reverse" : "row nowrap",
             md: "column nowrap",
           },
-          gap: "10px",
+          gap: { xs: "10px", md: "unset" },
+          alignItems: { md: isMy ? "flex-start" : "flex-end" },
         }}
       >
         <Box
@@ -210,7 +211,7 @@ export const Message = ({
             display: "flex",
             flexFlow: { xs: "column nowrap", md: "row nowrap" },
             justifyContent: "flex-start",
-            alignItems: "flex-start",
+            alignItems: { xs: "flex-start", md: "unset" },
             position: "relative",
             px: 0,
             py: 0.5,
