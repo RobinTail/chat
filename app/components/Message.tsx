@@ -80,9 +80,10 @@ export const Message = ({
     >
       <Avatar
         sx={mergeSx({
+          zIndex: 3,
           width: { xs: "30px", md: "50px" },
           height: { xs: "30px", md: "50px" },
-          mb: { xs: "5px", md: "unset" },
+          mb: { xs: "-5px", md: "unset" },
         })}
         src={author.avatar}
       />
@@ -105,7 +106,10 @@ export const Message = ({
           right: { xs: isMy ? "37px" : "auto", md: 0 },
           left: { xs: isMy ? "auto" : "37px", md: "unset" },
           display: "flex",
-          flexFlow: { xs: "row nowrap", md: "column nowrap" },
+          flexFlow: {
+            xs: isMy ? "row-reverse" : "row nowrap",
+            md: "column nowrap",
+          },
           gap: "10px",
         }}
       >
