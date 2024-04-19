@@ -213,6 +213,7 @@ export const Message = ({
             alignItems: "flex-start",
             position: "relative",
             px: 0,
+            py: 0.5,
           },
           isMy && {
             flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
