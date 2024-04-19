@@ -5,13 +5,15 @@
 The demonstration of [zod-sockets](https://github.com/RobinTail/zod-sockets) and [express-zod-api](https://github.com/RobinTail/express-zod-api)
 working together as the Socket.IO and Express based chat core using oAuth authentication via social networks.
 
-* Three oAuth providers: Facebook, Twitter, Google;
-* The application is aware of I/O types:
+* Three oAuth providers: Facebook, Twitter, Google (handled by `express-zod-api`);
+* The application is aware of the events I/O types (handled by `zod-sockets`):
   * See [Generated client](app/client.ts),
-  * See [the generator](core/generate-client.ts);
+  * See [the generator](core/generate-client.ts)
 * It makes a sound on new incoming messages;
 * It shows who are typing messages now;
 * Converts URLs to anchors and fetch webpage's previews, photos and videos from Embedly API.
+
+![Meme](https://github.com/RobinTail/chat/assets/13189514/754ba9cf-86db-4f83-8800-dd30f4883dbf)
 
 # Demo
 
