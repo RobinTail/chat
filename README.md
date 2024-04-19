@@ -17,7 +17,7 @@ working together as the Socket.IO and Express based chat core using oAuth authen
 
 # Demo
 
-Try it on http://chat.robintail.cz/
+Try it on https://chat.robintail.cz/
 
 # Screenshots
 
