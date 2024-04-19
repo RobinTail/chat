@@ -80,7 +80,7 @@ export const Embedly = ({ urls, isMy }: { urls: string[]; isMy?: boolean }) => {
     }
     (async () => {
       const response = await fetch(
-        `http://api.embed.ly/1/oembed?key=${embedlyKey}&format=json&maxwidth=400&urls=${urls.slice(0, 10).map(encodeURIComponent).join(",")}`,
+        `https://api.embed.ly/1/oembed?key=${embedlyKey}&format=json&maxwidth=400&urls=${urls.slice(0, 10).map(encodeURIComponent).join(",")}`,
       );
       if (!response.ok) {
         return;
