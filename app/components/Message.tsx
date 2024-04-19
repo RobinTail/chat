@@ -58,14 +58,14 @@ export const Message = ({
   ) : (
     <Badge
       overlap="circular"
-      anchorOrigin={{ vertical: "bottom", horizontal: isMy ? "left" : "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: isMy ? "right" : "left" }}
       badgeContent={
         author.provider && (
           <Avatar
             sx={{
               width: "20px",
               height: "20px",
-              display: { xs: "none", sm: "block" },
+              display: { xs: "none", sm: "flex" },
               backgroundColor: providers[author.provider].color,
               "& svg": {
                 maxWidth: "80%",
@@ -80,10 +80,10 @@ export const Message = ({
     >
       <Avatar
         sx={mergeSx({
-          zIndex: 3,
+          zIndex: { xs: 3, sm: "unset" },
           width: { xs: "30px", md: "50px" },
           height: { xs: "30px", md: "50px" },
-          mb: { xs: "-5px", md: "unset" },
+          mb: { xs: "-5px", sm: "5px", md: "unset" },
         })}
         src={author.avatar}
       />
@@ -133,14 +133,14 @@ export const Message = ({
       sx={mergeSx(
         {
           zIndex: 1,
-          position: { xs: "absolute", md: "relative" },
-          top: { xs: "35px", md: "25px" },
-          right: { xs: "auto", md: "-10px" },
-          left: { xs: "24px", md: "unset" },
-          display: { xs: "none", md: "block" },
+          display: { xs: "none", sm: "block" },
+          position: { sm: "absolute", md: "relative" },
+          top: { sm: "38px", md: "25px" },
+          right: { sm: "auto", md: "-10px" },
+          left: { sm: "24px", md: "unset" },
           overflow: "hidden",
-          width: { xs: "10px", md: "20px" },
-          height: { xs: "10px", md: "20px" },
+          width: { sm: "10px", md: "20px" },
+          height: { sm: "10px", md: "20px" },
           backgroundColor: "white",
           transform: "perspective(71px) rotate(45deg)",
           transformOrigin: "100% 50% 0px",
