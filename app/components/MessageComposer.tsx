@@ -1,15 +1,10 @@
 import ButtonBase from "@mui/material/ButtonBase";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
+import { mergeSx } from "merge-sx";
 import React from "react";
 import Send from "@mui/icons-material/Send";
-import {
-  wrapperDefault,
-  wrapperMD,
-  wrapperSM,
-  wrapperXS,
-  wrapperXSPadding,
-} from "../vars.tsx";
+import { wrapperSx, wrapperXSPadding } from "../wrapper.tsx";
 
 const TYPING_TIMEOUT = 800;
 
@@ -34,22 +29,17 @@ export const MessageComposer = ({
 
   return (
     <Box
-      sx={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        textAlign: "center",
-        zIndex: 3,
-        backgroundColor: "#eee",
-        boxShadow: "#eee 0 0 20px 10px",
-        width: {
-          xs: `${wrapperXS}vw`,
-          sm: `${wrapperSM}vw`,
-          md: `${wrapperMD}vw`,
-          lg: `${wrapperDefault}vw`,
+      sx={mergeSx(
+        {
+          position: "fixed",
+          bottom: 0,
+          zIndex: 3,
+          backgroundColor: "#eee",
+          boxShadow: "#eee 0 0 20px 10px",
+          ml: { xs: `-${wrapperXSPadding}px`, sm: "unset" },
         },
-        p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
-      }}
+        wrapperSx,
+      )}
     >
       {others.length ? (
         <Box
