@@ -39,7 +39,3 @@ jobs:
         run: yarn test
       - name: Build Core
         run: yarn build:core
-      - name: Build App
-        run: |
-          yarn build:client
-          yarn build:app
