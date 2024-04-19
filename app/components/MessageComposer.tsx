@@ -1,3 +1,4 @@
+import { SxProps } from "@mui/material/";
 import ButtonBase from "@mui/material/ButtonBase";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
@@ -7,6 +8,55 @@ import Send from "@mui/icons-material/Send";
 import { wrapperSx, wrapperXSPadding } from "../wrapper.tsx";
 
 const TYPING_TIMEOUT = 800;
+
+const composerSx: SxProps = {
+  position: "fixed",
+  bottom: 0,
+  zIndex: 3,
+  backgroundColor: "#eee",
+  boxShadow: "#eee 0 0 20px 10px",
+  ml: { xs: `-${wrapperXSPadding}px`, sm: "unset" },
+};
+
+const formSx: SxProps = {
+  display: "flex",
+  mt: "7px",
+  mb: "10px",
+  lineHeight: "100%",
+  height: "50px",
+};
+
+const inputSx: SxProps = {
+  display: "flex",
+  px: 2,
+  borderStyle: "none",
+  backgroundColor: "#e4e4e4",
+  color: "#333",
+  fontSize: "18px",
+  borderTopLeftRadius: "5px",
+  borderBottomLeftRadius: "5px",
+  "&.Mui-focused": { background: "white" },
+};
+
+const btnSx: SxProps = {
+  borderTopRightRadius: "5px",
+  borderBottomRightRadius: "5px",
+  backgroundColor: "#6bba6b",
+  cursor: "pointer",
+  color: "white",
+  px: 2,
+};
+
+const typingSx: SxProps = {
+  zIndex: 100,
+  fontStyle: "italic",
+  color: "rgba(0, 0, 0, 0.4)",
+  fontSize: "13px",
+  lineHeight: "15px",
+  textAlign: "left",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+};
 
 export const MessageComposer = ({
   onTyping,
@@ -28,35 +78,9 @@ export const MessageComposer = ({
   }, [message, onSend]);
 
   return (
-    <Box
-      sx={mergeSx(
-        {
-          position: "fixed",
-          bottom: 0,
-          zIndex: 3,
-          backgroundColor: "#eee",
-          boxShadow: "#eee 0 0 20px 10px",
-          ml: { xs: `-${wrapperXSPadding}px`, sm: "unset" },
-        },
-        wrapperSx,
-      )}
-    >
+    <Box sx={mergeSx(wrapperSx, composerSx)}>
       {others.length ? (
-        <Box
-          sx={{
-            position: "relative",
-            display: "inline-block",
-            top: "5px",
-            zIndex: 100,
-            fontStyle: "italic",
-            color: "rgba(0, 0, 0, 0.4)",
-            fontSize: "13px",
-            lineHeight: "15px",
-            textAlign: "left",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
+        <Box sx={typingSx}>
           {others.length > 3 ? (
             <strong>{`${others.length} persons`}</strong>
           ) : (
@@ -72,28 +96,10 @@ export const MessageComposer = ({
           </Box>
         </Box>
       ) : null}
-      <Box
-        sx={{
-          display: "flex",
-          mt: "7px",
-          mb: "10px",
-          lineHeight: "100%",
-          height: "50px",
-        }}
-      >
+      <Box sx={formSx}>
         <InputBase
           fullWidth
-          sx={{
-            display: "flex",
-            px: 2,
-            borderStyle: "none",
-            backgroundColor: "#e4e4e4",
-            color: "#333",
-            fontSize: "18px",
-            borderTopLeftRadius: "5px",
-            borderBottomLeftRadius: "5px",
-            "&.Mui-focused": { background: "white" },
-          }}
+          sx={inputSx}
           placeholder="Start typing here"
           autoFocus
           value={message}
@@ -114,17 +120,7 @@ export const MessageComposer = ({
           }}
           autoComplete="off"
         />
-        <ButtonBase
-          sx={{
-            borderTopRightRadius: "5px",
-            borderBottomRightRadius: "5px",
-            backgroundColor: "#6bba6b",
-            cursor: "pointer",
-            color: "white",
-            px: 2,
-          }}
-          onClick={send}
-        >
+        <ButtonBase sx={btnSx} onClick={send}>
           <Send />
         </ButtonBase>
       </Box>
