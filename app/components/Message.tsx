@@ -159,7 +159,7 @@ export const Message = ({
         {
           zIndex: 2,
           display: "inline-block",
-          maxWidth: { md: "60vw", lg: "30vw" },
+          maxWidth: { xs: "90vw", sm: "60vw", md: "30vw" },
           minWidth: "40px",
           padding: { xs: "5px 10px", md: "10px", lg: "10px 15px" },
           borderRadius: "5px",
@@ -183,7 +183,7 @@ export const Message = ({
           },
         },
         isSystem && {
-          maxWidth: "100%",
+          maxWidth: "100% !important",
           width: "100%",
           padding: "10px",
           color: "rgba(0, 0, 0, 0.3)",
