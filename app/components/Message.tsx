@@ -162,7 +162,7 @@ export const Message = ({
         {
           zIndex: 2,
           display: "inline-block",
-          maxWidth: { xs: "90vw", md: "60vw", lg: "30vw" },
+          maxWidth: { sm: "90vw", md: "60vw", lg: "30vw" },
           minWidth: "40px",
           padding: { xs: "5px 10px", md: "10px", lg: "10px 15px" },
           borderRadius: "5px",
@@ -216,6 +216,7 @@ export const Message = ({
             flexFlow: { xs: "column nowrap", md: "row nowrap" },
             justifyContent: "flex-start",
             position: "relative",
+            px: 0,
           },
           isMy && {
             flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
@@ -223,7 +224,7 @@ export const Message = ({
           },
         )}
       >
-        {info}
+        {!isSystem && info}
         {!isSystem && avatar}
         {!isSystem && corner}
         {msg}
