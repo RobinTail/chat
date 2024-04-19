@@ -1,5 +1,5 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import ButtonBase from "@mui/material/ButtonBase";
+import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import React from "react";
 import Send from "@mui/icons-material/Send";
@@ -38,11 +38,17 @@ export const MessageComposer = ({
         position: "fixed",
         bottom: 0,
         left: 0,
-        width: "100%",
         textAlign: "center",
         zIndex: 3,
         backgroundColor: "#eee",
         boxShadow: "#eee 0 0 20px 10px",
+        width: {
+          xs: `${wrapperXS}vw`,
+          sm: `${wrapperSM}vw`,
+          md: `${wrapperMD}vw`,
+          lg: `${wrapperDefault}vw`,
+        },
+        p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
       }}
     >
       {others.length ? (
@@ -57,13 +63,6 @@ export const MessageComposer = ({
             fontSize: "13px",
             lineHeight: "15px",
             textAlign: "left",
-            width: {
-              xs: `${wrapperXS}vw`,
-              sm: `${wrapperSM}vw`,
-              md: `${wrapperMD}vw`,
-              lg: `${wrapperDefault}vw`,
-            },
-            p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
@@ -86,38 +85,25 @@ export const MessageComposer = ({
       <Box
         sx={{
           position: "relative",
-          display: "inline-block",
-          width: {
-            xs: `${wrapperXS}vw`,
-            sm: `${wrapperSM}vw`,
-            md: `${wrapperMD}vw`,
-            lg: `${wrapperDefault}vw`,
-          },
-          p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
+          display: "flex",
           mt: "7px",
           mb: "10px",
-          borderRadius: "5px",
           lineHeight: "100%",
-          boxSizing: "border-box",
+          height: "50px",
         }}
       >
-        <TextField
+        <InputBase
           fullWidth
           sx={{
-            height: "50px",
-            position: "relative",
-            display: "inline-block",
-            mb: 0,
-            pl: "20px",
-            pr: "12%",
-            float: "left",
+            display: "flex",
+            px: 2,
             borderStyle: "none",
-            borderRadius: "5px",
             backgroundColor: "#e4e4e4",
             color: "#333",
             fontSize: "18px",
-            boxSizing: "border-box",
-            outline: 0,
+            borderTopLeftRadius: "5px",
+            borderBottomLeftRadius: "5px",
+            "&.Mui-focused": { background: "white" },
           }}
           placeholder="Start typing here"
           autoFocus
@@ -139,25 +125,20 @@ export const MessageComposer = ({
           }}
           autoComplete="off"
         />
-        <Button
+        <ButtonBase
           sx={{
-            position: "absolute",
-            right: 0,
-            display: "block",
-            width: "10%",
-            height: "50px",
             border: 0,
             borderTopRightRadius: "5px",
             borderBottomRightRadius: "5px",
             backgroundColor: "#6bba6b",
-            outline: 0,
             cursor: "pointer",
             color: "white",
+            px: 2,
           }}
           onClick={send}
         >
           <Send />
-        </Button>
+        </ButtonBase>
       </Box>
     </Box>
   );
