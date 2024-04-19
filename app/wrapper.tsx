@@ -14,5 +14,5 @@ export const wrapperSx: SxProps = {
     md: `${wrapperMD}vw`,
     lg: `${wrapperLG}vw`,
   },
-  p: { xs: `${wrapperXSPadding}px`, sm: "unset" },
+  px: { xs: `${wrapperXSPadding}px`, sm: "unset" },
 };
