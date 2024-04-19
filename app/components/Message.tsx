@@ -65,6 +65,7 @@ export const Message = ({
             sx={{
               width: "20px",
               height: "20px",
+              display: { xs: "none", sm: "block" },
               backgroundColor: providers[author.provider].color,
               "& svg": {
                 maxWidth: "80%",
@@ -78,14 +79,11 @@ export const Message = ({
       }
     >
       <Avatar
-        sx={mergeSx(
-          {
-            width: { xs: "30px", md: "50px" },
-            height: { xs: "30px", md: "50px" },
-            mb: { xs: "5px", md: "unset" },
-          },
-          isMy && { float: "right" },
-        )}
+        sx={mergeSx({
+          width: { xs: "30px", md: "50px" },
+          height: { xs: "30px", md: "50px" },
+          mb: { xs: "5px", md: "unset" },
+        })}
         src={author.avatar}
       />
     </Badge>
@@ -95,21 +93,20 @@ export const Message = ({
     <Box
       sx={{
         position: "absolute",
-        left: { xs: "auto", md: "-20px" },
         top: "10px",
         display: "inline-block",
         color: "rgba(0, 0, 0, 0.4)",
         fontSize: "13px",
-        textAlign: { xs: "left", md: "right" },
       }}
     >
       <Box
         sx={{
           position: { xs: "relative", md: "absolute" },
-          right: { xs: "auto", md: 0 },
-          left: { xs: "37px", md: "unset" },
+          right: { xs: isMy ? "37px" : "auto", md: 0 },
+          left: { xs: isMy ? "auto" : "37px", md: "unset" },
           display: "flex",
           flexFlow: { xs: "row nowrap", md: "column nowrap" },
+          gap: "10px",
         }}
       >
         <Box
@@ -123,11 +120,7 @@ export const Message = ({
         >
           {author.name}
         </Box>
-        {time && (
-          <Box sx={{ whiteSpace: "nowrap", ml: { xs: "10px", md: "unset" } }}>
-            {time}
-          </Box>
-        )}
+        {time && <Box sx={{ whiteSpace: "nowrap" }}>{time}</Box>}
       </Box>
     </Box>
   );
@@ -140,7 +133,7 @@ export const Message = ({
           top: { xs: "35px", md: "25px" },
           right: { xs: "auto", md: "-10px" },
           left: { xs: "24px", md: "unset" },
-          display: "block",
+          display: { xs: "none", md: "block" },
           overflow: "hidden",
           width: { xs: "10px", md: "20px" },
           height: { xs: "10px", md: "20px" },
@@ -171,8 +164,6 @@ export const Message = ({
           lineHeight: "23px",
           backgroundColor: "white",
           textAlign: "left",
-          alignSelf: { xs: "flex-start", md: "flex-end" },
-          boxSizing: "border-box",
           wordWrap: "break-word",
           "& a": {
             color: "#666",
@@ -215,6 +206,7 @@ export const Message = ({
             display: "flex",
             flexFlow: { xs: "column nowrap", md: "row nowrap" },
             justifyContent: "flex-start",
+            alignItems: "flex-start",
             position: "relative",
             px: 0,
           },
