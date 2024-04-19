@@ -216,9 +216,6 @@ export const Message = ({
             flexFlow: { xs: "column nowrap", md: "row nowrap" },
             justifyContent: "flex-start",
             position: "relative",
-            "&:not(:first-of-type)": {
-              marginTop: "5px",
-            },
           },
           isMy && {
             flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
