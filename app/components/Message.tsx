@@ -159,7 +159,7 @@ export const Message = ({
         {
           zIndex: 2,
           display: "inline-block",
-          maxWidth: { sm: "90vw", md: "60vw", lg: "30vw" },
+          maxWidth: { md: "60vw", lg: "30vw" },
           minWidth: "40px",
           padding: { xs: "5px 10px", md: "10px", lg: "10px 15px" },
           borderRadius: "5px",
