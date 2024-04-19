@@ -1,4 +1,4 @@
-import { SxProps } from "@mui/material/";
+import type { SxProps } from "@mui/material";
 
 const wrapperXS = 100; // vw
 export const wrapperXSPadding = 10; // px

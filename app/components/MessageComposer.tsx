@@ -1,4 +1,4 @@
-import { SxProps } from "@mui/material/";
+import type { SxProps } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
