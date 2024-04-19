@@ -1,3 +1,4 @@
+import type { SxProps } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -25,6 +26,126 @@ export interface MessageProps {
   text: string;
 }
 
+const placeholderSx: SxProps = {
+  width: "70px",
+  minWidth: "70px",
+  display: { xs: "none", md: "block" },
+};
+
+const badgeSx: SxProps = {
+  width: "20px",
+  height: "20px",
+  display: { xs: "none", sm: "flex" },
+  "& svg": {
+    maxWidth: "80%",
+    maxHeight: "80%",
+  },
+};
+
+const avatarSx: SxProps = {
+  zIndex: { xs: 3, sm: "unset" },
+  width: { xs: "30px", md: "50px" },
+  height: { xs: "30px", md: "50px" },
+  mb: { xs: "-5px", sm: "5px", md: "unset" },
+};
+
+const infoLocatorSx: SxProps = {
+  position: "absolute",
+  top: "10px",
+  display: "inline-block",
+  color: "rgba(0, 0, 0, 0.4)",
+  fontSize: "13px",
+};
+
+const infoLayoutSx: SxProps = {
+  position: { xs: "relative", md: "absolute" },
+  display: "flex",
+  gap: { xs: "10px", md: "unset" },
+};
+
+const nameSx: SxProps = {
+  maxWidth: "140px",
+  fontWeight: 700,
+  textOverflow: "ellipsis",
+  overflow: { xs: "visible", md: "hidden" },
+  whiteSpace: "nowrap",
+};
+
+const timeSx: SxProps = { whiteSpace: "nowrap" };
+
+const cornerSx: SxProps = {
+  zIndex: 1,
+  display: { xs: "none", sm: "block" },
+  position: { sm: "absolute", md: "relative" },
+  top: { sm: "38px", md: "25px" },
+  right: { sm: "auto", md: "-10px" },
+  left: { sm: "24px", md: "unset" },
+  overflow: "hidden",
+  width: { sm: "10px", md: "20px" },
+  height: { sm: "10px", md: "20px" },
+  backgroundColor: "white",
+  transform: "perspective(71px) rotate(45deg)",
+  transformOrigin: "100% 50% 0px",
+};
+
+const myCornerSx: SxProps = {
+  backgroundColor: "#6bba6b",
+  left: { xs: "auto", md: "unset" },
+  right: { xs: "24px", md: "15px" },
+};
+
+const messageSx: SxProps = {
+  zIndex: 2,
+  display: "inline-block",
+  maxWidth: { xs: "90vw", sm: "60vw", md: "30vw" },
+  minWidth: "40px",
+  padding: { xs: "5px 10px", md: "10px", lg: "10px 15px" },
+  borderRadius: "5px",
+  color: "#666",
+  fontSize: "18px",
+  lineHeight: "23px",
+  backgroundColor: "white",
+  textAlign: "left",
+  wordWrap: "break-word",
+  "& a": {
+    color: "#666",
+  },
+};
+
+const myMessageSx: SxProps = {
+  backgroundColor: "#6bba6b",
+  color: "white",
+  textAlign: "right",
+  alignSelf: "flex-end",
+  "& a": {
+    color: "white",
+  },
+};
+
+const systemMsgSx: SxProps = {
+  maxWidth: "100% !important",
+  width: "100%",
+  padding: "10px",
+  color: "rgba(0, 0, 0, 0.3)",
+  fontSize: "14px",
+  fontWeight: 700,
+};
+
+const itemSx: SxProps = {
+  display: "flex",
+  flexFlow: { xs: "column nowrap", md: "row nowrap" },
+  justifyContent: "flex-start",
+  alignItems: { xs: "flex-start", md: "unset" },
+  position: "relative",
+  px: 0,
+  py: 0.5,
+};
+
+const myItemSx: SxProps = {
+  flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
+  alignItems: { xs: "flex-end", md: "unset" },
+};
+
 export const Message = ({
   isSameAuthor,
   author,
@@ -48,13 +169,7 @@ export const Message = ({
 
   const Logo = author.provider ? providers[author.provider].Logo : undefined;
   const avatar = isSameAuthor ? (
-    <Box
-      sx={{
-        width: "70px",
-        minWidth: "70px",
-        display: { xs: "none", md: "block" },
-      }}
-    />
+    <Box sx={placeholderSx} />
   ) : (
     <Badge
       overlap="circular"
@@ -62,134 +177,47 @@ export const Message = ({
       badgeContent={
         author.provider && (
           <Avatar
-            sx={{
-              width: "20px",
-              height: "20px",
-              display: { xs: "none", sm: "flex" },
+            sx={mergeSx(badgeSx, {
               backgroundColor: providers[author.provider].color,
-              "& svg": {
-                maxWidth: "80%",
-                maxHeight: "80%",
-              },
-            }}
+            })}
           >
             {Logo && <Logo />}
           </Avatar>
         )
       }
     >
-      <Avatar
-        sx={mergeSx({
-          zIndex: { xs: 3, sm: "unset" },
-          width: { xs: "30px", md: "50px" },
-          height: { xs: "30px", md: "50px" },
-          mb: { xs: "-5px", sm: "5px", md: "unset" },
-        })}
-        src={author.avatar}
-      />
+      <Avatar sx={avatarSx} src={author.avatar} />
     </Badge>
   );
   const time = at && moment(at).format("HH:mm");
   const info = isSameAuthor ? null : (
-    <Box
-      sx={{
-        position: "absolute",
-        top: "10px",
-        display: "inline-block",
-        color: "rgba(0, 0, 0, 0.4)",
-        fontSize: "13px",
-      }}
-    >
+    <Box sx={infoLocatorSx}>
       <Box
-        sx={{
-          position: { xs: "relative", md: "absolute" },
+        sx={mergeSx(infoLayoutSx, {
           right: { xs: isMy ? "37px" : "auto", md: isMy ? "auto" : "20px" },
           left: { xs: isMy ? "auto" : "37px", md: isMy ? "20px" : "auto" },
-          display: "flex",
           flexFlow: {
             xs: isMy ? "row-reverse" : "row nowrap",
             md: "column nowrap",
           },
-          gap: { xs: "10px", md: "unset" },
           alignItems: { md: isMy ? "flex-start" : "flex-end" },
-        }}
+        })}
       >
-        <Box
-          sx={{
-            maxWidth: "140px",
-            fontWeight: 700,
-            textOverflow: "ellipsis",
-            overflow: { xs: "visible", md: "hidden" },
-            whiteSpace: "nowrap",
-          }}
-        >
-          {author.name}
-        </Box>
-        {time && <Box sx={{ whiteSpace: "nowrap" }}>{time}</Box>}
+        <Box sx={nameSx}>{author.name}</Box>
+        {time && <Box sx={timeSx}>{time}</Box>}
       </Box>
     </Box>
   );
   const corner = isSameAuthor ? null : (
-    <Box
-      sx={mergeSx(
-        {
-          zIndex: 1,
-          display: { xs: "none", sm: "block" },
-          position: { sm: "absolute", md: "relative" },
-          top: { sm: "38px", md: "25px" },
-          right: { sm: "auto", md: "-10px" },
-          left: { sm: "24px", md: "unset" },
-          overflow: "hidden",
-          width: { sm: "10px", md: "20px" },
-          height: { sm: "10px", md: "20px" },
-          backgroundColor: "white",
-          transform: "perspective(71px) rotate(45deg)",
-          transformOrigin: "100% 50% 0px",
-        },
-        isMy && {
-          backgroundColor: "#6bba6b",
-          left: { xs: "auto", md: "unset" },
-          right: { xs: "24px", md: "15px" },
-        },
-      )}
-    ></Box>
+    <Box sx={mergeSx(cornerSx, isMy && myCornerSx)}></Box>
   );
   const msg = (
     <Box
       sx={mergeSx(
-        {
-          zIndex: 2,
-          display: "inline-block",
-          maxWidth: { xs: "90vw", sm: "60vw", md: "30vw" },
-          minWidth: "40px",
-          padding: { xs: "5px 10px", md: "10px", lg: "10px 15px" },
-          borderRadius: "5px",
-          color: "#666",
-          fontSize: "18px",
-          lineHeight: "23px",
-          backgroundColor: "white",
-          textAlign: "left",
-          wordWrap: "break-word",
-          "& a": {
-            color: "#666",
-          },
-        },
-        isMy && {
-          backgroundColor: "#6bba6b",
-          color: "white",
-          textAlign: "right",
-          alignSelf: "flex-end",
-          "& a": {
-            color: "white",
-          },
-        },
+        messageSx,
+        isMy && myMessageSx,
+        isSystem && systemMsgSx,
         isSystem && {
-          maxWidth: "100% !important",
-          width: "100%",
-          padding: "10px",
-          color: "rgba(0, 0, 0, 0.3)",
-          fontSize: "14px",
-          fontWeight: 700,
           backgroundColor:
             severity === "warning"
               ? "rgba(255, 184, 0, 0.13)"
@@ -205,23 +233,7 @@ export const Message = ({
 
   return (
     <>
-      <ListItem
-        sx={mergeSx(
-          {
-            display: "flex",
-            flexFlow: { xs: "column nowrap", md: "row nowrap" },
-            justifyContent: "flex-start",
-            alignItems: { xs: "flex-start", md: "unset" },
-            position: "relative",
-            px: 0,
-            py: 0.5,
-          },
-          isMy && {
-            flexFlow: { xs: "column nowrap", md: "row-reverse nowrap" },
-            alignItems: { xs: "flex-end", md: "unset" },
-          },
-        )}
-      >
+      <ListItem sx={mergeSx(itemSx, isMy && myItemSx)}>
         {!isSystem && info}
         {!isSystem && avatar}
         {!isSystem && corner}

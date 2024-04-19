@@ -1,4 +1,4 @@
-import { SxProps } from "@mui/material/";
+import type { SxProps } from "@mui/material";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
