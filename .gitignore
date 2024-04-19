@@ -5,4 +5,4 @@ dist-app
 dist-core
 app/apiKeys.ts
 tsconfig.node.tsbuildinfo
-ecosystem.config.js
+ecosystem.config.cjs
