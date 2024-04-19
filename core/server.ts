@@ -7,7 +7,10 @@ import { appUrl, httpConfig, socketConfig } from "./config";
 import { routing } from "./routing";
 import { sessionMw } from "./session-mw";
 
-const { httpServer, logger } = await createServer(httpConfig, routing);
+const { httpServer, httpsServer, logger } = await createServer(
+  httpConfig,
+  routing,
+);
 
 const io = new Server({
   cors: {
@@ -18,7 +21,7 @@ const io = new Server({
 
 await attachSockets({
   io,
-  target: httpServer,
+  target: httpsServer || httpServer,
   config: socketConfig,
   actions,
   logger,
