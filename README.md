@@ -2,11 +2,15 @@
 
 [![CI](https://github.com/RobinTail/chat/actions/workflows/ci.yml/badge.svg)](https://github.com/RobinTail/chat/actions/workflows/ci.yml)
 
-The demonstration of `zod-sockets` and `express-zod-api` working together as the Socket.IO and Express based chat core using oAuth authentication via social networks.
+The demonstration of [zod-sockets](https://github.com/RobinTail/zod-sockets) and [express-zod-api](https://github.com/RobinTail/express-zod-api)
+working together as the Socket.IO and Express based chat core using oAuth authentication via social networks.
 
-* Three oAuth providers: Facebook, Twitter, Google.
-* It makes a sound on new incoming messages.
-* It shows who are typing messages now.
+* Three oAuth providers: Facebook, Twitter, Google;
+* The application is aware of I/O types:
+  * See [Generated client](app/client.ts),
+  * See [the generator](core/generate-client.ts);
+* It makes a sound on new incoming messages;
+* It shows who are typing messages now;
 * Converts URLs to anchors and fetch webpage's previews, photos and videos from Embedly API.
 
 # Demo
