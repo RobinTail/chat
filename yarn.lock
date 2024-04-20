@@ -1994,10 +1994,10 @@ express-session@^1.18.0:
     safe-buffer "5.2.1"
     uid-safe "~2.1.5"
 
-express-zod-api@^18.0.0-beta3:
-  version "18.0.0-beta3"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-18.0.0-beta3.tgz#59956420a7c6ef825b30f6a5b20f6b13f7458aab"
-  integrity sha512-21TqrrNDvGhxgqN3D4SuWMig+2Tu29yLdbOfAMZDQ4llNjde5Dzr8PRNiluMlLhJf+/cbTQ7rrQFtLS/8284gg==
+express-zod-api@^18.0.0:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-18.0.0.tgz#c9d9583bcb8f3dc6bf148723f6bd2f05f76084b8"
+  integrity sha512-sqqQzzpUPFPWwZu9IGZpXJ62sXJQlyWXj4czz5GlvVNIwmZdnsrCteKnalWkmqtfhMkndaeH7RJ2xidWNoeWLw==
   dependencies:
     ansis "^3.1.0"
     openapi3-ts "^4.2.1"
@@ -3894,10 +3894,10 @@ yocto-queue@^1.0.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.0.0.tgz#7f816433fb2cbc511ec8bf7d263c3b58a1a3c251"
   integrity sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==
 
-zod-sockets@^1.0.0-beta2:
-  version "1.0.0-beta2"
-  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-1.0.0-beta2.tgz#d730dc7eafd4dd40c22aa51de86c4091f90e0f18"
-  integrity sha512-KNTg3OrBBfjVJljjKwbVBsPumLwIjhnBRngPeSNsyM8WZ6OmnYQrYjpUXHb3WpBk5/4OVBWOTAat6vMH1kRFsQ==
+zod-sockets@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-1.0.0.tgz#97b8802b00a022dbdb5d06e0de880bca9a3a1454"
+  integrity sha512-56UEInHEcqlDbvhps/pl3yPruRBKN5ReIfC0W2/mf3huip8YxRejn3u3L6a/KZm0he1mIt5usrspCOTMLu8tJg==
   dependencies:
     ansis "^3.1.0"
     ramda "^0.29.1"
