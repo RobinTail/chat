@@ -1,7 +1,13 @@
-import { EndpointsFactory, Routing } from "express-zod-api";
+import {
+  createMiddleware,
+  defaultEndpointsFactory,
+  EndpointsFactory,
+  Routing,
+} from "express-zod-api";
 import passport from "passport";
 import { z } from "zod";
 import { authFactory } from "./factory";
+import { User, userSchema } from "./user";
 
 const dummyEndpoint: Parameters<EndpointsFactory["build"]>[0] = {
   method: "get",
@@ -28,6 +34,22 @@ const logoutEndpoint = authFactory
   })
   .build(dummyEndpoint);
 
+const selfAwareEndpoint = defaultEndpointsFactory
+  .addMiddleware(
+    createMiddleware({
+      input: z.object({}),
+      middleware: async ({ request: { user } }) => ({
+        user: user as User | undefined,
+      }),
+    }),
+  )
+  .build({
+    method: "get",
+    input: z.object({}),
+    output: z.object({ user: userSchema.optional() }),
+    handler: async ({ options: { user } }) => ({ user }),
+  });
+
 export const routing: Routing = {
   logout: logoutEndpoint,
   auth: {
@@ -35,4 +57,5 @@ export const routing: Routing = {
     twitter: { "": twitterEndpoint, callback: twitterEndpoint },
     google: { "": googleEndpoint, callback: googleEndpoint },
   },
+  me: selfAwareEndpoint,
 };
