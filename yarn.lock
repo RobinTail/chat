@@ -1994,13 +1994,13 @@ express-session@^1.18.0:
     safe-buffer "5.2.1"
     uid-safe "~2.1.5"
 
-express-zod-api@^19.0.0-beta.6:
-  version "19.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-19.0.0-beta.6.tgz#a5edde40606dca21348bb586d57e1824a44c40bc"
-  integrity sha512-m09Ao26/d9R3SUnPuXI2lMPjWjTRXZdmNVeRO/Ou73Pwy1apBSc/ckK9ABvPSrcTW3tZCRgv5iHGvSEmrZSMhQ==
+express-zod-api@^19.2.1:
+  version "19.2.1"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-19.2.1.tgz#29cfd926a1cd9074fad1a2699fc293699933f72c"
+  integrity sha512-NfvbKxBZGCphew83RpvYZrLnjCUDhLoZpjlMuyOvdNcnLhMhTzZaYOkNyamqHF6by6qDb9srsx7T7XYlE0Gs5Q==
   dependencies:
     ansis "^3.1.0"
-    openapi3-ts "^4.2.1"
+    openapi3-ts "^4.3.2"
     ramda "^0.30.0"
 
 express@^4.19.2:
@@ -2801,12 +2801,12 @@ onetime@^6.0.0:
   dependencies:
     mimic-fn "^4.0.0"
 
-openapi3-ts@^4.2.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/openapi3-ts/-/openapi3-ts-4.3.1.tgz#8f4b68e97e7885d531694938f59983e866c47dc1"
-  integrity sha512-ha/kTOLhMQL7MvS9Abu/cpCXx5qwHQ++88YkUzn1CGfmM8JvCOG/4ZE6tRsexgXRFaoJrcwLyf81H2Y/CXALtA==
+openapi3-ts@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/openapi3-ts/-/openapi3-ts-4.3.2.tgz#a1a11eb5e0bc557210a4ec9b627711af8fb19b41"
+  integrity sha512-IvKNb3hPHwfuyVJnseTsFvZ0DO2EODpitYMsLcmfVwJ2p41zAHh2VDConzLLEB5h5YFbne9vv1zZxCeUICYZ8A==
   dependencies:
-    yaml "^2.4.1"
+    yaml "^2.4.2"
 
 optionator@^0.9.3:
   version "0.9.3"
@@ -3888,6 +3888,11 @@ yaml@^2.3.4, yaml@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.1.tgz#2e57e0b5e995292c25c75d2658f0664765210eed"
   integrity sha512-pIXzoImaqmfOrL7teGUBt/T7ZDnyeGBWyXQBvOVhLkWLN37GXv8NMLK406UY6dS51JfcQHsmcW5cJ441bHg6Lg==
+
+yaml@^2.4.2:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.3.tgz#0777516b8c7880bcaa0f426a5410e8d6b0be1f3d"
+  integrity sha512-sntgmxj8o7DE7g/Qi60cqpLBA3HG3STcDA0kO+WfB05jEKhZMbY7umNm2rBpQvsmZ16/lPXCJGW2672dgOUkrg==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
