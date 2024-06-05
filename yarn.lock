@@ -3915,10 +3915,10 @@ yocto-queue@^1.0.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.0.0.tgz#7f816433fb2cbc511ec8bf7d263c3b58a1a3c251"
   integrity sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==
 
-zod-sockets@^2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-2.0.0-beta.1.tgz#fc895901f9c580efb9139970323711f4d984f5fc"
-  integrity sha512-HVOU/eAb3uEaqrUX3kuxVq230GXz4rNOfOuSN9hkQ3pZsby/Ve9TyLtTWDnOdvYQG37s5PnohJ3lqYiYA0dFwQ==
+zod-sockets@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-2.0.0.tgz#5b8ea12fd1bfb41c0e329788f1c10f5afa845486"
+  integrity sha512-XOxPGCFW8ZxKO4jhjuaueJNjNtct7CG0XhDEO4aOxWbw/1EY3Gxl81ehUssmO5rmct/eC6o4LMAeG72CP9LNPw==
   dependencies:
     ansis "^3.1.0"
     ramda "^0.30.0"
