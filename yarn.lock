@@ -1839,7 +1839,7 @@ express-session@^1.18.0:
     safe-buffer "5.2.1"
     uid-safe "~2.1.5"
 
-express-zod-api@^20.1.0-beta.2:
+express-zod-api@^20.2.0:
   version "20.2.0"
   resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.2.0.tgz#831784387ac843b9328356d41cb0aa3d5c91b1b5"
   integrity sha512-OYB3CmkBu5lObVtqVWFVZbR7VqpimtmD+/0ZQ1PF1/MIHxMtRgcxLeINfCz/gIKSSayF1XslsSvKT9alOOB9bw==
