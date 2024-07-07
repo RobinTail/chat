@@ -847,9 +847,9 @@
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
 "@types/node@*", "@types/node@>=10.0.0", "@types/node@^20.10.6":
-  version "20.14.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.9.tgz#12e8e765ab27f8c421a1820c99f5f313a933b420"
-  integrity sha512-06OCtnTXtWOZBJlRApleWndH4JsRVs1pDCc8dLSQp+7PpUpX3ePdHyeNSFTeSe7FtKyQkrlPvHwJOW3SLd8Oyg==
+  version "20.14.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.10.tgz#a1a218290f1b6428682e3af044785e5874db469a"
+  integrity sha512-MdiXf+nDuMvY0gJKxyfZ7/6UFsETO7mGKF54MVD/ekJS6HdFtpZFBgrh6Pseu64XTb2MLyFPlbW6hj8HYRQNOQ==
   dependencies:
     undici-types "~5.26.4"
 
@@ -1833,9 +1833,9 @@ express-session@^1.18.0:
     uid-safe "~2.1.5"
 
 express-zod-api@^20.2.0:
-  version "20.3.0"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.3.0.tgz#ca9f27e46e0907c6497435cb95f23947e04b3dd0"
-  integrity sha512-XhDT1gNmLnj3Mc7P5oqfOxE4zi1AYJxYng21g7HyZOsrx8/FsFNXSHNiRedx9re9wpNx3tcrzKnVmhvuAVYgwQ==
+  version "20.3.1"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.3.1.tgz#c5ba19532d3c0af2ad936dae3869442811f33a95"
+  integrity sha512-NYr8XKzSguk7FKtwZIXHLbDt8FGDHdXOvgwBippl7Hg7vhjud2AAGhwQIbHxh5uejT1dSldC2iQvalHnayUJ2A==
   dependencies:
     ansis "^3.2.0"
     node-mocks-http "^1.15.0"
