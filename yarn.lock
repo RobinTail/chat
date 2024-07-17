@@ -3529,9 +3529,9 @@ tslib@^2.6.2:
   integrity sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==
 
 tsup@^8.0.2:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/tsup/-/tsup-8.1.1.tgz#440516c3a5d8666546cd6971d98b25256ca71249"
-  integrity sha512-lLXP3BshJ6y/32b3tPZUB2siD2mkJ6mLzhbPOShfjogSc3aRw8MhbBV4cPKbqkbXuhsJR+c9B0W9RHMbtbXLMQ==
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/tsup/-/tsup-8.1.2.tgz#e4b274b391e51262bcddb24092576a7759bd33d1"
+  integrity sha512-Gzw/PXSX/z0aYMNmkcI54bKKFVFJQbLne+EqTJZeQ3lNT3QpumjtMU4rl+ZwTTp8oRF3ahMbEAxT2sZPJLFSrg==
   dependencies:
     bundle-require "^5.0.0"
     cac "^6.7.14"
