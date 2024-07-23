@@ -924,9 +924,9 @@
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
 "@types/node@*", "@types/node@>=10.0.0", "@types/node@^20.10.6":
-  version "20.14.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.11.tgz#09b300423343460455043ddd4d0ded6ac579b74b"
-  integrity sha512-kprQpL8MMeszbz6ojB5/tU8PLN4kesnN8Gjzw349rDlNgsSzg90lAVj3llK99Dh7JON+t9AuscPPFW6mPbTnSA==
+  version "20.14.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.14.12.tgz#129d7c3a822cb49fc7ff661235f19cfefd422b49"
+  integrity sha512-r7wNXakLeSsGT0H1AU863vS2wa5wBOK4bWMjZz2wj+8nBx+m5PeIn0k8AloSLpRuiwdRQZwarZqHE4FNArPuJQ==
   dependencies:
     undici-types "~5.26.4"
 
@@ -1238,9 +1238,9 @@ ansi-styles@^6.1.0:
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
 ansis@^3.1.0, ansis@^3.2.0:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.3.1.tgz#c89b7d3892cc5be0f0f302f17ec84f8d2502da75"
-  integrity sha512-dW/sqnbVeWXW1UMRyKGHiJj+vBrlnnDcvyNMDB8BBI4Gu0tsohweIkvcqb3bNNwcVn70LTyvvnGgjUzUVFnK6Q==
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.3.2.tgz#15adc36fea112da95c74d309706e593618accac3"
+  integrity sha512-cFthbBlt+Oi0i9Pv/j6YdVWJh54CtjGACaMPCIrEV4Ha7HWsIjXDwseYV79TIL0B4+KfSwD5S70PeQDkPUd1rA==
 
 any-promise@^1.0.0:
   version "1.3.0"
@@ -1924,9 +1924,9 @@ express-session@^1.18.0:
     uid-safe "~2.1.5"
 
 express-zod-api@^20.2.0:
-  version "20.4.0"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.4.0.tgz#e134c1f2466711f4d8febd8f276db987c35fe444"
-  integrity sha512-xuJZXdePtcZloXcOmYyB4PQSRvhVptXAXjgPykWMsssa3PA/4UFQ2yNw+RzgcjC6k5DlhzoLumNc0YZoc4P9+A==
+  version "20.4.1"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.4.1.tgz#7a43362e5f20b69803fbf659e6a7e03a0c4005e6"
+  integrity sha512-zVfMyoKJEyWEXPm1MXtTRWqZBB3AtOj4Zld8aGJdfuwKrTt7sWiEpUZEgseKhwjmEChuKEn3EkesBG1rQyEP3w==
   dependencies:
     ansis "^3.2.0"
     node-mocks-http "^1.15.0"
