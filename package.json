@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsx core/server.ts",
     "test": "yarn lint && yarn test:types",
-    "lint": "eslint .",
+    "lint": "eslint",
     "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
     "build:client": "tsx core/generate-client.ts && eslint --fix app/client.ts",
     "build:app": "vite build",
@@ -63,7 +63,7 @@
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "next",
     "globals": "^15.3.0",
     "prettier": "3.3.3",
     "socket.io-client-cookie": "^0.1.0",
