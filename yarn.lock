@@ -863,9 +863,9 @@
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
 "@types/express-serve-static-core@^4.17.33":
-  version "4.19.4"
-  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.19.4.tgz#36283c0447e182d1a362aa5cb0ab4d4dd6e00655"
-  integrity sha512-ZQSvOi1hrdICnPt6e2eiFGx4iPIqySC5pEWkWfofkyEi7A+ujNy+4W2lzM8n2B/8LBm4d54oZyIOUdCFpMCCAA==
+  version "4.19.5"
+  resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.19.5.tgz#218064e321126fcf9048d1ca25dd2465da55d9c6"
+  integrity sha512-y6W03tvrACO72aijJ5uF02FRq5cgDR9lUxddQ8vyF+GvmjJQqbzDcJngEjURc+ZsG31VI3hODNZJ2URj86pzmg==
   dependencies:
     "@types/node" "*"
     "@types/qs" "*"
@@ -900,9 +900,9 @@
   integrity sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==
 
 "@types/node@*", "@types/node@>=10.0.0":
-  version "22.4.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.4.0.tgz#c295fe1d6f5f58916cc61dbef8cf65b5b9b71de9"
-  integrity sha512-49AbMDwYUz7EXxKU/r7mXOsxwFr4BYbvB7tWYxVuLdb2ibd30ijjXINSMAHiEEZk5PCRBmW1gUeisn2VMKt3cQ==
+  version "22.5.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.5.0.tgz#10f01fe9465166b4cab72e75f60d8b99d019f958"
+  integrity sha512-DkFrJOe+rfdHTqqMg0bSNlGlQ85hSoh2TPzZyhHsXnMtligRWpxUySiyw8FY14ITt24HVCiQPWxS3KO/QlGmWg==
   dependencies:
     undici-types "~6.19.2"
 
@@ -928,9 +928,9 @@
     "@types/passport-oauth2" "*"
 
 "@types/passport-google-oauth2@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@types/passport-google-oauth2/-/passport-google-oauth2-0.1.8.tgz#c2b7b86f83b74505bffb3fd87f3546e085e1923e"
-  integrity sha512-0lgGOVbGNTw7NcmrPh3pRwtGJXf1XZG7FZkYtM5DuQ8HJjHzi5mMIq28x7v/q5NNDIrFvhjE0CnyTv7hn4DIjg==
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@types/passport-google-oauth2/-/passport-google-oauth2-0.1.9.tgz#5b2173e96041212764f5269ccac394ac8b1fae89"
+  integrity sha512-xIWqMY7ZGogoUNFEUzELIwk3pTTGHvWgornZV8A6mrdom9Jbl2MxnlyOBbsMVOO3CSkEu0H0gKjf10+HSAlBLA==
   dependencies:
     "@types/express" "*"
 
@@ -3520,9 +3520,9 @@ uid2@0.0.x:
   integrity sha512-IevTus0SbGwQzYh3+fRsAMTVVPOoIVufzacXcHPmdlle1jUpq7BRL+mw3dgeLanvGZdwwbWhRV6XrcFNdBmjWA==
 
 undici-types@~6.19.2:
-  version "6.19.6"
-  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.6.tgz#e218c3df0987f4c0e0008ca00d6b6472d9b89b36"
-  integrity sha512-e/vggGopEfTKSvj4ihnOLTsqhrKRN3LeO6qSN/GxohhuRv8qH9bNQ4B8W7e/vFL+0XTnmHPB4/kegunZGA4Org==
+  version "6.19.8"
+  resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.19.8.tgz#35111c9d1437ab83a7cdc0abae2f26d88eda0a02"
+  integrity sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
