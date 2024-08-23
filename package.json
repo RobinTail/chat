@@ -80,6 +80,7 @@
   "resolutions": {
     "**/react": "^18",
     "**/react-dom": "^18",
-    "**/@types/react": "^18"
+    "**/@types/react": "^18",
+    "**/xmldom": "npm:@xmldom/xmldom@^0.7.5"
   }
 }
