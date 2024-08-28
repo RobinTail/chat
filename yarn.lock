@@ -928,9 +928,9 @@
     "@types/passport-oauth2" "*"
 
 "@types/passport-google-oauth2@^0.1.8":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@types/passport-google-oauth2/-/passport-google-oauth2-0.1.9.tgz#5b2173e96041212764f5269ccac394ac8b1fae89"
-  integrity sha512-xIWqMY7ZGogoUNFEUzELIwk3pTTGHvWgornZV8A6mrdom9Jbl2MxnlyOBbsMVOO3CSkEu0H0gKjf10+HSAlBLA==
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@types/passport-google-oauth2/-/passport-google-oauth2-0.1.10.tgz#18e695ac3045a563b4d564d9df511142a43e0fb6"
+  integrity sha512-Awm0w8qvAOmxvcO+hLLvEzzpQKqtYrzWcCLt4x59YRjCDPNsTIJUYCDWuK6Hvur39/m7UGKflo2Pnnx2KENG2g==
   dependencies:
     "@types/express" "*"
 
