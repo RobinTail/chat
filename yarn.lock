@@ -2469,10 +2469,10 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
-merge-sx@^3.0.0-beta.2:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/merge-sx/-/merge-sx-3.1.0.tgz#201b71b28691dc34f123ce57e7accf440f1389d6"
-  integrity sha512-mYOLiEyou4/2lMGJLlH+xyOtPq80FM+zBibEVcOqHw3hZlvU3RGGAn6mn96Dv8qqU2OXgjggnApbwXBnrHDDDg==
+merge-sx@^3.2.0-beta.1:
+  version "3.2.0-beta.1"
+  resolved "https://registry.yarnpkg.com/merge-sx/-/merge-sx-3.2.0-beta.1.tgz#7c83bb48d1f003d350daafb259fdbcecda538dac"
+  integrity sha512-zOP7wJRh+oZTG/yV7SDuqHuEmgMOMvrFvWhQLLQEbCrxHPl64KaOHTwKg1Tb8HskNk1rYyWn8smjKtXEE3+nrw==
 
 merge2@^1.3.0, merge2@^1.4.1:
   version "1.4.1"
