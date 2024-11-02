@@ -2060,9 +2060,9 @@ express-session@^1.18.0:
     uid-safe "~2.1.5"
 
 express-zod-api@^20.14.2:
-  version "20.15.3"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.15.3.tgz#30e8c585749532e62bfcbf3a0983ede13b782f69"
-  integrity sha512-GfgUu239cMOQBYSvk5G39U09cJDjPflaZnL7rFrBKJJKZSZugdwC6vI5zUya3u+JQv2No8YqWftlEb+6AwZzPg==
+  version "20.16.0"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-20.16.0.tgz#85a1e2a4f9d09f57d8d60fc508ef5aa656c4e866"
+  integrity sha512-c8I0oJ4/KhnCd9no3yGVCalU9D1R/YafnNyFTLXEeuXz95sKsg05ZNI1l3LrQibdgv7g8YNG5X38j6FDLoPzjg==
   dependencies:
     ansis "^3.2.0"
     node-mocks-http "^1.16.1"
