@@ -5,7 +5,6 @@ import { authFactory } from "./factory";
 
 const dummyEndpoint: Parameters<EndpointsFactory["build"]>[0] = {
   method: "get",
-  input: z.object({}),
   output: z.object({}),
   handler: async () => ({}),
 };

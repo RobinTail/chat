@@ -30,7 +30,7 @@
     "@types/express-session": "^1.18.0",
     "express": "^5.0.1",
     "express-session": "^1.18.0",
-    "express-zod-api": "^20.18.0-beta.2",
+    "express-zod-api": "^20.21.0-beta.1",
     "http-errors": "^2.0.0",
     "ion-sound": "^3.0.7",
     "linkify-react": "^4.1.3",
