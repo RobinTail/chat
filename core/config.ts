@@ -17,30 +17,28 @@ const sslListen =
   "CORE_SSL" in process.env ? parseInt(process.env.CORE_SSL!, 10) : undefined;
 
 export const httpConfig = createConfig({
-  server: {
-    listen: httpListen,
-    beforeRouting: ({ app }) => {
-      app.use(sessionMw);
-      app.use(passport.initialize());
-      app.use(passport.session());
-      passport.use(fbStrategy);
-      passport.use(twStrategy);
-      passport.use(ggStrategy);
-      passport.serializeUser((user, done) => {
-        try {
-          done(null, JSON.stringify(user));
-        } catch (e) {
-          done(e);
-        }
-      });
-      passport.deserializeUser((user, done) => {
-        try {
-          done(null, typeof user === "string" ? JSON.parse(user) : null);
-        } catch (e) {
-          done(e);
-        }
-      });
-    },
+  http: { listen: httpListen },
+  beforeRouting: ({ app }) => {
+    app.use(sessionMw);
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(fbStrategy);
+    passport.use(twStrategy);
+    passport.use(ggStrategy);
+    passport.serializeUser((user, done) => {
+      try {
+        done(null, JSON.stringify(user));
+      } catch (e) {
+        done(e);
+      }
+    });
+    passport.deserializeUser((user, done) => {
+      try {
+        done(null, typeof user === "string" ? JSON.parse(user) : null);
+      } catch (e) {
+        done(e);
+      }
+    });
   },
   https: sslListen
     ? {
