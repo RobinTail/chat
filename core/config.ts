@@ -11,13 +11,10 @@ import { User, userSchema } from "./user";
 
 const sslDir = "/etc/letsencrypt/live/chat-core.robintail.cz";
 export const appUrl = process.env.APP_URL || "http://localhost:8080";
-const httpListen =
-  "CORE_HTTP" in process.env ? parseInt(process.env.CORE_HTTP!, 10) : 8090;
 const sslListen =
   "CORE_SSL" in process.env ? parseInt(process.env.CORE_SSL!, 10) : undefined;
 
 export const httpConfig = createConfig({
-  http: { listen: httpListen },
   beforeRouting: ({ app }) => {
     app.use(sessionMw);
     app.use(passport.initialize());
