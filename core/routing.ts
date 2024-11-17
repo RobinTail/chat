@@ -4,7 +4,6 @@ import { z } from "zod";
 import { authFactory } from "./factory";
 
 const dummyEndpoint: Parameters<EndpointsFactory["build"]>[0] = {
-  method: "get",
   output: z.object({}),
   handler: async () => ({}),
 };
