@@ -3,8 +3,8 @@ import { z } from "zod";
 import { appUrl } from "./config";
 
 export const redirectingResultHandler = new ResultHandler({
-  positive: { statusCode: 302, mimeType: "text/html", schema: z.never() },
-  negative: { statusCode: 302, mimeType: "text/html", schema: z.never() },
+  positive: { statusCode: 302, mimeType: null, schema: z.never() },
+  negative: { statusCode: 302, mimeType: null, schema: z.never() },
   handler: ({ request, response, error }) => {
     const feed = new URLSearchParams(
       error ? { error: error.message } : { ...request.user },
