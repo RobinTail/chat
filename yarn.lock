@@ -3761,9 +3761,9 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zod-sockets@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-2.1.0.tgz#30b4bf65dabec3fc4bf3d19645f7ecc33812457a"
-  integrity sha512-iedtiGkZrKElCDB1SXX2CR0Q/sze8ZvhFAx/ydiSzZ/fDm5AypEPEX1+wZEyzYkAGd92laLNGns74dHowskkBw==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/zod-sockets/-/zod-sockets-2.1.1.tgz#4786f76381427e6b736bd9e7f7292f93175fef21"
+  integrity sha512-nlSwkWRqimnU3E/mSRy/v2gxbvWiiEacpNj2gX+paA6dsjnLQ4DpZmIhBZUZNgw7rVNxNHcR4EfDvNfOxlv0Wg==
   dependencies:
     ansis "^3.1.0"
     ramda "^0.30.0"
