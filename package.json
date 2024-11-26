@@ -43,7 +43,7 @@
     "passport-twitter": "^1.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-router-dom": "^6.22.3",
+    "react-router-dom": "^7.0.0",
     "smoothscroll": "^0.4.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
