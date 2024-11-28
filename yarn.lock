@@ -2420,10 +2420,10 @@ merge-descriptors@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-2.0.0.tgz#ea922f660635a2249ee565e0449f951e6b603808"
   integrity sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==
 
-merge-sx@^3.2.0-beta.1:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/merge-sx/-/merge-sx-3.2.4.tgz#c82a9a9c7488190d5425dc36aad4a883ae9494b8"
-  integrity sha512-uIgj2dW627tZzEFZdDVvkzHp7tCktP6k1W+i7Bdos2GldTWBpBYHNs4oNmBWpQ0+TRuUmFFlGAZR0xK3/YC45A==
+merge-sx@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/merge-sx/-/merge-sx-3.3.0.tgz#251e1a57dbafdbed37e5ab3507ade0a592441d45"
+  integrity sha512-mLmdMP/h7r2MPk5BMOwUWAMUkZCl4pBblIBYRvjvH+28e+b3ubgEytmMbLXV6DtILXFuT1B2O0sKVkULhqzlsg==
 
 merge2@^1.3.0:
   version "1.4.1"
