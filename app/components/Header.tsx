@@ -1,12 +1,10 @@
-import Logout from "@mui/icons-material/Logout";
-import VolumeUp from "@mui/icons-material/VolumeUp";
-import VolumeOff from "@mui/icons-material/VolumeOff";
+import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
-import type { SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import { version } from "../../package.json";
 import { UserContext } from "../contexts/UserContext.ts";
+import { SxProps } from "@mui/material/styles";
 
 const btnSx: SxProps = {
   p: 0,
@@ -69,7 +67,7 @@ export const Header = ({ logout }: { logout: () => void }) => {
       </Box>
       <Box sx={controlsSx}>
         <IconButton sx={btnSx} onClick={() => setSounds(!sounds)}>
-          {sounds ? <VolumeUp /> : <VolumeOff />}
+          <Icon>{sounds ? "volume_up" : "volume_off"}</Icon>
         </IconButton>
         <IconButton
           sx={btnSx}
@@ -78,7 +76,7 @@ export const Header = ({ logout }: { logout: () => void }) => {
             window.location.replace(`${coreUrl}/logout`);
           }}
         >
-          <Logout />
+          <Icon>logout</Icon>
         </IconButton>
       </Box>
     </Box>

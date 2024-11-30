@@ -1,11 +1,11 @@
-import type { SxProps } from "@mui/material";
+import Icon from "@mui/material/Icon";
 import ButtonBase from "@mui/material/ButtonBase";
 import InputBase from "@mui/material/InputBase";
 import Box from "@mui/material/Box";
 import { mergeSx } from "merge-sx";
 import React from "react";
-import Send from "@mui/icons-material/Send";
 import { wrapperSx, wrapperXSPadding } from "../wrapper.tsx";
+import { SxProps } from "@mui/material/styles";
 
 const TYPING_TIMEOUT = 800;
 
@@ -121,7 +121,7 @@ export const MessageComposer = ({
           autoComplete="off"
         />
         <ButtonBase sx={btnSx} onClick={send}>
-          <Send />
+          <Icon>send</Icon>
         </ButtonBase>
       </Box>
     </Box>

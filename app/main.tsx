@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -13,9 +14,21 @@ const router = createBrowserRouter([
   },
 ]);
 
+const theme = createTheme({
+  components: {
+    MuiIcon: {
+      defaultProps: {
+        className: "material-symbols-outlined",
+      },
+    },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CssBaseline />
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 );
