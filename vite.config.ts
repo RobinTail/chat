@@ -6,6 +6,10 @@ const port = parseInt(
   10,
 );
 
+const icons = ["volume_up", "volume_off", "logout", "send", "close"].toSorted();
+
+process.env.VITE_ICONS = icons.join(",");
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],

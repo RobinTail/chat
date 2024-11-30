@@ -1,4 +1,4 @@
-import Close from "@mui/icons-material/Close";
+import { Icon } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
@@ -16,7 +16,7 @@ export const Modal = () => {
         onClick={hide}
         sx={{ top: "10px", right: "10px", position: "absolute" }}
       >
-        <Close />
+        <Icon>close</Icon>
       </IconButton>
       <DialogContent>{message}</DialogContent>
     </Dialog>
