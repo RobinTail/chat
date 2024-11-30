@@ -1,9 +1,10 @@
+import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
-import { Icon, SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from "react";
 import { version } from "../../package.json";
 import { UserContext } from "../contexts/UserContext.ts";
+import { SxProps } from "@mui/material/styles";
 
 const btnSx: SxProps = {
   p: 0,
