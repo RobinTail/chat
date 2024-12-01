@@ -6,8 +6,7 @@
     "target": "ES2022",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "lib": ["ES2023"]
+    "strict": true
   },
   "include": ["vite.config.ts", "vitest.config.ts", "tsup.config.ts", "core", "secrets.ts", "ecosystem.config.cjs"]
 }
