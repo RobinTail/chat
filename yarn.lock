@@ -1822,7 +1822,7 @@ espree@^10.0.1, espree@^10.3.0:
     acorn-jsx "^5.3.2"
     eslint-visitor-keys "^4.2.0"
 
-esquery@^1.5.0:
+esquery@^1.5.0, esquery@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/esquery/-/esquery-1.6.0.tgz#91419234f804d852a82dceec3e16cdc22cf9dae7"
   integrity sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==
@@ -3490,6 +3490,13 @@ vite-node@2.1.6:
     es-module-lexer "^1.5.4"
     pathe "^1.1.2"
     vite "^5.0.0 || ^6.0.0"
+
+vite-plugin-material-symbols@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-material-symbols/-/vite-plugin-material-symbols-0.2.1.tgz#0cecbc08aa818fb7c4f33c6f52818fd9661a32e5"
+  integrity sha512-YnrAKldzMJqrqoJisPrJhQ2AfKk29ZaY38nwwdNFpIz342l4Wlk1jY1L/5Nl6MB49fZeERZktCMqprIpsRJc0Q==
+  dependencies:
+    esquery "^1.6.0"
 
 "vite@^5.0.0 || ^6.0.0", vite@^6.0.0:
   version "6.0.1"
