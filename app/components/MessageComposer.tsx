@@ -68,7 +68,7 @@ export const MessageComposer = ({
   others: string[];
 }) => {
   const [message, setMessage] = React.useState("");
-  const timer = React.useRef<NodeJS.Timeout>();
+  const timer = React.useRef<NodeJS.Timeout>(undefined);
 
   const send = React.useCallback(() => {
     if (message.trim().length > 0) {
