@@ -71,7 +71,7 @@
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.0.0",
     "vite": "^6.0.0",
-    "vite-plugin-material-symbols": "^0.3.0"
+    "vite-plugin-material-symbols": "^0.4.0"
   },
   "engines": {
     "node": "^18 || ^20 || ^22"
