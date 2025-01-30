@@ -15,10 +15,6 @@ working together as the Socket.IO and Express based chat core using oAuth authen
 
 ![Meme](https://github.com/RobinTail/chat/assets/13189514/754ba9cf-86db-4f83-8800-dd30f4883dbf)
 
-# Demo
-
-Try it on https://chat.robintail.cz/
-
 # Screenshots
 
 Responsive design by @DERZELLE (clickable previews for 'lg', 'sm' and 'xs' screens). 
