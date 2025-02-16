@@ -1201,7 +1201,7 @@ ansi-styles@^6.1.0:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-ansis@^3.1.0, ansis@^3.11.0:
+ansis@^3.1.0, ansis@^3.14.0:
   version "3.14.0"
   resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.14.0.tgz#6eb4012927f000aa586236a7515da2022fb0883b"
   integrity sha512-R1LnSpYZWMDEFoAyCrfgToVz4ES25luDpjlZsUlD5GXdPWb91U+TZGkxWAOvt+7zWRY/ctOxhtTx5HUtL3qmbA==
@@ -1799,11 +1799,11 @@ express-session@^1.18.0:
     uid-safe "~2.1.5"
 
 express-zod-api@^22.0.0-beta.5:
-  version "22.9.0"
-  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-22.9.0.tgz#9958b97b338cbc494f083a554716ded30b76ab5e"
-  integrity sha512-rm47Uo+/ePnSlyuti5pXBxbRirmAvcGYNgd6G5dCM5LylgZvfV+VfIGn7Rho3guEh3irA6EiC1qTwt1jkEw6cg==
+  version "22.9.1"
+  resolved "https://registry.yarnpkg.com/express-zod-api/-/express-zod-api-22.9.1.tgz#dba712688c2b5f0329b02d2ef87b4bded3dbb647"
+  integrity sha512-Z6LzFzDiOu8at53DDPQFWMksTpatC7uGVyk1lQBx0UTy/bFeIsqC07ac4HgplcwkPZ2zFhmm7/YiSI47O6vMDA==
   dependencies:
-    ansis "^3.11.0"
+    ansis "^3.14.0"
     node-mocks-http "^1.16.2"
     openapi3-ts "^4.4.0"
     ramda "^0.30.1"
